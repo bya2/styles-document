@@ -1,0 +1,24 @@
+@mixin r_doc__main_flex__setting {
+  @include setting__flex_CCS;
+}
+
+@mixin setting__flex_CCS {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@mixin setting__flex_CCC {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin setting__flex_CSC {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}

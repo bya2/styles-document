@@ -1,0 +1,60 @@
+@import "./variables.scss";
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  &,
+  * {
+    box-sizing: border-box;
+  }
+
+  & {
+    height: 3rem;
+    background-color: $r_root__header_bg__color;
+    border-bottom: 1px solid black;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+footer {
+  & {
+    height: 2.125rem;
+    background-color: $r_root__footer_bg__color;
+    // border-top: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // padding-left: 1rem;
+  }
+
+  p {
+    font-family: $r_root__footer_font__sub;
+    font-size: 0.875rem;
+  }
+}
+
+@media screen and (max-width: 256px) {
+  header {
+    & {
+      padding-left: 0;
+    }
+
+    .logo_wrapper {
+      width: 100%;
+      justify-content: center;
+      h1 {
+        display: none;
+      }
+    }
+  }
+}

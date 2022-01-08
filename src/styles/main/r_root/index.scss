@@ -1,0 +1,8 @@
+@import "../../variables.scss";
+
+main.r_root {
+  flex-grow: 1;
+  background-color: $r_root__main_bg__color;
+  display: flex;
+  justify-content: space-around;
+}

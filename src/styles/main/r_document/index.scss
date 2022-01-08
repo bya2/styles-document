@@ -1,0 +1,23 @@
+@import "../../variables.scss";
+@import "../../mixins.scss";
+
+$r_doc__main_size__width: 30rem;
+$r_doc__main_bg__color: hsl(0, 0%, 80%);
+
+@mixin r_doc__main__box_model {
+}
+
+main.r_doc {
+  & {
+    align-self: center;
+    width: $r_doc__main_size__width;
+    background-color: $r_doc__main_bg__color;
+    @include setting__flex_CCS;
+  }
+
+  div {
+    & {
+      background-color: #fcfcfc;
+    }
+  }
+}

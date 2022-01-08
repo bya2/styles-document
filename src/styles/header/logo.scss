@@ -1,0 +1,40 @@
+@import "../variables.scss";
+
+.wrapper__header_logo {
+  & {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  img {
+    width: 2rem;
+    height: 2rem;
+    background-color: black;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    -webkit-user-drag: none;
+  }
+
+  h1 {
+    font-family: $r_root__header_font__main;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: hsl(0, 0%, 20%);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+}
+
+@media screen and (max-width: 256px) {
+  .wrapper__header_logo {
+    width: 100%;
+    justify-content: center;
+    img {
+      display: none;
+    }
+    // h1 {
+    //   display: none;
+    // }
+  }
+}
