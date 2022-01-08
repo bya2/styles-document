@@ -11,10 +11,10 @@ const app = "ok";
 const App = () => {
   return (
     <div className="app">
+      {/* Header */}
       <header className="header r_user r_doc">
         <Link to="/">
           <HeaderLogo />
-          {/* <Route path="/doc" element={<div>A</div>}></Route> */}
         </Link>
         <Routes>
           <Route
@@ -23,11 +23,15 @@ const App = () => {
           ></Route>
         </Routes>
       </header>
+
+      {/* Routes */}
       <Routes>
         <Route path="/" element={<RouteRoot />}></Route>
         <Route path="/user/:id" element={<RouteUserID />}></Route>
         <Route path="/doc" element={<RouteDocument />}></Route>
       </Routes>
+
+      {/* Footer */}
       <footer className="footer r_user">
         <p>Copyright ⓒ Bya2 All rights reserverd.</p>
         {/* <Link to="/">LINK_ROOT</Link> | <Link to="/doc">LINK_DOC</Link> |{" "} */}
