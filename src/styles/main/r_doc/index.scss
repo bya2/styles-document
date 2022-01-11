@@ -1,25 +1,30 @@
 @import "../../variables.scss";
 @import "../../mixins.scss";
 
-$r_doc__main_size__width: 30rem;
+$r_doc__main_size__width: 100vw;
+$r_doc__main_size__height: auto;
 $r_doc__main_bg__color: hsl(0, 0%, 100%);
 
 @mixin r_doc__main__box_model {
 }
 
 main.r_doc {
+  &,
+  * {
+    box-sizing: border-box;
+  }
+
   & {
     align-self: center;
     width: $r_doc__main_size__width;
+    height: $r_doc__main_size__height;
     background-color: $r_doc__main_bg__color;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
     @include setting__flex_CCS;
   }
 
-  div {
-    & {
-      background-color: #fcfcfc;
-    }
+  .wrapper_top_menu {
+    width: 100%;
+    background-color: hsl(0, 0%, 90%);
+    border-bottom: $common__border__basic;
   }
 }

@@ -6,10 +6,11 @@
 // Common
 $common__font__main: "Ubuntu", sans-serif;
 $common__font__sub: "Ubuntu Condensed", sans-serif;
+$common__border__basic: 1px solid black;
 
 // Route Root
 
-$r_root__wrapper__bg__color: hsla(0, 18%, 53%, 0.2);
+// $r_root__wrapper__bg__color: hsla(0, 18%, 53%, 0.2);
 $r_root__header_bg__color: hsl(0, 0%, 100%);
 $r_root__footer_bg__color: hsl(0, 0%, 100%);
 
@@ -19,7 +20,7 @@ $r_root__header_font__sub: "Ubuntu Condensed", sans-serif;
 $r_root__footer_font__main: "Ubuntu", sans-serif;
 $r_root__footer_font__sub: "Ubuntu Condensed", sans-serif;
 
-$r_root__main_bg__color: hsl(0, 0%, 97%);
+$r_root__main_bg__color: hsl(0, 0%, 100%);
 $r_root__main__login_container_bg__color: hsl(0, 0%, 100%);
 $r_root__main__login_font__main: "Ubuntu", sans-serif;
 $r_root__main__login_font__sub: "Ubuntu Condensed", sans-serif;
