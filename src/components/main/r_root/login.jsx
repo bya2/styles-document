@@ -26,14 +26,14 @@ const Login = () => {
   };
 
   const on_click__login_button = async () => {
-    const URL = process.env.REQUEST_LOGGING_IN || "http://127.0.0.1/login";
-    const res = await axios.get(URL, { params: state__obj_user_info });
-    if (res.status === 200) {
-      const obj_user_info = res.json();
-    }
-
-    const { data } = res;
-    console.log(data);
+    // const URL = process.env.REQUEST_LOGGING_IN || "http://127.0.0.1/login";
+    // const res = await axios.get(URL, { params: state__obj_user_info });
+    // if (res.status === 200) {
+    //   const obj_user_info = res.json();
+    // }
+    // const { data } = res;
+    // console.log(data);
+    console.log(process.env.REACT_APP_PORT);
   };
 
   // const on_submit__login_form = async () => {

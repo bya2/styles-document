@@ -1,6 +1,7 @@
-import "../styles/main/r_document/index.scss";
+import "../styles/main/r_doc/index.scss";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import Markdown from "../components/main/r_document/markdown";
+import DocMarkdown from "../components/main/r_doc/markdown";
+import DocMenu from "../components/main/r_doc/menu";
 
 const tmp_str_markdown = `# okok
 sdfjkdalsjfkldsajfklds
@@ -12,7 +13,8 @@ const RouteDocument = () => {
   return (
     <>
       <main className={common_class_name}>
-        <Markdown />
+        <DocMarkdown />
+        <DocMenu />
       </main>
     </>
   );
