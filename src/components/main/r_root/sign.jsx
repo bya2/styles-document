@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import Login from "./login";
 import LoginForm from "./login_form";
+import RootSignUp from "./sign_up";
 
 const RootSign = () => {
   // Local states
@@ -40,6 +41,7 @@ const RootSign = () => {
       </div>
 
       <Login />
+      <RootSignUp />
     </div>
   );
 };
