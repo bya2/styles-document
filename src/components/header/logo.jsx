@@ -9,7 +9,7 @@ const logo_img = {
 const HeaderLogo = () => {
   return (
     <div className="wrapper__header_logo">
-      <img src={logo_img.src} alt={logo_img.alt} />
+      {/* <img src={logo_img.src} alt={logo_img.alt} /> */}
       <h1>Style Documents</h1>
     </div>
   );

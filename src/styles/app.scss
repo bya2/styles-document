@@ -13,12 +13,12 @@ header {
   }
 
   & {
-    height: 3rem;
+    height: 2.125rem;
     background-color: $r_root__header_bg__color;
-    border-bottom: 1px solid black;
     display: flex;
     align-items: center;
     padding-left: 1rem;
+    padding-right: 0.5rem;
   }
 
   a {
@@ -30,11 +30,9 @@ footer {
   & {
     height: 2.125rem;
     background-color: $r_root__footer_bg__color;
-    // border-top: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
-    // padding-left: 1rem;
   }
 
   p {
@@ -47,6 +45,7 @@ footer {
   header {
     & {
       padding-left: 0;
+      justify-content: center;
     }
 
     .logo_wrapper {

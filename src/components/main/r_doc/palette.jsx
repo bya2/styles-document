@@ -1,10 +1,10 @@
 import "../../../styles/main/r_doc/palette.scss";
 
-const STR__CLS_ROUTE = "r_doc";
-const STR__CLS_WRAPPER = "wrapper_doc_palette";
+const STR__CURR_ROUTE = "r_doc";
+const STR__COMPONENT = "palette";
 
 const DocPalette = () => {
-  return <div className={`${STR__CLS_WRAPPER} ${STR__CLS_ROUTE}`}></div>;
+  return <div className={`${STR__COMPONENT} ${STR__CURR_ROUTE}`}></div>;
 };
 
 export default DocPalette;

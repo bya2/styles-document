@@ -1,0 +1,67 @@
+@import "../../mixins.scss";
+@import "../../variables.scss";
+
+.wrapper_side_bar {
+  &,
+  * {
+    box-sizing: border-box;
+  }
+
+  & {
+    position: relative;
+    width: $r_doc__main_side_bar__width;
+    height: 100%;
+    background-color: $r_doc__main_side_bar__bg_color;
+    border: 2px solid black;
+    // border-radius: 11px;
+    margin-right: 0.25rem;
+  }
+
+  .menu_bar {
+    & {
+      border-bottom: 1px solid black;
+    }
+    
+    i {
+      border: 1px solid black;
+    }
+  }
+
+  & > ul {
+    margin: 0.5rem 0;
+    border: 1px solid black;
+    padding: 0 0.5rem;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    i {
+      margin-right: 5px;
+    }
+
+    span {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  & > ul > li.adding_doc {
+    & {
+      display: none;
+    }
+
+    input {
+      width: 100%;
+      height: 1.125rem;
+    }
+  }
+
+  & > ul > li.adding_doc.active {
+    & {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

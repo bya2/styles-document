@@ -11,8 +11,8 @@ $common__border__basic: 1px solid black;
 // Route Root
 
 // $r_root__wrapper__bg__color: hsla(0, 18%, 53%, 0.2);
-$r_root__header_bg__color: hsl(0, 0%, 100%);
-$r_root__footer_bg__color: hsl(0, 0%, 100%);
+$r_root__header_bg__color: hsl(0, 0%, 97%);
+$r_root__footer_bg__color: hsl(0, 0%, 97%);
 
 $r_root__header_font__main: "Ubuntu", sans-serif;
 $r_root__header_font__sub: "Ubuntu Condensed", sans-serif;
@@ -33,3 +33,9 @@ $r_root__main__login_button_font__color: hsl(0, 0%, 20%);
 // Route User:ID
 
 // Route Documentation
+
+$r_doc__main_activity_bar__width: 3rem;
+$r_doc__main_activity_bar__bg_color: hsl(0, 0%, 100%);
+
+$r_doc__main_side_bar__width: 10rem;
+$r_doc__main_side_bar__bg_color: hsl(0, 0%, 100%);

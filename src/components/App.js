@@ -1,6 +1,7 @@
 import "../styles/app.scss";
 import { Routes, Route, Link } from "react-router-dom";
-import HeaderLogo from "./header/logo";
+import Logo from "./header/logo";
+import DocButton from "./header/r_doc/button";
 import RouteRoot from "../routes/r_root";
 import RouteUser from "../routes/r_user";
 import RouteUserID from "../routes/r_user__id";
@@ -14,17 +15,14 @@ const App = () => {
       {/* Header */}
       <header className="header r_user r_doc">
         <Link to="/">
-          <HeaderLogo />
+          <Logo />
         </Link>
         <Routes>
-          <Route
-            path="/doc"
-            element={<div style={{ fontSize: "2rem" }}>A</div>}
-          ></Route>
+          <Route path="/doc" element={<DocButton />}></Route>
         </Routes>
       </header>
 
-      {/* Routes */}
+      {/* Main */}
       <Routes>
         <Route path="/" element={<RouteRoot />}></Route>
         <Route path="/user/:id" element={<RouteUserID />}></Route>
