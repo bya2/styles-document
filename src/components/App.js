@@ -4,7 +4,7 @@ import Logo from "./header/logo";
 import DocButton from "./header/r_doc/button";
 import RouteRoot from "../routes/r_root";
 import RouteUser from "../routes/r_user";
-import RouteUserID from "../routes/r_user__id";
+import RouteID from "../routes/r__id";
 import RouteDocument from "../routes/r_doc";
 
 const app = "ok";
@@ -25,7 +25,7 @@ const App = () => {
       {/* Main */}
       <Routes>
         <Route path="/" element={<RouteRoot />}></Route>
-        <Route path="/user/:id" element={<RouteUserID />}></Route>
+        <Route path="/:id" element={<RouteID />}></Route>
         <Route path="/doc" element={<RouteDocument />}></Route>
       </Routes>
 

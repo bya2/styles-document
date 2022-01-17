@@ -11,7 +11,7 @@ const logo_img = {
   alt: "Logo Image",
 };
 
-function Login() {
+const Login = () => {
   return (
     <div className="container_login r_root">
       <p>Login</p>
@@ -19,6 +19,6 @@ function Login() {
       <LoginForm />
     </div>
   );
-}
+};
 
 export default Login;

@@ -2,6 +2,25 @@
   @include setting__flex_CCS;
 }
 
+@mixin setting__flex_RCC {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin setting__flex_REC {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@mixin setting__flex_CSS {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
 @mixin setting__flex_CCS {
   display: flex;
   flex-direction: column;

@@ -1,47 +1,72 @@
-import "../../../styles/main/r_root/sign.scss";
-import font_awesome from "../../../icon/font_awesome.json";
 import { useState } from "react";
 
+import "../../../styles/main/r_root/sign.scss";
+import font_awesome from "../../../icon/font_awesome.json";
 import Login from "./login";
-import LoginForm from "./login_form";
-import RootSignUp from "./sign_up";
+import ReusingModal from "../../resusing/modal";
+import SessionSignUp from "../../session/sign_up";
+import SessionSignIn from "../../session/sign_in";
 
 const RootSign = () => {
   // Local states
-  const [state__is_click, set_state__is_click] = useState({
+  const [state__is_click_sign, set_state__is_click_sign] = useState({
     sign_up: false,
     sign_in: false,
   });
+  const { sign_up, sign_in } = state__is_click_sign;
 
   // Event Handlers
-  const fn_handler__sign = (e) => {
-    set_state__is_click({
-      ...state__is_click,
-      [e.currentTarget.name]: true,
+  const fn_handler__on_click__sign = (e) => {
+    console.log(e.currentTarget.getAttribute("name"));
+    set_state__is_click_sign({
+      ...state__is_click_sign,
+      [e.currentTarget.getAttribute("name")]: true,
+    });
+  };
+
+  const fn_handler__on_click__close_modal_button = (e) => {
+    set_state__is_click_sign({
+      ...state__is_click_sign,
+      sign_up: false,
+      sign_in: false,
     });
   };
 
   return (
     <div className="wrapper_sign">
       <div
-        className={`box sign_up ${state__is_click.sign_up && "active"}`}
+        className={`box sign_up ${sign_up && "active"}`}
         name="sign_up"
-        onClick={fn_handler__sign}
+        onClick={fn_handler__on_click__sign}
       >
         <i className={font_awesome.cls_icon__sign_up}></i>
         <h2>Sign Up</h2>
       </div>
       <div
-        className={`box sign_in ${state__is_click.sign_in && "active"}`}
+        className={`box sign_in ${sign_in && "active"}`}
         name="sign_in"
-        onClick={fn_handler__sign}
+        onClick={fn_handler__on_click__sign}
       >
         <i className={font_awesome.cls_icon__sign_in}></i>
         <h2>Sign In</h2>
       </div>
 
-      <Login />
-      <RootSignUp />
+      {/* This is Modal */}
+      <ReusingModal
+        state__is_click_sign={state__is_click_sign.sign_up}
+        fn_close_modal={fn_handler__on_click__close_modal_button}
+        name="sign_up"
+      >
+        <SessionSignUp />
+      </ReusingModal>
+
+      <ReusingModal
+        state__is_click_sign={state__is_click_sign.sign_in}
+        fn_close_modal={fn_handler__on_click__close_modal_button}
+        name="sign_in"
+      >
+        <SessionSignIn />
+      </ReusingModal>
     </div>
   );
 };

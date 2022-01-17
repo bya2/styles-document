@@ -24,8 +24,11 @@ const DocSideBar = () => {
   // Local states
   const [arr_docs, set_arr_docs] = useState([]);
   const [is_active__adding_doc, set_is_active__adding_doc] = useState(false);
-  const [obj_doc_info, set_obj_doc_info] = useState({ alt: "", str_doc_name: "" });
-  
+  const [obj_doc_info, set_obj_doc_info] = useState({
+    alt: "",
+    str_doc_name: "",
+  });
+
   // Local refs
   const ref_adding_doc_input = useRef();
 
@@ -34,14 +37,15 @@ const DocSideBar = () => {
     const ENDPOINT = "/user";
     const STR_URL = `${Scheme}://${HOST}:${PORT}${ENDPOINT}`;
 
-    axios.get(STR_URL)
-    .then(res => {
-      console.log(res.data);
-      set_arr_docs(res.data);
-    })
-    .catch(err => {
-      console.error(`Error: DocSideBar.fn_GET_load_docs\n${err}`);
-    });
+    axios
+      .get(STR_URL)
+      .then((res) => {
+        console.log(res.data);
+        set_arr_docs(res.data);
+      })
+      .catch((err) => {
+        console.error(`Error: DocSideBar.fn_GET_load_docs\n${err}`);
+      });
   };
 
   const fn_POST_add_doc = (e) => {
@@ -53,20 +57,20 @@ const DocSideBar = () => {
       headers: { "content-type": "application/x-www-form-urlencoded" },
       data: qs.stringify(obj_doc_info),
       url: STR_URL,
-    }
+    };
 
     console.log(qs.stringify(obj_doc_info));
 
     axios(obj_axios_POST_options)
-      .then(res => {
+      .then((res) => {
         set_arr_docs([...arr_docs, res.data]);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(`Error: DocSideBar.fn_POST_add_doc\n${err}`);
       })
       .then(() => {
         set_is_active__adding_doc(false);
-    
+
         // Remove string: adding_doc_input
         ref_adding_doc_input.current.value = "";
         set_obj_doc_info({
@@ -108,7 +112,7 @@ const DocSideBar = () => {
       ...obj_doc_info,
       [e.target.name]: e.target.value,
     });
-  }
+  };
 
   const fn_on_change__add_doc_input = (e) => {
     set_obj_doc_info({
@@ -116,41 +120,36 @@ const DocSideBar = () => {
       [e.target.name]: e.target.value,
     });
     console.log(obj_doc_info);
-  }
-  
+  };
+
   const fn_on_key_down__add_doc_input = (e) => {
     if (e.keyCode === 13) {
       fn_POST_add_doc(e);
-    } 
-  }
+    }
+  };
 
   return (
-    <nav className="wrapper_side_bar">
+    <nav className="side_bar">
       <div className="menu_bar">
         <i className="fas fa-file-medical" onClick={fn_on_click__add_doc}></i>
       </div>
       <ul>
-        <ul className="tmp">
-        </ul>
-        {
-          arr_dummy_docs.map(obj => (
-            <li key={obj.alt}>
-              <i className="fas fa-file-medical" />
-              <span>{obj.str_doc_name}</span>
-            </li>
-          ))
-        }
-        {
-          arr_docs.map(obj => (
-            <li key={obj.alt}>
-              <i className="fas fa-file-medical" />
-              <span>{obj.str_doc_name}</span>
-            </li>
-          ))
-        }
+        <ul className="tmp"></ul>
+        {arr_dummy_docs.map((obj) => (
+          <li key={obj.alt}>
+            <i className="fas fa-file-medical" />
+            <span>{obj.str_doc_name}</span>
+          </li>
+        ))}
+        {arr_docs.map((obj) => (
+          <li key={obj.alt}>
+            <i className="fas fa-file-medical" />
+            <span>{obj.str_doc_name}</span>
+          </li>
+        ))}
         <li className={`${"adding_doc"} ${is_active__adding_doc && "active"}`}>
-          <i className ="fas fa-file-medical" />
-          <input 
+          <i className="fas fa-file-medical" />
+          <input
             type="text"
             name="str_doc_name"
             placeholder="input..."

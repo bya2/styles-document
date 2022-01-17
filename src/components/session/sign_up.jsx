@@ -3,9 +3,9 @@ import { useState } from "react";
 import axios from "axios";
 import qs from "qs";
 
-import "../../../styles/main/r_doc/sign_up.scss";
-import { URL__SIGN_UP } from "../../../config/server";
-import { ERROR_MESSAGE__SIGN_UP } from "../../../config/message";
+import "../../styles/session/sign_up.scss";
+import { URL__SIGN_UP } from "../../config/server";
+import { ERROR_MESSAGE__SIGN_UP } from "../../config/message";
 
 // Value
 const str_legend__write_area = "Sign up";
@@ -39,7 +39,7 @@ const STR__SIGN_UP_FAIL = "회원가입에 문제가 발생하였습니다.";
 /*
  *  Context
  */
-const RootSignUp = ({ is_click_sign_up }) => {
+const SessionSignUp = ({ is_click_sign_up }) => {
   // Local state
   const [state__sign_up_info, set_state__sign_up_info] = useState({
     id: "",
@@ -88,7 +88,10 @@ const RootSignUp = ({ is_click_sign_up }) => {
           <legend>{str_legend__write_area}</legend>
           <>
             {arr_form_group__data.map((obj_data) => (
-              <div className="form_group__label_input">
+              <div
+                key={obj_data.label_value}
+                className="form_group__label_input"
+              >
                 <label htmlFor={obj_data.input_id}>
                   {obj_data.label_value}
                 </label>
@@ -119,4 +122,4 @@ const RootSignUp = ({ is_click_sign_up }) => {
   );
 };
 
-export default RootSignUp;
+export default SessionSignUp;

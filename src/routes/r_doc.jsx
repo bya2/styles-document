@@ -3,7 +3,7 @@ import DocPalette from "../components/main/r_doc/palette";
 import DocTypography from "../components/main/r_doc/typography";
 import DocMarkdown from "../components/main/r_doc/markdown";
 import DocSelector from "../components/main/r_doc/selector";
-import DocActivityBar from "../components/main/r_doc/activity_bar";
+import DocActivityBar from "../components/main/r__id/activity_bar";
 import DocSideBar from "../components/main/r_doc/side_bar";
 import DocToolBar from "../components/main/r_doc/tool_bar";
 

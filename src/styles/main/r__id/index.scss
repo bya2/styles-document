@@ -1,0 +1,21 @@
+@import "../../mixins.scss";
+@import "../../variables.scss";
+
+main.r__id {
+  &,
+  * {
+    box-sizing: border-box;
+  }
+
+  & {
+    flex-grow: 1;
+    height: auto;
+    padding: 0.5rem;
+    display: flex;
+  }
+
+  aside {
+    position: relative;
+    display: flex;
+  }
+}

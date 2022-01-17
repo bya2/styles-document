@@ -1,18 +1,59 @@
 @import "../../mixins.scss";
 @import "../../variables.scss";
 
-.wrapper_activity_bar {
-  &,
-  * {
-    box-sizing: border-box;
-  }
+$activity_bar__width: 3rem;
+$activity_bar__bg_color: hsl(0, 0%, 100%);
+$activity_bar__icon_box__diameter: 2.5rem;
+$activity_bar__icon_box__bg_color: hsla(0, 0%, 0%, 0.4);
+$activity_bar__icon__color: hsl(0, 0%, 100%);
 
+nav.activity_bar {
   & {
-    width: $r_doc__main_activity_bar__width;
+    width: $activity_bar__width;
     height: 100%;
-    background-color: $r_doc__main_activity_bar__bg_color;
-    border: 2px solid black;
-    border-radius: 11px;
+    background-color: $activity_bar__bg_color;
+
+    box-shadow: 0 0 0 1px hsla(0, 0%, 0%, 0.4);
+    border-radius: 30px;
+
     margin-right: 0.25rem;
+    padding: 0.75rem 0;
+
+    @include setting__flex_CCS;
+  }
+  div.icon_box {
+    & {
+      width: $activity_bar__icon_box__diameter;
+      height: $activity_bar__icon_box__diameter;
+      box-shadow: 0 0 0 1px hsla(0, 0%, 0%, 0.1);
+      border-radius: 50%;
+      @include setting__flex_RCC;
+      transition-property: box-shadow;
+      transition-duration: 1s;
+      transition-timing-function: ease;
+    }
+
+    &:not(:last-of-type) {
+      margin-bottom: 0.5rem;
+    }
+
+    &:hover {
+      & {
+        background-color: hsla(0, 0%, 0%, 0.2);
+      }
+      i {
+        color: $activity_bar__icon__color;
+      }
+    }
+
+    &.state__mouse_down {
+      & {
+        box-shadow: 0 0 0 1px hsla(0, 0%, 0%, 0.5);
+        background-color: hsla(0, 0%, 0%, 0.1);
+      }
+      i {
+        font-size: 1.125rem;
+      }
+    }
   }
 }
