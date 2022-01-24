@@ -5,7 +5,7 @@ import qs from "qs";
 
 import "../../styles/session/sign_up.scss";
 import { URL__SIGN_UP } from "../../config/server";
-import { ERROR_MESSAGE__SIGN_UP } from "../../config/message";
+import { ERR_MSG__SIGN_UP } from "../../config/message";
 
 // Value
 const str_legend__write_area = "Sign up";
@@ -60,7 +60,7 @@ const SessionSignUp = ({ is_click_sign_up }) => {
         set_state__is_success_sign_up(true);
       })
       .catch((err) => {
-        console.error(`${ERROR_MESSAGE__SIGN_UP}${err}`);
+        console.error(`${ERR_MSG__SIGN_UP}${err}`);
         set_state__is_success_sign_up(false);
       })
       .then(() => {

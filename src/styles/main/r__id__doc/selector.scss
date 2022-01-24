@@ -1,0 +1,91 @@
+@import "../../mixins.scss";
+@import "../../variables.scss";
+
+.comp_selector {
+  &.outer {
+    position: relative;
+    height: 100px;
+    @include bs__a(0.1);
+  }
+
+  .inner {
+    position: relative;
+    margin: auto;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 112px;
+
+    @include bs__a(0.1);
+
+    @include setting__flex_RSEC;
+    padding: 0.25rem 0;
+
+    .selector_wrapper {
+      position: relative;
+
+      @include bs__a(0.1);
+      border-radius: 50%;
+
+      padding: 0.125rem;
+
+      .icon_box {
+        width: 24px;
+        height: 24px;
+        @include setting__flex_RCC;
+
+        color: hsla(0, 0%, 0%, 0.7);
+        font-size: 1.5rem;
+      }
+
+      &:hover .icon_box {
+        color: hsla(0, 0%, 0%, 1);
+      }
+
+      &.state__active {
+        box-shadow: 0 0 0 3px hsla(0, 0%, 37%, 0.4);
+      }
+
+      .tooltip {
+        visibility: hidden;
+        opacity: 0;
+        transition-property: opacity;
+        transition-duration: 1s;
+        z-index: 1;
+
+        position: absolute;
+        top: 150%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        outline: none;
+        border: none;
+        border-radius: 6px;
+
+        @include setting__flex_RCC;
+        padding: 0.125rem 0.5rem;
+        background-color: black;
+
+        color: white;
+        font-size: 0.75rem;
+        text-transform: capitalize;
+      }
+
+      .tooltip::before {
+        content: "";
+
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 4px solid black;
+        border-color: transparent transparent black transparent;
+      }
+
+      &:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+}

@@ -57,3 +57,22 @@ nav.activity_bar {
     }
   }
 }
+
+@media screen and (max-width: 1520px) {
+  nav.activity_bar {
+    & {
+      width: 100%;
+      height: 3rem;
+      margin-bottom: 0.25rem;
+      margin-right: 0rem;
+      padding: 0 0.75rem;
+      @include setting__flex_RSC;
+    }
+    div.icon_box {
+      &:not(:last-of-type) {
+        margin-bottom: 0rem;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}

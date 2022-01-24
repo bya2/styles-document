@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import "../../../styles/main/r_doc/activity_bar.scss";
+import "../../../styles/main/r__id/activity_bar.scss";
 import font_awesome from "../../../icon/font_awesome.json";
 
 const arr_activity_items = [
@@ -23,7 +23,7 @@ const obj_activity_items = arr_activity_items.reduce(
   {}
 );
 
-const DocActivityBar = () => {
+const UserActivityBar = () => {
   // Local state
   const [state__is_mouse_down, set_state__is_mouse_down] =
     useState(obj_activity_items);
@@ -68,4 +68,4 @@ const DocActivityBar = () => {
   );
 };
 
-export default DocActivityBar;
+export default UserActivityBar;

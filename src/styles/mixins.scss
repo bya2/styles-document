@@ -2,6 +2,13 @@
   @include setting__flex_CCS;
 }
 
+@mixin setting__flex_RSC {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 @mixin setting__flex_RCC {
   display: flex;
   justify-content: center;
@@ -40,4 +47,51 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+}
+
+@mixin setting__flex_RSAC {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@mixin setting__flex_RSBC {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin setting__flex_RSEC {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+@mixin setting__no_drag__text {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@mixin bg_color__a($f) {
+  background-color: hsla(0, 0%, 0%, $f);
+}
+
+@mixin bd__a($f) {
+  border: 1px solid hsla(0, 0%, 0%, $f);
+}
+
+@mixin bd_top_radius($n) {
+  border-top-left-radius: $n;
+  border-top-right-radius: $n;
+}
+
+@mixin bs__a($f) {
+  box-shadow: 0 0 0 1px hsla(0, 0%, 0%, $f);
 }

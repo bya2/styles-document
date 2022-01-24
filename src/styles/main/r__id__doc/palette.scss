@@ -1,0 +1,56 @@
+@import "../../mixins.scss";
+@import "../../variables.scss";
+
+.comp_palette {
+  &.outer {
+    width: 80%;
+    // height: 110px;
+    @include bs__a(0.1);
+  }
+
+  .inner {
+    position: relative;
+    margin: auto;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 90%;
+    // height: 100px;
+    @include bs__a(0.1);
+
+    @include setting__flex_RSC;
+    flex-wrap: wrap;
+
+    .palette_wrapper {
+      @include setting__flex_CCC;
+      // padding: 0.25rem;
+      margin: 1rem;
+
+      .palette_box {
+        width: 4rem;
+        height: 4rem;
+
+        @include bs__a(0.4);
+      }
+
+      .palette_txt {
+        margin: 0;
+        text-align: center;
+
+        color: hsla(0, 0%, 0%, 0.7);
+        font-family: $common__font__main;
+        font-size: 1rem;
+      }
+
+      &:hover {
+        .palette_box {
+          @include bs__a(0.9);
+        }
+
+        .palette_txt {
+          color: hsla(0, 0%, 0%, 0.8);
+        }
+      }
+    }
+  }
+}

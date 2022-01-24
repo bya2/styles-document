@@ -1,0 +1,72 @@
+@import "../../mixins.scss";
+@import "../../variables.scss";
+
+article.comp_editor {
+  & {
+    width: 80%;
+    @include bs__a(0.1);
+    @include bd_top_radius(10px);
+
+    // state__selected
+    visibility: hidden;
+  }
+
+  &.state__active {
+    visibility: visible;
+  }
+
+  form {
+    width: 100%;
+    @include setting__flex_CSC;
+  }
+
+  p {
+    width: 100%;
+    background-color: hsl(0, 0%, 70%);
+    @include bd_top_radius(10px);
+    margin: 0;
+    padding: 0.25rem 1rem;
+    font-family: $common__font__sub;
+    font-size: 0.875rem;
+    user-select: none;
+    text-transform: capitalize;
+  }
+
+  textarea {
+    width: 100%;
+    height: auto;
+    outline: none;
+    border: none;
+    // @include bs__a(0.1);
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    resize: none;
+    overflow: none;
+    line-height: 1;
+  }
+
+  button {
+    align-self: flex-end;
+    width: 5rem;
+    height: 2rem;
+    background-color: hsl(0, 0%, 70%);
+    outline: none;
+    border: none;
+    @include bs__a(0.4);
+    border-radius: 15px;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: white;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:hover {
+      background-color: hsl(0, 0%, 65%);
+    }
+
+    &.state__is_mouse_down {
+      background-color: hsl(0, 0%, 60%);
+    }
+  }
+}

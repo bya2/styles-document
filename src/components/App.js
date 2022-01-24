@@ -13,27 +13,25 @@ const App = () => {
   return (
     <div className="app">
       {/* Header */}
-      <header className="header r_user r_doc">
+      {/* <header className="header r_user r_doc">
         <Link to="/">
           <Logo />
         </Link>
         <Routes>
           <Route path="/doc" element={<DocButton />}></Route>
         </Routes>
-      </header>
+      </header> */}
 
       {/* Main */}
       <Routes>
         <Route path="/" element={<RouteRoot />}></Route>
-        <Route path="/:id" element={<RouteID />}></Route>
-        <Route path="/doc" element={<RouteDocument />}></Route>
+        <Route path=":id/*" element={<RouteID />}></Route>
       </Routes>
 
       {/* Footer */}
-      <footer className="footer r_user">
+      {/* <footer className="footer r_user">
         <p>Copyright ⓒ Bya2 All rights reserverd.</p>
-        {/* <Link to="/">LINK_ROOT</Link> | <Link to="/doc">LINK_DOC</Link> |{" "} */}
-      </footer>
+      </footer> */}
     </div>
   );
 };

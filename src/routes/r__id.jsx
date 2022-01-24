@@ -1,17 +1,24 @@
+import { Routes, Route, Link, Outlet } from "react-router-dom";
+
 import "../styles/main/r__id/index.scss";
 
-import DocActivityBar from "../components/main/r__id/activity_bar";
-import DocSideBar from "../components/main/r_doc/side_bar";
+import UserActivityBar from "../components/main/r__id/activity_bar";
+import UserSideBar from "../components/main/r__id/side_bar";
+import RouteIDDocument from "./r__id__doc";
 
 const RouteID = () => {
   return (
     <>
       <main className="r__id">
         <aside>
-          <DocActivityBar />
-          <DocSideBar />
+          <UserActivityBar />
+          <UserSideBar />
         </aside>
+        <Routes>
+          <Route path="/:doc" element={<RouteIDDocument />}></Route>
+        </Routes>
       </main>
+      <Outlet />
     </>
   );
 };

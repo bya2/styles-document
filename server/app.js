@@ -36,8 +36,45 @@ router.get("/user", (req, res) => {
       alt: "ok3",
       str_doc_name: "C",
     },
-  ])
+  ]);
 });
+
+const arr_usr_doc_elems = [
+  {
+    selector: "markdown",
+    value: `
+      # GFM
+      
+      ## Autolink literals
+      
+      www.example.com, https://example.com, and contact@example.com.
+      
+      ## Footnote
+      
+      A note[^1]
+      
+      [^1]: Big note.
+      
+      ## Strikethrough
+      
+      ~one~ or ~~two~~ tildes.
+      
+      ## Table
+      
+      | a | b  |  c |  d  |
+      | - | :- | -: | :-: |
+      
+      ## Tasklist
+      
+      * [ ] to do
+      * [x] done
+    `,
+  },
+  {
+    selector: "palette",
+    value: `#000\r\n#fcfcfc #fd7891\t#fa6109\n#dfdfdf\t#adadad #d7d #d99 #d99 #111 sssss 101010`,
+  },
+];
 
 router.post("/doc", (req, res) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -51,6 +88,18 @@ api_router.get("/login", (req, res) => {
   const obj_q = req.query;
   console.log(obj_q);
   res.status(200).json(obj_q); // axios.get(STR_URL, { params: state__obj_user_info })
+});
+
+api_router.get("/usr_doc_elems", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Methods", "GET");
+  res.json(arr_usr_doc_elems);
+});
+
+api_router.post("/add_doc_elem", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Methods", "POST");
+  res.json(req.body);
 });
 
 app.use("/api", api_router);

@@ -8,6 +8,11 @@ $common__font__main: "Ubuntu", sans-serif;
 $common__font__sub: "Ubuntu Condensed", sans-serif;
 $common__border__basic: 1px solid black;
 
+$common__black_a1: hsla(0, 0%, 0%, 0.1);
+$common__black_a2: hsla(0, 0%, 0%, 0.2);
+$common__black_a3: hsla(0, 0%, 0%, 0.3);
+$common__black_a4: hsla(0, 0%, 0%, 0.4);
+
 // Route Root
 
 // $r_root__wrapper__bg__color: hsla(0, 18%, 53%, 0.2);
@@ -39,3 +44,20 @@ $r_doc__main_activity_bar__bg_color: hsl(0, 0%, 100%);
 
 $r_doc__main_side_bar__width: 10rem;
 $r_doc__main_side_bar__bg_color: hsl(0, 0%, 100%);
+
+/**
+ * Media Queries
+ */
+// aside: ~425px 100%
+// main:
+
+$mq_mb__s: 320px;
+$mq_mb__m: 375px;
+$mq_mb__l: 425px;
+
+$mq_tb: 768px;
+
+$mq_nb: 1024px;
+$mq_mb__l: 1440px;
+
+$mq_4k: 2560px;

@@ -8,14 +8,31 @@ main.r__id {
   }
 
   & {
+    position: relative;
     flex-grow: 1;
-    height: auto;
-    padding: 0.5rem;
+    padding-left: 24.25rem;
     display: flex;
   }
 
   aside {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding: 8px;
     display: flex;
+    margin-right: 0.5rem;
+    // background-color: black; // tmp
+  }
+}
+
+@media screen and (max-width: 1520px) {
+  main.r__id {
+    & {
+      padding-left: 21.125rem;
+    }
+    aside {
+      flex-direction: column;
+    }
   }
 }
