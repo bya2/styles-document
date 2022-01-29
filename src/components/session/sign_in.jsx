@@ -1,13 +1,12 @@
-import "../../styles/session/sign_in.scss";
-import { URL__SIGN_IN } from "../../config/server";
-import {
-  ERROR_MESSAGE__SIGN_IN,
-  ERROR_MESSAGE__SIGN_UP,
-} from "../../config/message";
-
-import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+
+import "../../styles/session/sign_in.scss";
+// import obj_cls__fas_icon from "../../icon/font_awesome";
+
+// import { fn_logic__GET__auth__sign_in } from "../../logic/api/get";
+
+// const { cls__icon_fail } = obj_cls__fas_icon;
 
 // Value
 const STR_LEGEND_WRITE_AREA = "Sign In";
@@ -33,51 +32,12 @@ const SessionSignIn = () => {
   });
 
   // Navigator
-  const navigator = useNavigate();
-
-  // API
-  const fn_GET__sign_in = () => {
-    axios
-      .get(URL__SIGN_IN, state__obj_sign_in_info)
-      .then((res) => {
-        switch (res.status) {
-          case 200:
-            sessionStorage.setItem(
-              "obj_user_info",
-              JSON.stringify(state__obj_sign_in_info)
-            );
-            navigator(
-              `/${JSON.parse(sessionStorage.getItem("obj_user_info")).id}`
-            );
-            console.log(JSON.parse(sessionStorage.getItem("obj_user_info")).id);
-            console.log(
-              JSON.parse(sessionStorage.getItem("obj_user_info")).password
-            );
-            break;
-          case 400:
-            break;
-          case 500:
-            break;
-          default:
-          // codes.
-        }
-      })
-      .catch((err) => {
-        import("../../config/message")
-          .then(({ ERROR_MESSAGE__SIGN_UP }) => {
-            console.error(`${ERROR_MESSAGE__SIGN_UP}${err}`);
-          })
-          .catch((err) => {
-            console.error(`Error in catch:\n${err}`);
-          });
-      })
-      .then(() => {});
-  };
+  // const navigator = useNavigate();
 
   // Handler
   const fn_handler__on_submit__sign_in_form = (e) => {
     e.preventDefault();
-    fn_GET__sign_in();
+    // fn_GET__sign_in();
   };
 
   const fn_handler__on_change__sign_in_info = (e) => {

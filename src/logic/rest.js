@@ -9,8 +9,8 @@ import qs from "qs";
 import {
   // GET
   URL__SIGN_IN,
-  URL__USR_DOC_LIST,
-  URL__USR_DOC_ElEMS,
+  URL__USR__DOC_LIST,
+  URL__USR_DOC__ELEM_LIST,
   // POST
   URL__SIGN_UP,
   URL__ADD_DOC,
@@ -20,8 +20,8 @@ import {
 import {
   // GET
   ERR_MSG__SIGN_IN,
-  ERR_MSG__USR_DOC_LIST,
-  ERR_MSG__USR_DOC_ELEMS,
+  ERR_MSG__USR__DOC_LIST,
+  ERR_MSG__USR_DOC__ELEM_LIST,
   // POST
   ERR_MSG__SIGN_UP,
   ERR_MSG__ADD_DOC,
@@ -65,14 +65,14 @@ export const fn_GET__sign_in = (state__obj_data) => {
 // r__id.side_bar
 export const fn_GET__usr_doc_list = (state__arr_docs, set_state__arr_docs) => {
   axios
-    .get(URL__USR_DOC_LIST, {
+    .get(URL__USR__DOC_LIST, {
       params: state__arr_docs,
     })
     .then((res) => {
       set_state__arr_docs(res.data);
     })
     .catch((err) => {
-      console.error(`${ERR_MSG__USR_DOC_LIST}${err}`);
+      console.error(`${ERR_MSG__USR__DOC_LIST}${err}`);
     })
     .then(() => {});
 };
@@ -83,7 +83,7 @@ export const fn_GET__usr_doc_elems = (set_state__arr_usr_doc_elems) => {
   // const obj_user_info = JSON.parse(sessionStorage.getItem("obj_user_info"));
   // const user_id = obj_user_info.user_id || undefined;
   axios
-    .get(URL__USR_DOC_ElEMS, {
+    .get(URL__USR_DOC__ELEM_LIST, {
       // params: user_id,
     })
     .then((res) => {
@@ -95,7 +95,7 @@ export const fn_GET__usr_doc_elems = (set_state__arr_usr_doc_elems) => {
       }
     })
     .catch((err) => {
-      console.error(`${ERR_MSG__USR_DOC_ELEMS}${err}`);
+      console.error(`${ERR_MSG__USR_DOC__ELEM_LIST}${err}`);
     })
     .then(() => {});
 };

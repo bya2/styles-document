@@ -1,0 +1,101 @@
+.flex-RSS {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.flex-RSC {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.flex-RCS {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+.flex-RCC {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.flex-RSAC {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.flex-RSBC {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-RSEC {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.flex-CSS {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.flex-CSC {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.flex-CCS {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.flex-CCC {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-HC {
+  display: grid;
+  justify-content: center;
+}
+.grid-HSE {
+  display: grid;
+  justify-content: space-evenly;
+}
+.grid-HSA {
+  display: grid;
+  justify-content: space-around;
+}
+.grid-HSB {
+  display: grid;
+  justify-content: space-between;
+}
+
+.grid-VC {
+  display: grid;
+  align-content: center;
+}
+.grid-VSE {
+  display: grid;
+  align-content: space-evenly;
+}
+.grid-VSA {
+  display: grid;
+  align-content: space-around;
+}
+.grid-VSB {
+  display: grid;
+  align-content: space-between;
+}

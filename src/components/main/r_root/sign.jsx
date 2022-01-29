@@ -2,9 +2,8 @@ import { useState } from "react";
 
 import "../../../styles/main/r_root/sign.scss";
 import font_awesome from "../../../icon/font_awesome.json";
-import Login from "./login";
-import ReusingModal from "../../resusing/modal";
-import SessionSignUp from "../../session/sign_up";
+import Modal from "../../resusing/modal";
+import SignUp from "../../session/sign_up";
 import SessionSignIn from "../../session/sign_in";
 
 const RootSign = () => {
@@ -52,21 +51,21 @@ const RootSign = () => {
       </div>
 
       {/* This is Modal */}
-      <ReusingModal
-        state__is_click_sign={state__is_click_sign.sign_up}
-        fn_close_modal={fn_handler__on_click__close_modal_button}
+      <Modal
+        state__is_click__elem={state__is_click_sign.sign_up}
+        fn_setter__state__close_modal={fn_handler__on_click__close_modal_button}
         name="sign_up"
       >
-        <SessionSignUp />
-      </ReusingModal>
+        <SignUp />
+      </Modal>
 
-      <ReusingModal
-        state__is_click_sign={state__is_click_sign.sign_in}
-        fn_close_modal={fn_handler__on_click__close_modal_button}
+      <Modal
+        state__is_click__elem={state__is_click_sign.sign_in}
+        fn_setter__state__close_modal={fn_handler__on_click__close_modal_button}
         name="sign_in"
       >
         <SessionSignIn />
-      </ReusingModal>
+      </Modal>
     </div>
   );
 };

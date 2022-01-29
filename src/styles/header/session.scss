@@ -1,0 +1,70 @@
+@import "../extends.scss";
+@import "../mixins.scss";
+@import "../variables.scss";
+
+$li_bg__hv_clr: hsla(0, 0%, 50%, 0.2);
+$i_bg__hv_clr: hsla(0, 0%, 50%, 0.4);
+$li_bg__md_clr: hsla(0, 0%, 50%, 0.3);
+$i_bg__md_clr: hsla(0, 0%, 50%, 0.5);
+
+.comp_session__header {
+  height: 100%;
+  @include flex-REC;
+  padding-right: 1rem;
+
+  &:hover .sess_elem_list .sess_elem_box .name {
+    width: 100%;
+    margin: 0 0.5rem;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+  }
+
+  ul.sess_elem_list {
+    margin: 0;
+    @include flex-RCC;
+    padding: 0;
+  }
+  li.sess_elem_box {
+    // width: 150px;
+    height: 100%;
+    @include flex-RCC;
+    list-style-type: none;
+    &:not(:last-of-type) {
+      margin-right: 0.5rem;
+    }
+    .icon {
+      width: 30px;
+      height: 30px;
+      padding: 15px;
+      border-radius: 50%;
+      @include flex-RCC;
+    }
+    .name {
+      width: 0;
+      margin: 0;
+      font-family: $common__font__sub;
+      font-size: 1rem;
+      text-transform: capitalize;
+      white-space: nowrap;
+      overflow: hidden;
+      @include no_drag__txt;
+    }
+    &:hover {
+      & {
+        background-color: $li_bg__hv_clr;
+        border-radius: 16px;
+      }
+      .icon {
+        background-color: $i_bg__hv_clr;
+      }
+    }
+    &.state__mouse_down {
+      & {
+        background-color: $li_bg__md_clr;
+      }
+      .icon {
+        background-color: $i_bg__md_clr;
+      }
+    }
+  }
+}

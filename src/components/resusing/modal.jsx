@@ -4,7 +4,11 @@ import "../../styles/reusing/modal.scss";
 import font_awesome from "../../icon/font_awesome.json";
 import { useState } from "react";
 
-const ReusingModal = ({ children, state__is_click_sign, fn_close_modal }) => {
+const Comp_modal__reusing = ({
+  children,
+  state__is_click__elem,
+  fn_setter__state__close_modal,
+}) => {
   // Local state
   const [state__is_mouse_down, set_state__is_mouse_down] = useState(false);
 
@@ -17,13 +21,13 @@ const ReusingModal = ({ children, state__is_click_sign, fn_close_modal }) => {
   };
 
   return (
-    state__is_click_sign &&
+    state__is_click__elem &&
     ReactDOM.createPortal(
       <article
         className="modal_wrapper"
         onMouseDown={(e) => {
           e.target.addEventListener("mouseup", () => {
-            fn_close_modal();
+            fn_setter__state__close_modal();
           });
         }}
         onMouseUp={(e) => {
@@ -42,7 +46,9 @@ const ReusingModal = ({ children, state__is_click_sign, fn_close_modal }) => {
             className={`modal_close_button ${state__is_mouse_down && "close"}`}
             onMouseDown={(e) => {
               fn_handler__on_mouse_down__close_icon(e);
-              e.target.addEventListener("mouseup", () => fn_close_modal());
+              e.target.addEventListener("mouseup", () =>
+                fn_setter__state__close_modal()
+              );
             }}
           >
             <i className={font_awesome.cls_icon__close_modal}></i>
@@ -55,4 +61,4 @@ const ReusingModal = ({ children, state__is_click_sign, fn_close_modal }) => {
   );
 };
 
-export default ReusingModal;
+export default Comp_modal__reusing;

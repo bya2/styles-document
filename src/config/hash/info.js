@@ -1,0 +1,2 @@
+export const NUM__KEY_STRETCHING =
+  process.env.REACT_APP_HASH__NUM_KEY_STRETCHING || 10;

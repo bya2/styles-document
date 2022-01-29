@@ -1,11 +1,12 @@
 import { useState } from "react";
 
-import axios from "axios";
-import qs from "qs";
-
 import "../../styles/session/sign_up.scss";
-import { URL__SIGN_UP } from "../../config/server";
-import { ERR_MSG__SIGN_UP } from "../../config/message";
+
+import { fn_logic__POST__auth__sign_up } from "../../logic/api/post";
+import {
+  fn_logic__hash__create_DIGEST,
+  fn_logic__hash__compare_PWD,
+} from "../../logic/hash";
 
 // Value
 const str_legend__write_area = "Sign up";
@@ -13,21 +14,25 @@ const str_legend__write_area = "Sign up";
 const arr_form_group__data = [
   {
     label_value: "ID",
+    input_type: "text",
     input_id: "sign_up_id",
     input_name: "id",
   },
   {
     label_value: "Email",
+    input_type: "email",
     input_id: "sign_up_email",
     input_name: "email",
   },
   {
     label_value: "Password",
+    input_type: "password",
     input_id: "sign_up_password",
     input_name: "password",
   },
   {
     label_value: "Check password",
+    input_type: "password",
     input_id: "sign_up_chk_password",
     input_name: "chk_password",
   },
@@ -36,51 +41,94 @@ const arr_form_group__data = [
 const STR__SIGN_UP_SUCCESS = "회원가입에 성공하셨습니다.";
 const STR__SIGN_UP_FAIL = "회원가입에 문제가 발생하였습니다.";
 
-/*
- *  Context
+const STR_WARNING__DIFF_PASSWORD = "비밀번호가 다름.";
+
+const init_state__obj_sign_up_info = {
+  id: "",
+  password: "",
+  chk_password: "",
+  email: "",
+};
+
+/**
+ * CONTEXT
  */
-const SessionSignUp = ({ is_click_sign_up }) => {
-  // Local state
-  const [state__sign_up_info, set_state__sign_up_info] = useState({
-    id: "",
-    password: "",
-    check_password: "",
-    email: "",
-  });
+const SignUp = ({ is_click_sign_up }) => {
+  /**
+   * Local State
+   */
+  const [state__obj_sign_up_info, set_state__obj_sign_up_info] = useState(
+    init_state__obj_sign_up_info
+  );
   const [state__is_sign_up, set_state__is_sign_up] = useState(false);
   const [state__is_success_sign_up, set_state__is_success_sign_up] =
     useState(false);
+  const [state__str_warning, set_state__str_warning] = useState("");
 
-  // API
-  const fn_POST__sign_up_info = () => {
-    axios
-      .post(URL__SIGN_UP, qs.stringify(state__sign_up_info))
-      .then((res) => {
-        console.log(res.data);
-        set_state__is_success_sign_up(true);
-      })
-      .catch((err) => {
-        console.error(`${ERR_MSG__SIGN_UP}${err}`);
-        set_state__is_success_sign_up(false);
-      })
-      .then(() => {
-        set_state__is_sign_up(true);
-      });
+  /**
+   * Setter
+   */
+  const fn_setter__success_sign_up = () => {
+    set_state__is_success_sign_up(true);
+  };
+  const fn_setter__did_sign_up = () => set_state__is_sign_up(true);
+  const fn_setter__no_warning = () => set_state__str_warning("");
+  const fn_setter__diff_pwd = () =>
+    set_state__str_warning(STR_WARNING__DIFF_PASSWORD);
+
+  /**
+   * Logic
+   */
+  const fn_logic__submit_form__is_diff_pwd = () => {
+    const { password, chk_password } = state__obj_sign_up_info;
+    const is_check = password === chk_password;
+    return is_check;
   };
 
-  // Handler
+  const fn_logic__submit_form__hashing = () => {
+    const hashed_password = fn_logic__hash__create_DIGEST(
+      state__obj_sign_up_info.password
+    );
+    const is_hashed = fn_logic__hash__compare_PWD(
+      state__obj_sign_up_info.password,
+      hashed_password
+    );
+    if (is_hashed) {
+      fn_logic__POST__auth__sign_up(
+        {
+          ...state__obj_sign_up_info,
+          hashed_password,
+        },
+        fn_setter__success_sign_up
+      );
+    }
+  };
+
+  /**
+   * Handler
+   */
   const fn_handler__on_submit__sign_up_form = (e) => {
     e.preventDefault();
-    fn_POST__sign_up_info();
+    const is_check = fn_logic__submit_form__is_diff_pwd();
+    if (!is_check) {
+      fn_setter__diff_pwd();
+      setTimeout(fn_setter__no_warning, 3000);
+      return;
+    }
+    fn_logic__submit_form__hashing();
+    fn_setter__did_sign_up();
   };
 
   const fn_handler__on_change__sign_up_info = (e) => {
-    set_state__sign_up_info({
-      ...state__sign_up_info,
+    set_state__obj_sign_up_info({
+      ...state__obj_sign_up_info,
       [e.currentTarget.name]: e.currentTarget.value,
     });
   };
 
+  /**
+   * Component
+   */
   return (
     <div className="sign_up_wrapper">
       <form onSubmit={fn_handler__on_submit__sign_up_form}>
@@ -95,8 +143,9 @@ const SessionSignUp = ({ is_click_sign_up }) => {
                 <label htmlFor={obj_data.input_id}>
                   {obj_data.label_value}
                 </label>
+
                 <input
-                  type="text"
+                  type={obj_data.input_type}
                   id={obj_data.input_id}
                   name={obj_data.input_name}
                   placeholder={obj_data.label_value}
@@ -104,6 +153,7 @@ const SessionSignUp = ({ is_click_sign_up }) => {
                 />
               </div>
             ))}
+            <p>{state__str_warning}</p>
           </>
         </fieldset>
 
@@ -122,4 +172,4 @@ const SessionSignUp = ({ is_click_sign_up }) => {
   );
 };
 
-export default SessionSignUp;
+export default SignUp;

@@ -1,59 +1,11 @@
 @import "./variables.scss";
 
+$size__h__app: 100vh;
+$size__h__header: 34px;
+$size__h__footer: 34px;
+
 .app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-header {
-  &,
-  * {
-    box-sizing: border-box;
-  }
-
-  & {
-    height: 2.125rem;
-    background-color: $r_root__header_bg__color;
-    display: flex;
-    align-items: center;
-    padding-left: 1rem;
-    padding-right: 0.5rem;
-  }
-
-  a {
-    text-decoration: none;
-  }
-}
-
-footer {
-  & {
-    height: 2.125rem;
-    background-color: $r_root__footer_bg__color;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  p {
-    font-family: $r_root__footer_font__sub;
-    font-size: 0.875rem;
-  }
-}
-
-@media screen and (max-width: 256px) {
-  header {
-    & {
-      padding-left: 0;
-      justify-content: center;
-    }
-
-    .logo_wrapper {
-      width: 100%;
-      justify-content: center;
-      h1 {
-        display: none;
-      }
-    }
-  }
+  min-height: $size__h__app;
+  display: grid;
+  grid-template-rows: $size__h__header auto $size__h__footer;
 }

@@ -1,5 +1,139 @@
+@import "./variables.scss";
+
+$breakpoint__mobile_s: 320px;
+$breakpoint__mobile_m: 375px;
+$breakpoint__mobile_max: 425px;
+
+$breakpoint__tablet_min: 426px;
+$breakpoint__tablet_max: 768px;
+
+$breakpoint__laptop_min: 769px;
+$breakpoint__laptop_max: 1024px;
+
+$breakpoint__desktop_min: 1025px;
+$breakpoint__desktop_max: 1440px;
+
+$breakpoint__tv_min: 1441px;
+$breakpoint__4k: 2560px;
+
+/**
+ * Media Query
+ */
+@mixin mobile {
+  // ~425px
+  @media screen and (max-width: $breakpoint__mobile_max) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  // ~768px
+  @media screen and (min-width: $breakpoint__tablet_min) and (max-width: $breakpoint__tablet_max) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  // ~1024px
+  @media screen and (min-width: $breakpoint__laptop_min) and (max-width: $breakpoint__laptop_max) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  // ~1440px
+  @media screen and (min-width: $breakpoint__desktop_min) and (max-width: $breakpoint__desktop_max) {
+    @content;
+  }
+}
+
+@mixin tv {
+  // ~2560px
+  @media screen and (min-width: $breakpoint__tv_min) and (max-width: $breakpoint__4k) {
+    @content;
+  }
+}
+
 @mixin r_doc__main_flex__setting {
   @include setting__flex_CCS;
+}
+
+/**
+ * Flex
+ */
+@mixin flex-RSS {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+@mixin flex-RSC {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+@mixin flex-RCS {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+@mixin flex-RCC {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-REC {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@mixin flex-RSEC {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+@mixin flex-RSAC {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+@mixin flex-RSBC {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+@mixin flex-CSS {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+@mixin flex-CSC {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+@mixin flex-CCS {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+@mixin flex-CCC {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 @mixin setting__flex_RSC {
@@ -70,7 +204,28 @@
   align-items: center;
 }
 
+/**
+ * Grid
+ */
+@mixin grid-C_C($cols) {
+  display: grid;
+  grid-template-columns: $cols;
+  align-content: center;
+}
+
+/**
+ * User
+ */
+// Drag
 @mixin setting__no_drag__text {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+@mixin no_drag__txt {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -94,4 +249,36 @@
 
 @mixin bs__a($f) {
   box-shadow: 0 0 0 1px hsla(0, 0%, 0%, $f);
+}
+
+/**
+ * Link
+ */
+@mixin link__none_effect {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+/**
+ * Icon
+ */
+
+@mixin hd_icon_style {
+  .icon {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 50%;
+
+    @include flex-RCC;
+  }
+
+  .icon:hover {
+    background-color: $i_bg__hv_clr;
+  }
+  .icon.state__mouse_down {
+    background-color: $i_bg__md_clr;
+  }
 }

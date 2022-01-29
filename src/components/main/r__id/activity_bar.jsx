@@ -18,10 +18,10 @@ const arr_activity_items = [
   },
 ];
 
-const obj_activity_items = arr_activity_items.reduce(
-  (obj, t) => ((obj[t.alt] = false), obj),
-  {}
-);
+const obj_activity_items = arr_activity_items.reduce((obj, t) => {
+  obj[t.alt] = false;
+  return obj;
+}, {});
 
 const UserActivityBar = () => {
   // Local state

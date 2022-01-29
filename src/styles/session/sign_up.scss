@@ -78,6 +78,17 @@ div.sign_up_wrapper {
           }
         }
       }
+
+      p {
+        & {
+          height: 2rem;
+          margin: 0;
+          padding-top: 1rem;
+          color: hsl(0, 100%, 50%);
+          font-size: 0.75rem;
+          text-indent: 0.25rem;
+        }
+      }
     }
 
     button[type="submit"] {

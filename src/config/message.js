@@ -5,9 +5,9 @@ const COMMON_ERROR_MESSAGE = "ERROR:";
  * GET
  */
 export const ERR_MSG__SIGN_IN = `${COMMON_ERROR_MESSAGE}\n`;
-export const ERR_MSG__USR_DOC_LIST = `${COMMON_ERROR_MESSAGE}\n`;
+export const ERR_MSG__USR__DOC_LIST = `${COMMON_ERROR_MESSAGE}\n`;
 
-export const ERR_MSG__USR_DOC_ELEMS = `${COMMON_ERROR_MESSAGE}\n`;
+export const ERR_MSG__USR_DOC__ELEM_LIST = `${COMMON_ERROR_MESSAGE}\n`;
 
 /**
  * REST:

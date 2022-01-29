@@ -1,0 +1,25 @@
+@import "../mixins.scss";
+@import "../variables.scss";
+
+$size__h: 100%;
+
+$bg__clr: hsl(0, 0%, 96%);
+$ft__clr: black;
+
+footer {
+  & {
+    position: relative;
+    height: $size__h;
+    background-color: $bg__clr;
+    display: grid;
+    grid-template-columns: auto;
+    justify-content: center;
+    align-content: center;
+  }
+
+  p {
+    margin: 0;
+    font-family: $common__font__sub;
+    font-size: 0.875rem;
+  }
+}

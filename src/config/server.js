@@ -10,11 +10,11 @@ const COMMON_URL = `${COMMON_SCHEME}://${COMMON_HOST}:${COMMON_PORT}`;
 const ENDPOINT__SIGN_IN =
   process.env.REACT_APP__ENDPOINT__SIGN_IN || "/api/sign_in";
 
-const ENDPOINT__USR_DOC_LIST =
-  process.env.REACT_APP__ENDPOINT__USR_DOC_LIST || "/api/usr_doc_list";
+const ENDPOINT__USR__DOC_LIST =
+  process.env.REACT_APP__ENDPOINT__USR_DOC_LIST || "/api/usr__doc_list";
 
-const ENDPOINT__USR_DOC_ELEMS =
-  process.env.REACT_APP__ENDPOINT__USR_DOC || "/api/usr_doc_elems";
+const ENDPOINT__USR_DOC__ELEM_LIST =
+  process.env.REACT_APP__ENDPOINT__USR_DOC || "/api/usr_doc__elem_list";
 
 /**
  * POST
@@ -22,7 +22,7 @@ const ENDPOINT__USR_DOC_ELEMS =
 const ENDPOINT__SIGN_UP =
   process.env.REACT_APP__ENDPOINT__SIGN_UP || "/api/sign_up";
 
-const ENDPOINT__ADD_DOC = process.env.ENDPOINT__ADD_DOC || "/api/doc/add_doc";
+const ENDPOINT__ADD_DOC = process.env.ENDPOINT__ADD_DOC || "/api/add_doc";
 // r__id__doc.editor: 문서 내 엘리먼트 생성
 const ENDPOINT__ADD_DOC_ELEM =
   process.env.REACT_APP__ENDPOINT__ADD_DOC_ELEM || "/api/add_doc_elem";
@@ -32,7 +32,7 @@ export const config__sign_up = {
   SCHEME: COMMON_SCHEME,
   HOST: COMMON_HOST,
   PORT: COMMON_PORT,
-  ENDPOINT: process.env.REACT_APP__SIGN_UP_ENDPOINT || "/api/signup",
+  ENDPOINT: ENDPOINT__SIGN_UP,
 };
 
 export const URL__SIGN_IN = `${COMMON_URL}${ENDPOINT__SIGN_IN}`;
@@ -40,15 +40,15 @@ export const config__sign_in = {
   SCHEME: COMMON_SCHEME,
   HOST: COMMON_HOST,
   PORT: COMMON_PORT,
-  ENDPOINT: process.env.REACT_APP__SIGN_IN_ENDPOINT || "/api/signin",
+  ENDPOINT: ENDPOINT__SIGN_IN,
 };
 
-export const URL__USR_DOC_LIST = `${COMMON_URL}${ENDPOINT__USR_DOC_LIST}`;
+export const URL__USR__DOC_LIST = `${COMMON_URL}${ENDPOINT__USR__DOC_LIST}`;
 export const config__usr_doc_list = {
   SCHEME: COMMON_SCHEME,
   HOST: COMMON_HOST,
   PORT: COMMON_PORT,
-  ENDPOINT: ENDPOINT__USR_DOC_LIST,
+  ENDPOINT: ENDPOINT__USR__DOC_LIST,
 };
 
 export const URL__ADD_DOC = `${COMMON_URL}${ENDPOINT__ADD_DOC}`;
@@ -59,12 +59,12 @@ export const config__add_doc = {
   ENDPOINT: ENDPOINT__ADD_DOC,
 };
 
-export const URL__USR_DOC_ElEMS = `${COMMON_URL}${ENDPOINT__USR_DOC_ELEMS}`;
+export const URL__USR_DOC__ELEM_LIST = `${COMMON_URL}${ENDPOINT__USR_DOC__ELEM_LIST}`;
 export const config__usr_doc = {
   SCHEME: COMMON_SCHEME,
   HOST: COMMON_HOST,
   PORT: COMMON_PORT,
-  ENDPOINT: ENDPOINT__USR_DOC_ELEMS,
+  ENDPOINT: ENDPOINT__USR_DOC__ELEM_LIST,
 };
 
 export const URL__ADD_DOC_ELEM = `${COMMON_URL}${ENDPOINT__ADD_DOC_ELEM}`;

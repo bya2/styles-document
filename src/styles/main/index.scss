@@ -1,0 +1,11 @@
+@import "../mixins.scss";
+@import "../variables.scss";
+
+$size__h: 100%;
+
+$bg__clr: hsl(0, 0%, 94%);
+
+main {
+  height: $size__h;
+  background-color: $bg__clr;
+}
