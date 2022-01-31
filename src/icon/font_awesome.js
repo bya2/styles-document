@@ -17,10 +17,29 @@ const obj_cls__fas_icon = {
   // -- RIGHT
   cls__icon_sign_up: "fas fa-user-plus",
   cls__icon_sign_in: "fas fa-sign-in-alt",
+  cls__icon_sign_out: "fas fa-sign-out-alt",
   cls__icon_bell: "fas fa-bell",
 
   /**
    * MAIN
+   */
+
+  /**
+   * SECTION
+   */
+
+  /**
+   * ASIDE:LEFT
+   */
+  cls__icon_doc_plus: "fas fa-plus",
+  cls__icon_group_plus: "fas fa-layer-group",
+  cls__icon_refresh: "fas fa-redo-alt",
+
+  cls__icon_doc: "far fa-sticky-note",
+  cls__icon_group: "far fa-object-group",
+
+  /**
+   * ASIDE:RIGHT
    */
 
   /**

@@ -7,5 +7,5 @@ $size__h__footer: 34px;
 .app {
   min-height: $size__h__app;
   display: grid;
-  grid-template-rows: $size__h__header auto $size__h__footer;
+  grid-template-rows: 1fr calc(100vh - 68px) 1fr;
 }

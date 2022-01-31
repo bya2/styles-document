@@ -1,33 +1,17 @@
-import { Routes, Route } from "react-router-dom";
+// import { Routes, Route } from "react-router-dom";
 
 import "../../styles/main/index.scss";
 
-import RouteRoot from "../../routes/r_root";
-import RouteID from "../../routes/r__id";
-
-const arr_routes = [
-  {
-    alt: "root",
-    path: "/",
-    elem: <RouteRoot />,
-  },
-  {
-    alt: "any user",
-    path: ":id/*",
-    elem: <RouteID />,
-  },
-];
+import Section from "./section";
+import LeftAside from "./aside/left";
+import RightAside from "./aside/right";
 
 const Comp_main = () => {
   return (
     <main>
-      <Routes>
-        <>
-          {arr_routes.map((route) => (
-            <Route key={route.alt} path={route.path} element={route.elem} />
-          ))}
-        </>
-      </Routes>
+      <LeftAside />
+      <Section />
+      <RightAside />
     </main>
   );
 };

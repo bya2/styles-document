@@ -1,19 +1,31 @@
 import "../../../styles/header/menu/search_list.scss";
 
-const Comp_search_list__header = () => {
+const arr = [
+  { value: "A" },
+  { value: "B" },
+  { value: "C" },
+  { value: "D" },
+  { value: "E" },
+  { value: "F" },
+  { value: "G" },
+];
+
+const Comp_menu__search_list = ({ state__is_focus_input }) => {
   return (
-    <div className="comp_search_list__header">
-      <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+    <div className="comp_menu__search_list">
+      <ul
+        className={`${
+          state__is_focus_input ? "parent_state__focus" : undefined
+        }`}
+      >
+        <>
+          {arr.map((obj) => (
+            <li key={obj.value}>{obj.value}</li>
+          ))}
+        </>
       </ul>
     </div>
   );
 };
 
-export default Comp_search_list__header;
+export default Comp_menu__search_list;

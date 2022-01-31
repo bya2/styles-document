@@ -6,16 +6,34 @@ const {
   fn_logic__logging_hashing_info,
   fn_logic__compare_hashing_info,
 } = require("../../logic/hashing");
+
 const fn_service__auth__sign_up = require("../../service/sign_up");
+const fn_service__auth__sign_in = require("../../service/sign_in");
 
 /**
  * GET
  */
 router.get("/sign_in", (req, res) => {
   console.log("res... (sign_in)");
-  const param__obj_sign_in_info = req.params;
-  console.log(param__obj_sign_in_info);
-  res.status(200);
+
+  const query__obj_sign_in_info = req.query;
+  console.log(query__obj_sign_in_info);
+
+  fn_service__auth__sign_in(query__obj_sign_in_info).then((obj_data) => {
+    if (obj_data == null) {
+      res.status(404).send(null);
+      return;
+    }
+
+    if (!obj_data.is_check_valid) {
+      res.status(400).json({
+        is_check_valid: false,
+      });
+      return;
+    }
+    console.log(obj_data);
+    res.status(200).json(obj_data);
+  });
 });
 
 /**

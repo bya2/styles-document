@@ -1,0 +1,48 @@
+@import "../../../../mixins.scss";
+@import "../../../../variables.scss";
+
+.comp_tool__left_aside {
+  // position: relative;
+  // margin: 2rem;
+  // width: 100px;
+  // height: 100px;
+  // background-color: hsla(0, 0%, 0%, 0.5);
+
+  ul.no_space {
+    margin: 0;
+    padding-left: 0;
+
+    li {
+      list-style-type: none;
+    }
+  }
+
+  .list__a_row {
+    @include flex-REC;
+
+    .col:not(:last-of-type) {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+    @include bs__a(0.2);
+    @include flex-RCC;
+    color: black;
+    font-size: 1rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: hsla(0, 0%, 0%, 0.05);
+      transition-duration: 0.3s;
+    }
+
+    &.state__mouse_down {
+      background-color: hsla(0, 0%, 0%, 0.1);
+      @include bs__a(0.4);
+      transition-duration: 0.3s;
+    }
+  }
+}

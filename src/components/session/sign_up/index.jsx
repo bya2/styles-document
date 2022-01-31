@@ -1,37 +1,37 @@
 import { useState } from "react";
 
-import "../../styles/session/sign_up.scss";
+import "../../../styles/session/sign_up.scss";
 
-import { fn_logic__POST__auth__sign_up } from "../../logic/api/post";
+import { fn_logic__POST__auth__sign_up } from "../../../logic/api/post";
 import {
   fn_logic__hash__create_DIGEST,
   fn_logic__hash__compare_PWD,
-} from "../../logic/hash";
+} from "../../../logic/hash";
 
 // Value
-const str_legend__write_area = "Sign up";
+const LEGEND__STR_CONTENT = "Sign up";
 
 const arr_form_group__data = [
   {
-    label_value: "ID",
+    label: "ID",
     input_type: "text",
     input_id: "sign_up_id",
     input_name: "id",
   },
   {
-    label_value: "Email",
+    label: "Email",
     input_type: "email",
     input_id: "sign_up_email",
     input_name: "email",
   },
   {
-    label_value: "Password",
+    label: "Password",
     input_type: "password",
     input_id: "sign_up_password",
     input_name: "password",
   },
   {
-    label_value: "Check password",
+    label: "Check password",
     input_type: "password",
     input_id: "sign_up_chk_password",
     input_name: "chk_password",
@@ -41,7 +41,7 @@ const arr_form_group__data = [
 const STR__SIGN_UP_SUCCESS = "회원가입에 성공하셨습니다.";
 const STR__SIGN_UP_FAIL = "회원가입에 문제가 발생하였습니다.";
 
-const STR_WARNING__DIFF_PASSWORD = "비밀번호가 다름.";
+const MSG__STR_WARNING__DIFF_PASSWORD = "비밀번호가 다름.";
 
 const init_state__obj_sign_up_info = {
   id: "",
@@ -53,7 +53,7 @@ const init_state__obj_sign_up_info = {
 /**
  * CONTEXT
  */
-const SignUp = ({ is_click_sign_up }) => {
+const Comp_session__sign_up = ({ fn_setter__state__close_modal }) => {
   /**
    * Local State
    */
@@ -74,7 +74,7 @@ const SignUp = ({ is_click_sign_up }) => {
   const fn_setter__did_sign_up = () => set_state__is_sign_up(true);
   const fn_setter__no_warning = () => set_state__str_warning("");
   const fn_setter__diff_pwd = () =>
-    set_state__str_warning(STR_WARNING__DIFF_PASSWORD);
+    set_state__str_warning(MSG__STR_WARNING__DIFF_PASSWORD);
 
   /**
    * Logic
@@ -117,6 +117,7 @@ const SignUp = ({ is_click_sign_up }) => {
     }
     fn_logic__submit_form__hashing();
     fn_setter__did_sign_up();
+    fn_setter__state__close_modal();
   };
 
   const fn_handler__on_change__sign_up_info = (e) => {
@@ -133,22 +134,17 @@ const SignUp = ({ is_click_sign_up }) => {
     <div className="sign_up_wrapper">
       <form onSubmit={fn_handler__on_submit__sign_up_form}>
         <fieldset className="form_inner__write_area">
-          <legend>{str_legend__write_area}</legend>
+          <legend>{LEGEND__STR_CONTENT}</legend>
           <>
             {arr_form_group__data.map((obj_data) => (
-              <div
-                key={obj_data.label_value}
-                className="form_group__label_input"
-              >
-                <label htmlFor={obj_data.input_id}>
-                  {obj_data.label_value}
-                </label>
+              <div key={obj_data.label} className="form_group__label_input">
+                <label htmlFor={obj_data.input_id}>{obj_data.label}</label>
 
                 <input
                   type={obj_data.input_type}
                   id={obj_data.input_id}
                   name={obj_data.input_name}
-                  placeholder={obj_data.label_value}
+                  placeholder={obj_data.label}
                   onChange={fn_handler__on_change__sign_up_info}
                 />
               </div>
@@ -172,4 +168,4 @@ const SignUp = ({ is_click_sign_up }) => {
   );
 };
 
-export default SignUp;
+export default Comp_session__sign_up;

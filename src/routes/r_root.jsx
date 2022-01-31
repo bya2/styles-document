@@ -6,13 +6,13 @@ import "../styles/main/r_root/index.scss";
 
 // const common_class_name = "r_root";
 
-const RouteRoot = () => {
+const Comp_route__root = () => {
   return (
     <>
-      <div></div>
+      <div>ROOT_PAGE</div>
       <Outlet />
     </>
   );
 };
 
-export default RouteRoot;
+export default Comp_route__root;

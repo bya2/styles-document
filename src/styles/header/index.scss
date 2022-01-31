@@ -3,7 +3,7 @@
 @import "../variables.scss";
 
 $size__w: 100%;
-$size__h: 2.125rem;
+// $size__h: 2.125rem;
 $bg__clr: hsl(0, 0%, 20%);
 $ft__clr: white;
 
@@ -18,7 +18,7 @@ header {
 
   position: relative;
   width: $size__w;
-  height: $size__h;
+  // height: $size__h;
   box-shadow: 0 0 0px hsla(0, 0%, 0%, 1);
 
   @include grid-C_C($grid_cols__default);

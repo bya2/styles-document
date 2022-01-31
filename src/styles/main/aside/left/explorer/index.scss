@@ -1,0 +1,21 @@
+@import "../../../../mixins.scss";
+@import "../../../../variables.scss";
+
+.comp_explorer__left_aside {
+  position: relative;
+  height: 100%;
+  @include bs__a(0.1);
+  border-radius: 8px;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    position: absolute;
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: hsl(0, 0%, 60%);
+  }
+  &::-webkit-scrollbar-track {
+    background-color: inherit;
+  }
+}

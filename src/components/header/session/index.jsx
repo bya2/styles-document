@@ -1,23 +1,26 @@
-import { useState } from "react";
-
+import { useCallback, useState } from "react";
 import "../../../styles/header/session.scss";
 import Modal from "../../resusing/modal";
 import SignUp from "../../session/sign_up";
 import SignIn from "../../session/sign_in";
+import fas_icon__obj_cls from "../../../icon/font_awesome";
 
-import obj_cls__fas_icon from "../../../icon/font_awesome";
-const { cls__icon_sign_up, cls__icon_sign_in } = obj_cls__fas_icon;
+const { cls__icon_sign_up, cls__icon_sign_in } = fas_icon__obj_cls;
 
 const arr_sess_elems = [
   {
     alt: "sign up",
-    i_cls: cls__icon_sign_up,
-    comp: <SignUp />,
+    icon_cls: cls__icon_sign_up,
+    comp: (fn_setter__state__close_modal) => (
+      <SignUp fn_setter__state__close_modal={fn_setter__state__close_modal} />
+    ),
   },
   {
     alt: "sign in",
-    i_cls: cls__icon_sign_in,
-    comp: <SignIn />,
+    icon_cls: cls__icon_sign_in,
+    comp: (fn_setter__state__close_modal) => (
+      <SignIn fn_setter__state__close_modal={fn_setter__state__close_modal} />
+    ),
   },
 ];
 
@@ -39,31 +42,36 @@ const Comp_session__header = () => {
   /**
    * Setter
    */
-  const fn_setter__mouse_down__icon = (tg) =>
+  const fn_setter__mouse_down__elem = (tg) =>
     set_state__obj_is_mouse_down__elem({
       ...state__obj_is_mouse_down__elem,
       [tg.getAttribute("name")]: true,
     });
-  const fn_setter__mouse_up__icon = () =>
+
+  const fn_setter__mouse_up__elem = () =>
     set_state__obj_is_mouse_down__elem(init_state__obj_is_occur_event__elem);
+
   const fn_setter__state__click_elem = (tg) =>
     set_state__obj_is_click__elem({
       ...state__obj_is_click__elem,
       [tg.getAttribute("name")]: true,
     });
-  const fn_setter__state__close_modal = () =>
-    set_state__obj_is_click__elem(init_state__obj_is_occur_event__elem);
+
+  const fn_setter__state__close_modal = useCallback(
+    () => set_state__obj_is_click__elem(init_state__obj_is_occur_event__elem),
+    []
+  );
 
   /**
    * Handler
    */
   const fn_handler__on_mouse_down__icon = (e) => {
     const e_curr_tg = e.currentTarget;
-    fn_setter__mouse_down__icon(e_curr_tg);
+    fn_setter__mouse_down__elem(e_curr_tg);
   };
 
-  const fn_handler__on_mouse_up__icon = (e) => {
-    fn_setter__mouse_up__icon();
+  const fn_handler__on_mouse_up__icon = () => {
+    fn_setter__mouse_up__elem();
   };
 
   const fn_handler__on_click__elem = (e) => {
@@ -87,7 +95,7 @@ const Comp_session__header = () => {
               onMouseDown={fn_handler__on_mouse_down__icon}
               onClick={fn_handler__on_click__elem}
             >
-              <i className={`icon ${obj_elem.i_cls}`}></i>
+              <i className={`icon ${obj_elem.icon_cls}`}></i>
               <p className="name">{obj_elem.alt}</p>
             </li>
           ))}
@@ -100,7 +108,7 @@ const Comp_session__header = () => {
             state__is_click__elem={state__obj_is_click__elem[obj_elem.alt]}
             fn_setter__state__close_modal={fn_setter__state__close_modal}
           >
-            {obj_elem.comp}
+            {obj_elem.comp(fn_setter__state__close_modal)}
           </Modal>
         ))}
       </>

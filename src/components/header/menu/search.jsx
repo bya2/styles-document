@@ -14,7 +14,7 @@ const str_placeholder__input = "Search or jump to...";
  * -- 키보드 입력 시 검색창에 포커스 (X)
  * --
  */
-const Comp_menu_search__header = ({ state__is_click__search }) => {
+const Comp_menu__search = ({ state__is_click__search }) => {
   /**
    * State
    */
@@ -86,9 +86,9 @@ const Comp_menu_search__header = ({ state__is_click__search }) => {
             <i className={`icon ${cls__icon_search}`}></i>
           </button>
         </fieldset>
-        <SearchList />
+        <SearchList state__is_focus_input={state__is_focus_input} />
       </form>
     </span>
   );
 };
-export default Comp_menu_search__header;
+export default Comp_menu__search;
