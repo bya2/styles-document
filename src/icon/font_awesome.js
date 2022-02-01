@@ -35,6 +35,8 @@ const obj_cls__fas_icon = {
   cls__icon_group_plus: "fas fa-layer-group",
   cls__icon_refresh: "fas fa-redo-alt",
 
+  cls__icon_down: "fas fa-chevron-down",
+  cls__icon_right: "fas fa-chevron-right",
   cls__icon_doc: "far fa-sticky-note",
   cls__icon_group: "far fa-object-group",
 

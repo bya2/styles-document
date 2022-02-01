@@ -1,0 +1,115 @@
+@import "../../../../../mixins.scss";
+@import "../../../../../variables.scss";
+
+.comp_explorer_layer {
+  &,
+  ul {
+    margin: 0;
+    li {
+      list-style-type: none;
+    }
+  }
+  p {
+    margin: 0;
+  }
+
+  position: relative;
+  padding: 1rem 0;
+
+  .box {
+    position: relative;
+    height: 24px;
+    @include flex-RSC;
+    // margin-bottom: 0.5rem;
+    padding: 0 1rem;
+
+    & > a {
+      @include flex-RSC;
+      text-decoration: none;
+    }
+
+    .fold_icon {
+      position: absolute;
+      left: 2px;
+      font-size: 10px;
+      &.fold {
+      }
+      &.unfold {
+      }
+    }
+
+    .icon {
+      margin-right: 0.5rem;
+    }
+
+    .name {
+      font-size: 0.75rem;
+      font-family: $common__font__sub;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &:not(:last-of-type) {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .inner_list {
+    // display: none;
+  }
+
+  .range {
+    position: relative;
+    margin-left: 0.4rem;
+    padding-left: 0.6rem;
+    border-left: 1px solid hsla(0, 0%, 0%, 0.1);
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: -1px;
+      bottom: 0;
+      width: 1px;
+      height: 6px;
+      // background-color: inherit;
+      background-color: white;
+    }
+  }
+
+  .sub_tree {
+    .p_node {
+      &:hover {
+        background-color: hsla(0, 0%, 90%, 0.7);
+        & + .c_node_list {
+          background-color: hsla(0, 0%, 80%, 0.1);
+
+          &,
+          & .c_node_list {
+            &::before {
+              background-color: hsla(0, 0%, 80%, 0.1);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .input_box {
+    padding-left: 1rem;
+    // padding-right: 1px;
+  }
+  input {
+    position: relative;
+    width: 100%;
+    outline: none;
+    border: 1px solid hsl(214, 100%, 50%);
+    margin-bottom: 0.5rem;
+    display: block;
+    // padding: 0.25rem 0.5rem;
+
+    &:focus {
+      box-shadow: 0 0 1px hsl(214, 100%, 50%);
+    }
+  }
+}

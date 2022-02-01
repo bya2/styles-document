@@ -1,8 +1,9 @@
 import "../../../../../styles/main/aside/left/tool/index.scss";
 import cls_list__fas_icon from "../../../../../icon/font_awesome";
 import {} from "../../../../../logic/api/post";
+import { ref__input } from "../explorer/layer";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const { cls__icon_doc_plus, cls__icon_group_plus, cls__icon_refresh } =
   cls_list__fas_icon;
@@ -30,10 +31,7 @@ const init_state__occur_event__tool_elem = tool_list__arr_elems.reduce(
   {}
 );
 
-const Comp_tool__left_aside = ({
-  ref_input__add_group,
-  ref_input__add_doc,
-}) => {
+const Comp_tool__left_aside = () => {
   console.log("Comp_tool__left_aside");
 
   /**
@@ -41,23 +39,6 @@ const Comp_tool__left_aside = ({
    */
   const [state__obj_is_click__tool_elem, set_state__obj_is_click__tool_elem] =
     useState(init_state__occur_event__tool_elem);
-
-  /**
-   * Side
-   */
-  useEffect(() => {
-    if (state__obj_is_click__tool_elem.add_group) {
-      ref_input__add_group.current.foucs();
-    }
-  }, [state__obj_is_click__tool_elem.add_group]);
-
-  useEffect(() => {
-    if (state__obj_is_click__tool_elem.add_doc) {
-      ref_input__add_doc.current.focus();
-    }
-  }, [state__obj_is_click__tool_elem.add_doc]);
-
-  useEffect(() => {}, [state__obj_is_click__tool_elem.refresh]);
 
   /**
    * Setter
@@ -69,11 +50,32 @@ const Comp_tool__left_aside = ({
     });
   };
 
+  const fn_setter__after_focus__ref__input = () =>
+    set_state__obj_is_click__tool_elem(init_state__occur_event__tool_elem);
+
+  /**
+   * Side
+   */
+  useEffect(() => {
+    if (
+      state__obj_is_click__tool_elem.add_group ||
+      state__obj_is_click__tool_elem.add_doc
+    ) {
+      ref__input.current.focus();
+      fn_setter__after_focus__ref__input();
+    }
+  }, [
+    state__obj_is_click__tool_elem.add_group,
+    state__obj_is_click__tool_elem.add_doc,
+  ]);
+
+  useEffect(() => {}, [state__obj_is_click__tool_elem.refresh]);
+
   /**
    * Handler
    */
   const fn_handler__click__tool_elem = (e) => {
-    const e_curr_tg_name = e.currentTarget.name;
+    const e_curr_tg_name = e.currentTarget.getAttribute("name");
     fn_setter__click__tool_elem(e_curr_tg_name);
   };
 
