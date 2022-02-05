@@ -14,14 +14,18 @@
   }
 
   position: relative;
-  padding: 1rem 0;
+  // padding: 1rem 0;
+  padding: 0;
 
   .box {
     position: relative;
     height: 24px;
+    border: 1px solid transparent;
     @include flex-RSC;
-    // margin-bottom: 0.5rem;
     padding: 0 1rem;
+    cursor: pointer;
+    @include no_drag__txt;
+    // @include link__none_effect;
 
     & > a {
       @include flex-RSC;
@@ -31,11 +35,11 @@
     .fold_icon {
       position: absolute;
       left: 2px;
+      width: 12px;
+      height: 12px;
       font-size: 10px;
-      &.fold {
-      }
-      &.unfold {
-      }
+      @include flex-RCC;
+      // pointer-events: none;
     }
 
     .icon {
@@ -51,18 +55,69 @@
     }
 
     &:not(:last-of-type) {
-      margin-bottom: 0.5rem;
+      // margin-bottom: 0.5rem;
+    }
+
+    &.click {
+      &::before {
+        // 눌러지면 파랗게
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: hsla(236, 100%, 66%, 0.103);
+        box-shadow: 0 0 0 1px hsl(236, 100%, 79%);
+      }
+    }
+    &.no_click {
+    }
+
+    &:not(.click).active {
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: hsla(0, 0%, 0%, 0.05);
+      }
+    }
+
+    &.input {
+      padding-right: 0;
+      input {
+        margin: 0;
+      }
+
+      &.no_display {
+        display: none;
+      }
+
+      &:not(:focus-within) {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
     }
   }
 
-  .inner_list {
-    // display: none;
+  .sub_tree_list_box {
+    &.fold {
+      display: block;
+    }
+    &.unfold {
+      display: none;
+    }
   }
 
   .range {
     position: relative;
-    margin-left: 0.4rem;
-    padding-left: 0.6rem;
+    margin-left: 4px;
+    padding-left: 12px;
     border-left: 1px solid hsla(0, 0%, 0%, 0.1);
 
     &::before {
@@ -103,13 +158,15 @@
     position: relative;
     width: 100%;
     outline: none;
-    border: 1px solid hsl(214, 100%, 50%);
+    // border: 1px solid hsl(236, 100%, 79%);
+    border: 1px solid transparent;
+    box-shadow: 0 0 0 1px hsl(236, 100%, 79%);
     margin-bottom: 0.5rem;
     display: block;
     // padding: 0.25rem 0.5rem;
 
     &:focus {
-      box-shadow: 0 0 1px hsl(214, 100%, 50%);
+      box-shadow: 0 0 1px hsl(236, 100%, 79%);
     }
   }
 }

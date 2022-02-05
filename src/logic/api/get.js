@@ -3,6 +3,7 @@ import axios from "axios";
 import {
   URL__AUTH__SIGN_IN,
   URL__AUTH__VALIDATION,
+  URL__EXP__NODE_LIST,
   URL__EXP__LOAD_GROUP_LIST,
   URL__EXP__LOAD_DOC_LIST,
   URL__ELEM__LOAD_LIST,
@@ -10,6 +11,7 @@ import {
 import {
   ERR_MSG__AUTH__SIGN_IN,
   ERR_MSG__AUTH__VALIDATION,
+  ERR_MSG__EXP__NODE_LIST,
   ERR_MSG__EXP__LOAD_GROUP_LIST,
   ERR_MSG__EXP__LOAD_DOC_LIST,
   ERR_MSG__ELEM__LOAD_LIST,
@@ -77,6 +79,33 @@ export const fn_logic__GET__auth__sign_in = (state__obj_sign_in_info) => {
     })
     .catch((err) => {
       console.error(`${ERR_MSG__AUTH__SIGN_IN}${err}`);
+    });
+};
+
+export const fn_logic__GET__exp__node_list = () => {
+  const ref = sessionStorage.getItem("ref_hashed_user");
+
+  return axios
+    .get(URL__EXP__NODE_LIST, {
+      params: {
+        ref,
+      },
+    })
+    .then((res) => {
+      if (res.status !== 200) throw Error("Unknown status code.");
+
+      const { status, data } = res;
+      console.log(status);
+      console.log(data);
+    })
+    .catch((err) => {
+      console.error(ERR_MSG__EXP__NODE_LIST);
+      if (err.response) {
+        const res = err.response;
+        console.error(res.data);
+        console.error(res.status);
+        console.error(res.headers);
+      }
     });
 };
 
