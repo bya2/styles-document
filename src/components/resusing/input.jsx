@@ -11,6 +11,7 @@ const Comp_input__reusing = (
     onChange,
     onKeyDown,
     onKeyUp,
+    onBlur,
   },
   ref
 ) => {
@@ -27,6 +28,7 @@ const Comp_input__reusing = (
       onChange={onChange}
       onKeyDown={onKeyDown}
       onKeyUp={onKeyUp}
+      onBlur={onBlur}
       ref={ref}
     />
   );

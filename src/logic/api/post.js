@@ -33,23 +33,26 @@ export const fn_logic__POST__auth__sign_up = (
     });
 };
 
-export const fn_logic__PORT__exp__add_group = (_obj_data) => {
+export const fn_logic__POST__exp__add_group = (_obj_data) => {
   const config = {
     method: "post",
     url: URL__EXP__ADD_GROUP,
-    data: qs.stringify(_obj_data),
+    data: qs.stringify({
+      ..._obj_data,
+      user: "bya2",
+    }),
   };
 
   return axios(config)
     .then((res) => {
       if (res.status === 201) {
-        return true;
+        return res.data;
       }
-      return false;
+      return null;
     })
     .catch((err) => {
-      console.error(`${ERR_MSG__EXP__ADD_GROUP}${err}`);
-      return false;
+      console.error(`${ERR_MSG__EXP__ADD_DOC}${err}`);
+      return null;
     });
 };
 
@@ -57,19 +60,22 @@ export const fn_logic__POST__exp__add_doc = (_obj_data) => {
   const config = {
     method: "post",
     url: URL__EXP__ADD_DOC,
-    data: qs.stringify(_obj_data),
+    data: qs.stringify({
+      ..._obj_data,
+      user: "bya2",
+    }),
   };
 
   return axios(config)
     .then((res) => {
       if (res.status === 201) {
-        return true;
+        return res.data;
       }
-      return false;
+      return null;
     })
     .catch((err) => {
       console.error(`${ERR_MSG__EXP__ADD_DOC}${err}`);
-      return false;
+      return null;
     });
 };
 

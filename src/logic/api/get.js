@@ -82,21 +82,23 @@ export const fn_logic__GET__auth__sign_in = (state__obj_sign_in_info) => {
     });
 };
 
-export const fn_logic__GET__exp__node_list = () => {
+export const fn_logic__GET__exp__node_list = (_id = "bya2") => {
   const ref = sessionStorage.getItem("ref_hashed_user");
 
   return axios
     .get(URL__EXP__NODE_LIST, {
       params: {
-        ref,
+        id: _id,
       },
     })
     .then((res) => {
       if (res.status !== 200) throw Error("Unknown status code.");
 
       const { status, data } = res;
-      console.log(status);
-      console.log(data);
+      return {
+        status,
+        data,
+      };
     })
     .catch((err) => {
       console.error(ERR_MSG__EXP__NODE_LIST);

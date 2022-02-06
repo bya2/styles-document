@@ -1,9 +1,8 @@
 import "../../../../../styles/main/aside/left/tool/index.scss";
 import cls_list__fas_icon from "../../../../../icon/font_awesome";
-import {} from "../../../../../logic/api/post";
-import { ref__input } from "../explorer/layer";
-
-import React, { useEffect, useState } from "react";
+import {} from "../../../../../logic/api/get";
+import { ref__doc_input, ref__grp_input } from "../explorer/layer";
+import { useEffect, useState } from "react";
 
 const { cls__icon_doc_plus, cls__icon_group_plus, cls__icon_refresh } =
   cls_list__fas_icon;
@@ -22,7 +21,6 @@ const tool_list__arr_elems = [
     icon: cls__icon_refresh,
   },
 ];
-
 const init_state__occur_event__tool_elem = tool_list__arr_elems.reduce(
   (obj, t) => {
     obj[t.alt] = false;
@@ -56,18 +54,32 @@ const Comp_tool__left_aside = () => {
   /**
    * Side
    */
+  // useEffect(() => {
+  //   if (
+  //     state__obj_is_click__tool_elem.add_group ||
+  //     state__obj_is_click__tool_elem.add_doc
+  //   ) {
+  //     ref__doc_input.current.focus();
+  //     fn_setter__after_focus__ref__input();
+  //   }
+  // }, [
+  //   state__obj_is_click__tool_elem.add_group,
+  //   state__obj_is_click__tool_elem.add_doc,
+  // ]);
+
   useEffect(() => {
-    if (
-      state__obj_is_click__tool_elem.add_group ||
-      state__obj_is_click__tool_elem.add_doc
-    ) {
-      ref__input.current.focus();
+    if (state__obj_is_click__tool_elem.add_doc) {
+      ref__doc_input.current.focus();
       fn_setter__after_focus__ref__input();
     }
-  }, [
-    state__obj_is_click__tool_elem.add_group,
-    state__obj_is_click__tool_elem.add_doc,
-  ]);
+  }, [state__obj_is_click__tool_elem.add_doc]);
+
+  useEffect(() => {
+    if (state__obj_is_click__tool_elem.add_group) {
+      ref__grp_input.current.focus();
+      fn_setter__after_focus__ref__input();
+    }
+  }, [state__obj_is_click__tool_elem.add_group]);
 
   useEffect(() => {}, [state__obj_is_click__tool_elem.refresh]);
 

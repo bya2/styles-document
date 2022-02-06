@@ -1,27 +1,25 @@
+import { useState } from "react";
 import "../../../../../styles/main/aside/left/explorer/index.scss";
 
 import Layer from "./layer";
-
-import Layer2 from "./layer/index2";
 
 const Comp_explorer__left_aside = () => {
   console.log("comp_explorer__left_aside");
 
   /**
-   * Handler
+   * State
    */
-  const fn_handler__click__nav = (e) => {
-    const e_curr_tg = e.currentTarget;
-  };
+  const [state__is_click__root, set_state__is_click__root] = useState(false);
 
   return (
     <nav
-      className="comp_explorer__left_aside"
+      className="comp_explorer__left_aside root"
       tabIndex="0"
-      onClick={fn_handler__click__nav}
+      onClick={() => set_state__is_click__root(true)}
+      onBlur={() => set_state__is_click__root(false)}
     >
-      {/* <Layer /> */}
-      <Layer2 />
+      <Layer state__is_click__root={state__is_click__root} />
+      {/* <Layer2 state__is_click__root={state__is_click__root} /> */}
     </nav>
   );
 };
