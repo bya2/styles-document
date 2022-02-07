@@ -100,9 +100,8 @@ router.post("/add_doc", (req, res) => {
   console.log("QUERY:", body);
 
   fn_service__POST__exp__add_node(body).then((obj_result) => {
-    res.json(obj_result);
+    res.status(201).json(obj_result);
   });
-  // res.status(201);
 });
 
 router.post("/add_group", (req, res) => {
@@ -112,7 +111,7 @@ router.post("/add_group", (req, res) => {
   console.log("QUERY:", body);
 
   fn_service__POST__exp__add_node(body).then((obj_result) => {
-    res.json(obj_result);
+    res.status(201).json(obj_result);
   });
 });
 

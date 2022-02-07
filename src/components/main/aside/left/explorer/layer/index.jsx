@@ -17,7 +17,7 @@ const re_fn__sub_tree_layer = (
   _obj_sub_tree_node,
   _state__is_click__obj_p_node_boxes,
   _state__is_active__obj_p_node_boxes,
-  _state__is_fold_sub_tree__obj_p_group_nodes,
+  _state__is_fold_sub_tree__obj_p_group_node_ids,
   _state__is_disabled__input,
   _fn_setter__click_p_node_box,
   _fn_setter__blur_p_node_box,
@@ -32,14 +32,29 @@ const re_fn__sub_tree_layer = (
       state__is_click__obj_p_node_boxes={_state__is_click__obj_p_node_boxes}
       state__is_active__obj_p_node_boxes={_state__is_active__obj_p_node_boxes}
       state__is_fold_sub_tree__obj_p_group_nodes={
-        _state__is_fold_sub_tree__obj_p_group_nodes
+        _state__is_fold_sub_tree__obj_p_group_node_ids
       }
       fn_setter__click_p_node_box={_fn_setter__click_p_node_box}
       fn_setter__blur_p_node_box={_fn_setter__blur_p_node_box}
       fn_setter__toggle_fold_sub_tree={_fn_setter__toggle_fold_sub_tree}
     >
       <ul className="c_node_list range">
-        {_state__is_active__obj_p_node_boxes[_obj_sub_tree_node._id] ? (
+        {_state__is_active__obj_p_node_boxes[_obj_sub_tree_node._id] ||
+        _obj_sub_tree_node.children
+          .map((obj_child_node) => {
+            // console.log(_state__is_active__obj_p_node_boxes);
+            // console.log("OBJNODE:", _obj_sub_tree_node.children);
+            // console.log("OBJCHILDNODE:", obj_child_node.name);
+            // console.log(
+            //   obj_child_node.type === "document" &&
+            //     _state__is_active__obj_p_node_boxes[obj_child_node._id]
+            // );
+            return (
+              obj_child_node.type === "document" &&
+              _state__is_active__obj_p_node_boxes[obj_child_node._id]
+            );
+          })
+          .includes(true) ? (
           <>
             <li className="box p_node input ">
               <i className="icon">d</i>
@@ -53,15 +68,20 @@ const re_fn__sub_tree_layer = (
                 onKeyDown={(e) =>
                   _fn_handler__key_down__sub_tree_p_input_node(
                     e,
-                    _obj_sub_tree_node._id
+                    _obj_sub_tree_node._id.toString()
                   )
                 }
                 onBlur={(e) =>
                   _fn_handler__blur__sub_tree_p_input_node(
                     e,
-                    _obj_sub_tree_node._id
+                    _obj_sub_tree_node._id.toString()
                   )
                 }
+                // onFocus={() =>
+                //   console.log(
+                //     "포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스"
+                //   )
+                // }
               />
             </li>
             <li className="box p_node input ">
@@ -76,13 +96,13 @@ const re_fn__sub_tree_layer = (
                 onKeyDown={(e) =>
                   _fn_handler__key_down__sub_tree_p_input_node(
                     e,
-                    _obj_sub_tree_node._id
+                    _obj_sub_tree_node._id.toString()
                   )
                 }
                 onBlur={(e) =>
-                  _fn_handler__key_down__sub_tree_p_input_node(
+                  _fn_handler__blur__sub_tree_p_input_node(
                     e,
-                    _obj_sub_tree_node._id
+                    _obj_sub_tree_node._id.toString()
                   )
                 }
               />
@@ -100,7 +120,7 @@ const re_fn__sub_tree_layer = (
                     obj_child_doc_elem,
                     _state__is_click__obj_p_node_boxes,
                     _state__is_active__obj_p_node_boxes,
-                    _state__is_fold_sub_tree__obj_p_group_nodes,
+                    _state__is_fold_sub_tree__obj_p_group_node_ids,
                     _state__is_disabled__input,
                     _fn_setter__click_p_node_box,
                     _fn_setter__blur_p_node_box,
@@ -148,22 +168,44 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
 
   // 폴드된 서브 트리 (부모 노드 아이디 기준)
   const [
-    state__is_fold_sub_tree__obj_p_group_nodes,
-    set_state__is_fold_sub_tree__obj_p_group_nodes,
+    state__is_fold_sub_tree__obj_p_group_node_ids,
+    set_state__is_fold_sub_tree__obj_p_group_node_ids,
   ] = useState(init_bool_state__obj_group_node_ids);
 
   const [state__is_disabled__input, set_state__is_disabled__input] =
     useState(false);
 
+  const [state__obj_new_node, set_state__obj_new_node] = useState(null);
+
   /**
    * Setter
    */
   const fn_setter__init_bool_state = () => {
+    console.log(state__obj_new_node);
+
     set_state__is_click__obj_node_ids(init_bool_state__obj_node_ids);
-    set_state__is_active__obj_node_ids(init_bool_state__obj_node_ids);
-    set_state__is_fold_sub_tree__obj_p_group_nodes(
-      init_bool_state__obj_group_node_ids
+    set_state__is_active__obj_node_ids(
+      state__obj_new_node === null
+        ? init_bool_state__obj_node_ids
+        : {
+            ...init_bool_state__obj_node_ids,
+            [state__obj_new_node._id.toString()]: true,
+          }
     );
+    // set_state__is_fold_sub_tree__obj_p_group_nodes(
+    //   init_bool_state__obj_group_node_ids
+    // );
+
+    const arr_prev_keys = Object.keys(
+      state__is_fold_sub_tree__obj_p_group_node_ids
+    );
+    const arr_curr_keys = Object.keys(init_bool_state__obj_group_node_ids);
+    const diff_key = arr_curr_keys.filter((el) => !arr_prev_keys.includes(el));
+
+    set_state__is_fold_sub_tree__obj_p_group_node_ids({
+      ...state__is_fold_sub_tree__obj_p_group_node_ids,
+      [diff_key]: false,
+    });
   };
 
   const fn_setter__click_p_node_box = (e_curr_tg_name) => {
@@ -185,9 +227,9 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
   };
 
   const fn_setter__toggle_fold_sub_tree = (e_curr_tg_name) => {
-    set_state__is_fold_sub_tree__obj_p_group_nodes({
-      ...state__is_fold_sub_tree__obj_p_group_nodes,
-      [e_curr_tg_name]: state__is_fold_sub_tree__obj_p_group_nodes[
+    set_state__is_fold_sub_tree__obj_p_group_node_ids({
+      ...state__is_fold_sub_tree__obj_p_group_node_ids,
+      [e_curr_tg_name]: state__is_fold_sub_tree__obj_p_group_node_ids[
         e_curr_tg_name
       ]
         ? false
@@ -202,6 +244,7 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
   useEffect(() => {
     fn_logic__GET__exp__node_list()
       .then(({ status, data }) => {
+        console.log("REQDATA:", data);
         set_state__arr_nodes(data || []);
       })
       .catch((err) => {
@@ -217,7 +260,7 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
 
     // 부모를 키로 가진 요소 배열로 이루어진 객체
     const obj_node_id_children = state__arr_nodes.reduce((obj, obj_node) => {
-      const key__str_p_id = obj_node.parent || "root";
+      const key__str_p_id = obj_node.parent.toString() || "root";
       if (!obj[key__str_p_id]) obj[key__str_p_id] = [];
       obj[key__str_p_id] = [...obj[key__str_p_id], obj_node];
       return obj;
@@ -235,11 +278,18 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
           : 0
       );
 
+      arr_node_children.sort((prev_obj, next_obj) =>
+        prev_obj.type > next_obj.type
+          ? -1
+          : next_obj.type > prev_obj.type
+          ? 1
+          : 0
+      );
+
       for (const obj_c_node of arr_node_children) {
-        console.log("CID", obj_c_node._id);
         if (obj_c_node.type === "document" || obj_c_node.children.length === 0)
           continue;
-        obj_c_node.children = re_fn__arr_sub_trees(obj_c_node._id);
+        obj_c_node.children = re_fn__arr_sub_trees(obj_c_node._id.toString());
       }
       return arr_node_children;
     };
@@ -250,7 +300,7 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
     const init_bool_state__obj_node_ids = (_type = null) => {
       return state__arr_nodes.reduce((obj, obj_node) => {
         if (_type === null || obj_node.type === _type) {
-          obj[obj_node._id] = false;
+          obj[obj_node._id.toString()] = false;
         }
         return obj;
       }, {});
@@ -266,12 +316,25 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
     fn_setter__init_bool_state();
   }, [init_bool_state__obj_node_ids, init_bool_state__obj_group_node_ids]);
 
+  useEffect(() => {
+    if (state__is_click__root) {
+      set_state__is_active__obj_node_ids(init_bool_state__obj_node_ids);
+    } else {
+    }
+  }, [state__is_click__root]);
+
+  useEffect(() => {
+    if (state__is_disabled__input) {
+      set_state__is_disabled__input(false);
+    }
+  }, [state__is_disabled__input]);
+
   /**
    * Handler
    */
-  const fn_inner_handler__sub_tree_p_input_node = (_e_curr_tg, parent) => {
-    const e_curr_tg_name = _e_curr_tg.getAttribute("name");
-    const e_curr_tg_value = _e_curr_tg.value;
+  const fn_inner_handler__sub_tree_p_input_node = (e_curr_tg, parent) => {
+    const e_curr_tg_name = e_curr_tg.getAttribute("name");
+    const e_curr_tg_value = e_curr_tg.value;
 
     set_state__is_disabled__input(true);
 
@@ -283,26 +346,27 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
     };
 
     /* type name parent writer */
-    if (e_curr_tg_name === "doc_input") {
+    if (e_curr_tg_name === "document") {
       fn_logic__POST__exp__add_doc(req_data__obj_params)
         .then((obj_data) => {
-          console.log("INPUT:", obj_data);
-          // if (obj_data) {
-          //   const idx__p_node = state__arr_nodes.findIndex(
-          //     (obj_node) => obj_node._id === obj_data.parent
-          //   );
+          if (obj_data) {
+            const idx__p_node = state__arr_nodes.findIndex(
+              (obj_node) =>
+                obj_node._id.toString() === obj_data.parent.toString()
+            );
 
-          //   const tmp_arr = [...state__arr_nodes, obj_data].map(
-          //     (obj_node, i) => {
-          //       if (i === idx__p_node) {
-          //         obj_node.children = [...obj_node.children, obj_data._id];
-          //         console.log(obj_node.children);
-          //       }
-          //     }
-          //   );
-
-          //   set_state__arr_nodes(tmp_arr);
-          // }
+            const adding_arr_nodes = [...state__arr_nodes, obj_data].map(
+              (obj_node, i) => {
+                if (i === idx__p_node) {
+                  obj_node.children = [...obj_node.children, obj_data];
+                  console.log("CHILDREN:", obj_node.children);
+                }
+                return obj_node;
+              }
+            );
+            set_state__arr_nodes(adding_arr_nodes);
+            set_state__obj_new_node(obj_data);
+          }
         })
         .catch((err) => {
           console.log(
@@ -312,7 +376,26 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
         });
     } else {
       fn_logic__POST__exp__add_group(req_data__obj_params)
-        .then(() => {})
+        .then((obj_data) => {
+          if (obj_data) {
+            const idx__p_node = state__arr_nodes.findIndex(
+              (obj_node) =>
+                obj_node._id.toString() === obj_data.parent.toString()
+            );
+
+            const adding_arr_nodes = [...state__arr_nodes, obj_data].map(
+              (obj_node, i) => {
+                if (i === idx__p_node) {
+                  obj_node.children = [...obj_node.children, obj_data];
+                  console.log("CHILDREN:", obj_node.children);
+                }
+                return obj_node;
+              }
+            );
+            set_state__arr_nodes(adding_arr_nodes);
+            set_state__obj_new_node(obj_data);
+          }
+        })
         .catch((err) => {
           console.log(
             "comp_explorer_layer - fn_inner_handler__sub_tree_p_input_node"
@@ -321,12 +404,11 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
         });
     }
 
-    console.log("E_CURR:", e_curr_tg_name, e_curr_tg_value);
-    _e_curr_tg.value = "";
-    set_state__is_disabled__input(false);
+    e_curr_tg.value = "";
   };
 
   const fn_handler__key_down__sub_tree_p_input_node = (e, parent = "root") => {
+    console.log("PARENT:", parent, typeof parent, e.keyCode !== 13);
     if (e.keyCode !== 13) return;
 
     const e_curr_tg = e.currentTarget;
@@ -334,7 +416,7 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
       console.log("No name.");
       return;
     }
-    fn_inner_handler__sub_tree_p_input_node(e_curr_tg, parent);
+    fn_inner_handler__sub_tree_p_input_node(e_curr_tg, parent.toString());
   };
 
   const fn_handler__blur__sub_tree_p_input_node = (e, parent = "root") => {
@@ -342,7 +424,7 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
     const e_curr_tg = e.currentTarget;
     if (e_curr_tg.value === "") return;
 
-    fn_inner_handler__sub_tree_p_input_node(e_curr_tg, parent);
+    fn_inner_handler__sub_tree_p_input_node(e_curr_tg, parent.toString());
   };
 
   return (
@@ -355,7 +437,7 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
               sub_tree_node,
               state__is_click__obj_node_ids,
               state__is_active__obj_node_ids,
-              state__is_fold_sub_tree__obj_p_group_nodes,
+              state__is_fold_sub_tree__obj_p_group_node_ids,
               state__is_disabled__input,
               fn_setter__click_p_node_box,
               fn_setter__blur_p_node_box,
@@ -366,38 +448,40 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
           })}
       </>
 
-      {state__is_click__root ||
-      (state__is_active__obj_node_ids &&
-        !Object.values(state__is_active__obj_node_ids).includes(true)) ? (
-        <>
-          <li className="box p_node input ">
-            <i className="icon">d</i>
-            <Input
-              className="name"
-              name="document"
-              type="text"
-              placeholder={"doc..."}
-              disabled={state__is_disabled__input}
-              ref={ref__doc_input}
-              onKeyDown={fn_handler__key_down__sub_tree_p_input_node}
-              onBlur={fn_handler__blur__sub_tree_p_input_node}
-            />
-          </li>
-          <li className="box p_node input ">
-            <i className="icon">g</i>
-            <Input
-              className="name"
-              name="group"
-              type="text"
-              placeholder={"grp..."}
-              disabled={state__is_disabled__input}
-              ref={ref__grp_input}
-              onKeyDown={fn_handler__key_down__sub_tree_p_input_node}
-              onBlur={fn_handler__blur__sub_tree_p_input_node}
-            />
-          </li>
-        </>
-      ) : undefined}
+      {
+        // state__is_click__root ||
+        state__is_active__obj_node_ids &&
+        !Object.values(state__is_active__obj_node_ids).includes(true) ? (
+          <>
+            <li className="box p_node input ">
+              <i className="icon">d</i>
+              <Input
+                className="name"
+                name="document"
+                type="text"
+                placeholder={"doc..."}
+                disabled={state__is_disabled__input}
+                ref={ref__doc_input}
+                onKeyDown={fn_handler__key_down__sub_tree_p_input_node}
+                onBlur={fn_handler__blur__sub_tree_p_input_node}
+              />
+            </li>
+            <li className="box p_node input ">
+              <i className="icon">g</i>
+              <Input
+                className="name"
+                name="group"
+                type="text"
+                placeholder={"grp..."}
+                disabled={state__is_disabled__input}
+                ref={ref__grp_input}
+                onKeyDown={fn_handler__key_down__sub_tree_p_input_node}
+                onBlur={fn_handler__blur__sub_tree_p_input_node}
+              />
+            </li>
+          </>
+        ) : undefined
+      }
     </ul>
   );
 };

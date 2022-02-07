@@ -19,7 +19,6 @@ const Comp_explorer__left_aside = () => {
       onBlur={() => set_state__is_click__root(false)}
     >
       <Layer state__is_click__root={state__is_click__root} />
-      {/* <Layer2 state__is_click__root={state__is_click__root} /> */}
     </nav>
   );
 };

@@ -34,6 +34,8 @@ export const fn_logic__POST__auth__sign_up = (
 };
 
 export const fn_logic__POST__exp__add_group = (_obj_data) => {
+  console.log("fn_logic__POST__exp__add_group");
+
   const config = {
     method: "post",
     url: URL__EXP__ADD_GROUP,
@@ -57,6 +59,8 @@ export const fn_logic__POST__exp__add_group = (_obj_data) => {
 };
 
 export const fn_logic__POST__exp__add_doc = (_obj_data) => {
+  console.log("fn_logic__POST__exp__add_doc");
+
   const config = {
     method: "post",
     url: URL__EXP__ADD_DOC,

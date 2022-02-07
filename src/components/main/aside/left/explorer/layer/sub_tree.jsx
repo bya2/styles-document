@@ -16,10 +16,6 @@ const Comp_explorer_layer_sub_tree = ({
   console.log("comp_explorer_layer_sub_tree");
 
   /**
-   * State
-   */
-
-  /**
    * Handler
    */
   const fn_handler__click__p_node_box = (e) => {
@@ -46,14 +42,14 @@ const Comp_explorer_layer_sub_tree = ({
   return (
     <li className="sub_tree">
       <div
-        name={obj_sub_tree_node._id}
+        name={obj_sub_tree_node._id.toString()}
         // className="box p_node"
         className={`box p_node ${
-          state__is_click__obj_p_node_boxes[obj_sub_tree_node._id]
+          state__is_click__obj_p_node_boxes[obj_sub_tree_node._id.toString()]
             ? "click"
             : "no_click"
         } ${
-          state__is_active__obj_p_node_boxes[obj_sub_tree_node._id]
+          state__is_active__obj_p_node_boxes[obj_sub_tree_node._id.toString()]
             ? "active"
             : "no_active"
         }`}
@@ -64,10 +60,10 @@ const Comp_explorer_layer_sub_tree = ({
         {obj_sub_tree_node.type === "group" ? (
           <>
             <i
-              name={obj_sub_tree_node._id}
+              name={obj_sub_tree_node._id.toString()}
               className={`fold_icon ${
                 state__is_fold_sub_tree__obj_p_group_nodes[
-                  obj_sub_tree_node._id
+                  obj_sub_tree_node._id.toString()
                 ]
                   ? cls__icon_down
                   : cls__icon_right
@@ -78,7 +74,7 @@ const Comp_explorer_layer_sub_tree = ({
             <p className="name">{obj_sub_tree_node.name}</p>
           </>
         ) : (
-          <Link to={obj_sub_tree_node._id} tabIndex="-1">
+          <Link to={obj_sub_tree_node._id.toString()} tabIndex="-1">
             <i className={`icon ${cls__icon_doc}`}></i>
             <p className="name">{obj_sub_tree_node.name}</p>
           </Link>
@@ -86,7 +82,9 @@ const Comp_explorer_layer_sub_tree = ({
       </div>
       <div
         className={`sub_tree_list_box ${
-          state__is_fold_sub_tree__obj_p_group_nodes[obj_sub_tree_node._id]
+          state__is_fold_sub_tree__obj_p_group_nodes[
+            obj_sub_tree_node._id.toString()
+          ]
             ? "fold"
             : "unfold"
         }`}
