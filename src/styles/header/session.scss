@@ -12,13 +12,6 @@ $i_bg__md_clr: hsla(0, 0%, 50%, 0.5);
   @include flex-REC;
   padding-right: 1rem;
 
-  &:hover .sess_elem_list .sess_elem_box .name {
-    width: 100%;
-    margin: 0 0.5rem;
-    transition-duration: 0.2s;
-    transition-timing-function: linear;
-  }
-
   ul.sess_elem_list {
     margin: 0;
     @include flex-RCC;
@@ -66,5 +59,16 @@ $i_bg__md_clr: hsla(0, 0%, 50%, 0.5);
         background-color: $i_bg__md_clr;
       }
     }
+  }
+
+  & .sess_elem_list .sess_elem_box .name {
+    transition-delay: 2s;
+  }
+  &:hover .sess_elem_list .sess_elem_box .name {
+    width: 100%;
+    margin: 0 0.5rem;
+    transition-delay: 0s;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
   }
 }

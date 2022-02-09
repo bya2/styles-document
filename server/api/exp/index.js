@@ -76,11 +76,11 @@ router.get("/node_list", (req, res) => {
   const { id } = queries;
 
   // console.log("params:", params);
-  console.log("queries:", queries);
+  // console.log("queries:", queries);
 
   fn_service__GET__exp__node_list(id)
     .then((arr_data) => {
-      console.log("DATA:", arr_data);
+      // console.log("DATA:", arr_data);
 
       if (arr_data.length === 0) {
         res.json(dummy_data__node_list);
@@ -97,7 +97,7 @@ router.post("/add_doc", (req, res) => {
   console.log("res... (add_doc");
 
   const body = req.body;
-  console.log("QUERY:", body);
+  // console.log("QUERY:", body);
 
   fn_service__POST__exp__add_node(body).then((obj_result) => {
     res.status(201).json(obj_result);
@@ -108,7 +108,7 @@ router.post("/add_group", (req, res) => {
   console.log("res... (add_group)");
 
   const body = req.body;
-  console.log("QUERY:", body);
+  // console.log("QUERY:", body);
 
   fn_service__POST__exp__add_node(body).then((obj_result) => {
     res.status(201).json(obj_result);

@@ -2,6 +2,9 @@ import "../../../styles/session/sign_in.scss";
 import { fn_logic__GET__auth__sign_in } from "../../../logic/api/get";
 import obj_cls__fas_icon from "../../../icon/font_awesome";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { g_state__user } from "../../../recoil/atoms";
 
 const { cls__icon_fail } = obj_cls__fas_icon;
 
@@ -26,6 +29,9 @@ const Comp_session__sign_in = ({ fn_setter__state__close_modal }) => {
   /**
    * State
    */
+  const [g_state__ref_hashed_user, set_g_state__ref_hashed_user] =
+    useRecoilState(g_state__user);
+
   const [state__obj_sign_in_info, set_state__obj_sign_in_info] = useState(
     init_state__obj_sign_in_info
   );
@@ -34,20 +40,26 @@ const Comp_session__sign_in = ({ fn_setter__state__close_modal }) => {
   /**
    * Navigator
    */
-  // const navigator = useNavigate();
+  const navigator = useNavigate();
 
   /**
    * Logic
    */
   const fn_logic__submit_form__validation = () => {
-    fn_logic__GET__auth__sign_in(state__obj_sign_in_info).then((status) => {
-      if (status === 400 || status === 404) {
+    fn_logic__GET__auth__sign_in(state__obj_sign_in_info).then(
+      (obj_res_data) => {
         set_state__is_req(true);
+
+        const { code } = obj_res_data;
+        if (code === 200) {
+          set_g_state__ref_hashed_user(
+            sessionStorage.getItem("ref_hashed_user")
+          );
+          fn_setter__state__close_modal();
+          navigator(state__obj_sign_in_info.id);
+        }
       }
-      if (status === 200) {
-        fn_setter__state__close_modal();
-      }
-    });
+    );
   };
 
   /**

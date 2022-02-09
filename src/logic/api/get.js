@@ -18,34 +18,50 @@ import {
 } from "../../config/api/get/message";
 
 export const fn_logic__GET__auth__validation = () => {
-  const ref_hashed_user = sessionStorage.getItem("ref_hashed_user") || null;
-  if (ref_hashed_user === null) {
-    return null;
+  const sess_strg__ref_hashed_user =
+    window.sessionStorage.getItem("ref_hashed_user");
+  if (
+    sess_strg__ref_hashed_user === undefined ||
+    sess_strg__ref_hashed_user === null
+  ) {
+    return false;
   }
 
-  axios
+  return axios
     .get(URL__AUTH__VALIDATION, {
       params: {
-        ref_hashed_user,
+        validateStatus: (status) => status < 500,
+        ref_hashed_user: sess_strg__ref_hashed_user,
       },
     })
     .then((res) => {
-      const STATUS = res.status;
+      const { status, data } = res;
 
-      if (STATUS === 200) {
-        return {
-          code: 200,
-          valid: true,
-          ref_hashed_user,
-        };
+      if (status !== data.code) {
+        console.log(status, data.code);
+        throw Error("상태 코드와 응답 코드 불일치");
       }
+
+      switch (status) {
+        case 200:
+          break;
+        case 404:
+          break;
+        default:
+          break;
+      }
+
+      return data;
     })
     .catch((err) => {
       console.error(`${ERR_MSG__AUTH__VALIDATION}${err}`);
       return {
-        code: err.code,
-        valid: false,
-        error: err,
+        code: 500,
+        message: "ERR",
+        data: {
+          valid: false,
+          ref_hashed_user: null,
+        },
       };
     });
 };
@@ -57,25 +73,29 @@ export const fn_logic__GET__auth__sign_in = (state__obj_sign_in_info) => {
       params: state__obj_sign_in_info,
     })
     .then((res) => {
-      const STATUS = res.status;
+      const { status, data } = res;
+      if (status !== data.code) {
+        console.log(status, data.code);
+        throw Error("상태 코드와 응답 코드 불일치");
+      }
 
-      switch (STATUS) {
+      switch (status) {
         case 200:
-          const { data } = res;
-          const { ref_hashed_user } = data;
-          sessionStorage.setItem("ref_hashed_user", ref_hashed_user);
-          return 200;
+          const { ref_user_id, ref_hashed_user } = data.data;
+          window.sessionStorage.setItem("ref_user_id", ref_user_id);
+          window.sessionStorage.setItem("ref_hashed_user", ref_hashed_user);
+          break;
         case 400:
-          // 비밀번호가 틀림.
-          console.log(400);
-          return 400;
+          console.log(400, "유효하지 않은 비밀번호");
+          break;
         case 404:
-          // 아이디가 없음.
-          console.log(404);
-          return 404;
+          console.log(404, "조회할 수 없는 아이디");
+          break;
         default:
           break;
       }
+
+      return data;
     })
     .catch((err) => {
       console.error(`${ERR_MSG__AUTH__SIGN_IN}${err}`);

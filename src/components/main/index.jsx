@@ -1,4 +1,4 @@
-// import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import "../../styles/main/index.scss";
 
@@ -9,9 +9,19 @@ import RightAside from "./aside/right";
 const Comp_main = () => {
   return (
     <main>
-      <LeftAside />
-      <Section />
-      <RightAside />
+      <Routes>
+        <Route path="/" element={<></>}></Route>
+        <Route
+          path=":id/*"
+          element={
+            <>
+              <LeftAside />
+              <Section />
+              <RightAside />
+            </>
+          }
+        ></Route>
+      </Routes>
     </main>
   );
 };

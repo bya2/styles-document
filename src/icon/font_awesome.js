@@ -19,6 +19,7 @@ const obj_cls__fas_icon = {
   cls__icon_sign_in: "fas fa-sign-in-alt",
   cls__icon_sign_out: "fas fa-sign-out-alt",
   cls__icon_bell: "fas fa-bell",
+  cls__icon_user: "fas fa-user",
 
   /**
    * MAIN

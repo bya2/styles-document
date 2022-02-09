@@ -9,6 +9,7 @@ const {
 
 const fn_service__auth__sign_up = require("../../service/sign_up");
 const fn_service__auth__sign_in = require("../../service/sign_in");
+const fn_service__auth__validation = require("../../service/auth/validation");
 
 /**
  * GET
@@ -17,23 +18,45 @@ router.get("/sign_in", (req, res) => {
   console.log("res... (sign_in)");
 
   const query__obj_sign_in_info = req.query;
-  console.log(query__obj_sign_in_info);
+  console.log("QUERY:", query__obj_sign_in_info);
 
-  fn_service__auth__sign_in(query__obj_sign_in_info).then((obj_data) => {
-    if (obj_data == null) {
-      res.status(404).send(null);
-      return;
-    }
+  if (!query__obj_sign_in_info || typeof query__obj_sign_in_info !== "object") {
+    res.status(400).json({
+      code: 400,
+      message: "no content",
+      data: null,
+    });
+    return;
+  }
 
-    if (!obj_data.is_check_valid) {
-      res.status(400).json({
-        is_check_valid: false,
-      });
-      return;
-    }
-    console.log(obj_data);
-    res.status(200).json(obj_data);
-  });
+  fn_service__auth__sign_in(query__obj_sign_in_info)
+    .then((obj_res_data) => {
+      const { code } = obj_res_data;
+      console.log(`(service) sign in: ${code}`);
+      res.status(code).json(obj_res_data);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500);
+    });
+});
+
+router.get("/validation", (req, res) => {
+  console.log("res... (validation)");
+
+  const req_q__ref_hashed_user = req.query;
+  console.log("Q:", req_q__ref_hashed_user);
+
+  fn_service__auth__validation(req_q__ref_hashed_user)
+    .then((obj_res_data) => {
+      const { code } = obj_res_data;
+      console.log(`(service) validation: ${code}`);
+      res.status(code).json(obj_res_data);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500);
+    });
 });
 
 /**
