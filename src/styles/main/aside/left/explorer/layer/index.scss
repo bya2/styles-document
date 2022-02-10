@@ -44,6 +44,12 @@
 
     .icon {
       margin-right: 0.5rem;
+      &.icon-grp {
+        color: hsl(36, 61%, 68%);
+      }
+      &.icon-doc {
+        color: hsla(0, 0%, 0%, 0.6);
+      }
     }
 
     .name {

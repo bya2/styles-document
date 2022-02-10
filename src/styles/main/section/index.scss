@@ -1,2 +1,26 @@
+@import "../../mixins.scss";
+@import "../../variables.scss";
+
 section {
+  position: relative;
+  // background-color: $bg__clr__section;
+  overflow: auto;
+
+  & > div.tmp_div {
+    position: relative;
+    width: 100px;
+    height: 1000px;
+    background-color: red;
+  }
+
+  &::-webkit-scrollbar {
+    position: absolute;
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: hsl(0, 0%, 60%);
+  }
+  &::-webkit-scrollbar-track {
+    background-color: inherit;
+  }
 }

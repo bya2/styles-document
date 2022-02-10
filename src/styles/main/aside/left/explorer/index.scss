@@ -1,25 +1,44 @@
 @import "../../../../mixins.scss";
 @import "../../../../variables.scss";
 
-.comp_explorer__left_aside {
-  position: relative;
-  height: 100%;
-  @include bs__a(0.1);
-  // border-radius: 8px;
-  overflow: auto;
+.comp_explorer {
+  padding: 0.5rem;
 
-  &::-webkit-scrollbar {
-    position: absolute;
-    width: 4px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: hsl(0, 0%, 60%);
-  }
-  &::-webkit-scrollbar-track {
-    background-color: inherit;
+  & > hr {
+    margin: 8px 0;
+    border: none;
+    border-bottom: 1px solid hsl(0, 0%, 70%);
+    box-shadow: 0 1px 1px hsla(0, 0%, 70%, 0.6);
   }
 
-  &:focus {
-    box-shadow: 0 0 0 1px hsl(236, 100%, 79%);
+  .layer_tree_root {
+    position: relative;
+    @include bs__a(0.1);
+    overflow: auto;
+
+    &:focus {
+      box-shadow: 0 0 0 1px hsl(236, 100%, 79%);
+    }
+
+    &::-webkit-scrollbar {
+      position: absolute;
+      width: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: hsl(0, 0%, 60%);
+      border-radius: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: inherit;
+    }
   }
+}
+
+// $size__h__tool: 24px;
+// $size__h__hr: 17px;
+
+.grid-box {
+  grid-template-rows: $size__h__tool $size__h__hr calc(
+      100vh - #{$size__h__minus_sum}
+    );
 }

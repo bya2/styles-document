@@ -11,21 +11,25 @@ $size__h__minus_sum: $size__h__tool + $size__h__hr + $size__h__header_footer +
 
 aside.left {
   position: relative;
-  padding: 0.5rem;
-
-  // display: flex;
-  // flex-direction: column;
-
-  display: grid;
-  grid-template-rows: $size__h__tool $size__h__hr calc(
-      100vh - #{$size__h__minus_sum}
-    );
-
-  hr {
-    margin: 8px 0;
-    border: none;
-    border-bottom: 1px solid black;
-    box-shadow: 0 1px 1px hsla(0, 0%, 0%, 0.2);
-    // @include bs__a(0.4);
-  }
 }
+
+// aside.left {
+//   position: relative;
+//   padding: 0.5rem;
+
+//   // display: flex;
+//   // flex-direction: column;
+
+//   display: grid;
+//   grid-template-rows: $size__h__tool $size__h__hr calc(
+//       100vh - #{$size__h__minus_sum}
+//     );
+
+//   hr {
+//     margin: 8px 0;
+//     border: none;
+//     border-bottom: 1px solid black;
+//     box-shadow: 0 1px 1px hsla(0, 0%, 0%, 0.2);
+//     // @include bs__a(0.4);
+//   }
+// }

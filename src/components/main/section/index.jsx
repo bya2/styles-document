@@ -2,17 +2,18 @@ import "../../../styles/main/section/index.scss";
 import { Routes, Route } from "react-router-dom";
 import PageRoot from "../../../routes/r_root";
 import PageID from "../../../routes/r__id";
+import PageIDDoc from "../../../routes/r__id__doc";
 
 const routes__arr_elems = [
   {
-    alt: "root",
+    alt: "node__root",
     path: "/",
-    comp: <PageRoot />,
+    element: <PageRoot />,
   },
   {
-    alt: "any user",
-    path: ":id/*",
-    elem: <PageID />,
+    alt: "node__sub",
+    path: ":doc",
+    element: <PageIDDoc />,
   },
 ];
 
@@ -21,13 +22,10 @@ const Comp_section = () => {
     <section>
       <Routes>
         <>
-          {routes__arr_elems.map((obj_elem) => (
-            <Route
-              key={obj_elem.alt}
-              path={obj_elem.path}
-              element={obj_elem.comp}
-            />
-          ))}
+          {routes__arr_elems.map((obj_route_elem) => {
+            const { alt, path, element } = obj_route_elem;
+            return <Route key={alt} path={path} element={element} />;
+          })}
         </>
       </Routes>
     </section>

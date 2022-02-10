@@ -3,10 +3,6 @@
 
 $size__h: 100%;
 
-$bg__clr__main: hsl(0, 0%, 85%);
-$bg__clr__section: hsl(0, 0%, 95%);
-$bg__clr__aside: hsl(0, 0%, 99%);
-
 $size__w__section: auto;
 $size__w__left_aside: 192px;
 $size__w__right_aside: 192px;
@@ -19,39 +15,18 @@ main {
 
   position: relative;
   background-color: $bg__clr__main;
-  padding: 1rem;
+  padding: 16px 16px;
   display: grid;
   grid-template-columns: $size__w__left_aside $size__w__section $size__w__right_aside;
-  gap: 4px;
+  gap: 16px;
 
   & > * {
-    @include bs__a(0.1);
+    // @include bs__a(0.1);
   }
-  & > section {
-    position: relative;
-    background-color: $bg__clr__section;
-    overflow: auto;
 
-    & > div.tmp_div {
-      position: relative;
-      width: 100px;
-      height: 1000px;
-      background-color: red;
-    }
-
-    &::-webkit-scrollbar {
-      position: absolute;
-      width: 4px;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: hsl(0, 0%, 60%);
-    }
-    &::-webkit-scrollbar-track {
-      background-color: inherit;
-    }
-  }
   & > aside {
     background-color: $bg__clr__aside;
+    @include bs__a(0.1);
   }
 }
 

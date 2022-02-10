@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import cls_list__fas_icon from "../../../../../../icon/font_awesome";
-const { cls__icon_down, cls__icon_right, cls__icon_doc, cls__icon_group } =
-  cls_list__fas_icon;
+const {
+  cls__icon_down,
+  cls__icon_right,
+  cls__icon_doc,
+  cls__icon_group_close,
+  cls__icon_group_open,
+} = cls_list__fas_icon;
 
 const Comp_explorer_layer_sub_tree = ({
   children,
@@ -70,12 +75,20 @@ const Comp_explorer_layer_sub_tree = ({
               }`}
               onClick={fn_handler__click__fold_icon}
             ></i>
-            <i className={`icon ${cls__icon_group}`}></i>
+            <i
+              className={`icon icon-grp ${
+                state__is_fold_sub_tree__obj_p_group_nodes[
+                  obj_sub_tree_node._id.toString()
+                ]
+                  ? cls__icon_group_open
+                  : cls__icon_group_close
+              }`}
+            ></i>
             <p className="name">{obj_sub_tree_node.name}</p>
           </>
         ) : (
           <Link to={obj_sub_tree_node._id.toString()} tabIndex="-1">
-            <i className={`icon ${cls__icon_doc}`}></i>
+            <i className={`icon icon-doc ${cls__icon_doc}`}></i>
             <p className="name">{obj_sub_tree_node.name}</p>
           </Link>
         )}

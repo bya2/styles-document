@@ -3,6 +3,10 @@
 // font-family: 'Ubuntu', sans-serif;
 // font-family: 'Ubuntu Condensed', sans-serif;
 
+$bg__clr__main: hsl(0, 0%, 85%);
+$bg__clr__section: hsl(0, 0%, 95%);
+$bg__clr__aside: hsl(0, 0%, 99%);
+
 // Common
 $common__font__main: "Ubuntu", sans-serif;
 $common__font__sub: "Ubuntu Condensed", sans-serif;
@@ -61,3 +65,11 @@ $mq_nb: 1024px;
 $mq_mb__l: 1440px;
 
 $mq_4k: 2560px;
+
+$size__h__tool: 22px;
+$size__h__hr: 17px;
+$size__h__header_footer: 68px;
+$padding__main: 32px;
+$padding__explorer: 16px;
+$size__h__minus_sum: $size__h__tool + $size__h__hr + $size__h__header_footer +
+  $padding__main + $padding__explorer;

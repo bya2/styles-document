@@ -1,37 +1,28 @@
-@import "../../../../mixins.scss";
-@import "../../../../variables.scss";
+@import "../../../../../mixins.scss";
+@import "../../../../../variables.scss";
 
-.comp_tool__left_aside {
+.comp_explorer_tool {
   // position: relative;
   // margin: 2rem;
   // width: 100px;
   // height: 100px;
   // background-color: hsla(0, 0%, 0%, 0.5);
 
-  ul.no_space {
-    margin: 0;
-    padding-left: 0;
-
-    li {
-      list-style-type: none;
-    }
-  }
-
-  .list__a_row {
+  .a-row {
     @include flex-REC;
-
     .col:not(:last-of-type) {
       margin-right: 0.5rem;
     }
   }
 
   .icon {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     @include bs__a(0.2);
+    border-radius: 10%;
     @include flex-RCC;
     color: black;
-    font-size: 1rem;
+    font-size: 14px;
     cursor: pointer;
 
     &:hover {

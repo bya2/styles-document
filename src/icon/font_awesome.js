@@ -28,6 +28,9 @@ const obj_cls__fas_icon = {
   /**
    * SECTION
    */
+  cls__icon_palette: "fas fa-palette",
+  cls__icon_typography: "fas fa-font",
+  cls__icon_markdown: "fab fa-medium-m",
 
   /**
    * ASIDE:LEFT
@@ -38,8 +41,9 @@ const obj_cls__fas_icon = {
 
   cls__icon_down: "fas fa-chevron-down",
   cls__icon_right: "fas fa-chevron-right",
-  cls__icon_doc: "far fa-sticky-note",
-  cls__icon_group: "far fa-object-group",
+  cls__icon_doc: "far fa-file",
+  cls__icon_group_close: "fas fa-folder",
+  cls__icon_group_open: "fas fa-folder-open",
 
   /**
    * ASIDE:RIGHT

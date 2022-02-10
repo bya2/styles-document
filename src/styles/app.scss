@@ -9,3 +9,36 @@ $size__h__footer: 34px;
   display: grid;
   grid-template-rows: 1fr calc(100vh - 68px) 1fr;
 }
+
+.inline {
+  display: inline;
+}
+
+.box {
+  display: block;
+}
+
+.inline-box {
+  display: inline-block;
+}
+
+.flex-box {
+  display: flex;
+}
+
+.grid-box {
+  display: grid;
+}
+
+.ul-no-space {
+  margin: 0;
+  padding-left: 0;
+}
+
+.li-no-style {
+  list-style-type: none;
+}
+
+.no-display {
+  display: none;
+}
