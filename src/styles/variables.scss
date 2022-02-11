@@ -66,10 +66,16 @@ $mq_mb__l: 1440px;
 
 $mq_4k: 2560px;
 
-$size__h__tool: 22px;
-$size__h__hr: 17px;
 $size__h__header_footer: 68px;
 $padding__main: 32px;
+
+$padding__section: 16px;
+
+$size__h__minus_sum__to_section: $size__h__header_footer + $padding__main +
+  $padding__section;
+
 $padding__explorer: 16px;
+$size__h__tool: 22px;
+$size__h__hr: 17px;
 $size__h__minus_sum: $size__h__tool + $size__h__hr + $size__h__header_footer +
   $padding__main + $padding__explorer;

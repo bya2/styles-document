@@ -3,15 +3,9 @@
 
 section {
   position: relative;
-  // background-color: $bg__clr__section;
+  min-height: calc(100vh - #{$size__h__minus_sum__to_section});
+  background-color: $bg__clr__section;
   overflow: auto;
-
-  & > div.tmp_div {
-    position: relative;
-    width: 100px;
-    height: 1000px;
-    background-color: red;
-  }
 
   &::-webkit-scrollbar {
     position: absolute;

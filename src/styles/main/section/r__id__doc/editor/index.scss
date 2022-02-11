@@ -1,0 +1,117 @@
+@import "../../../../mixins.scss";
+@import "../../../../variables.scss";
+.comp_doc_editor {
+  width: 100%;
+  padding: 0 5%;
+
+  .box {
+    background-color: hsl(0, 0%, 95%);
+    @include bs__a(0.4);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+    // p {
+    //   border-top-left-radius: 8px;
+    //   border-top-right-radius: 8px;
+    //   padding: 0.25rem;
+    //   background-color: hsl(0, 0%, 70%);
+    // }
+
+    div.flex-box {
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      padding: 0.25rem 0.5rem;
+      background-color: hsl(0, 0%, 70%);
+      justify-content: space-between;
+    }
+
+    form.flex-box {
+      flex-direction: column;
+      background-color: inherit;
+
+      .a-row {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+        padding-top: 0.5rem;
+        padding-right: 0.75rem;
+        .rownum.col {
+          color: gray;
+          width: 56px;
+          line-height: 1.25rem;
+          font-size: 0.875rem;
+          font-family: none;
+          // padding-top: 0.5rem;
+          padding-right: 0.75rem;
+          text-align: end;
+          @include no_drag__txt;
+        }
+      }
+
+      textarea {
+        width: 100%;
+        height: auto;
+        background-color: inherit;
+        outline: none;
+        border: none;
+        border-right: 1px solid black;
+        // @include bs__a(0.1); // tmp
+        // padding: 0.5rem 0 0 0;
+        resize: none;
+        overflow: none;
+        line-height: 1.25rem;
+        // opacity: 0;
+        white-space: nowrap;
+      }
+
+      .line-select {
+        position: absolute;
+        // top: 0.5rem;
+        left: 56px;
+        right: 0.75rem;
+        height: 1.25rem;
+        border-top: 1px solid hsla(0, 0%, 0%, 0.1);
+        border-bottom: 1px solid hsla(0, 0%, 0%, 0.1);
+        pointer-events: none;
+      }
+
+      button {
+        align-self: flex-end;
+        width: 80px;
+        height: 38px;
+        background-color: hsla(229, 100%, 66%, 0.8);
+        margin: 4px;
+        outline: none;
+        border: none;
+        border-radius: 20px;
+        color: white;
+        font-size: 1.25rem;
+        font-family: $common__font__sub;
+        text-transform: uppercase;
+        cursor: pointer;
+
+        &:hover {
+          background-color: hsla(229, 100%, 66%, 0.9);
+        }
+
+        &.state__mouse_up {
+          background-color: hsl(229, 100%, 66%);
+        }
+      }
+    }
+  }
+
+  .msg,
+  .type {
+    font-family: $common__font__sub;
+    font-size: 0.875rem;
+    text-transform: capitalize;
+    @include no_drag__txt;
+  }
+
+  .type {
+    color: hsl(0, 100%, 65%);
+    font-weight: 500;
+  }
+}

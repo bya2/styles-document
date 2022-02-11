@@ -33,28 +33,61 @@ const Comp_doc_selector = () => {
   const [state__is_click__obj_type_names, set_state__is_click__obj_type_names] =
     useState(init_state__bool__obj_types);
 
+  const [
+    state__is_mouse_up__obj_type_names,
+    set_state__is_mouse_up__obj_type_names,
+  ] = useState(init_state__bool__obj_types);
+
   /**
    * Setter
    */
   const fn_setter__toggle__type_to_click_state = (e_curr_tg_name) => {
     set_state__is_click__obj_type_names({
-      ...state__is_click__obj_type_names,
+      ...init_state__bool__obj_types,
       [e_curr_tg_name]: state__is_click__obj_type_names[e_curr_tg_name]
         ? false
         : true,
     });
   };
 
+  const fn_setter__mouse_up_state = (e_curr_tg_name) => {
+    set_state__is_mouse_up__obj_type_names({
+      ...state__is_mouse_up__obj_type_names,
+      [e_curr_tg_name]: true,
+    });
+
+    setTimeout(
+      () => set_state__is_mouse_up__obj_type_names(init_state__bool__obj_types),
+      100
+    );
+  };
+
+  const fn_setter__init__type_to_click_state = () =>
+    set_state__is_click__obj_type_names(init_state__bool__obj_types);
+
   /**
    * Handler
    */
-  const fn_handler__click__icon_box = (e) => {
+  const fn_handler__click__col = (e) => {
     const e_curr_tg_name = e.currentTarget.getAttribute("name");
     fn_setter__toggle__type_to_click_state(e_curr_tg_name);
   };
 
+  const fn_handler__mouse_up__col = (e) => {
+    const e_curr_tg_name = e.currentTarget.getAttribute("name");
+    fn_setter__mouse_up_state(e_curr_tg_name);
+  };
+
   return (
     <>
+      {Object.values(state__is_click__obj_type_names).includes(true) ? (
+        <Editor
+          state__is_click__obj_type_names={state__is_click__obj_type_names}
+          fn_setter__init__type_to_click_state={
+            fn_setter__init__type_to_click_state
+          }
+        />
+      ) : undefined}
       <article className="comp_doc_selector">
         <div className="box">
           <ul className="a-row flex-box ul-no-space">
@@ -66,9 +99,16 @@ const Comp_doc_selector = () => {
                     key={alt}
                     name={name}
                     className="col group li-no-style"
-                    onClick={(e) => fn_handler__click__icon_box(e)}
+                    onClick={(e) => fn_handler__click__col(e)}
+                    onMouseUp={(e) => fn_handler__mouse_up__col(e)}
                   >
-                    <i className={`icon ${icon}`} />
+                    <i
+                      className={`icon ${icon}${
+                        state__is_mouse_up__obj_type_names[name]
+                          ? " state__mouse_up"
+                          : ""
+                      }`}
+                    />
                     <span className="tooltip no-display">{name}</span>
                   </li>
                 );
@@ -77,9 +117,6 @@ const Comp_doc_selector = () => {
           </ul>
         </div>
       </article>
-      <Editor
-        state__is_click__obj_type_names={state__is_click__obj_type_names}
-      />
     </>
   );
 };

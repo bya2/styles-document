@@ -3,14 +3,17 @@
 
 .comp_doc_selector {
   position: relative;
+  align-self: flex-end;
+  padding-right: 5%;
+  margin-bottom: 0;
 
   .box {
     .flex-box {
       width: 100px;
-      height: 42px;
-      @include bs__a(0.4);
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
+      // height: 42px;
+      // @include bs__a(0.4);
+      // border-top-left-radius: 8px;
+      // border-top-right-radius: 8px;
 
       .group {
         position: relative;
@@ -24,6 +27,11 @@
           @include flex-RCC;
           color: hsla(0, 0%, 0%, 0.7);
           font-size: 20px;
+        }
+
+        .icon.state__mouse_up {
+          // color: hsla(0, 0%, 0%, 1);
+          background-color: hsla(0, 0%, 0%, 0.05);
         }
 
         .tooltip {

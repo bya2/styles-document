@@ -10,8 +10,8 @@ const RouteIDDocument = () => {
   return (
     <>
       <section className="r__id__doc">
-        <ElemList />
-        <ElemTypeSelector />
+        {/* <ElemList />
+        <ElemTypeSelector /> */}
         <Selector />
       </section>
       <Outlet />
