@@ -1,17 +1,27 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import "../../../../../styles/main/section/r__id__doc/editor/index.scss";
+import { fn_logic__POST__doc__add_elem } from "../../../../../logic/api/post";
 import TextArea from "../../../../resusing/textarea";
+import { useMemo } from "react";
 
 const init_state__bool__obj_keys = {
-  key_13__enter: false,
-  key_17__ctrl: false,
+  13: false,
+  17: false,
 };
 
 const Comp_doc_editor = ({
   state__is_click__obj_type_names,
   fn_setter__init__type_to_click_state,
+  state__list__arr_elems,
+  set_state__list__arr_elems,
 }) => {
+  /**
+   * Parameters
+   */
+  const obj_params = useParams();
+  const { id: param__id, doc: param__doc } = obj_params;
+
   /**
    * State
    */
@@ -54,6 +64,55 @@ const Comp_doc_editor = ({
   };
 
   /**
+   * Memo
+   */
+  const memo__str_selected_type = useMemo(
+    () =>
+      Object.keys(state__is_click__obj_type_names)[
+        Object.values(state__is_click__obj_type_names).findIndex(
+          (el) => el === true
+        )
+      ] || undefined,
+    [state__is_click__obj_type_names]
+  );
+
+  /**
+   * Logic
+   */
+  const fn_logic__add_elem = () => {
+    set_state__is_not_submit__form(false);
+
+    const obj_elem = {
+      param__id,
+      param__doc,
+      ta__str_value: state__content__str_txta_val,
+      type: memo__str_selected_type,
+      styles: null || {},
+    };
+
+    fn_logic__POST__doc__add_elem(obj_elem)
+      .then((obj_res_data) => {
+        // code
+        // -- setter
+        const { code, message, data } = obj_res_data;
+        const { element } = data;
+        console.log("DATA:", state__list__arr_elems, obj_elem);
+
+        set_state__list__arr_elems([...state__list__arr_elems, element]);
+      })
+      .catch((err) => {
+        console.log("ERR:\nLOC: comp_editor-logic-fn_req__POST__add_elem");
+        console.error(err);
+      });
+
+    // after
+    setTimeout(() => {
+      fn_setter__init__type_to_click_state();
+      set_state__is_not_submit__form(true);
+    }, 500);
+  };
+
+  /**
    * Side
    */
   const fn_side__chk_key_down__both_13_17 = () => {
@@ -63,14 +122,8 @@ const Comp_doc_editor = ({
       state__is_key_down__obj_keys["17"]
     ) {
       // code
-      console.log("loglog");
-      set_state__is_not_submit__form(false);
-
-      // success
-      setTimeout(() => {
-        fn_setter__init__type_to_click_state();
-        set_state__is_not_submit__form(true);
-      }, 500);
+      console.log("submit(keydown)");
+      fn_logic__add_elem();
     }
   };
 
@@ -83,14 +136,8 @@ const Comp_doc_editor = ({
     e.preventDefault();
     if (state__is_not_submit__form) {
       // code
-      console.log("submit");
-      set_state__is_not_submit__form(false);
-
-      // success
-      setTimeout(() => {
-        fn_setter__init__type_to_click_state();
-        set_state__is_not_submit__form(true);
-      }, 500);
+      console.log("submit(click)");
+      fn_logic__add_elem();
     }
   };
 
@@ -176,7 +223,7 @@ const Comp_doc_editor = ({
 
   const fn_handler__mouse_up__form_btn = () => fn_setter__mouse_up_state();
 
-  const fn_handler__mouse_down__ta_selection = (e) => {
+  const fn_handler__click__ta_selection = (e) => {
     const node__ta = e.currentTarget;
     const { value: node__ta_value, selectionStart, selectionEnd } = node__ta;
     if (selectionStart === selectionEnd) {
@@ -193,7 +240,9 @@ const Comp_doc_editor = ({
       node__ta.selectionStart,
       node__ta.selectionEnd,
       node__ta.moveStart,
-      node__ta.moveEnd
+      node__ta.moveEnd,
+      node__ta.offsetLeft,
+      node__ta.offsetTop
     );
     e.stopPropagation();
   };
@@ -205,15 +254,7 @@ const Comp_doc_editor = ({
           <p className="msg p-no-margin">
             {"Editor - Ctrl+Enter | Click Button"}
           </p>
-          <p className="type p-no-margin">
-            {`[${
-              Object.keys(state__is_click__obj_type_names)[
-                Object.values(state__is_click__obj_type_names).findIndex(
-                  (el) => el === true
-                )
-              ] || ""
-            }]`}
-          </p>
+          <p className="type p-no-margin">{`[${memo__str_selected_type}]`}</p>
         </div>
         <form
           className="flex-box"
@@ -234,7 +275,7 @@ const Comp_doc_editor = ({
               placeholder="Input..."
               rows={state__num_ta_rows}
               onChange={(e) => fn_handler__change__txta(e)}
-              onMouseDown={(e) => fn_handler__mouse_down__ta_selection(e)}
+              onClick={(e) => fn_handler__click__ta_selection(e)}
               onKeyDown={(e) => {}}
             />
             <div

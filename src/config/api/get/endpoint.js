@@ -19,3 +19,9 @@ const ENDPOINT__EXP__LOAD_ELEM_LIST = "/api/elem/load_list";
 export const URL__EXP__LOAD_GROUP_LIST = `${URL__prefix}${ENDPOINT__EXP__LOAD_GROUP_LIST}`;
 export const URL__EXP__LOAD_DOC_LIST = `${URL__prefix}${ENDPOINT__EXP__LOAD_DOC_LIST}`;
 export const URL__ELEM__LOAD_LIST = `${URL__prefix}${ENDPOINT__EXP__LOAD_ELEM_LIST}`;
+
+/**
+ * Document
+ */
+const ENDPOINT__DOC__ELEM_LIST = "/api/doc/elem_list";
+export const URL__DOC__ELEM_LIST = `${URL__prefix}${ENDPOINT__DOC__ELEM_LIST}`;

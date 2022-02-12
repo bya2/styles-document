@@ -4,17 +4,13 @@ import {
   URL__AUTH__SIGN_IN,
   URL__AUTH__VALIDATION,
   URL__EXP__NODE_LIST,
-  URL__EXP__LOAD_GROUP_LIST,
-  URL__EXP__LOAD_DOC_LIST,
-  URL__ELEM__LOAD_LIST,
+  URL__DOC__ELEM_LIST,
 } from "../../config/api/get/endpoint";
 import {
   ERR_MSG__AUTH__SIGN_IN,
   ERR_MSG__AUTH__VALIDATION,
   ERR_MSG__EXP__NODE_LIST,
-  ERR_MSG__EXP__LOAD_GROUP_LIST,
-  ERR_MSG__EXP__LOAD_DOC_LIST,
-  ERR_MSG__ELEM__LOAD_LIST,
+  ERR_MSG__DOC__ELEM_LIST,
 } from "../../config/api/get/message";
 
 export const fn_logic__GET__auth__validation = () => {
@@ -131,63 +127,41 @@ export const fn_logic__GET__exp__node_list = (_id = "bya2") => {
     });
 };
 
-export const fn_logic__GET__exp__load_group_list = () => {
-  const config = {
-    method: "get",
-    url: URL__EXP__LOAD_GROUP_LIST,
-    params: {},
-  };
-
-  return axios(config)
-    .then((res) => {
-      if (res.status === 200) {
-      }
-    })
-    .catch((err) => {
-      console.error(`${ERR_MSG__EXP__LOAD_GROUP_LIST}${err}`);
-      return err;
-    });
-};
-
-export const fn_logic__GET__doc__load_list = () => {
-  const user_id = sessionStorage.getItem("user");
-  const ref_hashed_user = sessionStorage.getItem("ref_hashed_user");
-
+export const fn_logic__GET__doc__elem_list = (_obj_data) => {
   return axios
-    .get(URL__EXP__LOAD_DOC_LIST, {
-      // 유저 아이디, 해시 값
-      params: {},
+    .get(URL__DOC__ELEM_LIST, {
+      validateStatus: (status) => status < 500,
+      params: {
+        param__id: _obj_data.id,
+        param__doc: _obj_data.doc,
+      },
     })
     .then((res) => {
-      const STATUS = res.status;
+      const { status, data } = res;
+      if (status !== data.code)
+        throw Error(
+          `상태 코드와 응답 코드 불일치: ${{ status, code: data.code }}`
+        );
 
-      if (STATUS === 200) {
-        return {
-          code: STATUS,
-          data: res.data,
-        };
+      switch (status) {
+        case 200:
+          console.log(`200: 성공적으로 문서의 요소들을 로드.`);
+          break;
+        case 400:
+          console.log(`400: 클라이언트에서 무언가를 잘못 보냄.`);
+          break;
+        case 404:
+          console.log(`404: 아이디나 문서 정보를 찾을 수 없음.`);
+          break;
+        default:
+          throw Error("Unknown status code. 500");
       }
+
+      return data;
     })
     .catch((err) => {
-      console.error(`${ERR_MSG__EXP__LOAD_DOC_LIST}${err.message}`);
-
-      return {
-        code: err.code,
-        error: err,
-      };
-    });
-};
-
-export const fn_logic__GET__elem__load_list = () => {
-  axios
-    .get(URL__ELEM__LOAD_LIST, {
-      params: {},
-    })
-    .then((res) => {
-      if (res.status === 200) {
-      }
-    })
-    .catch((err) => {
-      console.error(`${ERR_MSG__ELEM__LOAD_LIST}${err.message}`);
+      console.log(ERR_MSG__DOC__ELEM_LIST);
+      console.error(err);
+      return null;
     });
 };

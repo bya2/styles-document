@@ -1,3 +1,4 @@
+@import "./mixins.scss";
 @import "./variables.scss";
 
 $size__h__app: 100vh;
@@ -45,4 +46,16 @@ $size__h__footer: 34px;
 
 .no-display {
   display: none;
+}
+
+.flex-card {
+  display: flex;
+  flex-direction: column;
+  @include flex-CCS;
+
+  .img {
+  }
+
+  .alt {
+  }
 }

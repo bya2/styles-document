@@ -5,13 +5,13 @@ import {
   URL__AUTH__SIGN_UP,
   URL__EXP__ADD_GROUP,
   URL__EXP__ADD_DOC,
-  URL__ADD_DOC_ELEM,
+  URL__DOC__ADD_ELEM,
 } from "../../config/api/post/endpoint";
 import {
   ERR_MSG__AUTH__SIGN_UP,
   ERR_MSG__EXP__ADD_GROUP,
   ERR_MSG__EXP__ADD_DOC,
-  ERR_MSG__ADD_DOC_ELEM,
+  ERR_MSG__DOC__ADD_ELEM,
 } from "../../config/api/post/message";
 
 export const fn_logic__POST__auth__sign_up = (
@@ -53,7 +53,7 @@ export const fn_logic__POST__exp__add_group = (_obj_data) => {
       return null;
     })
     .catch((err) => {
-      console.error(`${ERR_MSG__EXP__ADD_DOC}${err}`);
+      console.error(`${ERR_MSG__EXP__ADD_GROUP}${err}`);
       return null;
     });
 };
@@ -83,11 +83,31 @@ export const fn_logic__POST__exp__add_doc = (_obj_data) => {
     });
 };
 
-export const fn_logic__POST__add_doc_elem = () => {
-  axios
-    .post(URL__ADD_DOC_ELEM)
-    .then((res) => {})
+export const fn_logic__POST__doc__add_elem = (_obj_data) => {
+  return axios
+    .post(
+      URL__DOC__ADD_ELEM,
+      qs.stringify({
+        ..._obj_data,
+      })
+    )
+    .then((res) => {
+      if (res.status !== 201) throw Error("Unknown status code.");
+
+      const { status, data } = res;
+      if (status !== data.code) throw Error("상태 코드와 응답 코드가 불일치");
+
+      return data;
+    })
     .catch((err) => {
-      console.error(`${ERR_MSG__ADD_DOC_ELEM} fn_logic__POST__add_doc_elem`);
+      console.log(`${ERR_MSG__DOC__ADD_ELEM}`);
+      console.error(err);
+
+      return null;
+
+      // return {
+      //   code: err.code,
+      //   data: {},
+      // };
     });
 };

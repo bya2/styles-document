@@ -1,0 +1,19 @@
+.comp_markdown {
+  h1,
+  h2,
+  h3 {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -12px;
+      height: 1px;
+      border-bottom: 1px solid hsl(0, 0%, 50%);
+    }
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+}

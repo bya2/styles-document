@@ -26,7 +26,10 @@ const init_state__bool__obj_types = types__arr_elems.reduce((obj, obj_type) => {
   return obj;
 }, {});
 
-const Comp_doc_selector = () => {
+const Comp_doc_selector = ({
+  state__list__arr_elems,
+  set_state__list__arr_elems,
+}) => {
   /**
    * State
    */
@@ -86,6 +89,8 @@ const Comp_doc_selector = () => {
           fn_setter__init__type_to_click_state={
             fn_setter__init__type_to_click_state
           }
+          state__list__arr_elems={state__list__arr_elems}
+          set_state__list__arr_elems={set_state__list__arr_elems}
         />
       ) : undefined}
       <article className="comp_doc_selector">
