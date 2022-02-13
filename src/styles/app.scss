@@ -59,3 +59,15 @@ $size__h__footer: 34px;
   .alt {
   }
 }
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.float-right {
+  float: right !important;
+}

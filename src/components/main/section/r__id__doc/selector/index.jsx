@@ -29,12 +29,21 @@ const init_state__bool__obj_types = types__arr_elems.reduce((obj, obj_type) => {
 const Comp_doc_selector = ({
   state__list__arr_elems,
   set_state__list__arr_elems,
+  fn_setter__cancel_mod,
+  prop__is_mod,
+  prop__curr_key,
+  prop__default_type,
+  prop__default_value,
 }) => {
   /**
    * State
    */
   const [state__is_click__obj_type_names, set_state__is_click__obj_type_names] =
-    useState(init_state__bool__obj_types);
+    useState(
+      prop__default_type
+        ? { ...init_state__bool__obj_types, [prop__default_type]: true }
+        : init_state__bool__obj_types
+    );
 
   const [
     state__is_mouse_up__obj_type_names,
@@ -91,6 +100,10 @@ const Comp_doc_selector = ({
           }
           state__list__arr_elems={state__list__arr_elems}
           set_state__list__arr_elems={set_state__list__arr_elems}
+          fn_setter__cancel_mod={fn_setter__cancel_mod}
+          prop__is_mod={prop__is_mod}
+          prop__curr_key={prop__curr_key}
+          prop__default_value={prop__default_value}
         />
       ) : undefined}
       <article className="comp_doc_selector">

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "../../../../../styles/main/section/r__id__doc/editor/index.scss";
 import { fn_logic__POST__doc__add_elem } from "../../../../../logic/api/post";
+import { fn_logic__PATCH__doc__mod_elem } from "../../../../../logic/api/patch";
 import TextArea from "../../../../resusing/textarea";
 import { useMemo } from "react";
 
@@ -15,6 +16,10 @@ const Comp_doc_editor = ({
   fn_setter__init__type_to_click_state,
   state__list__arr_elems,
   set_state__list__arr_elems,
+  fn_setter__cancel_mod,
+  prop__is_mod,
+  prop__curr_key,
+  prop__default_value,
 }) => {
   /**
    * Parameters
@@ -32,7 +37,7 @@ const Comp_doc_editor = ({
     useState(init_state__bool__obj_keys);
 
   const [state__content__str_txta_val, set_state__content__str_txta_val] =
-    useState("");
+    useState(prop__default_value || "");
 
   const [state__is_mouse_up__form_btn, set_state__is_mouse_up__form_btn] =
     useState(false);
@@ -101,7 +106,58 @@ const Comp_doc_editor = ({
         set_state__list__arr_elems([...state__list__arr_elems, element]);
       })
       .catch((err) => {
-        console.log("ERR:\nLOC: comp_editor-logic-fn_req__POST__add_elem");
+        console.log("ERR:\nLOC: comp_editor-logic-fn_logic__add_elem");
+        console.error(err);
+      });
+
+    // after
+    setTimeout(() => {
+      fn_setter__init__type_to_click_state();
+      set_state__is_not_submit__form(true);
+    }, 500);
+  };
+
+  const fn_logic__mod_elem = () => {
+    set_state__is_not_submit__form(false);
+
+    const obj_req_body = {
+      id: prop__curr_key,
+      writer: param__id,
+      document: param__doc,
+      value: state__content__str_txta_val,
+      type: memo__str_selected_type,
+      styles: null || {},
+    };
+
+    fn_logic__PATCH__doc__mod_elem(obj_req_body)
+      .then((obj_res_data) => {
+        console.log(1);
+        const { code, message, data } = obj_res_data;
+        const { element } = data;
+
+        const idx__elem = state__list__arr_elems.findIndex((obj_elem, i) => {
+          console.log(
+            "_ID",
+            obj_elem._id.toString(),
+            element._id.toString(),
+            i
+          );
+          return obj_elem._id.toString() === element._id.toString();
+        });
+        console.log("DIDI", state__list__arr_elems);
+        console.log("IDX", idx__elem);
+
+        const updated_state__list__arr_elems = [...state__list__arr_elems];
+        updated_state__list__arr_elems.splice(idx__elem, 1, element);
+
+        console.log(element);
+
+        set_state__list__arr_elems(updated_state__list__arr_elems);
+        console.log(element._id.toString());
+        fn_setter__cancel_mod(element._id.toString());
+      })
+      .catch((err) => {
+        console.log("ERR:\nLOC: comp_editor-logic-fn_logic__mod_elem");
         console.error(err);
       });
 
@@ -123,7 +179,14 @@ const Comp_doc_editor = ({
     ) {
       // code
       console.log("submit(keydown)");
-      fn_logic__add_elem();
+
+      if (prop__is_mod) {
+        console.log(1112);
+        fn_logic__mod_elem();
+      } else {
+        console.log(1113);
+        fn_logic__add_elem();
+      }
     }
   };
 
@@ -137,7 +200,12 @@ const Comp_doc_editor = ({
     if (state__is_not_submit__form) {
       // code
       console.log("submit(click)");
-      fn_logic__add_elem();
+
+      if (prop__is_mod) {
+        fn_logic__mod_elem();
+      } else {
+        fn_logic__add_elem();
+      }
     }
   };
 
@@ -277,6 +345,7 @@ const Comp_doc_editor = ({
               onChange={(e) => fn_handler__change__txta(e)}
               onClick={(e) => fn_handler__click__ta_selection(e)}
               onKeyDown={(e) => {}}
+              defaultValue={prop__default_value}
             />
             <div
               className="line-select"

@@ -28,6 +28,7 @@
     // @include link__none_effect;
 
     & > a {
+      width: 100%;
       @include flex-RSC;
       text-decoration: none;
     }

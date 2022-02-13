@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import cls_list__fas_icon from "../../../../../../icon/font_awesome";
 const {
   cls__icon_down,
@@ -87,10 +87,10 @@ const Comp_explorer_layer_sub_tree = ({
             <p className="name">{obj_sub_tree_node.name}</p>
           </>
         ) : (
-          <Link to={obj_sub_tree_node._id.toString()} tabIndex="-1">
+          <NavLink to={obj_sub_tree_node.name} tabIndex="-1">
             <i className={`icon icon-doc ${cls__icon_doc}`}></i>
             <p className="name">{obj_sub_tree_node.name}</p>
-          </Link>
+          </NavLink>
         )}
       </div>
       <div

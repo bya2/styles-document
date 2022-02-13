@@ -1,0 +1,29 @@
+@import "../../../../../mixins.scss";
+@import "../../../../../variables.scss";
+
+.comp_palette {
+  .card {
+    width: 4rem;
+    height: 5rem;
+    margin: 0.75rem;
+    border-radius: 15%;
+    @include flex-CCC;
+    padding: 0.125rem;
+    cursor: pointer;
+
+    .img {
+      width: 3rem;
+      height: 3rem;
+      @include bs__a(0.4);
+      border-radius: 8px;
+    }
+    .alt {
+      font-family: $common__font__main;
+      font-size: 1rem;
+    }
+
+    &:hover {
+      background-color: hsla(0, 0%, 0%, 0.05);
+    }
+  }
+}

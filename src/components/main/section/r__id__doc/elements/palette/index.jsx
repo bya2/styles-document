@@ -33,7 +33,7 @@ const Comp_palette = ({ ta__str_value }) => {
   };
 
   return (
-    <ul className="comp_palette ul-no-space">
+    <ul className="comp_palette flex-container ul-no-space">
       <>
         {substrs__arr_ta_str_values.map((str_ta_value, i) => {
           if (!str_ta_value instanceof String || str_ta_value.length === 0)
@@ -49,7 +49,7 @@ const Comp_palette = ({ ta__str_value }) => {
               onClick={(e) => fn_handler__click__a_palette(e)}
             >
               <div className="img" style={{ background: str_ta_value }} />
-              <p className="alt">{str_ta_value}</p>
+              <p className="alt p-no-margin">{str_ta_value}</p>
             </li>
           );
         })}

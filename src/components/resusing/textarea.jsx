@@ -3,6 +3,7 @@ const Comp_textarea__reusing = ({
   name,
   rows,
   placeholder,
+  defaultValue,
   value,
   onChange,
   onMouseDown,
@@ -15,6 +16,7 @@ const Comp_textarea__reusing = ({
       name={name}
       rows={rows}
       placeholder={placeholder}
+      defaultValue={defaultValue}
       value={value}
       onChange={onChange}
       onMouseDown={onMouseDown}

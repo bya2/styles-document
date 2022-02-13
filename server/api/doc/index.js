@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const fn_service__GET__doc__elem_list = require("../../service/doc/elem_list");
 const fn_service__POST__doc__add_elem = require("../../service/doc/add_elem");
+const fn_service__PATCH__doc__mod_elem = require("../../service/doc/mod_elem");
 /**
  * Get
  */
@@ -41,6 +42,30 @@ router.post("/add_elem", (req, res) => {
       });
   } catch (err) {
     console.log("ERR:\nLOC: api-post-doc/add_elem");
+    console.error(err);
+  }
+});
+
+/**
+ * Patch
+ */
+router.patch("/mod_elem", (req, res) => {
+  console.log("res... (doc/mod_elem)");
+  try {
+    const obj_req_body = req.body;
+    console.log(obj_req_body);
+
+    fn_service__PATCH__doc__mod_elem(obj_req_body)
+      .then((obj_res_data) => {
+        const { code } = obj_res_data;
+        res.status(code).json(obj_res_data);
+      })
+      .catch((err) => {
+        console.log("ERR:\nLOC: api-patch-doc/mod_elem-s_processor");
+        console.error(err);
+      });
+  } catch (err) {
+    console.log("ERR:\nLOC: api-patch-doc/mod_elem");
     console.error(err);
   }
 });

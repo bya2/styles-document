@@ -8,7 +8,8 @@ const fn_service__GET__doc__elem_list = (_obj_req_q) => {
   return Element.find({ writer: param__id, document: param__doc })
     .exec()
     .then((results__arr_elems) => {
-      if (results__arr_elems instanceof Array) {
+      if (!results__arr_elems instanceof Array) {
+        console.log(results__arr_elems, results__arr_elems instanceof Array);
         throw Error("non-array");
       }
 

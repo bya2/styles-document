@@ -31,6 +31,8 @@ const obj_cls__fas_icon = {
   cls__icon_palette: "fas fa-palette",
   cls__icon_typography: "fas fa-font",
   cls__icon_markdown: "fab fa-medium-m",
+  cls__icon_filter: "fab fa-elementor",
+  cls__icon_edit: "fas fa-pen-square",
 
   /**
    * ASIDE:LEFT

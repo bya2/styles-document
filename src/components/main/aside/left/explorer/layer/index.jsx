@@ -200,7 +200,9 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
       state__is_fold_sub_tree__obj_p_group_node_ids
     );
     const arr_curr_keys = Object.keys(init_bool_state__obj_group_node_ids);
-    const diff_key = arr_curr_keys.filter((el) => !arr_prev_keys.includes(el));
+    const diff_key = arr_curr_keys.filter(
+      (el) => !arr_prev_keys.includes(el)
+    )[0]; // modify
 
     set_state__is_fold_sub_tree__obj_p_group_node_ids({
       ...state__is_fold_sub_tree__obj_p_group_node_ids,
