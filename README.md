@@ -2,6 +2,12 @@
 
 스스로에게 도움이 될 스타일 문서를 작성하고 저장하고 싶어서 작성.
 
+## Progress
+
+### `220213`
+
+![image](https://user-images.githubusercontent.com/61080445/153845913-ec2e9e79-dc9a-4c44-8ca0-4e10cda3fd40.png)
+
 ## Getting Started
 
 ### Installation
