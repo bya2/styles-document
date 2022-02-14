@@ -1,6 +1,8 @@
 # Style Documents
 
-스스로에게 도움이 될 스타일 문서를 작성하고 저장하고 싶어서 작성.
+프론트엔드 개발자를 목표로 삼고나서 작성하는 첫 프론트엔드 프로젝트입니다.  
+스스로에게 도움이 될 스타일 문서를 작성하고 저장하고 싶어서 작성했습니다.
+현재 작성 중인 프로젝트(React)입니다.
 
 ## Progress
 
@@ -27,15 +29,78 @@ npm build (production mode)
 
 ```
 Header
-Root
-  Login
-  User
-    Documents
-  Document
     Menu
-    Markdown
-    Palette
+    Logo
+    Session
+        SignUp
+        SignIn
+        SignOut
+        Bell
+        UserInfo
+Main
+    Aside
+        Explorer
+            Tool
+            Layer
+    Section
+        Elements
+            Palette
+            Typography
+            Markdown
+            Selector
+                Editor
+    Aside
+        No implement
 Footer
+    No-implement
+```
+
+## Function
+
+`현재 구현된 기능`
+
+```
+Common
+  - 로그인 검증(Bcrpyt)
+  - 모달
+
+Session
+  - 회원 가입
+  - 로그인(sessionStorage, Recoil)
+  - 로그아웃(sessionStorage, Recoil)
+
+Explorer:
+  - 트리 구조의 폴더 및 문서 구조
+  - 클릭한 문서/폴더/루트 표시
+  - 클릭한 문서/폴더/루트 활성화
+    - 문서/폴더 생성
+  - 클릭한 문서로 이동
+  - 폴더 접기/펴기
+
+Document:
+  - 문서 내 에디터 기능
+  - 문서 내 에디터 종류 선택 기능
+  - Palette/Typography/Markdown 등의 요소
+  - 문서 내 요소 추가 기능
+  - 선택한 문서 내 요소 수정 기능
+```
+
+`구현 예정`
+
+```
+Session
+  - 문서 검색 기능
+  - 유저 프로필
+  - 유저 메뉴
+
+Explorer:
+  - 새로 고침
+  - 문서/폴더 삭제
+
+Document:
+  - 맨 위로 이동
+  - Sticky를 이용해 스크롤을 내리면 문서 내 요소의 헤더가 블록처럼 쌓이는 기능
+  - Right Aside에 Typography 속성 나열
 ```
 
 ## Proxy
@@ -92,6 +157,28 @@ qs.stringify - (O)
 ```
 WARNING in ./node_modules/bcryptjs/dist/bcrypt.js
 Module not found: Error: Can't resolve 'crypto' in 'D:\Projects\styles-space\node_modules\bcryptjs\dist
+
+- 동작을 방해하지 않았고 해결 방법이 따로 존재하지 않아서 아직 건들지 않았습니다.
+-
+```
+
+## Stack
+
+`Front-End`
+
+```
+SCSS
+Javascript
+React
+Recoil
+```
+
+`Back-End`
+
+```
+Node.js
+Express
+Bcrypt
 ```
 
 ## Writer
