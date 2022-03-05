@@ -1,19 +1,12 @@
-import "../../../styles/main/section/index.scss";
+import "styles/main/section/index.scss";
 import { Routes, Route } from "react-router-dom";
-import PageRoot from "../../../routes/r_root";
-import PageID from "../../../routes/r__id";
-import PageIDDoc from "../../../routes/r__id__doc";
+import RouteRoot from "../../../routes/root";
 
-const routes__arr_elems = [
+const routes__arr = [
   {
-    alt: "node__root",
+    key: "route-root",
     path: "/",
-    element: <PageRoot />,
-  },
-  {
-    alt: "node__sub",
-    path: ":doc",
-    element: <PageIDDoc />,
+    component: <RouteRoot></RouteRoot>,
   },
 ];
 
@@ -22,7 +15,7 @@ const Comp_section = () => {
     <section>
       <Routes>
         <>
-          {routes__arr_elems.map((obj_route_elem) => {
+          {routes__arr.map((obj_route_elem) => {
             const { alt, path, element } = obj_route_elem;
             return <Route key={alt} path={path} element={element} />;
           })}
