@@ -1,58 +1,50 @@
 # Style Documents
 
-프론트엔드 개발자를 목표로 삼고나서 작성하는 첫 프론트엔드 프로젝트입니다.  
-스스로에게 도움이 될 스타일 문서를 작성하고 저장하고 싶어서 작성했습니다.
-현재 작성 중인 프로젝트(React)입니다.
+프론트엔드 개발자를 목표로 삼고나서 작성하는 첫 프론트엔드 프로젝트입니다. 현재 리팩토링 중입니다.
+
+- VSCode와 같은 에디터 형태의 스타일 문서를 작성할 수 있는 애플리케이션
+- 마크다운, 서체, 색상 박스
 
 ## Progress
 
-### `220213`
+#### 0213 (기능 완성)
 
 ![image](https://user-images.githubusercontent.com/61080445/153845913-ec2e9e79-dc9a-4c44-8ca0-4e10cda3fd40.png)
 
-## Getting Started
+#### 0305 (리팩토링 시작)
 
-### Installation
+디자인적인 면에서 부족함을 느껴서 리팩토링을 시작했습니다.
+
+- 불필요한 파일 정리 및 baseURI를 설정
+- 재사용성 컴포넌트 리팩토링
+  - 모달 내 이벤트 재작성
+  - 태그 컴포넌트 id 프로퍼티 추가
+  - refInput과 Input 컴포넌트 분리
+- 컴포넌트와 일반 함수 간 구분
+  - 컴포넌트: 함수 선언
+  - 일반 함수: 화살표 함수
+- Electron
+  - 설치
+  - 실행 확인
+
+## REST API
+
+GET
 
 ```
-npm i --save-prod
+/api/auth/sign_in (로그인)
+/api/auth/validation (로그인 검증)
+/api/exp/node_list (폴더 및 문서 목록)
+/api/doc/elem_list (문서 내 요소 목록)
 ```
 
-### Execution
+POST
 
 ```
-npm start (development mode)
-npm build (production mode)
-```
-
-## Layout & Routes & Components
-
-```
-Header
-    Menu
-    Logo
-    Session
-        SignUp
-        SignIn
-        SignOut
-        Bell
-        UserInfo
-Main
-    Aside
-        Explorer
-            Tool
-            Layer
-    Section
-        Elements
-            Palette
-            Typography
-            Markdown
-            Selector
-                Editor
-    Aside
-        No implement
-Footer
-    No-implement
+/api/auth/sign_up (회원 가입)
+/api/exp/add_group (폴더 생성)
+/api/exp/add_doc (문서 생성)
+/api/doc/add_elem (문서 내 요소 생성)
 ```
 
 ## Function
