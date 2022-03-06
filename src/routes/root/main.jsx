@@ -5,7 +5,9 @@ export default function RouteRootMain() {
   return (
     <>
       <main className="route-root">
-        <div></div>
+        <div>
+          <span>Document</span>
+        </div>
         <div>
           <CompSearch />
         </div>

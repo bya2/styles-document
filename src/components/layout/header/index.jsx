@@ -1,6 +1,7 @@
 import "styles/layout/header.scss";
 
-import Logo from "components/layout/header/logo";
+import CompLogo from "components/layout/header/logo";
+import CompSession from "components/layout/header/session";
 
 const logo_content__str = "Style Explorer";
 
@@ -8,8 +9,8 @@ export default function CompLayoutHeader() {
   return (
     <header>
       <div className="menu"></div>
-      <Logo prop__logo_content__str={logo_content__str} />
-      <div className="session"></div>
+      <CompLogo prop__logo_content__str={logo_content__str} />
+      <CompSession />
     </header>
   );
 }

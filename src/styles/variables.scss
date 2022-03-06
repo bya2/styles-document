@@ -1,16 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
 // font-family: 'Ubuntu', sans-serif;
 // font-family: 'Ubuntu Condensed', sans-serif;
+// font-family: 'Shadows Into Light', cursive;
 
 // Layout
-$header-g-cols: auto auto auto;
 $main-g-cols: auto auto auto;
 $footer-g-cols: auto auto auto;
 
 $bg__clr__main: hsl(0, 0%, 85%);
 $bg__clr__section: hsl(0, 0%, 95%);
 $bg__clr__aside: hsl(0, 0%, 99%);
+
+// Font
+$ft-main: "Ubuntu", sans-serif;
+$ft-sub: "Ubuntu Condensed", sans-serif;
+$ft-logo: "Shadows Into Light", cursive;
 
 // Common
 $common__font__main: "Ubuntu", sans-serif;
