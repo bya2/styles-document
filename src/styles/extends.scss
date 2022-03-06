@@ -33,6 +33,13 @@
   }
 }
 
+.f-box-r-c-s {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 .f-box-r-c-c {
   display: flex;
   flex-direction: row;
@@ -47,4 +54,14 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.no-list-style-space {
+  ul {
+    margin: 0;
+    padding: 0;
+    li {
+      list-style-type: none;
+    }
+  }
 }

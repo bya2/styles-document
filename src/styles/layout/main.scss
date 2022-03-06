@@ -21,8 +21,9 @@ main {
     background-color: $bg-clr-main;
     @include g-box-t-rows($g-rows-main-r-root);
 
-    div:nth-of-type(2) {
-      @extend .f-box-r-c-c;
+    & > div:nth-of-type(2) {
+      padding-top: 48px;
+      @extend .f-box-r-c-s;
     }
   }
   &.route-id {
@@ -32,10 +33,10 @@ main {
     aside {
       @include g-box-t-rows($aside-explorer-g-rows);
 
-      article:nth-of-type(1) {
+      & > article:nth-of-type(1) {
         background-color: $aside-a1-bg-clr;
       }
-      article:nth-of-type(2) {
+      & > article:nth-of-type(2) {
         background-color: $aside-a2-bg-clr;
       }
     }
