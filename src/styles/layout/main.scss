@@ -1,0 +1,53 @@
+@import "../extends.scss";
+@import "../mixins.scss";
+@import "../variables.scss";
+
+// Grid
+$g-rows-main-r-root: auto auto auto;
+$g-cols-main-r-id: 192px 1fr;
+
+$aside-explorer-g-rows: 24px 1fr;
+$section-g-rows: 24px 1fr;
+
+// Color
+$bg-clr-main: hsl(0, 0%, 30%);
+$aside-a1-bg-clr: hsl(0, 0%, 30%);
+$aside-a2-bg-clr: hsl(0, 0%, 20%);
+$section-a1-bg-clr: hsl(0, 0%, 35%);
+$section-a2-bg-clr: hsl(0, 0%, 15%);
+
+main {
+  &.route-root {
+    background-color: $bg-clr-main;
+    @include g-box-t-rows($g-rows-main-r-root);
+
+    div:nth-of-type(2) {
+      @extend .f-box-r-c-c;
+    }
+  }
+  &.route-id {
+    background-color: $bg-clr-main;
+    @include g-box-t-cols($g-cols-main-r-id);
+
+    aside {
+      @include g-box-t-rows($aside-explorer-g-rows);
+
+      article:nth-of-type(1) {
+        background-color: $aside-a1-bg-clr;
+      }
+      article:nth-of-type(2) {
+        background-color: $aside-a2-bg-clr;
+      }
+    }
+    section {
+      @include g-box-t-rows($section-g-rows);
+
+      article:nth-of-type(1) {
+        background-color: $section-a1-bg-clr;
+      }
+      article:nth-of-type(2) {
+        background-color: $section-a2-bg-clr;
+      }
+    }
+  }
+}

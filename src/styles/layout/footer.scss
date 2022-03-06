@@ -1,0 +1,17 @@
+@import "../extends.scss";
+@import "../mixins.scss";
+@import "../variables.scss";
+
+$bg-clr: hsl(0, 0%, 96%);
+
+footer {
+  background-color: $bg-clr;
+
+  @include g-box-t-cols($footer-g-cols);
+
+  div:nth-of-type(2) {
+    @extend .f-box-r-c-c;
+    font-family: $common__font__sub;
+    font-size: 0.875rem;
+  }
+}

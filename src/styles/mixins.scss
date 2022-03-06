@@ -207,6 +207,16 @@ $breakpoint__4k: 2560px;
 /**
  * Grid
  */
+@mixin g-box-t-cols($g-cols) {
+  display: grid;
+  grid-template-columns: $g-cols;
+}
+
+@mixin g-box-t-rows($g-rows) {
+  display: grid;
+  grid-template-rows: $g-rows;
+}
+
 @mixin grid-C_C($cols) {
   display: grid;
   grid-template-columns: $cols;

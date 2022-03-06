@@ -1,0 +1,24 @@
+@import "../extends.scss";
+@import "../mixins.scss";
+@import "../variables.scss";
+
+$bg-clr: hsl(0, 0%, 45%);
+
+header {
+  background-color: $bg-clr;
+
+  @include g-box-t-cols($header-g-cols);
+
+  .comp.logo {
+    @extend .f-box-r-c-c;
+    @extend .heading-no-space;
+    @extend .link;
+    @extend .no-select;
+
+    .content {
+      color: hsl(0, 0%, 95%);
+      font-size: 1.25em;
+      font-weight: 400;
+    }
+  }
+}

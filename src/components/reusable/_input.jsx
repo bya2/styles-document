@@ -1,4 +1,16 @@
-export function CompInput({ type, id, name, className, placeholder, disabled, value, onChange, onKeyUp, onKeyDown, onBlur }) {
+export default function CompInput({
+  type,
+  id,
+  name,
+  className,
+  placeholder,
+  disabled,
+  value,
+  onChange,
+  onKeyUp,
+  onKeyDown,
+  onBlur,
+}) {
   return (
     <input
       type={type}
