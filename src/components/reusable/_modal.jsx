@@ -1,78 +1,45 @@
-import "styles/reusable/modal.scss";
+import "styles/reusable/_modal.scss";
 
 import { useState } from "react";
 import ReactDOM from "react-dom";
 
-import {} from "icon/fs";
+// import {} from "icon/fs";
 
-export default function CompModal({ children, prop__cond__is_click, prop__fn_set__close_modal }) {
+export default function CompModal({ children, prop__cond__is_click_item__bool, prop__fn_set__close_modal__item }) {
   // State
   const [state__is_mouse_down__bool, set_state__is_mouse_down__bool] = useState(false);
 
   // Event
   const fn_handle__mouse_down__outer = (e) => {
-    e.currentTarget.addEventListener("mouseup", () => prop__fn_set__close_modal(), { once: true });
     e.stopPropagation();
+    e.currentTarget.addEventListener("mouseup", () => prop__fn_set__close_modal__item(), { once: true });
   };
 
   const fn_handle__mouse_down__close_icon = (e) => {
-    const e_curr_tg = e.currentTarget;
-
-    set_state__is_mouse_down__bool(true);
-    const fn_handle__mouse_up__close_icon = () => set_state__is_mouse_down__bool(false);
-    window.addEventListener("mouseup", fn_handle__mouse_up__close_icon, { once: true });
     e.stopPropagation();
+    set_state__is_mouse_down__bool(true);
+    const fn_handle__mouse_up__close_icon = () => {
+      set_state__is_mouse_down__bool(false);
+      prop__fn_set__close_modal__item();
+    };
+    window.addEventListener("mouseup", fn_handle__mouse_up__close_icon, { once: true });
   };
 
-  return prop__cond__is_click
-    ? ReactDOM.createPortal(
-        <div className="comp modal outer" onMouseDown={(e) => fn_handle__mouse_down__outer(e)} onMouseUp={(e) => {}}>
-          <div className="inner" onMouseDown={(e) => e.stopPropagation()}>
-            <div className={`close-btn ${1}`} onMouseDown={(e) => fn_handle__mouse_down__close_icon(e)}>
-              <i className={1}></i>
-            </div>
-            {children}
+  return (
+    prop__cond__is_click_item__bool &&
+    ReactDOM.createPortal(
+      <article className="comp modal outer" onMouseDown={(e) => fn_handle__mouse_down__outer(e)} onMouseUp={(e) => {}}>
+        <div className="inner" onMouseDown={(e) => e.stopPropagation()}>
+          <div
+            className={`close-btn${state__is_mouse_down__bool ? " s-mouse-down" : ""}`}
+            onMouseDown={(e) => fn_handle__mouse_down__close_icon(e)}
+          >
+            <i className={`icon ${1}`}>X</i>
           </div>
+          {children}
         </div>
-      )
-    : undefined;
+      </article>,
+      document.getElementById("modal")
+    )
+  );
 }
-
-// state__is_click__elem &&
-// ReactDOM.createPortal(
-//   <article
-//     className="modal_wrapper"
-//     onMouseDown={(e) => {
-//       e.target.addEventListener("mouseup", () => {
-//         fn_setter__state__close_modal();
-//       });
-//     }}
-//     onMouseUp={(e) => {
-//       e.target.addEventListener("mouseup", () => {
-//         set_state__is_mouse_down(false);
-//       });
-//     }}
-//   >
-//     <div
-//       className="modal_inner"
-//       onMouseDown={(e) => {
-//         e.stopPropagation();
-//       }}
-//     >
-//       <div
-//         className={`modal_close_button ${state__is_mouse_down && "close"}`}
-//         onMouseDown={(e) => {
-//           fn_handler__on_mouse_down__close_icon(e);
-//           e.target.addEventListener("mouseup", () =>
-//             fn_setter__state__close_modal()
-//           );
-//         }}
-//       >
-//         <i className={font_awesome.cls_icon__close_modal}></i>
-//       </div>
-//       {children}
-//     </div>
-//   </article>,
-//   document.getElementById("modal")
-// )
-// );

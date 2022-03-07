@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function CompSearchItems({ prop__search_items__arr }) {
   return (
     <div className="comp search-items outer">
-      <ul class="list">
+      <ul className="list">
         <>
           {prop__search_items__arr.map((item__obj) => {
             const { key, value } = item__obj;

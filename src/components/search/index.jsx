@@ -38,8 +38,8 @@ export default function CompSearch() {
     <article className="comp search box">
       <form onBlur={(e) => fn_handle__blur__usr_input(e)}>
         <div className={`wrap-bar${state__is_focus__bool ? " s-focus" : ""}`}>
-          <div class="bar">
-            <span class="icon-box search">
+          <div className="bar">
+            <span className="icon-box search">
               <i className={`icon`}>E</i>
             </span>
             <CompInput
@@ -51,7 +51,7 @@ export default function CompSearch() {
               onChange={(e) => fn_handle__change__usr_input(e)}
               onFocus={(e) => fn_handle__focus__usr_input(e)}
             ></CompInput>
-            <span class="icon-box tool">
+            <span className="icon-box tool">
               <i className={`icon`}>T</i>
             </span>
           </div>

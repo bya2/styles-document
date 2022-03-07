@@ -34,10 +34,10 @@ main {
         &::before {
           content: "Style";
           position: absolute;
-          left: 34.5%;
+          left: 50%;
           transform: translate(-50%);
           bottom: 55%;
-          font-size: 0.5em;
+          font-size: 0.375em;
           font-weight: 600;
         }
       }

@@ -1,0 +1,65 @@
+@import "../extends.scss";
+@import "../mixins.scss";
+@import "../variables.scss";
+
+$bg-clr-modal-outer: hsla(0, 0%, 0%, 0.4);
+$bg-clr-modal-inner: white;
+
+.comp.modal {
+  &.outer {
+    width: 100vw;
+    height: 100vh;
+    background-color: $bg-clr-modal-outer;
+    @extend .f-box.r-c-c;
+  }
+
+  .inner {
+    position: relative;
+    background-color: $bg-clr-modal-inner;
+    border-radius: 2px;
+    box-shadow: 0 0 3px 2px hsla(0, 0%, 0%, 0.3);
+    padding: 16px;
+    @extend .f-box.r-c-c;
+
+    &:hover {
+      .close-btn {
+        display: flex;
+      }
+    }
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    width: 20px;
+    height: 20px;
+    box-shadow: 0 0 0 1px hsla(0, 0%, 60%, 0.3);
+    border-radius: 50%;
+    @extend .f-box.r-c-c;
+    display: none;
+    @extend .no-select;
+
+    transition-property: box-shadow;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+
+    color: hsl(0, 0%, 40%);
+    .icon {
+      color: inherit;
+      font-size: 1em;
+    }
+
+    &:hover {
+      color: hsla(0, 0%, 0%, 1);
+      box-shadow: 0 0 0 1px hsla(0, 0%, 0%, 0.3);
+    }
+
+    &.s-mouse-down {
+      background-color: hsla(0, 0%, 30%, 0.1);
+      transition-property: background-color;
+      transition-duration: 0.1s;
+    }
+  }
+}

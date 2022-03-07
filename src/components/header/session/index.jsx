@@ -9,13 +9,7 @@ import { g_state__user, g_state__user_valid } from "../../../recoil/atoms";
 import { useEffect } from "react";
 import { useMemo } from "react";
 
-const {
-  cls__icon_sign_up,
-  cls__icon_sign_in,
-  cls__icon_sign_out,
-  cls__icon_bell,
-  cls__icon_user,
-} = fas_icon__obj_cls;
+const { cls__icon_sign_up, cls__icon_sign_in, cls__icon_sign_out, cls__icon_bell, cls__icon_user } = fas_icon__obj_cls;
 
 const arr_sess_elems = {
   state__sign_in: [
@@ -36,45 +30,33 @@ const arr_sess_elems = {
     {
       alt: "sign up",
       icon_cls: cls__icon_sign_up,
-      comp: (fn_setter__state__close_modal) => (
-        <SignUp fn_setter__state__close_modal={fn_setter__state__close_modal} />
-      ),
+      comp: (fn_setter__state__close_modal) => <SignUp fn_setter__state__close_modal={fn_setter__state__close_modal} />,
     },
     {
       alt: "sign in",
       icon_cls: cls__icon_sign_in,
-      comp: (fn_setter__state__close_modal) => (
-        <SignIn fn_setter__state__close_modal={fn_setter__state__close_modal} />
-      ),
+      comp: (fn_setter__state__close_modal) => <SignIn fn_setter__state__close_modal={fn_setter__state__close_modal} />,
     },
   ],
 };
 
-const init_state__obj_is_occur_event__elem =
-  arr_sess_elems.state__sign_out.reduce((obj, t) => {
-    obj[t.alt] = false;
-    return obj;
-  }, {});
+const init_state__obj_is_occur_event__elem = arr_sess_elems.state__sign_out.reduce((obj, t) => {
+  obj[t.alt] = false;
+  return obj;
+}, {});
 
 const Comp_session__header = () => {
   /**
    * State
    */
-  const [g_state__ref_hashed_user, set_g_state__ref_hashed_user] =
-    useRecoilState(g_state__user);
-  const [g_state__is_valid_hashed, set_g_state__is_valid_hashed] =
-    useRecoilState(g_state__user_valid);
+  const [g_state__ref_hashed_user, set_g_state__ref_hashed_user] = useRecoilState(g_state__user);
+  const [g_state__is_valid_hashed, set_g_state__is_valid_hashed] = useRecoilState(g_state__user_valid);
 
-  const [state__obj_is_mouse_down__elem, set_state__obj_is_mouse_down__elem] =
-    useState(init_state__obj_is_occur_event__elem);
-  const [state__obj_is_click__elem, set_state__obj_is_click__elem] = useState(
-    init_state__obj_is_occur_event__elem
-  );
+  const [state__obj_is_mouse_down__elem, set_state__obj_is_mouse_down__elem] = useState(init_state__obj_is_occur_event__elem);
+  const [state__obj_is_click__elem, set_state__obj_is_click__elem] = useState(init_state__obj_is_occur_event__elem);
 
   const memo__is_sign_in = useMemo(
-    () =>
-      g_state__ref_hashed_user !== undefined &&
-      g_state__ref_hashed_user !== null,
+    () => g_state__ref_hashed_user !== undefined && g_state__ref_hashed_user !== null,
     [g_state__ref_hashed_user]
   );
 
@@ -87,8 +69,7 @@ const Comp_session__header = () => {
       [tg.getAttribute("name")]: true,
     });
 
-  const fn_setter__mouse_up__elem = () =>
-    set_state__obj_is_mouse_down__elem(init_state__obj_is_occur_event__elem);
+  const fn_setter__mouse_up__elem = () => set_state__obj_is_mouse_down__elem(init_state__obj_is_occur_event__elem);
 
   const fn_setter__state__click_elem = (tg) =>
     set_state__obj_is_click__elem({
@@ -143,9 +124,7 @@ const Comp_session__header = () => {
                   key={obj_elem.alt}
                   name={obj_elem.alt}
                   className={`sess_elem_box ${obj_elem.alt} ${
-                    state__obj_is_mouse_down__elem[obj_elem.alt]
-                      ? "state__mouse_down"
-                      : undefined
+                    state__obj_is_mouse_down__elem[obj_elem.alt] ? "state__mouse_down" : undefined
                   }`}
                   onMouseDown={fn_handler__mouse_down__icon}
                   onClick={() => fn_handler__click__sign_in_elems(obj_elem.alt)}
@@ -164,11 +143,7 @@ const Comp_session__header = () => {
                 <li
                   key={obj_elem.alt}
                   name={obj_elem.alt}
-                  className={`sess_elem_box ${
-                    state__obj_is_mouse_down__elem[obj_elem.alt]
-                      ? "state__mouse_down"
-                      : undefined
-                  }`}
+                  className={`sess_elem_box ${state__obj_is_mouse_down__elem[obj_elem.alt] ? "state__mouse_down" : undefined}`}
                   onMouseDown={fn_handler__mouse_down__icon}
                   onClick={fn_handler__click__elem}
                 >
