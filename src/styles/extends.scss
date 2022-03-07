@@ -83,6 +83,12 @@
     justify-content: center;
     align-items: flex-end;
   }
+  &.c-s-s {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
 }
 
 .no-select {

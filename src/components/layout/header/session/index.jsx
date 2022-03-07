@@ -2,19 +2,20 @@ import { useState } from "react";
 
 import CompModal from "components/reusable/_modal";
 import CompSignIn from "components/session/sign_in.jsx";
+import CompSignUp from "components/session/sign_up";
 
 const sign_out_state__session_items__arr = [
   {
     key: "sess_sign_in",
     icon: "",
     value: "로그인",
-    comp: () => <CompSignIn />,
+    comp: (_fn) => <CompSignIn prop__fn_set__close_modal__item={_fn} />,
   },
   {
     key: "sess_sign_up",
     icon: "",
     value: "회원가입",
-    comp: () => <></>,
+    comp: (_fn) => <CompSignUp prop__fn_set__close_modal__item={_fn} />,
   },
 ];
 
@@ -95,7 +96,7 @@ export default function CompSession() {
                 prop__cond__is_click_item__bool={state__is_click_item__obj[sess_item__obj.key]}
                 prop__fn_set__close_modal__item={fn_set__close_modal__item}
               >
-                {comp()}
+                {comp(fn_set__close_modal__item)}
               </CompModal>
             );
           })}

@@ -1,12 +1,7 @@
 import axios from "axios";
 import qs from "qs";
 
-import {
-  URL__AUTH__SIGN_UP,
-  URL__EXP__ADD_GROUP,
-  URL__EXP__ADD_DOC,
-  URL__DOC__ADD_ELEM,
-} from "../../config/api/post/endpoint";
+import { URL__AUTH__SIGN_UP, URL__EXP__ADD_GROUP, URL__EXP__ADD_DOC, URL__DOC__ADD_ELEM } from "../../config/api/post/endpoint";
 import {
   ERR_MSG__AUTH__SIGN_UP,
   ERR_MSG__EXP__ADD_GROUP,
@@ -14,18 +9,16 @@ import {
   ERR_MSG__DOC__ADD_ELEM,
 } from "../../config/api/post/message";
 
-export const fn_logic__POST__auth__sign_up = (
-  state__obj_sign_up_info,
-  fn_setter__success_sign_up
-) => {
-  console.log(state__obj_sign_up_info);
-
-  axios
+export const fn_logic__POST__auth__sign_up = (state__obj_sign_up_info) => {
+  return axios
     .post(URL__AUTH__SIGN_UP, qs.stringify(state__obj_sign_up_info))
     .then((res) => {
       if (res.status === 200 || res.status === 201) {
         console.log("RES:", res.data);
-        fn_setter__success_sign_up();
+        return true;
+      } else {
+        console.log("Unknown code");
+        return false;
       }
     })
     .catch((err) => {
