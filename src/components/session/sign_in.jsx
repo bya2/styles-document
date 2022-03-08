@@ -43,7 +43,11 @@ export default function CompSignIn({ prop__fn_set__close_modal__item }) {
       .then((res_data__obj) => {
         const { code } = res_data__obj;
         if (code === 200) {
-          set_g_state__ref_hashed_user(sessionStorage.getItem("ref_hashed_user"));
+          console.log(111);
+          set_g_state__ref_hashed_user({
+            ref_user_id: window.sessionStorage.getItem("ref_user_id"),
+            ref_hashed_user: window.sessionStorage.getItem("ref_hashed_user"),
+          });
           prop__fn_set__close_modal__item();
           navigator(state__sign_in_info__obj.id);
         }
