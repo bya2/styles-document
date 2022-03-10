@@ -202,7 +202,6 @@ export default function CompExplorer() {
       [e_curr_tg_name]: !state__is_fold__exp_l_tree_node__obj[e_curr_tg_name],
     });
 
-    // tmp click
     set_state__is_click__exp_l_tree_node__obj({
       ...init_state__cond__exp_l_tree_node__obj,
       [e_curr_tg_name]: true,
@@ -211,7 +210,7 @@ export default function CompExplorer() {
     e_curr_tg.addEventListener(
       "blur",
       () => {
-        set_state__is_active__exp_l_tree_node__obj({
+        set_state__is_click__exp_l_tree_node__obj({
           ...init_state__cond__exp_l_tree_node__obj,
         });
       },

@@ -247,6 +247,9 @@ main {
                     background-color: hsla(0, 0%, 100%, 0.05);
                   }
                   &.s-active::after {
+                    background-color: hsla(0, 0%, 100%, 0.1);
+                  }
+                  &.s-click::after {
                     border: 1px solid hsla(209, 100%, 69%, 1);
                     background-color: hsla(209, 100%, 69%, 0.2);
                   }
