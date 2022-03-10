@@ -1,9 +1,6 @@
 import "../../../../../../styles/main/aside/left/explorer/layer/index.scss";
 import { fn_logic__GET__exp__node_list } from "../../../../../../logic/api/get";
-import {
-  fn_logic__POST__exp__add_doc,
-  fn_logic__POST__exp__add_group,
-} from "../../../../../../logic/api/post";
+import { fn_logic__POST__exp__add_doc, fn_logic__POST__exp__add_group } from "../../../../../../logic/api/post";
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -31,9 +28,7 @@ const re_fn__sub_tree_layer = (
       obj_sub_tree_node={_obj_sub_tree_node}
       state__is_click__obj_p_node_boxes={_state__is_click__obj_p_node_boxes}
       state__is_active__obj_p_node_boxes={_state__is_active__obj_p_node_boxes}
-      state__is_fold_sub_tree__obj_p_group_nodes={
-        _state__is_fold_sub_tree__obj_p_group_node_ids
-      }
+      state__is_fold_sub_tree__obj_p_group_nodes={_state__is_fold_sub_tree__obj_p_group_node_ids}
       fn_setter__click_p_node_box={_fn_setter__click_p_node_box}
       fn_setter__blur_p_node_box={_fn_setter__blur_p_node_box}
       fn_setter__toggle_fold_sub_tree={_fn_setter__toggle_fold_sub_tree}
@@ -49,10 +44,7 @@ const re_fn__sub_tree_layer = (
             //   obj_child_node.type === "document" &&
             //     _state__is_active__obj_p_node_boxes[obj_child_node._id]
             // );
-            return (
-              obj_child_node.type === "document" &&
-              _state__is_active__obj_p_node_boxes[obj_child_node._id]
-            );
+            return obj_child_node.type === "document" && _state__is_active__obj_p_node_boxes[obj_child_node._id];
           })
           .includes(true) ? (
           <>
@@ -65,18 +57,8 @@ const re_fn__sub_tree_layer = (
                 placeholder="doc..."
                 disabled={_state__is_disabled__input}
                 ref={ref__doc_input}
-                onKeyDown={(e) =>
-                  _fn_handler__key_down__sub_tree_p_input_node(
-                    e,
-                    _obj_sub_tree_node._id.toString()
-                  )
-                }
-                onBlur={(e) =>
-                  _fn_handler__blur__sub_tree_p_input_node(
-                    e,
-                    _obj_sub_tree_node._id.toString()
-                  )
-                }
+                onKeyDown={(e) => _fn_handler__key_down__sub_tree_p_input_node(e, _obj_sub_tree_node._id.toString())}
+                onBlur={(e) => _fn_handler__blur__sub_tree_p_input_node(e, _obj_sub_tree_node._id.toString())}
                 // onFocus={() =>
                 //   console.log(
                 //     "포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스포커스"
@@ -93,18 +75,8 @@ const re_fn__sub_tree_layer = (
                 placeholder="grp..."
                 disabled={_state__is_disabled__input}
                 ref={ref__grp_input}
-                onKeyDown={(e) =>
-                  _fn_handler__key_down__sub_tree_p_input_node(
-                    e,
-                    _obj_sub_tree_node._id.toString()
-                  )
-                }
-                onBlur={(e) =>
-                  _fn_handler__blur__sub_tree_p_input_node(
-                    e,
-                    _obj_sub_tree_node._id.toString()
-                  )
-                }
+                onKeyDown={(e) => _fn_handler__key_down__sub_tree_p_input_node(e, _obj_sub_tree_node._id.toString())}
+                onBlur={(e) => _fn_handler__blur__sub_tree_p_input_node(e, _obj_sub_tree_node._id.toString())}
               />
             </li>
           </>
@@ -149,31 +121,23 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
    * State
    */
   const [state__arr_nodes, set_state__arr_nodes] = useState([]);
-  const [init_bool_state__obj_node_ids, set_init_bool_state__obj_node_ids] =
-    useState({});
-  const [
-    init_bool_state__obj_group_node_ids,
-    set_init_bool_state__obj_group_node_ids,
-  ] = useState({});
+  const [init_bool_state__obj_node_ids, set_init_bool_state__obj_node_ids] = useState({});
+  const [init_bool_state__obj_group_node_ids, set_init_bool_state__obj_group_node_ids] = useState({});
   const [state__arr_sub_trees, set_state__arr_sub_trees] = useState([]);
 
   // 클릭한 서브 트리의 메인(부모) 노드
-  const [state__is_click__obj_node_ids, set_state__is_click__obj_node_ids] =
-    useState(init_bool_state__obj_node_ids);
+  const [state__is_click__obj_node_ids, set_state__is_click__obj_node_ids] = useState(init_bool_state__obj_node_ids);
 
   // 활성화한 서브 트리의 메인(부모) 노드
   // INPUT 컴포넌트의 위치인 메인 노드
-  const [state__is_active__obj_node_ids, set_state__is_active__obj_node_ids] =
-    useState(init_bool_state__obj_node_ids);
+  const [state__is_active__obj_node_ids, set_state__is_active__obj_node_ids] = useState(init_bool_state__obj_node_ids);
 
   // 폴드된 서브 트리 (부모 노드 아이디 기준)
-  const [
-    state__is_fold_sub_tree__obj_p_group_node_ids,
-    set_state__is_fold_sub_tree__obj_p_group_node_ids,
-  ] = useState(init_bool_state__obj_group_node_ids);
+  const [state__is_fold_sub_tree__obj_p_group_node_ids, set_state__is_fold_sub_tree__obj_p_group_node_ids] = useState(
+    init_bool_state__obj_group_node_ids
+  );
 
-  const [state__is_disabled__input, set_state__is_disabled__input] =
-    useState(false);
+  const [state__is_disabled__input, set_state__is_disabled__input] = useState(false);
 
   const [state__obj_new_node, set_state__obj_new_node] = useState(null);
 
@@ -196,13 +160,9 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
     //   init_bool_state__obj_group_node_ids
     // );
 
-    const arr_prev_keys = Object.keys(
-      state__is_fold_sub_tree__obj_p_group_node_ids
-    );
+    const arr_prev_keys = Object.keys(state__is_fold_sub_tree__obj_p_group_node_ids);
     const arr_curr_keys = Object.keys(init_bool_state__obj_group_node_ids);
-    const diff_key = arr_curr_keys.filter(
-      (el) => !arr_prev_keys.includes(el)
-    )[0]; // modify
+    const diff_key = arr_curr_keys.filter((el) => !arr_prev_keys.includes(el))[0]; // modify
 
     set_state__is_fold_sub_tree__obj_p_group_node_ids({
       ...state__is_fold_sub_tree__obj_p_group_node_ids,
@@ -231,11 +191,7 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
   const fn_setter__toggle_fold_sub_tree = (e_curr_tg_name) => {
     set_state__is_fold_sub_tree__obj_p_group_node_ids({
       ...state__is_fold_sub_tree__obj_p_group_node_ids,
-      [e_curr_tg_name]: state__is_fold_sub_tree__obj_p_group_node_ids[
-        e_curr_tg_name
-      ]
-        ? false
-        : true,
+      [e_curr_tg_name]: state__is_fold_sub_tree__obj_p_group_node_ids[e_curr_tg_name] ? false : true,
     });
   };
 
@@ -250,9 +206,7 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
         set_state__arr_nodes(data || []);
       })
       .catch((err) => {
-        console.error(
-          `ERR:\nlocation: /src/components/main/aside/left/explorer/layer/index.jsx\n${err}`
-        );
+        console.error(`ERR:\nlocation: /src/components/main/aside/left/explorer/layer/index.jsx\n${err}`);
       });
   }, []);
 
@@ -273,24 +227,15 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
       const arr_node_children = [...obj_node_id_children[_id]];
 
       arr_node_children.sort((prev_obj, next_obj) =>
-        prev_obj.name > next_obj.name
-          ? 1
-          : next_obj.name > prev_obj.name
-          ? -1
-          : 0
+        prev_obj.name > next_obj.name ? 1 : next_obj.name > prev_obj.name ? -1 : 0
       );
 
       arr_node_children.sort((prev_obj, next_obj) =>
-        prev_obj.type > next_obj.type
-          ? -1
-          : next_obj.type > prev_obj.type
-          ? 1
-          : 0
+        prev_obj.type > next_obj.type ? -1 : next_obj.type > prev_obj.type ? 1 : 0
       );
 
       for (const obj_c_node of arr_node_children) {
-        if (obj_c_node.type === "document" || obj_c_node.children.length === 0)
-          continue;
+        if (obj_c_node.type === "document" || obj_c_node.children.length === 0) continue;
         obj_c_node.children = re_fn__arr_sub_trees(obj_c_node._id.toString());
       }
       return arr_node_children;
@@ -309,9 +254,7 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
     };
 
     set_init_bool_state__obj_node_ids(init_bool_state__obj_node_ids);
-    set_init_bool_state__obj_group_node_ids(
-      init_bool_state__obj_node_ids("group")
-    );
+    set_init_bool_state__obj_group_node_ids(init_bool_state__obj_node_ids("group"));
   }, [state__arr_nodes]);
 
   useEffect(() => {
@@ -352,56 +295,42 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
       fn_logic__POST__exp__add_doc(req_data__obj_params)
         .then((obj_data) => {
           if (obj_data) {
-            const idx__p_node = state__arr_nodes.findIndex(
-              (obj_node) =>
-                obj_node._id.toString() === obj_data.parent.toString()
-            );
+            const idx__p_node = state__arr_nodes.findIndex((obj_node) => obj_node._id.toString() === obj_data.parent.toString());
 
-            const adding_arr_nodes = [...state__arr_nodes, obj_data].map(
-              (obj_node, i) => {
-                if (i === idx__p_node) {
-                  obj_node.children = [...obj_node.children, obj_data];
-                  console.log("CHILDREN:", obj_node.children);
-                }
-                return obj_node;
+            const adding_arr_nodes = [...state__arr_nodes, obj_data].map((obj_node, i) => {
+              if (i === idx__p_node) {
+                obj_node.children = [...obj_node.children, obj_data];
+                console.log("CHILDREN:", obj_node.children);
               }
-            );
+              return obj_node;
+            });
             set_state__arr_nodes(adding_arr_nodes);
             set_state__obj_new_node(obj_data);
           }
         })
         .catch((err) => {
-          console.log(
-            "comp_explorer_layer - fn_inner_handler__sub_tree_p_input_node"
-          );
+          console.log("comp_explorer_layer - fn_inner_handler__sub_tree_p_input_node");
           console.error(err);
         });
     } else {
       fn_logic__POST__exp__add_group(req_data__obj_params)
         .then((obj_data) => {
           if (obj_data) {
-            const idx__p_node = state__arr_nodes.findIndex(
-              (obj_node) =>
-                obj_node._id.toString() === obj_data.parent.toString()
-            );
+            const idx__p_node = state__arr_nodes.findIndex((obj_node) => obj_node._id.toString() === obj_data.parent.toString());
 
-            const adding_arr_nodes = [...state__arr_nodes, obj_data].map(
-              (obj_node, i) => {
-                if (i === idx__p_node) {
-                  obj_node.children = [...obj_node.children, obj_data];
-                  console.log("CHILDREN:", obj_node.children);
-                }
-                return obj_node;
+            const adding_arr_nodes = [...state__arr_nodes, obj_data].map((obj_node, i) => {
+              if (i === idx__p_node) {
+                obj_node.children = [...obj_node.children, obj_data];
+                console.log("CHILDREN:", obj_node.children);
               }
-            );
+              return obj_node;
+            });
             set_state__arr_nodes(adding_arr_nodes);
             set_state__obj_new_node(obj_data);
           }
         })
         .catch((err) => {
-          console.log(
-            "comp_explorer_layer - fn_inner_handler__sub_tree_p_input_node"
-          );
+          console.log("comp_explorer_layer - fn_inner_handler__sub_tree_p_input_node");
           console.error(err);
         });
     }
@@ -452,8 +381,7 @@ const Comp_explorer_layer = ({ state__is_click__root }) => {
 
       {
         // state__is_click__root ||
-        state__is_active__obj_node_ids &&
-        !Object.values(state__is_active__obj_node_ids).includes(true) ? (
+        state__is_active__obj_node_ids && !Object.values(state__is_active__obj_node_ids).includes(true) ? (
           <>
             <li className="box p_node input ">
               <i className="icon">d</i>

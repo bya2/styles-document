@@ -14,12 +14,8 @@ import {
 } from "../../config/api/get/message";
 
 export const fn_logic__GET__auth__validation = () => {
-  const sess_strg__ref_hashed_user =
-    window.sessionStorage.getItem("ref_hashed_user");
-  if (
-    sess_strg__ref_hashed_user === undefined ||
-    sess_strg__ref_hashed_user === null
-  ) {
+  const sess_strg__ref_hashed_user = window.sessionStorage.getItem("ref_hashed_user");
+  if (sess_strg__ref_hashed_user === undefined || sess_strg__ref_hashed_user === null) {
     return false;
   }
 
@@ -98,6 +94,33 @@ export const fn_logic__GET__auth__sign_in = (state__obj_sign_in_info) => {
     });
 };
 
+export const fn_logic__GET__exp__nodes = (_id = "bya2") => {
+  console.log("fn_logic__GET__exp__nodes");
+  return axios
+    .get(URL__EXP__NODE_LIST, {
+      params: {
+        id: _id,
+      },
+    })
+    .then((res) => {
+      const { status, data } = res;
+      if (status !== 200) throw Error({ status, headers: null, data: null });
+      return data;
+    })
+    .catch((err) => {
+      console.log("ERR!\nLoc:logic/api/get.js (fn_logic__GET__exp__nodes)");
+      console.error(err);
+      if (err.response) {
+        const res = err.response;
+        const { status, headers, data } = res;
+        console.log(status);
+        console.log(headers);
+        return data;
+      }
+      return null;
+    });
+};
+
 export const fn_logic__GET__exp__node_list = (_id = "bya2") => {
   const ref = sessionStorage.getItem("ref_hashed_user");
 
@@ -138,10 +161,7 @@ export const fn_logic__GET__doc__elem_list = (_obj_data) => {
     })
     .then((res) => {
       const { status, data } = res;
-      if (status !== data.code)
-        throw Error(
-          `상태 코드와 응답 코드 불일치: ${{ status, code: data.code }}`
-        );
+      if (status !== data.code) throw Error(`상태 코드와 응답 코드 불일치: ${{ status, code: data.code }}`);
 
       switch (status) {
         case 200:

@@ -71,7 +71,6 @@ const dummy_data__node_list = [
 router.get("/node_list", (req, res) => {
   console.log("res... (node_list)");
 
-  // const params = req.params;
   const queries = req.query;
   const { id } = queries;
 
@@ -79,13 +78,14 @@ router.get("/node_list", (req, res) => {
   // console.log("queries:", queries);
 
   fn_service__GET__exp__node_list(id)
-    .then((arr_data) => {
+    .then((results__arr) => {
       // console.log("DATA:", arr_data);
 
-      if (arr_data.length === 0) {
+      if (results__arr.length === 0) {
+        console.log("no resutls (node_list)");
         res.json(dummy_data__node_list);
       } else {
-        res.json(arr_data);
+        res.json(results__arr);
       }
     })
     .catch((err) => {
