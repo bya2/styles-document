@@ -17,6 +17,7 @@ function CompInput(
     onKeyDown,
     onFocus,
     onBlur,
+    onClick,
   },
   ref
 ) {
@@ -37,6 +38,7 @@ function CompInput(
       onKeyDown={onKeyDown}
       onFocus={onFocus}
       onBlur={onBlur}
+      onClick={onClick}
       ref={ref}
     />
   );

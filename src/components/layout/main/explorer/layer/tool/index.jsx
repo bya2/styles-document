@@ -49,7 +49,7 @@ export default function CompExpTool() {
 
         switch (e_curr_tg_name) {
           case "new document":
-            console.log(ref__n_doc_input);
+            console.log(ref__n_doc_input.current.getAttribute("name"));
             ref__n_doc_input.current.focus();
             break;
           case "new folder":

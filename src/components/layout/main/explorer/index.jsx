@@ -142,15 +142,19 @@ export default function CompExplorer() {
           };
 
           init_state__cond__exp_l_tree_node__obj = {
+            [init_state__exp_roots__arr[i].key]: false,
             ...init_state__cond__exp_l_tree_node__obj,
             ...init_state__cond__tree__obj(),
           };
 
           init_state__cond__exp_l_tree_fold_node__obj = {
+            [init_state__exp_roots__arr[i].key]: false,
             ...init_state__cond__exp_l_tree_fold_node__obj,
             ...init_state__cond__tree__obj("group"),
           };
         }
+
+        console.log(init_state__cond__exp_l_tree_node__obj);
 
         set_state__exp_layers__arr(init_state__exp_layers__arr);
 
@@ -188,6 +192,7 @@ export default function CompExplorer() {
   };
 
   const fn_handle__click__exp_l_tree_node = (e, root_id) => {
+    e.stopPropagation();
     // Fold, Active
     const e_curr_tg = e.currentTarget;
     const e_curr_tg_name = e_curr_tg.getAttribute("name");
@@ -218,6 +223,31 @@ export default function CompExplorer() {
     );
   };
 
+  const fn_handle__click__exp_any_layer = (e) => {
+    e.stopPropagation();
+    const e_curr_tg = e.currentTarget;
+    const e_curr_tg_name = e_curr_tg.getAttribute("name");
+    set_state__is_active__exp_l_tree_node__obj({
+      ...init_state__cond__exp_l_tree_node__obj,
+      [e_curr_tg_name]: true,
+    });
+
+    set_state__is_click__exp_l_tree_node__obj({
+      ...init_state__cond__exp_l_tree_node__obj,
+      [e_curr_tg_name]: true,
+    });
+
+    e_curr_tg.addEventListener(
+      "blur",
+      () => {
+        set_state__is_click__exp_l_tree_node__obj({
+          ...init_state__cond__exp_l_tree_node__obj,
+        });
+      },
+      { once: true }
+    );
+  };
+
   return (
     <article className="comp explorer">
       <ul className="item-list">
@@ -226,12 +256,12 @@ export default function CompExplorer() {
             const { key, name, nodes } = item__obj;
             const cond__is_usr_exp_layer__bool = name === ref_user_id;
             const cond__is_click__exp_l_root__bool = state__is_click__exp_l_root__obj[name] === true;
-            console.log(name);
 
             return (
               <li key={key} className="item">
                 <ExplorerContext.Provider
                   value={{
+                    layer__key: key,
                     param__id: name,
                     nodes__arr: nodes,
                     cond__is_usr_exp_layer__bool,
@@ -242,6 +272,7 @@ export default function CompExplorer() {
                     fn_handle__click__exp_l_root,
                     fn_handle__focus__exp_l_tree_node,
                     fn_handle__click__exp_l_tree_node,
+                    fn_handle__click__exp_any_layer,
                     ref__n_doc_input,
                     ref__n_fold_input,
                   }}

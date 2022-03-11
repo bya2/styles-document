@@ -78,7 +78,7 @@ main {
 
           &.s-click-root {
             .comp.exp-l-root {
-              box-shadow: 0 0 0 1px red;
+              box-shadow: inset 0 0 0 1px red;
 
               & .desc .icon-box {
                 transform: rotate(90deg);
@@ -215,14 +215,47 @@ main {
 
           &.node.outer {
             &.s-click {
-              border: 1px solid blue;
-              // box-shadow: 0 0 0 1px blue;
+              // border: 1px solid blue;
+              box-shadow: inset 0 0 0 1px hsla(209, 100%, 69%, 1);
             }
           }
 
           & > .inner {
             & > .desc {
             }
+          }
+
+          .item.input {
+            opacity: 1;
+
+            .group.desc {
+              padding: 2px;
+              // height: 16px;
+              .content-box {
+                height: 100%;
+                input {
+                  width: 100%;
+                  height: 100%;
+                  outline: none;
+                  border: 1px solid hsla(209, 100%, 69%, 1);
+                  background-color: hsla(0, 0%, 30%, 0.5);
+                  padding: 0;
+                  font-size: 1rem;
+                  color: white;
+                }
+              }
+            }
+
+            // &.s-not-focus {
+            //   display: none;
+            // }
+
+            // &:not(:focus-within) {
+            //   position: absolute;
+            //   opacity: 0;
+            //   width: 0;
+            //   height: 0;
+            // }
           }
         }
 
@@ -285,6 +318,7 @@ main {
                   // text-indent: 8px;
                   @extend .f-box.r-s-c;
                   &.desc {
+                    width: 100%;
                     z-index: 10;
                     & > .icon-box {
                       $size-icon: 16px;
@@ -301,6 +335,7 @@ main {
                       }
                     }
                     & > .content-box {
+                      width: 100%;
                       padding-left: 4px;
                       color: white;
                       font-size: 0.75em;

@@ -1,5 +1,7 @@
 import { ExplorerContext } from "context/explorer";
 import { useContext } from "react";
+import CompRefInput from "components/reusable/_ref_input";
+import CompInputNode from "./input_node";
 
 function CompTreeNode({ prop__node_id, prop__node_type, prop__node_name }) {
   const {
@@ -30,7 +32,7 @@ function CompTreeNode({ prop__node_id, prop__node_type, prop__node_name }) {
           </div>
         ) : null}
         <div className="icon-box type">
-          <i className={`icon ${1}${state__is_fold__exp_l_tree_node__obj ? "s-fold" : ""}`}>
+          <i className={`icon ${1}${state__is_fold__exp_l_tree_node__obj ? " s-fold" : ""}`}>
             {cond__is_folder__bool ? "F" : "D"}
           </i>
         </div>
@@ -50,13 +52,22 @@ function CompTreeNode({ prop__node_id, prop__node_type, prop__node_name }) {
   );
 }
 
-function CompTreeChildren({ prop__node_id, prop__node_parent_id, prop__node_children }) {
-  const { state__is_fold__exp_l_tree_node__obj } = useContext(ExplorerContext);
+function CompTreeChildren({ prop__node_id, prop__node_name, prop__node_type, prop__node_parent_id, prop__node_children }) {
+  const { state__is_active__exp_l_tree_node__obj, state__is_fold__exp_l_tree_node__obj, ref__n_doc_input, ref__n_fold_input } =
+    useContext(ExplorerContext);
+
+  const cond__is_folder__bool = prop__node_type === "group";
+  console.log(ref__n_doc_input);
+
   return (
     <div className={`area children${state__is_fold__exp_l_tree_node__obj[prop__node_id] ? " s-fold" : " s-unfold"}`}>
       <span className="group list">
         <ul className="item-list">
           <>
+            {cond__is_folder__bool && state__is_active__exp_l_tree_node__obj[prop__node_id] ? (
+              <CompInputNode prop__input_type={"folder"} />
+            ) : null}
+
             {prop__node_children !== null
               ? prop__node_children.map((child_node__obj) => {
                   const { _id, type, name, parent, children } = child_node__obj;
@@ -74,6 +85,10 @@ function CompTreeChildren({ prop__node_id, prop__node_parent_id, prop__node_chil
                   );
                 })
               : null}
+
+            {cond__is_folder__bool && state__is_active__exp_l_tree_node__obj[prop__node_id] ? (
+              <CompInputNode prop__input_type={"document"} />
+            ) : null}
           </>
         </ul>
       </span>
@@ -94,6 +109,8 @@ export default function CompExpLSubTree({
         <CompTreeNode prop__node_id={prop__node_id} prop__node_type={prop__node_type} prop__node_name={prop__node_name} />
         <CompTreeChildren
           prop__node_id={prop__node_id}
+          prop__node_type={prop__node_type}
+          prop__node_name={prop__node_name}
           prop__node_parent_id={prop__node_parent_id}
           prop__node_children={prop__node_children}
         />

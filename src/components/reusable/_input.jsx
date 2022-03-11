@@ -14,6 +14,7 @@ export default function CompInput({
   onKeyDown,
   onFocus,
   onBlur,
+  onClick,
 }) {
   return (
     <input
@@ -32,6 +33,7 @@ export default function CompInput({
       onKeyDown={onKeyDown}
       onFocus={onFocus}
       onBlur={onBlur}
+      onClick={onClick}
     />
   );
 }
