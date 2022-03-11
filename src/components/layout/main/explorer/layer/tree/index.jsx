@@ -14,8 +14,6 @@ export default function CompExpLTree() {
     state__is_click__exp_l_tree_node__obj,
     cond__is_usr_exp_layer__bool,
     fn_handle__click__exp_any_layer,
-    ref__n_doc_input,
-    ref__n_fold_input,
   } = useContext(ExplorerContext);
 
   return (

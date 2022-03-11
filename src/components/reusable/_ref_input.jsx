@@ -9,6 +9,7 @@ function CompInput(
     placeholder,
     disabled,
     value,
+    style,
     autoFocus,
     autoComplete,
     tabIndex,
@@ -39,6 +40,7 @@ function CompInput(
       onFocus={onFocus}
       onBlur={onBlur}
       onClick={onClick}
+      style={style}
       ref={ref}
     />
   );

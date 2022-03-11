@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { g_state__user } from "recoil/atoms";
@@ -15,8 +15,8 @@ export default function CompExplorer() {
   // Param
   const { id: param__id } = useParams();
 
-  const ref__n_doc_input = useRef(null);
-  const ref__n_fold_input = useRef(null);
+  const ref__n_doc_input = useRef();
+  const ref__n_fold_input = useRef();
 
   // Global State
   const [g_state__user__obj, set_g_state__user__obj] = useRecoilState(g_state__user);
@@ -38,7 +38,8 @@ export default function CompExplorer() {
   // const [state__is_active__exp_l_tree__obj, set_state__is_active__exp_l_tree__obj] = useState({});
 
   // Cache
-  // const cb_fn = useCallback(() => {}, []);
+  const memo__n_doc_input = useMemo(() => ref__n_doc_input, [ref__n_doc_input]);
+  const memo__n_fold_input = useMemo(() => ref__n_fold_input, [ref__n_fold_input]);
 
   // Side
   useEffect(() => {
@@ -275,6 +276,8 @@ export default function CompExplorer() {
                     fn_handle__click__exp_any_layer,
                     ref__n_doc_input,
                     ref__n_fold_input,
+                    memo__n_doc_input,
+                    memo__n_fold_input,
                   }}
                 >
                   <CompExpLayer />

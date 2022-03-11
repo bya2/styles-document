@@ -27,8 +27,14 @@ const init_state__cond__obj = tool_items__arr.reduce((obj, item__obj) => {
 
 export default function CompExpTool() {
   // Context
-  const { cond__is_usr_exp_layer__bool, cond__is_click__exp_l_root__bool, ref__n_doc_input, ref__n_fold_input } =
-    useContext(ExplorerContext);
+  const {
+    cond__is_usr_exp_layer__bool,
+    cond__is_click__exp_l_root__bool,
+    ref__n_doc_input,
+    ref__n_fold_input,
+    memo__n_doc_input,
+    memo__n_fold_input,
+  } = useContext(ExplorerContext);
 
   // Local State
   const [state__is_click_tool_item__obj, set_state__is_click_tool_item__obj] = useState(init_state__cond__obj);
@@ -49,7 +55,6 @@ export default function CompExpTool() {
 
         switch (e_curr_tg_name) {
           case "new document":
-            console.log(ref__n_doc_input.current.getAttribute("name"));
             ref__n_doc_input.current.focus();
             break;
           case "new folder":

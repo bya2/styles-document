@@ -52,12 +52,12 @@ function CompTreeNode({ prop__node_id, prop__node_type, prop__node_name }) {
   );
 }
 
-function CompTreeChildren({ prop__node_id, prop__node_name, prop__node_type, prop__node_parent_id, prop__node_children }) {
-  const { state__is_active__exp_l_tree_node__obj, state__is_fold__exp_l_tree_node__obj, ref__n_doc_input, ref__n_fold_input } =
-    useContext(ExplorerContext);
+function CompTreeChildren({ prop__node_id, prop__node_type, prop__node_children }) {
+  const { state__is_active__exp_l_tree_node__obj, state__is_fold__exp_l_tree_node__obj } = useContext(ExplorerContext);
 
   const cond__is_folder__bool = prop__node_type === "group";
-  console.log(ref__n_doc_input);
+
+  console.log(state__is_active__exp_l_tree_node__obj);
 
   return (
     <div className={`area children${state__is_fold__exp_l_tree_node__obj[prop__node_id] ? " s-fold" : " s-unfold"}`}>
