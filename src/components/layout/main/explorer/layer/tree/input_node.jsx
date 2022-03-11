@@ -23,7 +23,7 @@ export default function CompInputNode({ prop__input_type }) {
           <div className="area node">
             <span className="group desc">
               <div className="icon-box type">
-                <i className={`icon ${1}`}>{"F"}</i>
+                <i className={`icon ${1}`}>{cond__is_folder__bool ? "F" : "D"}</i>
               </div>
               <div className="content-box">
                 <CompRefInput

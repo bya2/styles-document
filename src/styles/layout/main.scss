@@ -250,12 +250,12 @@ main {
             //   display: none;
             // }
 
-            // &:not(:focus-within) {
-            //   position: absolute;
-            //   opacity: 0;
-            //   width: 0;
-            //   height: 0;
-            // }
+            &:not(:focus-within) {
+              position: absolute;
+              opacity: 0;
+              width: 0;
+              height: 0;
+            }
           }
         }
 

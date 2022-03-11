@@ -37,10 +37,6 @@ export default function CompExplorer() {
   const [state__is_click__exp_l_tree_node__arr, set_state__is_click__exp_l_trees__arr] = useState({}); // tmp
   // const [state__is_active__exp_l_tree__obj, set_state__is_active__exp_l_tree__obj] = useState({});
 
-  // Cache
-  const memo__n_doc_input = useMemo(() => ref__n_doc_input, [ref__n_doc_input]);
-  const memo__n_fold_input = useMemo(() => ref__n_fold_input, [ref__n_fold_input]);
-
   // Side
   useEffect(() => {
     // 탐색기 ROOT 객체 리스트 상태 저장
@@ -194,6 +190,7 @@ export default function CompExplorer() {
 
   const fn_handle__click__exp_l_tree_node = (e, root_id) => {
     e.stopPropagation();
+
     // Fold, Active
     const e_curr_tg = e.currentTarget;
     const e_curr_tg_name = e_curr_tg.getAttribute("name");
@@ -249,6 +246,23 @@ export default function CompExplorer() {
     );
   };
 
+  const fn_logic__fold__close_folder = (e_curr_tg_name) => {
+    set_state__is_active__exp_l_tree_node__obj({
+      ...init_state__cond__exp_l_tree_node__obj,
+      [e_curr_tg_name]: true,
+    });
+
+    set_state__is_fold__exp_l_tree_node__obj({
+      ...state__is_fold__exp_l_tree_node__obj,
+      [e_curr_tg_name]: true,
+    });
+
+    set_state__is_click__exp_l_tree_node__obj({
+      ...init_state__cond__exp_l_tree_node__obj,
+      [e_curr_tg_name]: true,
+    });
+  };
+
   return (
     <article className="comp explorer">
       <ul className="item-list">
@@ -274,10 +288,9 @@ export default function CompExplorer() {
                     fn_handle__focus__exp_l_tree_node,
                     fn_handle__click__exp_l_tree_node,
                     fn_handle__click__exp_any_layer,
+                    fn_logic__fold__close_folder,
                     ref__n_doc_input,
                     ref__n_fold_input,
-                    memo__n_doc_input,
-                    memo__n_fold_input,
                   }}
                 >
                   <CompExpLayer />
