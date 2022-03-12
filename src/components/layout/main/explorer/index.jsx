@@ -166,8 +166,9 @@ export default function CompExplorer() {
           }, []);
         }
 
-        set_state__exp_layers__arr(init_state__exp_layers__arr);
+        console.log(init_state__exp_layers__arr);
 
+        set_state__exp_layers__arr(init_state__exp_layers__arr);
         set_init_state__cond__exp_l_tree_node__obj(init_state__cond__exp_l_tree_node__obj);
         set_init_state__cond__exp_l_tree_fold_node__obj(init_state__cond__exp_l_tree_fold_node__obj);
         set_state__is_active__exp_l_tree_node__obj(init_state__cond__exp_l_tree_node__obj);
@@ -180,6 +181,7 @@ export default function CompExplorer() {
         console.error(err);
       });
   }, [g_state__user__obj]);
+  // const fn_set__at_add_node = () => {};
 
   // Event
   const fn_handle__click__exp_l_root = (e) => {

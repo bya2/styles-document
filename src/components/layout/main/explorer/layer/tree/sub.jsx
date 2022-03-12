@@ -1,5 +1,6 @@
 import { ExplorerContext } from "context/explorer";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import CompRefInput from "components/reusable/_ref_input";
 import CompInputNode from "./input_node";
 
@@ -31,14 +32,29 @@ function CompTreeNode({ prop__node_id, prop__node_type, prop__node_name }) {
             <i className={`icon ${1}`}>{">"}</i>
           </div>
         ) : null}
-        <div className="icon-box type">
-          <i className={`icon ${1}${state__is_fold__exp_l_tree_node__obj ? " s-fold" : ""}`}>
-            {cond__is_folder__bool ? "F" : "D"}
-          </i>
-        </div>
-        <div className="content-box">
-          <span>{prop__node_name}</span>
-        </div>
+        {cond__is_folder__bool ? (
+          <>
+            <div className="icon-box type">
+              <i className={`icon ${1}${state__is_fold__exp_l_tree_node__obj ? " s-fold" : ""}`}>
+                {cond__is_folder__bool ? "F" : "D"}
+              </i>
+            </div>
+            <div className="content-box">
+              <span>{prop__node_name}</span>
+            </div>
+          </>
+        ) : (
+          <Link to={prop__node_name}>
+            <div className="icon-box type">
+              <i className={`icon ${1}${state__is_fold__exp_l_tree_node__obj ? " s-fold" : ""}`}>
+                {cond__is_folder__bool ? "F" : "D"}
+              </i>
+            </div>
+            <div className="content-box">
+              <span>{prop__node_name}</span>
+            </div>
+          </Link>
+        )}
       </span>
       <span className="group tool">
         <div className="icon-box">

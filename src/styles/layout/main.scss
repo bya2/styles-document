@@ -337,8 +337,33 @@ main {
                     & > .content-box {
                       width: 100%;
                       padding-left: 4px;
-                      color: white;
+                      color: hsl(120, 100%, 75%);
                       font-size: 0.75em;
+                    }
+                    & > a {
+                      width: 100%;
+                      @extend .f-box.r-s-c;
+                      text-decoration: none;
+                      & > .icon-box {
+                        $size-icon: 16px;
+                        width: $size-icon;
+                        height: $size-icon;
+                        box-shadow: 0 0 0 1px gray;
+                        @extend .f-box.r-c-c;
+                        color: hsl(0, 0%, 80%);
+                        font-size: 0.75em;
+
+                        &.fold {
+                          position: absolute;
+                          left: -2px;
+                        }
+                      }
+                      & > .content-box {
+                        width: 100%;
+                        padding-left: 4px;
+                        color: white;
+                        font-size: 0.75em;
+                      }
                     }
                   }
                   &.tool {

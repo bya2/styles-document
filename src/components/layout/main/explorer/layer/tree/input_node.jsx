@@ -39,7 +39,7 @@ export default function CompInputNode({ prop__node_id, prop__input_type, prop__n
     }
   };
 
-  const fn_valid__input_val__bool = (e_tg_val__curr) => {
+  const fn_cond__valid__input_val = (e_tg_val__curr) => {
     const is_no__input_val__bool = e_tg_val__curr === "" || e_tg_val__curr.length === 0;
     let is_duplicated_name__bool;
     if (is_folder__type__bool) {
@@ -85,7 +85,6 @@ export default function CompInputNode({ prop__node_id, prop__input_type, prop__n
   const fn_handle__change__input_value = (e) => {
     const e_tg_val__curr = e.currentTarget.value;
     set_state__input_value__str(e_tg_val__curr);
-    console.log(state__input_value__str);
   };
 
   const fn_handle__key_down_and_blur__input_node = (e) => {
@@ -97,7 +96,6 @@ export default function CompInputNode({ prop__node_id, prop__input_type, prop__n
     if (e.keyCode) {
       const e_key = e.keyCode || e.key;
       const is_enter__key__bool = e_key === 13;
-      console.log(is_enter__key__bool);
       if (!is_enter__key__bool) return;
     }
 
@@ -107,7 +105,7 @@ export default function CompInputNode({ prop__node_id, prop__input_type, prop__n
     // - request (import)
     // - change explorer nodes state (context)
     // - init input value state (curr)
-    const is_valid__input_val__bool = fn_valid__input_val__bool(e_tg_val__curr);
+    const is_valid__input_val__bool = fn_cond__valid__input_val(e_tg_val__curr);
     if (!is_valid__input_val__bool) return;
 
     fn_set__add__node(e_tg__curr);
