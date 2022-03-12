@@ -27,7 +27,9 @@ export default function CompExpLTree() {
       <span className="inner">
         <ul className="item-list">
           <>
-            {state__is_active__exp_l_tree_node__obj[layer__key] ? <CompInputNode prop__input_type={"folder"} /> : null}
+            {state__is_active__exp_l_tree_node__obj[layer__key] ? (
+              <CompInputNode prop__node_id={null} prop__input_type={"folder"} prop__node_children={nodes__arr} />
+            ) : null}
 
             {nodes__arr.map((node__obj) => {
               const { _id, type, name, parent, children } = node__obj;
@@ -46,7 +48,9 @@ export default function CompExpLTree() {
               );
             })}
 
-            {state__is_active__exp_l_tree_node__obj[layer__key] ? <CompInputNode prop__input_type={"document"} /> : null}
+            {state__is_active__exp_l_tree_node__obj[layer__key] ? (
+              <CompInputNode prop__node_id={null} prop__input_type={"document"} prop__node_children={nodes__arr} />
+            ) : null}
           </>
         </ul>
       </span>

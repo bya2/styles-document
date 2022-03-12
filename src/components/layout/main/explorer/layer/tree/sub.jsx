@@ -13,7 +13,7 @@ function CompTreeNode({ prop__node_id, prop__node_type, prop__node_name }) {
     fn_handle__click__exp_l_tree_node,
   } = useContext(ExplorerContext);
 
-  const cond__is_folder__bool = prop__node_type === "group";
+  const cond__is_folder__bool = prop__node_type === "folder";
 
   return (
     <div
@@ -55,7 +55,7 @@ function CompTreeNode({ prop__node_id, prop__node_type, prop__node_name }) {
 function CompTreeChildren({ prop__node_id, prop__node_type, prop__node_children }) {
   const { state__is_active__exp_l_tree_node__obj, state__is_fold__exp_l_tree_node__obj } = useContext(ExplorerContext);
 
-  const cond__is_folder__bool = prop__node_type === "group";
+  const cond__is_folder__bool = prop__node_type === "folder";
 
   return (
     <div className={`area children${state__is_fold__exp_l_tree_node__obj[prop__node_id] ? " s-fold" : " s-unfold"}`}>
@@ -63,13 +63,18 @@ function CompTreeChildren({ prop__node_id, prop__node_type, prop__node_children 
         <ul className="item-list">
           <>
             {cond__is_folder__bool && state__is_active__exp_l_tree_node__obj[prop__node_id] ? (
-              <CompInputNode prop__input_type={"folder"} prop__node_children={prop__node_children} />
+              <CompInputNode
+                prop__input_type={"folder"}
+                prop__node_id={prop__node_id}
+                prop__node_children={prop__node_children}
+              />
             ) : null}
 
             {prop__node_children !== null
               ? prop__node_children.map((child_node__obj) => {
                   const { _id, type, name, parent, children } = child_node__obj;
                   const key = _id.toString();
+
                   return (
                     <li key={key} className="item">
                       <CompExpLSubTree
@@ -85,7 +90,11 @@ function CompTreeChildren({ prop__node_id, prop__node_type, prop__node_children 
               : null}
 
             {cond__is_folder__bool && state__is_active__exp_l_tree_node__obj[prop__node_id] ? (
-              <CompInputNode prop__input_type={"document"} prop__node_children={prop__node_children} />
+              <CompInputNode
+                prop__input_type={"document"}
+                prop__node_id={prop__node_id}
+                prop__node_children={prop__node_children}
+              />
             ) : null}
           </>
         </ul>

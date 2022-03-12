@@ -7,9 +7,7 @@ import { ExplorerContext } from "context/explorer";
 import { fn_logic__GET__exp__nodes } from "logic/api/get";
 
 import CompExpLayer from "components/layout/main/explorer/layer";
-
-// const ref__n_doc_input = React.createRef(null);
-// const ref__n_fold_input = React.createRef(null);
+import { fn_logic__POST__exp__add_doc, fn_logic__POST__exp__add_group } from "logic/api/post";
 
 export default function CompExplorer() {
   // Param
@@ -88,15 +86,17 @@ export default function CompExplorer() {
           // 계층 구조로 변환
           // 상위 노드의 ID를 키로 가진 하위 노드들의 배열로 이루어진 객체 (상위 노드 ID: [하위노드들])
           const node_id_children__obj = results__n_arr[i].reduce((obj, node__obj) => {
-            const key__node_id__str = node__obj.parent?.toString() ?? null;
+            // const key__node_id__str = node__obj.parent?.toString() ?? "root";
+            const key__node_id__str = node__obj.parent ? node__obj.parent.toString() : "root";
             if (!obj[key__node_id__str]) obj[key__node_id__str] = [];
             obj[key__node_id__str] = [...obj[key__node_id__str], node__obj];
             return obj;
           }, {});
 
           // (재귀) 계층 구조 생성
-          const fn_logic__re__sub_trees__arr = (_key__node_id = null) => {
-            const children_nodes__arr = [...node_id_children__obj[_key__node_id]];
+          const fn_logic__re__sub_trees__arr = (_key__node_id = "root") => {
+            const prop = !_key__node_id || _key__node_id.length === 0 ? "root" : _key__node_id;
+            const children_nodes__arr = [...node_id_children__obj[prop]];
 
             // 나열할 순서 정렬
             // 이름별 (차선 순위)
@@ -110,7 +110,7 @@ export default function CompExplorer() {
             );
 
             for (const child_node__obj of children_nodes__arr) {
-              const cond__is_folder__bool = child_node__obj.type === "group";
+              const cond__is_folder__bool = child_node__obj.type === "folder" || child_node__obj.type === "group";
               if (cond__is_folder__bool && child_node__obj.children.length !== 0) {
                 child_node__obj.children = fn_logic__re__sub_trees__arr(child_node__obj._id?.toString() ?? null);
               }
@@ -185,7 +185,7 @@ export default function CompExplorer() {
   const fn_handle__click__exp_l_root = (e) => {
     const e_curr_tg = e.currentTarget;
     const e_curr_tg_name = e_curr_tg.getAttribute("name");
-    console.log(e_curr_tg_name);
+
     set_state__is_click__exp_l_root__obj({
       ...init_state__cond__exp_l_tree_node__obj,
       [e_curr_tg_name]: !state__is_click__exp_l_root__obj[e_curr_tg_name],

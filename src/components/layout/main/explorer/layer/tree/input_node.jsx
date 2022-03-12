@@ -1,21 +1,25 @@
 import { ExplorerContext } from "context/explorer";
 import React, { useContext, useMemo, useState } from "react";
+import { useRecoilState } from "recoil";
+import { g_state__user } from "recoil/atoms";
+import { fn_logic__POST__exp__add_doc, fn_logic__POST__exp__add_group } from "logic/api/post";
 import CompRefInput from "components/reusable/_ref_input";
 
-export default function CompInputNode({ prop__input_type, prop__node_children }) {
+export default function CompInputNode({ prop__node_id, prop__input_type, prop__node_children }) {
   const { ref__n_doc_input, ref__n_fold_input } = useContext(ExplorerContext);
 
   const is_exist__ref_current = ref__n_doc_input.current !== null && ref__n_fold_input !== null;
   const is_folder__type__bool = prop__input_type === "folder";
 
   // State
+  const [g_state__user__obj, set_g_state__user__obj] = useRecoilState(g_state__user);
   const [state__input_value__str, set_state__input_value__str] = useState("");
 
   // Cache
   const memo__node_name_by_type__obj = useMemo(() => {
     return prop__node_children.reduce(
       (obj, node__obj) => {
-        if (node__obj.type === "group") {
+        if (node__obj.type === "folder") {
           obj.folder = [...obj.folder, node__obj.name];
         } else {
           obj.document = [...obj.document, node__obj.name];
@@ -35,6 +39,48 @@ export default function CompInputNode({ prop__input_type, prop__node_children })
     }
   };
 
+  const fn_valid__input_val__bool = (e_tg_val__curr) => {
+    const is_no__input_val__bool = e_tg_val__curr === "" || e_tg_val__curr.length === 0;
+    let is_duplicated_name__bool;
+    if (is_folder__type__bool) {
+      is_duplicated_name__bool = memo__node_name_by_type__obj.folder.includes(e_tg_val__curr);
+    } else {
+      is_duplicated_name__bool = memo__node_name_by_type__obj.document.includes(e_tg_val__curr);
+    }
+
+    if (is_no__input_val__bool) {
+      console.log(1);
+      return false;
+    }
+    if (is_duplicated_name__bool) {
+      console.log(2);
+      return false;
+    }
+
+    return true;
+  };
+
+  const fn_set__add__node = (e_tg__curr) => {
+    const e_tg_val__curr = e_tg__curr.value;
+
+    const req_data__obj_params = {
+      type: prop__input_type,
+      name: e_tg_val__curr,
+      parent: prop__node_id,
+      writer: g_state__user__obj.ref_user_id,
+    };
+
+    if (is_folder__type__bool) {
+      fn_logic__POST__exp__add_group(req_data__obj_params)
+        .then((res_data__obj) => {})
+        .catch((err) => {});
+    } else {
+      fn_logic__POST__exp__add_doc(req_data__obj_params)
+        .then((res_data__obj) => {})
+        .catch(() => {});
+    }
+  };
+
   // Event
   const fn_handle__change__input_value = (e) => {
     const e_tg_val__curr = e.currentTarget.value;
@@ -48,9 +94,10 @@ export default function CompInputNode({ prop__input_type, prop__node_children })
 
     // key down:
     // - press enter key
-    if (e instanceof KeyboardEvent) {
-      const e_key = e.key || e.keyCode;
+    if (e.keyCode) {
+      const e_key = e.keyCode || e.key;
       const is_enter__key__bool = e_key === 13;
+      console.log(is_enter__key__bool);
       if (!is_enter__key__bool) return;
     }
 
@@ -60,23 +107,12 @@ export default function CompInputNode({ prop__input_type, prop__node_children })
     // - request (import)
     // - change explorer nodes state (context)
     // - init input value state (curr)
+    const is_valid__input_val__bool = fn_valid__input_val__bool(e_tg_val__curr);
+    if (!is_valid__input_val__bool) return;
 
-    const is_no__input_val__bool = e_tg_val__curr === "" || e_tg_val__curr.length === 0;
-    let is_duplicated_name__bool;
-    if (is_folder__type__bool) {
-      is_duplicated_name__bool = memo__node_name_by_type__obj.folder.includes(e_tg_val__curr);
-    } else {
-      is_duplicated_name__bool = memo__node_name_by_type__obj.document.includes(e_tg_val__curr);
-    }
+    fn_set__add__node(e_tg__curr);
 
-    console.log(prop__node_children, memo__node_name_by_type__obj);
-
-    if (is_no__input_val__bool) {
-      console.log(1);
-    }
-    if (is_duplicated_name__bool) {
-      console.log(2);
-    }
+    set_state__input_value__str("");
   };
 
   return is_exist__ref_current ? (
