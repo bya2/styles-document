@@ -6,12 +6,12 @@ import CompInputNode from "./input_node";
 
 function CompTreeNode({ prop__node_id, prop__node_type, prop__node_name }) {
   const {
-    param__id,
-    state__is_active__exp_l_tree_node__obj,
-    state__is_fold__exp_l_tree_node__obj,
-    state__is_click__exp_l_tree_node__obj,
-    fn_handle__focus__exp_l_tree_node,
-    fn_handle__click__exp_l_tree_node,
+    ctx__root_name,
+    ctx__state__cond__is_active__exp_l_nodes__obj,
+    ctx__state__cond__is_click__exp_l_nodes__obj,
+    ctx__state__cond__is_fold__exp_l_f_nodes__obj,
+    ctx__fn_handle__focus__exp_l_tree_node,
+    ctx__fn_handle__click__exp_l_tree_node,
   } = useContext(ExplorerContext);
 
   const cond__is_folder__bool = prop__node_type === "folder";
@@ -19,11 +19,11 @@ function CompTreeNode({ prop__node_id, prop__node_type, prop__node_name }) {
   return (
     <div
       name={prop__node_id}
-      className={`area node${state__is_click__exp_l_tree_node__obj[prop__node_id] ? " s-click" : ""}${
-        state__is_active__exp_l_tree_node__obj[prop__node_id] ? " s-active" : ""
-      }${!cond__is_folder__bool ? "" : state__is_fold__exp_l_tree_node__obj[prop__node_id] ? " s-fold" : ""}`}
-      onFocus={(e) => fn_handle__focus__exp_l_tree_node(e, param__id)}
-      onClick={(e) => fn_handle__click__exp_l_tree_node(e, param__id)}
+      className={`area node${ctx__state__cond__is_click__exp_l_nodes__obj[prop__node_id] ? " s-click" : ""}${
+        ctx__state__cond__is_active__exp_l_nodes__obj[prop__node_id] ? " s-active" : ""
+      }${!cond__is_folder__bool ? "" : ctx__state__cond__is_fold__exp_l_f_nodes__obj[prop__node_id] ? " s-fold" : ""}`}
+      onFocus={(e) => ctx__fn_handle__focus__exp_l_tree_node(e, ctx__root_name)}
+      onClick={(e) => ctx__fn_handle__click__exp_l_tree_node(e, ctx__root_name)}
       tabIndex="0"
     >
       <span className="group desc">
@@ -35,7 +35,7 @@ function CompTreeNode({ prop__node_id, prop__node_type, prop__node_name }) {
         {cond__is_folder__bool ? (
           <>
             <div className="icon-box type">
-              <i className={`icon ${1}${state__is_fold__exp_l_tree_node__obj ? " s-fold" : ""}`}>
+              <i className={`icon ${1}${ctx__state__cond__is_fold__exp_l_f_nodes__obj ? " s-fold" : ""}`}>
                 {cond__is_folder__bool ? "F" : "D"}
               </i>
             </div>
@@ -46,7 +46,7 @@ function CompTreeNode({ prop__node_id, prop__node_type, prop__node_name }) {
         ) : (
           <Link to={prop__node_name}>
             <div className="icon-box type">
-              <i className={`icon ${1}${state__is_fold__exp_l_tree_node__obj ? " s-fold" : ""}`}>
+              <i className={`icon ${1}${ctx__state__cond__is_fold__exp_l_f_nodes__obj ? " s-fold" : ""}`}>
                 {cond__is_folder__bool ? "F" : "D"}
               </i>
             </div>
@@ -69,16 +69,17 @@ function CompTreeNode({ prop__node_id, prop__node_type, prop__node_name }) {
 }
 
 function CompTreeChildren({ prop__node_id, prop__node_type, prop__node_children }) {
-  const { state__is_active__exp_l_tree_node__obj, state__is_fold__exp_l_tree_node__obj } = useContext(ExplorerContext);
+  const { ctx__state__cond__is_active__exp_l_nodes__obj, ctx__state__cond__is_fold__exp_l_f_nodes__obj } =
+    useContext(ExplorerContext);
 
   const cond__is_folder__bool = prop__node_type === "folder";
 
   return (
-    <div className={`area children${state__is_fold__exp_l_tree_node__obj[prop__node_id] ? " s-fold" : " s-unfold"}`}>
+    <div className={`area children${ctx__state__cond__is_fold__exp_l_f_nodes__obj[prop__node_id] ? " s-fold" : " s-unfold"}`}>
       <span className="group list">
         <ul className="item-list">
           <>
-            {cond__is_folder__bool && state__is_active__exp_l_tree_node__obj[prop__node_id] ? (
+            {cond__is_folder__bool && ctx__state__cond__is_active__exp_l_nodes__obj[prop__node_id] ? (
               <CompInputNode
                 prop__input_type={"folder"}
                 prop__node_id={prop__node_id}
@@ -105,7 +106,7 @@ function CompTreeChildren({ prop__node_id, prop__node_type, prop__node_children 
                 })
               : null}
 
-            {cond__is_folder__bool && state__is_active__exp_l_tree_node__obj[prop__node_id] ? (
+            {cond__is_folder__bool && ctx__state__cond__is_active__exp_l_nodes__obj[prop__node_id] ? (
               <CompInputNode
                 prop__input_type={"document"}
                 prop__node_id={prop__node_id}

@@ -28,13 +28,13 @@ const init_state__cond__obj = tool_items__arr.reduce((obj, item__obj) => {
 export default function CompExpTool() {
   // Context
   const {
-    param__id,
-    cond__is_usr_exp_layer__bool,
-    cond__is_click__exp_l_root__bool,
-    state__is_active__exp_l_tree_node__obj,
-    ref__n_doc_input,
-    ref__n_fold_input,
-    fn_logic__fold__close_folder,
+    ctx__root_name,
+    ctx__cond__is_usr_exp_layer__bool,
+    ctx__cond__is_click__root__bool,
+    ctx__state__cond__is_active__exp_l_nodes__obj,
+    ctx__fn_logic__fold__close_folder,
+    ctx__ref__n_doc_input,
+    ctx__ref__n_fold_input,
   } = useContext(ExplorerContext);
 
   // Local State
@@ -53,10 +53,10 @@ export default function CompExpTool() {
 
     switch (clicked) {
       case "new document":
-        ref__n_doc_input.current.focus();
+        ctx__ref__n_doc_input.current.focus();
         break;
       case "new folder":
-        ref__n_fold_input.current.focus();
+        ctx__ref__n_fold_input.current.focus();
         break;
       default:
     }
@@ -80,9 +80,9 @@ export default function CompExpTool() {
           [e_tg_name__curr]: true,
         });
 
-        const node_idx__actived = Object.values(state__is_active__exp_l_tree_node__obj).findIndex((el) => el === true);
-        const node__actived = Object.keys(state__is_active__exp_l_tree_node__obj)[node_idx__actived];
-        fn_logic__fold__close_folder(node__actived);
+        const node_idx__actived = Object.values(ctx__state__cond__is_active__exp_l_nodes__obj).findIndex((el) => el === true);
+        const node__actived = Object.keys(ctx__state__cond__is_active__exp_l_nodes__obj)[node_idx__actived];
+        ctx__fn_logic__fold__close_folder(node__actived);
       },
       { once: true }
     );
@@ -92,7 +92,7 @@ export default function CompExpTool() {
     <div className="comp exp-l-tool wrap">
       <ul className="item-list">
         <>
-          {cond__is_click__exp_l_root__bool && cond__is_usr_exp_layer__bool
+          {ctx__cond__is_click__root__bool && ctx__cond__is_usr_exp_layer__bool
             ? tool_items__arr.map((tool_item__obj) => {
                 const { key, name, icon } = tool_item__obj;
                 return (

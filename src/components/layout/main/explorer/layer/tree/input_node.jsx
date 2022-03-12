@@ -6,9 +6,10 @@ import { fn_logic__POST__exp__add_doc, fn_logic__POST__exp__add_group } from "lo
 import CompRefInput from "components/reusable/_ref_input";
 
 export default function CompInputNode({ prop__node_id, prop__input_type, prop__node_children }) {
-  const { ref__n_doc_input, ref__n_fold_input } = useContext(ExplorerContext);
+  const { ctx__root_name, ctx__fn_set__state__add_node, ctx__ref__n_doc_input, ctx__ref__n_fold_input } =
+    useContext(ExplorerContext);
 
-  const is_exist__ref_current = ref__n_doc_input.current !== null && ref__n_fold_input !== null;
+  const is_exist__ref_current = ctx__ref__n_doc_input.current !== null && ctx__ref__n_fold_input !== null;
   const is_folder__type__bool = prop__input_type === "folder";
 
   // State
@@ -33,9 +34,9 @@ export default function CompInputNode({ prop__node_id, prop__input_type, prop__n
   // Logic
   const fn_logic__assign_ref = (el) => {
     if (is_folder__type__bool) {
-      ref__n_fold_input.current = el;
+      ctx__ref__n_fold_input.current = el;
     } else {
-      ref__n_doc_input.current = el;
+      ctx__ref__n_doc_input.current = el;
     }
   };
 
@@ -72,12 +73,29 @@ export default function CompInputNode({ prop__node_id, prop__input_type, prop__n
 
     if (is_folder__type__bool) {
       fn_logic__POST__exp__add_group(req_data__obj_params)
-        .then((res_data__obj) => {})
-        .catch((err) => {});
+        .then((res_data__obj) => {
+          // const exp_layers__arr = [...set_state__exp_layers__arr];
+          // exp_layers__arr.findIndex(layer__obj => layer__obj.name === ctx__root_name)
+          // // ctx__set_state__exp_layers__arr();
+          ctx__fn_set__state__add_node(ctx__root_name, res_data__obj); // root_name, data__obj
+          console.log("FOLDER", res_data__obj);
+          ctx__ref__n_fold_input.current.blur();
+        })
+        .catch((err) => {
+          console.log("!ERR:\nLoc:CompInputNode (fn_set__add__node)");
+          console.error(err);
+        });
     } else {
       fn_logic__POST__exp__add_doc(req_data__obj_params)
-        .then((res_data__obj) => {})
-        .catch(() => {});
+        .then((res_data__obj) => {
+          ctx__fn_set__state__add_node(ctx__root_name, res_data__obj);
+          console.log("DOCUMENT", res_data__obj);
+          ctx__ref__n_doc_input.current.blur();
+        })
+        .catch((err) => {
+          console.log("!ERR:\nLoc:CompInputNode (fn_set__add__node)");
+          console.error(err);
+        });
     }
   };
 

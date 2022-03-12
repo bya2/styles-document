@@ -7,32 +7,32 @@ import CompInputNode from "./input_node";
 
 export default function CompExpLTree() {
   const {
-    layer__key,
-    param__id,
-    nodes__arr,
-    state__is_active__exp_l_tree_node__obj,
-    state__is_click__exp_l_tree_node__obj,
-    cond__is_usr_exp_layer__bool,
-    fn_handle__click__exp_any_layer,
+    ctx__root_key,
+    ctx__root_name,
+    ctx__nodes__arr,
+    ctx__state__cond__is_active__exp_l_nodes__obj,
+    ctx__state__cond__is_click__exp_l_nodes__obj,
+    ctx__cond__is_usr_exp_layer__bool,
+    ctx__fn_handle__click__exp_any_layer,
   } = useContext(ExplorerContext);
 
   return (
     <div
-      name={layer__key}
-      className={`comp exp-l-tree outer node root${state__is_active__exp_l_tree_node__obj[layer__key] ? " s-active" : ""}${
-        state__is_click__exp_l_tree_node__obj[layer__key] ? " s-click" : ""
-      }`}
-      onClick={(e) => fn_handle__click__exp_any_layer(e)}
+      name={ctx__root_key}
+      className={`comp exp-l-tree outer node root${
+        ctx__state__cond__is_active__exp_l_nodes__obj[ctx__root_key] ? " s-active" : ""
+      }${ctx__state__cond__is_click__exp_l_nodes__obj[ctx__root_key] ? " s-click" : ""}`}
+      onClick={(e) => ctx__fn_handle__click__exp_any_layer(e)}
     >
       <span className="inner">
         <ul className="item-list">
           <>
-            {state__is_active__exp_l_tree_node__obj[layer__key] ||
-            !Object.values(state__is_active__exp_l_tree_node__obj).includes(true) ? (
-              <CompInputNode prop__node_id={null} prop__input_type={"folder"} prop__node_children={nodes__arr} />
+            {ctx__state__cond__is_active__exp_l_nodes__obj[ctx__root_key] ||
+            !Object.values(ctx__state__cond__is_active__exp_l_nodes__obj).includes(true) ? (
+              <CompInputNode prop__node_id={null} prop__input_type={"folder"} prop__node_children={ctx__nodes__arr} />
             ) : null}
 
-            {nodes__arr.map((node__obj) => {
+            {ctx__nodes__arr.map((node__obj) => {
               const { _id, type, name, parent, children } = node__obj;
               const key = _id.toString();
               const parent_id = parent?.toString();
@@ -49,9 +49,9 @@ export default function CompExpLTree() {
               );
             })}
 
-            {state__is_active__exp_l_tree_node__obj[layer__key] ||
-            !Object.values(state__is_active__exp_l_tree_node__obj).includes(true) ? (
-              <CompInputNode prop__node_id={null} prop__input_type={"document"} prop__node_children={nodes__arr} />
+            {ctx__state__cond__is_active__exp_l_nodes__obj[ctx__root_key] ||
+            !Object.values(ctx__state__cond__is_active__exp_l_nodes__obj).includes(true) ? (
+              <CompInputNode prop__node_id={null} prop__input_type={"document"} prop__node_children={ctx__nodes__arr} />
             ) : null}
           </>
         </ul>

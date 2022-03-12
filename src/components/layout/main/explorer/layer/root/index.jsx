@@ -5,10 +5,10 @@ import CompExpTool from "components/layout/main/explorer/layer/tool";
 import { ExplorerContext } from "context/explorer";
 
 export default function CompExpLRoot() {
-  const { param__id, fn_handle__click__exp_l_root } = useContext(ExplorerContext);
+  const { ctx__root_name, ctx__fn_handle__click__exp_l_root } = useContext(ExplorerContext);
 
   return (
-    <div name={param__id} className={"comp exp-l-root outer"} onClick={(e) => fn_handle__click__exp_l_root(e)}>
+    <div name={ctx__root_name} className={"comp exp-l-root outer"} onClick={(e) => ctx__fn_handle__click__exp_l_root(e)}>
       <span
         className="inner"
         onClick={(e) => {
@@ -20,7 +20,7 @@ export default function CompExpLRoot() {
             <i className={`icon ${1}`}>R</i>
           </div>
           <div className="content-box">
-            <span>{param__id}</span>
+            <span>{ctx__root_name}</span>
           </div>
         </span>
         {true ? (
