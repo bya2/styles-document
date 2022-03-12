@@ -50,6 +50,29 @@
 
 ![image](https://user-images.githubusercontent.com/61080445/157671284-daa107c2-ca4d-446b-ba8b-d61c8688a9f0.png)
 
+#### 0312
+
+- 탐색기
+  - Context API
+    - Context 프로퍼티 변수 이름 일관화
+  - useEffect Hook에서 마운트 과정과 업데이트 과정을 ref를 통해 분리하여 불필요한 렌더링을 방지
+  - 탐색기 상태 유지
+    - 폴더/문서 생성 시 탐색기가 초기 상태로 되돌아가지 않도록 했습니다.
+    - 활성화 상태, 클릭 상태, 폴더 접기/펴기 상태 등은 화면이 다시 렌더링되어도 유지됩니다.
+  - 컴포넌트 분리
+    - 코드의 가독성과 성능을 위해 컴포넌트를 분리했습니다.
+    - Input,
+    - Ref Input,
+    - Sub Tree
+    - Sub Tree Node
+    - Sub Tree Input Node,
+    - 등...
+- 탐색기 툴:
+  - 폴더/문서 추가 기능 완료 (새로고침을 하지 않아도 폴더/문서가 화면 상에 추가됩니다.)
+  - 로그인된 Root에서만 폴더/문서를 생성할 수 있습니다.
+
+![image](https://user-images.githubusercontent.com/61080445/158029258-2765b3f1-44e3-43b5-8e43-477c35cc2306.png)
+
 ## REST API
 
 GET
