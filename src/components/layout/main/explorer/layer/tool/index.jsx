@@ -51,11 +51,8 @@ export default function CompExpTool() {
 
     if (clicked === undefined) return;
 
-    console.log("CLICKED", clicked);
-
     switch (clicked) {
       case "new document":
-        console.log(ref__n_doc_input);
         ref__n_doc_input.current.focus();
         break;
       case "new folder":
@@ -72,22 +69,20 @@ export default function CompExpTool() {
 
   // Event
   const fn_handle__mouse_down__tool_item = (e) => {
-    e.stopPropagation();
-    const e_curr_tg = e.currentTarget;
-    const e_curr_tg_name = e_curr_tg.getAttribute("name");
+    const e_tg__curr = e.currentTarget;
+    const e_tg_name__curr = e_tg__curr.getAttribute("name");
 
-    e_curr_tg.addEventListener(
+    e_tg__curr.addEventListener(
       "mouseup",
       () => {
         set_state__is_click_tool_item__obj({
           ...state__is_click_tool_item__obj,
-          [e_curr_tg_name]: true,
+          [e_tg_name__curr]: true,
         });
 
-        const idx__actived = Object.values(state__is_active__exp_l_tree_node__obj).findIndex((el) => el === true);
-        const actived = Object.keys(state__is_active__exp_l_tree_node__obj)[idx__actived];
-
-        fn_logic__fold__close_folder(actived);
+        const node_idx__actived = Object.values(state__is_active__exp_l_tree_node__obj).findIndex((el) => el === true);
+        const node__actived = Object.keys(state__is_active__exp_l_tree_node__obj)[node_idx__actived];
+        fn_logic__fold__close_folder(node__actived);
       },
       { once: true }
     );
@@ -105,7 +100,10 @@ export default function CompExpTool() {
                     key={key}
                     name={name}
                     className="item"
-                    onMouseDown={(e) => fn_handle__mouse_down__tool_item(e)}
+                    onMouseDown={(e) => {
+                      e.stopPropagation();
+                      fn_handle__mouse_down__tool_item(e);
+                    }}
                     onClick={(e) => e.stopPropagation()}
                   >
                     <span className="item-inner">

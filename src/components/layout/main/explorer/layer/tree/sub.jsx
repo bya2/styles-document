@@ -57,15 +57,13 @@ function CompTreeChildren({ prop__node_id, prop__node_type, prop__node_children 
 
   const cond__is_folder__bool = prop__node_type === "group";
 
-  console.log(state__is_active__exp_l_tree_node__obj);
-
   return (
     <div className={`area children${state__is_fold__exp_l_tree_node__obj[prop__node_id] ? " s-fold" : " s-unfold"}`}>
       <span className="group list">
         <ul className="item-list">
           <>
             {cond__is_folder__bool && state__is_active__exp_l_tree_node__obj[prop__node_id] ? (
-              <CompInputNode prop__input_type={"folder"} />
+              <CompInputNode prop__input_type={"folder"} prop__node_children={prop__node_children} />
             ) : null}
 
             {prop__node_children !== null
@@ -87,7 +85,7 @@ function CompTreeChildren({ prop__node_id, prop__node_type, prop__node_children 
               : null}
 
             {cond__is_folder__bool && state__is_active__exp_l_tree_node__obj[prop__node_id] ? (
-              <CompInputNode prop__input_type={"document"} />
+              <CompInputNode prop__input_type={"document"} prop__node_children={prop__node_children} />
             ) : null}
           </>
         </ul>

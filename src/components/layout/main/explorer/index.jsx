@@ -33,9 +33,7 @@ export default function CompExplorer() {
   const [state__is_fold__exp_l_tree_node__obj, set_state__is_fold__exp_l_tree_node__obj] = useState({});
   const [state__is_click__exp_l_tree_node__obj, set_state__is_click__exp_l_tree_node__obj] = useState({});
 
-  const [state__is_active__exp_l_tree_node__arr, set_state__is_active__exp_l_trees__arr] = useState({}); // tmp
-  const [state__is_click__exp_l_tree_node__arr, set_state__is_click__exp_l_trees__arr] = useState({}); // tmp
-  // const [state__is_active__exp_l_tree__obj, set_state__is_active__exp_l_tree__obj] = useState({});
+  const [state__t_node_names__obj, set_state__t_node_names__obj] = useState([]);
 
   // Side
   useEffect(() => {
@@ -83,8 +81,7 @@ export default function CompExplorer() {
         let init_state__exp_layers__arr = [...init_state__exp_roots__arr];
         let init_state__cond__exp_l_tree_node__obj = {};
         let init_state__cond__exp_l_tree_fold_node__obj = {};
-        let init_state__cond__exp_l_tree_node__arr = [...init_state__exp_roots__arr];
-        let init_state__cond__exp_l_tree_fold_node__arr = [...init_state__exp_roots__arr];
+        let init_state__exp_l_tree_node_names__obj = { folder: [], document: [] };
 
         const num__exp_layers = init_state__exp_layers__arr.length;
         for (let i = 0; i < num__exp_layers; ++i) {
@@ -149,9 +146,25 @@ export default function CompExplorer() {
             ...init_state__cond__exp_l_tree_fold_node__obj,
             ...init_state__cond__tree__obj("group"),
           };
-        }
 
-        console.log(init_state__cond__exp_l_tree_node__obj);
+          // 폴더 및 문서의 이름을 배열로 묶음
+          // usage: 폴더, 문서 이름 찾기
+          init_state__exp_l_tree_node_names__obj.folder = results__n_arr[i].reduce((arr, node__obj) => {
+            if (node__obj.type === "group") {
+              return [...arr, node__obj.name];
+            } else {
+              return [...arr];
+            }
+          }, []);
+
+          init_state__exp_l_tree_node_names__obj.document = results__n_arr[i].reduce((arr, node__obj) => {
+            if (node__obj.type === "document") {
+              return [...arr, node__obj.name];
+            } else {
+              return [...arr];
+            }
+          }, []);
+        }
 
         set_state__exp_layers__arr(init_state__exp_layers__arr);
 
@@ -160,6 +173,7 @@ export default function CompExplorer() {
         set_state__is_active__exp_l_tree_node__obj(init_state__cond__exp_l_tree_node__obj);
         set_state__is_fold__exp_l_tree_node__obj(init_state__cond__exp_l_tree_fold_node__obj);
         set_state__is_click__exp_l_tree_node__obj(init_state__cond__exp_l_tree_node__obj);
+        set_state__t_node_names__obj(init_state__exp_l_tree_node_names__obj);
       })
       .catch((err) => {
         console.log("!ERR\nLoc:components/layout/main/explorer (mounted, updated)");
@@ -284,6 +298,7 @@ export default function CompExplorer() {
                     state__is_active__exp_l_tree_node__obj: state__is_active__exp_l_tree_node__obj,
                     state__is_fold__exp_l_tree_node__obj: state__is_fold__exp_l_tree_node__obj,
                     state__is_click__exp_l_tree_node__obj: state__is_click__exp_l_tree_node__obj,
+                    state__t_node_names__obj,
                     fn_handle__click__exp_l_root,
                     fn_handle__focus__exp_l_tree_node,
                     fn_handle__click__exp_l_tree_node,
