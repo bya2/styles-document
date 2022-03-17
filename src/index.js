@@ -1,24 +1,25 @@
+// Style
+import "./index.css";
+
+// React
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
-import { Provider } from "react-redux";
-import { createStore } from "redux";
+
+// State -- Recoil, Redux
 import { RecoilRoot } from "recoil";
+import { Provider } from "react-redux";
+import { store__App } from "store/redux/app";
 
-function reducer(state = 1, action) {
-  return state;
-}
-
-const store = createStore(reducer);
+// Component
+import App from "./components/App";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <RecoilRoot>
-        <Provider store={store}>
+        <Provider store={store__App}>
           <App />
         </Provider>
       </RecoilRoot>

@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 
-import CompExplorer from "components/layout/main/explorer";
+import Explorer from "components/layout/main/explorer";
+import Resizer from "components/reusable/_resizer";
 
 export default function RouteRootMain() {
   return (
@@ -10,8 +11,9 @@ export default function RouteRootMain() {
           <article className="">
             <span>{"EXPLORER"}</span>
           </article>
-          <CompExplorer />
+          <Explorer />
         </aside>
+        <Resizer />
         <section>
           <article></article>
           <article></article>

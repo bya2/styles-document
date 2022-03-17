@@ -4,7 +4,7 @@
 
 // Grid
 $g-rows-main-r-root: 1.5fr 1fr 1fr;
-$g-cols-main-r-id: 192px 1fr;
+$g-cols-main-r-id: 192px 0 1fr;
 
 $aside-explorer-g-rows: 24px 1fr;
 $section-g-rows: 24px 1fr;
@@ -452,6 +452,24 @@ main {
           //   }
           // }
         }
+      }
+    }
+
+    .dragbar.resizer {
+      position: relative;
+      padding: 3px;
+      border-left: 1px solid black;
+      z-index: 2;
+      @extend .no-select;
+
+      &:hover::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        left: -3px;
+        right: 3px;
+        background-color: aqua;
+        cursor: ew-resize;
       }
     }
 
