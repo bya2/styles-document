@@ -1,0 +1,14 @@
+const { merge } = require("webpack-merge");
+const path = require("path");
+
+const config = require("./webpack.config.common");
+
+module.exports = merge(config, {
+  mode: "production",
+
+  output: {
+    path: path.resolve(__dirname, "dist/"),
+    publicPath: "/dist/",
+    filename: "bundle.js",
+  },
+});
