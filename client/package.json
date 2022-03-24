@@ -56,8 +56,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve --open --mode development",
-    "build": "webpack --mode production",
+    "start": "webpack serve --open --env mode=development",
+    "build": "webpack --env mode=production",
     "app:start": "concurrently \"npm start\" \"npm run electron\"",
     "app:build": "electron-builder --windows nsis:ia32 --x64",
     "electron": "wait-on http://localhost:3003 && electron ."
