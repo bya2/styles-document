@@ -7,7 +7,7 @@
     "paths": {
       "@src/*": ["./*"],
       "@components/*": ["./components/*"],
-      "@styles/*": ["./styles/*"],
+      "@styles-components/*": ["./styles/components/*"],
       "@pages/*": ["./pages/*"]
     },
     // -- [DECLARATION]

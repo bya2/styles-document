@@ -9,7 +9,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = (env, options) => {
-  const is_prod__mode = env.mode === "production";
+  // const is_prod__mode = env.mode === "production";
   const entry_path__mode = "./src/index.tsx";
 
   return {
@@ -32,6 +32,7 @@ module.exports = (env, options) => {
         "@src": path.resolve(__dirname, "src"),
         "@components": path.resolve(__dirname, "src/components"),
         "@styles": path.resolve(__dirname, "src/styles"),
+        "@styles-components": path.resolve(__dirname, "src/styles/components"),
         "@pages": path.resolve(__dirname, "src/pages"),
       },
     },
@@ -91,6 +92,11 @@ module.exports = (env, options) => {
               loader: "sass-loader",
               options: {
                 sourceMap: true,
+                additionalData: `
+                  @import "@styles/abstracts/__abstracts-dir.scss";
+                  @import "@styles/base/__base-dir.scss";
+                  @import "@styles/layouts/__layouts-dir.scss";
+                `
               },
             },
           ],
@@ -155,7 +161,7 @@ module.exports = (env, options) => {
         }),
       ],
       splitChunks: {
-        chunks: 'async',
+        chunks: "async",
         minSize: 20000,
         minRemainingSize: 0,
         minChunks: 1,
