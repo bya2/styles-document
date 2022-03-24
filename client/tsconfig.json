@@ -17,7 +17,7 @@
     "target": "ESNext",
     "module": "CommonJS",
     "moduleResolution": "node",
-    "jsx": "react",
+    "jsx": "react-jsx",
 
     // COMPILER
     "watch": true,
