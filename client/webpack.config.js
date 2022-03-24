@@ -1,21 +1,16 @@
-// const process = require("process");
+const process = require("process");
+const os = require("os");
 const path = require("path");
-
 const webpack = require("webpack");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const dotenv = require("dotenv");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
-module.exports = (env, option) => {
+module.exports = (env, options) => {
   const is_prod__mode = env.mode === "production";
-
-  dotenv.config({
-    path: path.resolve(__dirname, is_prod__mode ? ".env" : ".env"),
-  });
-
-  let entry_path__mode = is_prod__mode ? "./src/index.tsx" : "./src/index.tsx";
+  const entry_path__mode = "./src/index.tsx";
 
   return {
     mode: env.mode,
@@ -25,12 +20,20 @@ module.exports = (env, option) => {
     output: {
       path: path.resolve(__dirname, "dist"),
       filename: "bundle.js",
+      // filename: "assets/js/[name].[contenthash:8].js",
+      publicPath: "/",
       clean: true,
     },
 
     resolve: {
-      extensions: [".ts", ".tsx", ".js", ".jsx"],
+      extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
       modules: [path.resolve(__dirname, "./src"), "node_modules"],
+      alias: {
+        "@src": path.resolve(__dirname, "src"),
+        "@components": path.resolve(__dirname, "src/components"),
+        "@styles": path.resolve(__dirname, "src/styles"),
+        "@pages": path.resolve(__dirname, "src/pages"),
+      },
     },
 
     devServer: {
@@ -44,43 +47,32 @@ module.exports = (env, option) => {
       proxy: {
         "/api": "http://localhost:8080",
       },
+      open: true,
+      compress: true,
+      historyApiFallback: true,
     },
 
     module: {
       rules: [
-        // {
-        //   test: /\.tsx?$/,
-        //   exclude: /node_modules/,
-        //   use: ["babel-loader", "ts-loader"],
-        // },
-        // {
-        //   test: /\.jsx?$/,
-        //   exclude: /node_modules/,
-        //   loader: ["babel-loader", "source-map-loader"],
-        // },
         {
           test: /\.tsx?$/,
           exclude: /node_modules/,
           use: [
+            {
+              loader: "babel-loader",
+              options: {
+                presets: ["@babel/preset-react"],
+                cacheDirectory: true,
+                cacheCompression: false,
+              },
+            },
             {
               loader: "ts-loader",
               options: {
                 transpileOnly: true,
               },
             },
-            {
-              loader: "esbuild-loader",
-              options: {
-                loader: "tsx",
-                target: "es2015",
-              },
-            },
           ],
-        },
-        {
-          test: /\.jsx?$/,
-          exclude: /node_modules/,
-          use: ["esbuild-loader"],
         },
         {
           test: /\.s?css$/,
@@ -88,9 +80,45 @@ module.exports = (env, option) => {
             {
               loader: MiniCssExtractPlugin.loader,
             },
-            "css-loader",
-            "sass-loader",
+            {
+              loader: "css-loader",
+              options: {
+                importLoaders: 2,
+              },
+            },
+            "resolve-url-loader",
+            {
+              loader: "sass-loader",
+              options: {
+                sourceMap: true,
+              },
+            },
           ],
+        },
+        {
+          test: /\.(jpe?g|png|gif)$/i,
+          use: [
+            {
+              loader: "url-loader",
+              options: {
+                limit: 8192,
+                name: "assets/images/[name].[hash:8].[ext]",
+              },
+            },
+          ],
+        },
+        {
+          test: /\.svg$/i,
+          use: ["@svgr/webpack"],
+        },
+        {
+          test: /\.(woff|woff2|eot|ttf|otf)$/i,
+          use: {
+            loader: "file-loader",
+            options: {
+              name: "assets/fonts/[name].[hash:8].[ext]",
+            },
+          },
         },
       ],
     },
@@ -99,16 +127,54 @@ module.exports = (env, option) => {
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, "public/index.html"),
         filename: "index.html",
+        inject: true,
       }),
       new MiniCssExtractPlugin({
         filename: "./styles/[name].[contenthash].css",
       }),
       new ForkTsCheckerWebpackPlugin(),
+      new webpack.EnvironmentPlugin({
+        NODE_ENV: env.mode,
+      }),
       new webpack.ProgressPlugin(),
       new webpack.ProvidePlugin({
         React: "react",
       }),
-      new CleanWebpackPlugin(),
+      new CleanWebpackPlugin({
+        dry: true,
+        verbose: true,
+        cleanOnceBeforeBuildPatterns: ["**/*", path.resolve(process.cwd(), "build/**/*")],
+      }),
     ],
+
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new CssMinimizerPlugin({
+          parallel: os.cpus().length - 1,
+        }),
+      ],
+      splitChunks: {
+        chunks: 'async',
+        minSize: 20000,
+        minRemainingSize: 0,
+        minChunks: 1,
+        maxAsyncRequests: 30,
+        maxInitialRequests: 30,
+        enforceSizeThreshold: 50000,
+        cacheGroups: {
+          defaultVendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10,
+            reuseExistingChunk: true,
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
+          },
+        },
+      },
+    },
   };
 };
