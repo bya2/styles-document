@@ -29,11 +29,16 @@ module.exports = (env, options) => {
       extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
       modules: [path.resolve(__dirname, "./src"), "node_modules"],
       alias: {
-        "@src": path.resolve(__dirname, "src"),
+        "@": path.resolve(__dirname, "src"),
+        "@api": path.resolve(__dirname, "src/api"),
+        "@assets": path.resolve(__dirname, "src/assets"),
         "@components": path.resolve(__dirname, "src/components"),
+        "@config": path.resolve(__dirname, "src/config"),
+        "@models": path.resolve(__dirname, "src/models"),
+        "@store": path.resolve(__dirname, "src/store"),
         "@styles": path.resolve(__dirname, "src/styles"),
+        "@styles-layouts": path.resolve(__dirname, "src/styles/layouts"),
         "@styles-components": path.resolve(__dirname, "src/styles/components"),
-        "@pages": path.resolve(__dirname, "src/pages"),
       },
     },
 

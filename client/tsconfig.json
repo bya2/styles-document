@@ -5,13 +5,19 @@
     // -- [IMPORT]
     "baseUrl": "src",
     "paths": {
-      "@src/*": ["./*"],
+      "@/*": ["./*"],
+      "@api/*": ["./api/*"],
+      "@assets/*": ["./assets/*"],
       "@components/*": ["./components/*"],
+      "@config/*": ["./config/*"],
+      "@models/*": ["./models/*"],
+      "@store/*": ["./store/*"],
+      "@styles/*": ["./styles/*"],
+      "@styles-layouts/*": ["./styles/layouts/*"],
       "@styles-components/*": ["./styles/components/*"],
-      "@pages/*": ["./pages/*"]
     },
     // -- [DECLARATION]
-    "typeRoots": ["./node_modules/@types", "./src/@types"],
+    "typeRoots": ["./node_modules/@types", "./src/@types/modules"],
 
     // COMPILE
     "target": "ESNext",
