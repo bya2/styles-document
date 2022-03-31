@@ -17,7 +17,7 @@
       "@styles-components/*": ["./styles/components/*"],
     },
     // -- [DECLARATION]
-    "typeRoots": ["./node_modules/@types", "./src/@types/modules"],
+    "typeRoots": ["./node_modules/@types", "./src/@types"],
 
     // COMPILE
     "target": "ESNext",
