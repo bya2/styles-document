@@ -1,0 +1,24 @@
+{
+  "storage": {
+    "exp_root": "fas fa-expand"
+  },
+  "menu": {
+    "at__sign_out": {
+      "sign_up": "fas fa-user-plus",
+      "sign_in": "fas fa-sign-in-alt"
+    },
+    "at__sign_in": {
+      "sign_out": "fas fa-sign-out-alt",
+      "user": "far fa-user-circle",
+      "setting": "fas fa-cog"
+    }
+  },
+
+  "explorer": {
+    "tool": {
+      "document": "",
+      "folder": "",
+      "refresh": ""
+    }
+  }
+}
