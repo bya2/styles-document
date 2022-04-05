@@ -29,6 +29,7 @@
     "watch": true,
     "allowJs": true,
     "checkJs": true,
+    "resolveJsonModule": true,
 
     // RULE
     // -- [STRICT]

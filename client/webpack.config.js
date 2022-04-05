@@ -26,7 +26,7 @@ module.exports = (env, options) => {
     },
 
     resolve: {
-      extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
+      extensions: [".json", ".ts", ".tsx", ".js", ".jsx"],
       modules: [path.resolve(__dirname, "./src"), "node_modules"],
       alias: {
         "@": path.resolve(__dirname, "src"),
