@@ -1,0 +1,31 @@
+%size-browser {
+  width: 100vw;
+  height: 100vh;
+}
+
+%outer {
+  position: absolute;
+  inset: 0;
+  @include f-box(d-row, c,c);
+}
+
+%inner-rel {
+  position: relative;
+}
+
+%inner-abs {
+
+}
+
+%pos {
+  
+}
+
+%effect {
+
+}
+
+%wrapper {
+  position: relative;
+  inset: 0;
+}
