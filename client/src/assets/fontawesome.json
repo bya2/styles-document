@@ -16,9 +16,10 @@
 
   "explorer": {
     "tool": {
-      "document": "",
-      "folder": "",
-      "refresh": ""
+      "document": "fas fa-plus-circle",
+      "folder": "fas fa-folder-plus",
+      "refresh": "fas fa-retweet",
+      "close": "fas fa-times"
     }
   }
 }
