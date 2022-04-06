@@ -1,1 +1,29 @@
+// 색상
+// -- 
 $body-bg: yellow;
+
+// 그리드
+// -- HEADER
+$g-t-rows--hd: 1fr;
+// -- NAV
+// -- MAIN
+// -- -- ASIDE
+// -- -- SECTION
+// -- FOOTER
+
+// 미디어쿼리
+// -- 모바일
+$bp-mb-min: 320px;
+$bp-mb-max: 425px;
+// -- 태블릿
+$bp-tb-min: 426px;
+$bp-tb-max: 768px;
+// -- 노트북
+$bp-lt-min: 769px;
+$bp-lt-max: 1024px;
+// -- 데스크탑
+$bp-dt-min: 1025px;
+$bp-dt-max: 1440px;
+// -- 스크린
+$bp-sc-min: 1441px;
+$bp-sc-max: 2560px;
