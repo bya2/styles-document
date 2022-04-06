@@ -1,0 +1,23 @@
+$main-g-cols: 160px 0 1fr;
+$aside-g-cols: 48px 1fr;
+$nav-g-rows: 1fr 1fr;
+
+main {
+  position: relative;
+  @include g-box(t-cols, $main-g-cols);
+}
+
+aside {
+  position: relative;
+  @include g-box(t-cols, $aside-g-cols);
+
+  nav {
+    position: relative;
+    @include g-box(t-rows, $nav-g-rows);
+    // background-color: hsl(0, 0%, 85%);
+  }
+}
+
+section {
+  background-color: hsl(0, 0%, 95%);
+}
