@@ -1,0 +1,7 @@
+@function _get-f-val($key) {
+  @return map-get($f-map, $key);  
+}
+
+@function _get-g-tmpl($key) {
+  @return map-get($g-map, $key);
+}
