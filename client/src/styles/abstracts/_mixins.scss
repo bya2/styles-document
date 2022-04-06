@@ -1,0 +1,208 @@
+// 선택자
+@mixin d-parent($p) {
+  @at-root #{$p} {
+    @content;
+  }
+}
+
+@mixin unify-parent($child) {
+  @at-root #{selector-unify(&, &child)} {
+    @content;
+  }
+}
+
+// 배치
+@mixin pos-abs($posX, $posY) {
+  position: absolute;
+
+  @if $posX == "c" {
+    left: 50%;
+    transform: translateX(-50%);
+  } @else if $posX == "s" {
+    left: 0;
+  } @else if $posX == "e" {
+    right: 0;
+  }
+
+  @if $posY == "c" {
+    top: 50%;
+    transform: translateY(-50%);
+  } @else if $posY == "s" {
+    top: 0;
+  } @else if $posY == "e" {
+    bottom: 0;
+  }
+}
+
+@mixin before-semo($direction) {
+  &::before {
+    content: " ";
+    position: absolute;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+
+    @if $direction == "top" {
+      border-color: transparent transparent black transparent;
+      left: 50%;
+      bottom: 105%;
+      transform: translateX(-50%);
+    } @else if $direction == "bottom" {
+      border-color: black transparent transparent transparent;
+      left: 50%;
+      top: 105%;
+      transform: translateX(-50%);
+    } @else if $direction == "left" {
+      border-color: transparent transparent transparent black;
+      right: 105%;
+      top: 50%;
+      transform: translateY(-50%);
+    } @else if $direction == "right" {
+      border-color: transparent black transparent transparent;
+      left: 105%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+
+// -- INSET
+@mixin posX-C($type: absolute) {
+  position: $type;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@mixin posY-C($type: absolute) {
+  position: $type;
+  top: 50%;
+  transform: translateY(-50%);
+}
+@mixin abs-C {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@mixin abs-TR {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+// -- Flex
+@mixin f-box($d, $j, $a) {
+  display: flex;
+  flex-direction: _get-f-val($d);
+  justify-content: _get-f-val($j);
+  align-items: _get-f-val($a);
+}
+// -- Grid
+@mixin g-box($tmpl-dir, $list, $gap: 0) {
+  display: grid;
+  #{_get-g-tmpl($tmpl-dir)}: $list;
+  gap: $gap;
+}
+
+// 구조
+@mixin outer($pos) {
+  position: $pos;
+  inset: 0;
+  @include f-box(d-row, c, c);
+}
+@mixin inner($pos) {
+  position: $pos;
+  inset: 0;
+  @include f-box(d-col, s, c);
+}
+
+// 모양
+@mixin cycle {
+  border-radius: 50%;
+  border: none;
+}
+
+// 효과
+@mixin effect-shadow($box-size-h, $bold: 0.3) {
+  position: relative;
+  top: 0;
+  left: -#{$box-size-h};
+  width: calc(100% + #{$box-size-h});
+  height: $box-size-h * 2;
+  background-image: linear-gradient(180deg, hsla(0, 0%, 0%, $bold), transparent, transparent);
+  transform-origin: top;
+  transform: skew(45deg);
+  pointer-events: none;
+}
+
+@mixin tooltip($g_parent) {
+  @at-root .box__content {
+    & {
+      position: absolute;
+      padding: 0 6px;
+      text-transform: capitalize;
+      white-space: nowrap;
+      opacity: 0;
+    }
+
+    #{$g_parent}:hover & {
+      opacity: 1;
+      transition-property: opacity;
+      transition-delay: 1s;
+    }
+  }
+}
+
+@mixin e-tooltip($g) {
+  & {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 1px;
+    padding: 0 6px;
+    color: black;
+    text-transform: capitalize;
+    white-space: nowrap;
+    opacity: 0;
+  }
+
+  #{$g}:hover & {
+    opacity: 1;
+    transition-property: opacity;
+    transition-delay: 1s;
+  }
+}
+
+// Wrapper
+@mixin wrapper($alpha, $bold: 1px) {
+  box-shadow: 0 0 0 $bold hsla(0, 0%, 0%, $alpha);
+}
+
+@mixin c-wrapper($alpha, $color: black, $bold: 1px) {
+  box-shadow: 0 0 0 $bold $color
+}
+
+// 반응형 미디어쿼리
+@mixin mobile {
+  @media screen and (max-width: $bp-mb-max) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media screen and (min-width: $bp-tb-min) and (max-width: $bp-tb-max) {
+    @content;
+  }
+}
+@mixin laptop {
+  @media screen and (min-width: $bp-lt-min) and (max-width: $bp-lt-max) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media screen and (min-width: $bp-dt-min) and (max-width: $bp-dt-max) {
+    @content;
+  }
+}
+@mixin screen {
+  @media screen and (min-width: $bp-sc-min) {
+    @content;
+  }
+}
