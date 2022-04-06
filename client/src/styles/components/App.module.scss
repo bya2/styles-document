@@ -1,13 +1,8 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
+$app-g-rows: 1fr;
 
 .App {
+  position: relative;
   width: 100vw;
   min-height: 100vh;
-  background-color: $body-bg;
+  @include g-box(t-rows, $app-g-rows);
 }
