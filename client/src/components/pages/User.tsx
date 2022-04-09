@@ -7,11 +7,14 @@ import Resizer from "@/components/reusable/complete/Resizer";
 import Main from "@components/layouts/User/Main";
 import Section from "@components/layouts/User/Section";
 import Aside from "@components/layouts/User/Aside";
+import Explorer from "../common/explorer/Explorer";
+import Activity from "../common/activity/Activity";
 
 import type { eFunc } from "@/models/Func";
 
-const s_key__visited_users = "visited_users";
-const aside_posX__min = 200;
+const s_key__visited_users: string = "visited_users";
+const aside_posX__0: number = 50;
+const aside_posX__min: number = 200;
 
 export default function UserPage(): JSX.Element {
   const { param__user_id } = useParams();
@@ -21,7 +24,9 @@ export default function UserPage(): JSX.Element {
     (e: MouseEvent): void => {
       const e_cX = e.clientX;
 
-      if (e_cX < aside_posX__min) {
+      if (e_cX < aside_posX__0) {
+        dispatch(set_s__aside_posX__num(0));
+      } else if (e_cX < aside_posX__min) {
         dispatch(set_s__aside_posX__num(aside_posX__min));
       } else {
         dispatch(set_s__aside_posX__num(e.clientX));
@@ -53,7 +58,7 @@ export default function UserPage(): JSX.Element {
       } else {
         converted_ids__str = param__user_id;
       }
-
+      
       window.localStorage.setItem(s_key__visited_users, converted_ids__str);
     } catch (err) {
       console.error("LOC:UserPage-MOUNT");
@@ -63,7 +68,10 @@ export default function UserPage(): JSX.Element {
 
   return (
     <Main>
-      <Aside />
+      <Aside>
+        <Activity />
+        <Explorer />
+      </Aside>
       <Resizer prop__handler__mouse_move__box={cb_handle__mouse_move__box} />
       <Section />
     </Main>
