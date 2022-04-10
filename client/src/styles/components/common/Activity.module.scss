@@ -1,0 +1,126 @@
+.wrapper {
+  $bgc: hsl(0, 0%, 30%);
+  $size_h__area__top: 1fr;
+  $size_h__area__bottom: 1fr;
+
+  // POS
+  position: relative;
+  // BOX
+  // INNER
+  background-color: $bgc;
+  color: white;
+  @include g-box(rows, $size_h__area__top $size_h__area__bottom);
+  padding: 12px 0;
+}
+
+%area {
+  //POS
+  position: relative;
+}
+
+%bar {
+  //BOX
+  width: 100%;
+  //IN
+  display: grid;
+  gap: 8px;
+}
+
+%group {
+  //POS
+  position: relative;
+
+  //IN
+  color: hsl(0, 0%, 75%);
+  cursor: pointer;
+  @include f-box(row, c, c);
+
+  //EVT
+  &:hover {
+    color: hsl(0, 0%, 100%);
+  }
+  &.s__active {
+    border-left: 2px solid white;
+    border-right: 2px solid transparent;
+    color: hsl(0, 0%, 100%);
+    z-index: 3;
+    pointer-events: none;
+  }
+}
+
+%box__icon {
+  //VAR
+  $size: 30px;
+
+  //BOX
+  width: $size;
+  height: $size;
+
+  //IN
+  color: inherit;
+}
+
+%box__content {
+  //POS
+  position: absolute;
+  top: 50%;
+  left: 110%;
+  transform: translateY(-50%);
+
+  //BOX
+  border: 1px solid black;
+
+  //IN
+  background-color: hsl(0, 0%, 100%);
+  color: black;
+  font-family: $roboto;
+  line-height: 24px;
+  white-space: nowrap;
+  padding: 0 6px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.area__tool_bar,
+.area__status_bar {
+  @extend %area;
+
+  .bar {
+    @extend %bar;
+
+    .group {
+      @extend %group;
+      $group: &;
+
+      .box__icon {
+        @extend %box__icon;
+      }
+
+      .box__content {
+        @extend %box__content;
+      }
+    }
+  }
+}
+
+%tooltip {
+  .group {
+    $g: &;
+    .box__content {
+      @include tooltip($g, 0);
+      @include pseudo-before-horn("left", 5px, white);
+    }
+  }
+}
+
+.area__tool_bar {
+  //IN
+  @include f-box(row, c, s);
+  @extend %tooltip;
+}
+
+.area__status_bar {
+  //IN
+  @include f-box(row, c, e);
+  @extend %tooltip;
+}
