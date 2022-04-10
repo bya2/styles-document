@@ -43,8 +43,6 @@
     border-left: 2px solid white;
     border-right: 2px solid transparent;
     color: hsl(0, 0%, 100%);
-    z-index: 3;
-    pointer-events: none;
   }
 }
 
@@ -123,4 +121,11 @@
   //IN
   @include f-box(row, c, e);
   @extend %tooltip;
+
+  .group {
+    &.s__active {
+      z-index: 3;
+      pointer-events: none;
+    }
+  }
 }
