@@ -6,7 +6,7 @@ import { set_s__tool__is_active_item__map } from "@/store/common/activity";
 
 import UList from "@/components/reusable/elements/UList";
 import Content from "@/components/reusable/unit1/Content";
-import { activity_tool_items__arr } from "@/assets/items";
+import { tool_items__arr } from "./items";
 
 import type { item } from "@/models/reusables";
 import type { Handler } from "@/models/Function";
@@ -40,7 +40,7 @@ export default function ToolBar(): JSX.Element {
   return (
     <div className={styles.area__tool_bar}>
       <UList className={styles.bar}>
-        {activity_tool_items__arr.map((tool_item__obj: item) => {
+        {tool_items__arr.map((tool_item__obj: item) => {
           const { id, content, Icon } = tool_item__obj;
           return (
             <li

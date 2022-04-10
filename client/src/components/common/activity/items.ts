@@ -2,6 +2,8 @@ import { fn_GET__auth__sign_in, fn_POST__auth__sign_up } from "@/api/auth";
 import type { item } from "@/models/reusables";
 
 import ExplorerIcon from "@/assets/icon/activity/documents-outline.svg";
+import ListIcon from "@/assets/icon/activity/list-outline.svg";
+import BackArrowIcon from "@/assets/icon/arrow-back-outline.svg";
 import SignUpIcon from "@assets/icon/auth/person-add-outline.svg";
 import SignInIcon from "@assets/icon/auth/log-in-outline.svg";
 import SignOutIcon from "@assets/icon/auth/log-out-outline.svg";
@@ -10,8 +12,18 @@ import UserIcon from "@assets/icon/auth/person-outline.svg";
 export const tool_items__arr: item[] = [
   {
     id: "id__tool_item__explorer",
-    content: "explorer",
+    content: "탐색기",
     Icon: ExplorerIcon,
+  },
+  {
+    id: "id__tool_item__visited_pages",
+    content: "방문한 페이지 목록",
+    Icon: ListIcon,
+  },
+  {
+    id: "id__tool_item__forward_page",
+    content: "최근 방문한 페이지",
+    Icon: BackArrowIcon,
   },
 ];
 
