@@ -1,13 +1,15 @@
 import styles from "@styles-components/common/Activity.module.scss";
 
+import { useCallback } from "react";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { set_s__tool__is_active_item__map } from "@/store/common/activity";
+
 import UList from "@/components/reusable/elements/UList";
 import Content from "@/components/reusable/unit1/Content";
 import { activity_tool_items__arr } from "@/assets/items";
+
 import type { item } from "@/models/reusables";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { Handler } from "@/models/Function";
-import { useCallback, useEffect } from "react";
-import { set_s__tool__is_active_item__map } from "@/store/common/activity";
+import type { Handler } from "@/models/Function";
 
 export default function ToolBar(): JSX.Element {
   // State
@@ -18,19 +20,17 @@ export default function ToolBar(): JSX.Element {
   // Handler
   const cb_handle__click__tool_item: Handler<React.MouseEvent> = useCallback(
     (e) => {
-      if (!e) return;
-
       e.stopPropagation();
 
-      const el = e.currentTarget;
-      const el_key = el.getAttribute("data-key");
+      const e_tg__curr = e.currentTarget;
+      const e_tg__key = e_tg__curr.getAttribute("data-key");
 
-      if (!el_key) return;
+      if (!e_tg__key) return;
 
       dispatch(
         set_s__tool__is_active_item__map({
           ...s__is_active_item__map,
-          [el_key]: true,
+          [e_tg__key]: true,
         })
       );
     },
