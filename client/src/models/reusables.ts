@@ -1,6 +1,8 @@
-import type { promiseFunc } from "./Func";
-
 export interface obj<T = any> {
+  [key: string]: T;
+}
+
+export interface map<T> {
   [key: string]: T;
 }
 
@@ -13,6 +15,7 @@ export interface item extends obj{
   name?: string;
   content?: string;
   icon?: string;
+  Icon?: any;
   items?: item[];
-  api?: promiseFunc;
+  api?: (obj?: any) => Promise<any>;
 }
