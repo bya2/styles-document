@@ -1,66 +1,71 @@
 import React from "react";
-import { IItem } from "./Common";
-import type { Func, eFunc, pFunc } from "./Func";
+import { Func, AsyncFunc, Handler, StateSetter } from "./Function";
+import { item, map } from "./reusables";
 
-type Children = JSX.Element | JSX.Element[];
+type ElementValue = string | number | readonly string[];
 
-// Common
-
-export interface IProps {
-  className?: string;
+export interface Props extends Attrs, Handlers {
+  children?: React.ReactNode;
+  cssModule?: map<string>;
+  prop__id?: string;
   prop__key?: string;
   prop__content?: string;
+  prop__element?: JSX.Element | React.FC | React.FunctionComponent<React.SVGAttributes<SVGElement>>
 }
 
-export interface IWrapperProps {
-  children?: React.ReactNode;
+export interface Attrs {
+  // BASE
+  id?: string;
+  className?: string;
+  name?: string;
+  value?: ElementValue;
+  tabIndex?: number;
+  inlineStyle?: React.CSSProperties;
+
+  // INPUT & TXTA
+  placeholder?: string;
+  readonly?: boolean;
+  disabled?: boolean;
+  autoFocus?: boolean;
+  autoComplete?: "on" | "off";
+
+  // INPUT
+  type?: string;
+
+  // TXTA
+  rows?: number;
+  defaultValue?: ElementValue;
+
+  // BUTTON
+  buttonType?: "submit" | "button" | "reset";
 }
 
-export interface IAttrProps {
-  className?: undefined | string;
-  id?: undefined | string;
-  name?: undefined | string;
-  value?: undefined | string | number | readonly string[];
-  placeholder?: undefined | string;
-  disabled?: undefined | boolean;
-  tabIndex?: undefined | number;
-  style?: undefined | React.CSSProperties;
-}
+export interface Handlers {
+  // CHANGE
+  onChange?: Handler<React.ChangeEvent>;
 
-export interface IInputAttrProps extends IAttrProps{
-  type?: undefined | string;
-  placeholder?: undefined | string;
-  autoFocus?: undefined | boolean;
-  autoComplete?: undefined | "on" | "off";
-}
+  // KEY
+  onKeyUp?: Handler<React.KeyboardEvent>;
+  onKeyDown?: Handler<React.KeyboardEvent>;
 
-export interface IButtonAttrProps {
-  className?: undefined | string;
-  type: "submit" | "button" | "reset" | undefined;
-  value: string;
-}
+  // MOUSE
+  onMouseUp?: Handler<React.MouseEvent>;
+  onMouseDown?: Handler<React.MouseEvent>;
+  onMouseEnter?: Handler<React.MouseEvent>;
+  onMouseLeave?: Handler<React.MouseEvent>;
+  onClick?: Handler<React.MouseEvent>;
 
-export interface IHandlerProps {
-  onChange?: eFunc<React.ChangeEvent>
-  onKeyUp?: eFunc<React.KeyboardEvent>
-  onKeyDown?: eFunc<React.KeyboardEvent>
-  onMouseUp?: eFunc<React.MouseEvent>
-  onMouseDown?: eFunc<React.MouseEvent>
-  onClick?: eFunc<React.MouseEvent>
-  onFocus?: eFunc<React.FocusEvent>
-  onBlur?: eFunc<React.FocusEvent>
-  onSubmit?: eFunc<React.FormEvent>
-}
+  // FOCUS
+  onFocus?: Handler<React.FocusEvent>;
+  onBlur?: Handler<React.FocusEvent>;
 
-export interface ICommonProps extends IWrapperProps {
-}
-
-export interface IReusableProps extends IWrapperProps, IAttrProps, IHandlerProps {
+  // FORM
+  onSubmit?: Handler<React.FormEvent>;
 }
 
 // Custom
 export interface IResizerProps {
-  prop__handler__mouse_move__box: eFunc<MouseEvent>;
+  prop__handler__mouse_move__box: Handler<MouseEvent>;
 }
 
 export interface IModalProps {
@@ -70,67 +75,23 @@ export interface IModalProps {
 
 export interface ISignContainerProps {
   prop__mode?: string;
-  prop__items: IItem[];
-  prop__api: pFunc<any>;
+  prop__items?: item[];
+  prop__api?: AsyncFunc<any, any>;
   prop__setter__close_modal: Func;
 }
 
-
-export interface Attrs {
-  className?: undefined | string;
-  id?: undefined | string;
-  name?: undefined | string;
-  value?: undefined | string | number | readonly string[];
-  placeholder?: undefined | string;
-  disabled?: undefined | boolean;
-  tabIndex?: undefined | number;
-  style?: undefined | React.CSSProperties;
-}
-
-export interface InputAttrs extends Attrs{
+export interface InputAttrs extends Attrs {
   type?: undefined | string;
   placeholder?: undefined | string;
   autoFocus?: undefined | boolean;
   autoComplete?: undefined | "on" | "off";
 }
 
-export interface EventHandlers {
-  onChange?: eFunc<React.ChangeEvent>
-  onKeyUp?: eFunc<React.KeyboardEvent>
-  onKeyDown?: eFunc<React.KeyboardEvent>
-  onMouseUp?: eFunc<React.MouseEvent>
-  onMouseDown?: eFunc<React.MouseEvent>
-  onClick?: eFunc<React.MouseEvent>
-  onFocus?: eFunc<React.FocusEvent>
-  onBlur?: eFunc<React.FocusEvent>
-  onSubmit?: eFunc<React.FormEvent>
-}
-
-export interface Props {
-  children?: Children;
-}
-
 export interface ResizerProps extends Props {
-  prop__fn_handle__mouse_move__box: eFunc<MouseEvent>;
+  prop__handler__mouse_move__box: Handler<MouseEvent>;
 }
-
 
 export interface ModalProps extends Props {
   prop__getter__is_actived: boolean;
-  prop__setter__close_modal: Func;
+  prop__setter__close_modal: StateSetter;
 }
-
-
-
-// Reusable
-// -- Unit1
-export interface ContainerProps extends Props, Attrs, EventHandlers {};
-
-// -- Element
-export interface FormProps extends Props, Attrs, EventHandlers {};
-export interface FieldsetProps extends Props, Attrs {
-  prop__legend?: string;
-}
-export interface InputProps extends InputAttrs, EventHandlers {};
-export interface UListProps extends Props, Attrs {};
-export interface ItemProps extends Props, Attrs {};
