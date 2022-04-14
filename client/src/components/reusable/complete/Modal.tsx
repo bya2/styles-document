@@ -1,7 +1,13 @@
 import styles from "@styles-components/reusable/Modal.module.scss";
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import type { ModalProps as Props } from "@models/Props";
+import type { Props as baseProps } from "@models/Props";
+import type { StateSetter } from "@/models/Function";
+
+interface Props extends baseProps {
+  prop__getter__is_actived: boolean;
+  prop__setter__close_modal: StateSetter;
+}
 
 export default function Modal({ children, prop__getter__is_actived, prop__setter__close_modal }: Props): React.ReactPortal | JSX.Element {
   // State
