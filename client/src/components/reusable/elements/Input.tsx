@@ -1,10 +1,11 @@
-import type { InputProps as Props } from "@models/Props";
+import type { Props } from "@models/Props";
 
 export default function Input({
   type,
   id,
   name,
   className,
+  inlineStyle,
   placeholder,
   disabled,
   value,
@@ -20,15 +21,16 @@ export default function Input({
 }: Props) {
   return (
     <input
-      type={type ?? "text"}
+      type={type}
       id={id}
       name={name}
       className={className}
+      style={inlineStyle}
       placeholder={placeholder}
       disabled={disabled}
       value={value}
       autoFocus={autoFocus}
-      autoComplete={autoComplete === undefined ? undefined : !autoComplete || autoComplete === "off" ? "off" : "on"}
+      autoComplete={autoComplete}
       tabIndex={tabIndex}
       onChange={onChange}
       onKeyUp={onKeyUp}

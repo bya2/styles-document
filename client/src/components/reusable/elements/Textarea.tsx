@@ -1,7 +1,10 @@
+import { Props } from "@/models/Props";
+
 export default function Textarea({
   id,
   name,
   className,
+  inlineStyle,
   rows,
   placeholder,
   defaultValue,
@@ -10,12 +13,13 @@ export default function Textarea({
   onMouseDown,
   onClick,
   onKeyDown,
-}: any) {
+}: Props) {
   return (
     <textarea
       id={id}
       name={name}
       className={className}
+      style={inlineStyle}
       rows={rows}
       placeholder={placeholder}
       defaultValue={defaultValue}

@@ -1,16 +1,16 @@
 import React from "react";
-import type { InputProps as Props } from "@models/Props";
+import type { Props } from "@models/Props";
 
 function Input(
   {
-    type,
+    type = "text",
     id,
     name,
     className,
     placeholder,
     disabled,
     value,
-    style,
+    inlineStyle,
     autoFocus,
     autoComplete,
     tabIndex,
@@ -21,7 +21,7 @@ function Input(
     onBlur,
     onClick,
   }: Props,
-  ref: undefined | React.LegacyRef<HTMLInputElement>
+  ref: React.LegacyRef<HTMLInputElement> | undefined
 ) {
   return (
     <input
@@ -29,10 +29,11 @@ function Input(
       id={id}
       name={name}
       className={className}
+      style={inlineStyle}
       placeholder={placeholder}
       disabled={disabled}
       autoFocus={autoFocus}
-      autoComplete={autoComplete === undefined ? undefined : !autoComplete || autoComplete === "off" ? "off" : "on"}
+      autoComplete={autoComplete}
       tabIndex={tabIndex}
       value={value}
       onChange={onChange}
@@ -41,7 +42,6 @@ function Input(
       onFocus={onFocus}
       onBlur={onBlur}
       onClick={onClick}
-      style={style}
       ref={ref}
     />
   );
