@@ -1,12 +1,12 @@
-import type { obj, cond } from "./reusables";
+import type { obj } from "./reusables";
 
-type FType = "F";
-type DType = "D";
+type FType = "nt__f";
+type DType = "nt__d";
 type nodeTypes = FType | DType;
 
 export interface expRef {
   id: string;
-  name: string;
+  // name: string;
 }
 
 export interface expRoot extends obj<any>, expRef {};
@@ -27,7 +27,6 @@ export interface expStorage {
 
 export interface expTree {
   id: string;
-  name: string;
   children: expNode[];
 }
 
