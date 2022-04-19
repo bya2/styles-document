@@ -6,7 +6,7 @@ interface Props extends baseProps {
 
 export default function Message({ cssModule, className, prop__messages, onClick }: Props) {
   return (
-    <div className={`${className} ${cssModule?.bar} ${cssModule?.message}`} onClick={onClick}>
+    <div className={`${className} ${cssModule?.bar} ${cssModule?.messages}`} onClick={onClick}>
       <>
         {prop__messages?.map((message, i) => {
           return <span key={`message${i}`}>{message}</span>;
