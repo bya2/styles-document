@@ -7,9 +7,11 @@ const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const ReactRefreshPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = (env, options) => {
-  // const is_prod__mode = env.mode === "production";
+  const is_prod = env.mode === "production";
+  const is_dev = !is_prod;
   const entry_path__mode = "./src/index.tsx";
 
   return {
@@ -70,6 +72,7 @@ module.exports = (env, options) => {
                 presets: ["@babel/preset-react"],
                 cacheDirectory: true,
                 cacheCompression: false,
+                plugins: [is_dev && require.resolve("react-refresh/babel")].filter(Boolean),
               },
             },
             {
@@ -101,7 +104,7 @@ module.exports = (env, options) => {
                   @import "@styles/abstracts/__abstracts-dir.scss";
                   @import "@styles/base/__base-dir.scss";
                   @import "@styles/layouts/__layouts-dir.scss";
-                `
+                `,
               },
             },
           ],
@@ -156,6 +159,7 @@ module.exports = (env, options) => {
         verbose: true,
         cleanOnceBeforeBuildPatterns: ["**/*", path.resolve(process.cwd(), "build/**/*")],
       }),
+      new ReactRefreshPlugin(),
     ],
 
     optimization: {
