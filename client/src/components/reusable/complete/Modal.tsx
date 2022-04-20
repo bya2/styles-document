@@ -3,13 +3,20 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import type { Props as baseProps } from "@models/Props";
 import type { StateSetter } from "@/models/Function";
+import Outer from "../wrapper/Outer";
+import Inner from "../wrapper/Inner";
+import Button from "../box/Button";
 
 interface Props extends baseProps {
   prop__getter__is_actived: boolean;
   prop__setter__close_modal: StateSetter;
 }
 
-export default function Modal({ children, prop__getter__is_actived, prop__setter__close_modal }: Props): React.ReactPortal | JSX.Element {
+export default function Modal({
+  children,
+  prop__getter__is_actived,
+  prop__setter__close_modal,
+}: Props): React.ReactPortal | JSX.Element {
   // State
   // -- L
   const [s__is_mouse_down__c_btn__bool, set_s__is_mouse_down__c_btn__bool] = useState(false);
@@ -35,19 +42,20 @@ export default function Modal({ children, prop__getter__is_actived, prop__setter
 
   return prop__getter__is_actived ? (
     createPortal(
-      <div className={styles.outer} onMouseDown={(e) => fn_handle__mouse_down__outer(e)} onMouseUp={(e) => {}}>
-        <div className={styles.inner} onMouseDown={(e) => e.stopPropagation()}>
-          <button
-            className={`${styles.inner__btn__close} ${s__is_mouse_down__c_btn__bool ? styles.s__mouse_down : ""}`}
+      <Outer cssModule={styles} onMouseDown={(e) => fn_handle__mouse_down__outer(e)} onMouseUp={(e) => {}}>
+        <Inner cssModule={styles} onMouseDown={(e) => e.stopPropagation()}>
+          <Button
+            cssModule={styles}
+            className={`${styles.close} ${s__is_mouse_down__c_btn__bool ? styles.s__mouse_down : ""}`}
+            prop__element={<span>X</span>}
             onMouseDown={(e) => fn_handle__mouse_down__c_btn(e)}
-          >
-            <i className={`${styles.icon__close} ${"fa"}`}>X</i>
-          </button>
-
+          />
           <div>{children}</div>
-        </div>
-      </div>,
+        </Inner>
+      </Outer>,
       document.getElementById("modal") as HTMLElement
     )
-  ) : <></>;
+  ) : (
+    <></>
+  );
 }
