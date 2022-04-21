@@ -5,3 +5,35 @@
 body {
   margin: 0;
 }
+
+input, textarea, button {
+  outline: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+%reset-fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+  legend {
+    user-select: none;
+  }
+}
+
+%reset-label {
+  user-select: none;
+}
+
+%reset-button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
