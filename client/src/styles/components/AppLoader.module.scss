@@ -1,0 +1,50 @@
+.outer {
+  position: relative;
+  @include rectangle-size(100vw, 100vh);
+  background-color: hsla(0, 0%, 0%, 0.1);
+}
+
+.inner {
+  // POS
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  // BOX
+  @include square-size(100px);
+
+  // INNER
+  background-color: transparent;
+  @include dis-f(col, c, c);
+}
+
+.spinner {
+  // POS
+  position: relative;
+
+  // BOX
+  @include circle-size(50%);
+  border: 8px solid transparent;
+  border-top-color: #ad60f5;
+  animation: spin 1.2s linear infinite;
+}
+
+.content {
+  font-family: $roboto;
+  font-size: 1.2em;
+  line-height: 2em;
+}
+
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

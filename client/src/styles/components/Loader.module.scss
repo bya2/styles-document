@@ -1,0 +1,29 @@
+.box.loader {
+  //POS
+  position: absolute;
+
+  //SIZE
+  inset: 0;
+
+  //MODEL
+  border: 2px solid #fff;
+  border-top-color: transparent;
+  border-radius: 50%;
+
+  //INNER
+
+  //OPER
+  animation: ani-spin 0.5s linear infinite;
+}
+
+@keyframes ani-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(90deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
