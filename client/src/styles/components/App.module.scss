@@ -1,8 +1,5 @@
-$app-g-rows: 1fr;
-
 .App {
   position: relative;
   width: 100vw;
   min-height: 100vh;
-  @include g-box(t-rows, $app-g-rows);
 }
