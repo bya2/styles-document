@@ -1,0 +1,20 @@
+.box {
+  // POS
+  position: absolute;
+  z-index: 5;
+
+  // BOX
+  border: 1px solid black;
+
+  // INNER
+  padding: 0 6px;
+  background-color: hsl(0, 0%, 100%);
+  color: black;
+  font-family: $roboto;
+  line-height: 24px;
+  white-space: nowrap;
+
+  // OPER
+  user-select: none;
+  pointer-events: none;
+}

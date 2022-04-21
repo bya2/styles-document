@@ -1,4 +1,4 @@
-import styles from "@styles-components/reusable/Tooltip.module.scss";
+import styles from "@styles-components/Tooltip.module.scss";
 import { createPortal } from "react-dom";
 
 interface Props {
