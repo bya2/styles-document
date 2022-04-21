@@ -1,4 +1,4 @@
-import styles from "@styles-components/reusable/Resizer.module.scss";
+import styles from "@styles-components/Resizer.module.scss";
 import { ResizerProps as Props } from "@models/Props";
 
 export default function Resizer({ prop__handler__mouse_move__box }: Props): JSX.Element {

@@ -1,0 +1,12 @@
+.box {
+  position: relative;
+  left: -2px;
+  z-index: 6;
+  padding: 2px;
+  user-select: none;
+  cursor: ew-resize;
+
+  &:hover {
+    background-color: hsla(221, 100%, 80%, 0.7);
+  }
+}
