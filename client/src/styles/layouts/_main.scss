@@ -4,20 +4,21 @@ $nav-g-rows: 1fr 1fr;
 
 main {
   position: relative;
-  @include g-box(t-cols, $main-g-cols);
+  @include dis-g(cols, $main-g-cols);
+  height: 100vh;
 }
 
 aside {
   position: relative;
-  @include g-box(t-cols, $aside-g-cols);
+  @include dis-g(cols, $aside-g-cols);
 
   nav {
     position: relative;
-    @include g-box(t-rows, $nav-g-rows);
-    // background-color: hsl(0, 0%, 85%);
+    @include dis-g(rows, $nav-g-rows);
   }
 }
 
 section {
-  background-color: hsl(0, 0%, 95%);
+  position: relative;
+  height: 100%;
 }
