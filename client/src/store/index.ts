@@ -1,13 +1,21 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import authRefReducer from "./common/authRef";
-import resizerPosReducer from "./reusable/resizerPos";
+import explorerReducer from "./common/explorer";
+import activityReducer from "./common/activity";
+import authReducer from "./common/auth";
+// import layerListReducer from "./common/layerList";
+import resizerReducer from "./reusable/resizer";
+import modalReducer from "./reusable/modal";
 
 // STORE
 export const store = configureStore({
   reducer: {
-    authRef: authRefReducer,
-    resizerPos: resizerPosReducer,
+    explorer: explorerReducer,
+    activity: activityReducer,
+    auth: authReducer,
+    // layerList: layerListReducer,
+    resizer: resizerReducer,
+    modal: modalReducer,
   }
 })
 
