@@ -3,22 +3,28 @@ $aside-g-cols: 48px 1fr;
 $nav-g-rows: 1fr 1fr;
 
 main {
-  position: relative;
-  @include dis-g(cols, $main-g-cols);
-  height: 100vh;
-}
-
-aside {
-  position: relative;
-  @include dis-g(cols, $aside-g-cols);
-
-  nav {
-    position: relative;
-    @include dis-g(rows, $nav-g-rows);
+  aside.main-left {
+    background-color: #f6f7fa;
   }
 }
 
-section {
-  position: relative;
-  height: 100%;
-}
+// main {
+//   position: relative;
+//   // @include dis-g(cols, $main-g-cols);
+//   height: 100vh;
+// }
+
+// aside {
+//   position: relative;
+//   @include dis-g(cols, $aside-g-cols);
+
+//   nav {
+//     position: relative;
+//     @include dis-g(rows, $nav-g-rows);
+//   }
+// }
+
+// section {
+//   position: relative;
+//   height: 100%;
+// }

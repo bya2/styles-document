@@ -1,0 +1,72 @@
+$ga-app: unique-id();
+$ga-header: unique-id();
+$ga-main: unique-id();
+$ga-footer: unique-id();
+
+$ga-aside: unique-id();
+$ga-resizer: unique-id();
+$ga-section: unique-id();
+
+$ga-act-map: unique-id();
+$ga-exp-map: unique-id();
+
+$ga-act-tool: unique-id();
+$ga-act-bookmark: unique-id();
+$ga-act-search: unique-id();
+
+.App {
+  $sh-r-header: 32px;
+  $sh-r-main: 1fr;
+  $sh-r-footer: 32px;
+
+  grid-area: $ga-app;
+  display: grid;
+  grid-template-rows: $sh-r-header $sh-r-main $sh-r-footer;
+  grid-template-areas:
+    quote($ga-main)
+    quote($ga-main)
+    quote($ga-main);
+
+  main {
+    $sw-c-aside: 1fr;
+    $sw-c-resizer: 0px;
+    $sw-c-section: 1fr;
+
+    grid-area: $ga-main;
+    display: grid;
+    grid-template-columns: $sw-c-aside $sw-c-resizer $sw-c-section;
+    grid-template-areas: quote(#{$ga-aside $ga-resizer $ga-section});
+  }
+
+  main > aside:nth-of-type(1) {
+    $sh-r-status-map: 80px;
+    $sh-r-act-map: auto;
+    $sh-r-view-map: 1fr;
+
+    grid-area: $ga-aside;
+    display: grid;
+    grid-template-rows: $sh-r-status-map $sh-r-act-map $sh-r-view-map;
+    // grid-template-rows: 1fr;
+    // grid-template-areas:
+    //   quote($ga-act-map)
+    //   quote($ga-exp-map);
+  }
+
+  main > section {
+    grid-area: $ga-section;
+  }
+}
+
+@include mq-mobile {
+  // COL - 1
+  // ROW - ASIDE(ACT[TOOL,],EXP[TOP,BOTTOM])-SECTION()
+}
+
+@include mq-tablet {
+}
+
+@include mq-laptop {
+}
+
+@include mq-desktop {
+}
