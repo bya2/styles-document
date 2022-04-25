@@ -1,33 +1,7 @@
-import { Props } from "@/models/Props";
+import { TextareaHTMLAttributes } from "react";
 
-export default function Textarea({
-  id,
-  name,
-  className,
-  inlineStyle,
-  rows,
-  placeholder,
-  defaultValue,
-  value,
-  onChange,
-  onMouseDown,
-  onClick,
-  onKeyDown,
-}: Props) {
-  return (
-    <textarea
-      id={id}
-      name={name}
-      className={className}
-      style={inlineStyle}
-      rows={rows}
-      placeholder={placeholder}
-      defaultValue={defaultValue}
-      value={value}
-      onChange={onChange}
-      onMouseDown={onMouseDown}
-      onClick={onClick}
-      onKeyDown={onKeyDown}
-    ></textarea>
-  );
+type T_txta_props = TextareaHTMLAttributes<HTMLTextAreaElement>;
+
+export default function Textarea(props: T_txta_props) {
+  return <textarea {...props} data-id={props.id} />;
 }

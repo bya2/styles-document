@@ -1,10 +1,10 @@
-import { Props as baseProps } from "@/models/Props";
+import { I_div_bs_props } from "@/models/props";
 
-interface Props extends baseProps {
+interface I_props extends I_div_bs_props {
   prop__messages?: string[];
 }
 
-export default function Message({ cssModule, className, prop__messages, onClick }: Props) {
+export default function Msgs({ cssModule, className, prop__messages, onClick }: I_props) {
   return (
     <div className={`${className} ${cssModule?.bar} ${cssModule?.messages}`} onClick={onClick}>
       <>

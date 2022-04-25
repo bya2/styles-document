@@ -1,15 +1,10 @@
-import type { Props as baseProps } from "@/models/Props";
+import type { I_div_bs_props } from "@/models/props";
 
-interface Props extends baseProps{
-  prop__title?: string;
-  prop__sub?: string;
-}
-
-export default function Title({ cssModule, className, prop__title, prop__sub }: Props): JSX.Element {
+export default function Title({ cssModule, className, prop__title, prop__sub_title }: I_div_bs_props): JSX.Element {
   return (
     <div className={`${className} ${cssModule?.box} ${cssModule?.title}`}>
-      <h3>{prop__title}</h3>
-      {prop__sub ? <span>{prop__sub}</span> : null}
+      <h3 className={cssModule?.content}>{prop__title}</h3>
+      {prop__sub_title ? <span>{prop__sub_title}</span> : null}
     </div>
   );
 }

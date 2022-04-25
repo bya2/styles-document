@@ -1,28 +1,11 @@
-import type { Props } from "@/models/Props";
+import type { I_li_bs_props } from "@/models/props";
+import { LiHTMLAttributes } from "react";
 
-export default function Item({
-  children,
-  cssModule,
-  className,
-  prop__id,
-  prop__key,
-  onClick,
-  onMouseDown,
-  onMouseUp,
-  onMouseEnter,
-  onMouseLeave,
-}: Props) {
+export default function Item(props: I_li_bs_props) {
+  const { children, cssModule, className, prop__id } = props;
+
   return (
-    <li
-      data-id={prop__id}
-      data-key={prop__key}
-      className={`${cssModule?.group} ${cssModule?.item} ${className}`}
-      onClick={onClick}
-      onMouseDown={onMouseDown}
-      onMouseUp={onMouseUp}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
+    <li {...props} data-id={prop__id} className={`${cssModule?.group} ${cssModule?.item} ${className}`}>
       <>{children}</>
     </li>
   );

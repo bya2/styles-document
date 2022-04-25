@@ -1,10 +1,6 @@
-import type { Props as baseProps } from "@models/Props";
+import type { I_fs_bs_props } from "@/models/props";
 
-interface Props extends baseProps {
-  prop__legend?: string;
-}
-
-export default function Field({ children, cssModule, className, prop__legend, tabIndex, }: Props): JSX.Element {
+export default function Field({ children, cssModule, className, prop__legend, tabIndex }: I_fs_bs_props): JSX.Element {
   return (
     <fieldset className={`${cssModule?.bar} ${cssModule?.fieldset} ${className}`} tabIndex={tabIndex}>
       <>

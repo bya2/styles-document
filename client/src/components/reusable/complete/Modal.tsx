@@ -1,27 +1,27 @@
-import styles from "@styles-components/reusable/Modal.module.scss";
+import styles from "@styles-components/Modal.module.scss";
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import type { Props as baseProps } from "@models/Props";
-import type { StateSetter } from "@/models/Function";
 import Outer from "../wrapper/Outer";
 import Inner from "../wrapper/Inner";
 import Button from "../box/Button";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { set_s__status__close_modal } from "@/store/reusable/modal";
 
-interface Props extends baseProps {
+interface I_props {
+  children: React.ReactNode;
   prop__getter__is_actived: boolean;
-  prop__setter__close_modal: StateSetter;
+  prop__setter__close_modal: () => void;
 }
 
 export default function Modal({
   children,
   prop__getter__is_actived,
   prop__setter__close_modal,
-}: Props): React.ReactPortal | JSX.Element {
-  // State
-  // -- L
+}: I_props): React.ReactPortal | JSX.Element {
+  // STATE
   const [s__is_mouse_down__c_btn__bool, set_s__is_mouse_down__c_btn__bool] = useState(false);
 
-  // Event
+  // HANDLER
   const fn_handle__mouse_down__outer = (e: React.MouseEvent): void => {
     e.stopPropagation();
     e.currentTarget.addEventListener("mouseup", () => prop__setter__close_modal(), { once: true });
@@ -47,7 +47,7 @@ export default function Modal({
           <Button
             cssModule={styles}
             className={`${styles.close} ${s__is_mouse_down__c_btn__bool ? styles.s__mouse_down : ""}`}
-            prop__element={<span>X</span>}
+            prop__element={<span>{"X"}</span>}
             onMouseDown={(e) => fn_handle__mouse_down__c_btn(e)}
           />
           <div>{children}</div>

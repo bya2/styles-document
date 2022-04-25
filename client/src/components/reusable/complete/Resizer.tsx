@@ -1,7 +1,11 @@
 import styles from "@styles-components/Resizer.module.scss";
-import { ResizerProps as Props } from "@models/Props";
+import { T_Handler } from "@/models/function";
 
-export default function Resizer({ prop__handler__mouse_move__box }: Props): JSX.Element {
+interface I_props {
+  prop__handler__mouse_move__box: T_Handler<MouseEvent>;
+}
+
+export default function Resizer({ prop__handler__mouse_move__box }: I_props): JSX.Element {
   return (
     <div
       className={styles.box}

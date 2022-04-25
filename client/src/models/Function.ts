@@ -1,15 +1,13 @@
-import type { obj } from "./reusables";
+import type { I_map } from "./reusables";
 
-export type Handler<T> = (arg: T) => void;
+export type T_Handler<I> = (arg: I) => void;
 
-export type Setter<I = obj> = (arg: I) => void;
-export type Getter<O = any> = () => O;
-export type PromiseGetter<O = any> = () => Promise<O>;
+export type T_Setter<I = I_map> = (arg: I) => void;
 
-export type Func<I = any, O = void> = (arg: I) => O;
-export type AsyncFunc<I = any, O = void> = (arg: I) => Promise<O>;
+export type T_Getter<O = any> = () => O;
 
-export type NoneIOFunc = () => void;
-export type SameIOFunc<T> = (arg: T) => T;
+export type T_AsyncFunc<I = any, O = void> = (arg: I) => Promise<O>
 
-export type StateSetter<T = obj> = (arg?: T) => void; 
+export type T_Func<I = any, O = void> = (arg: I) => O;
+
+export type T_SameIOFunc<T> = (arg: T) => T;

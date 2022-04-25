@@ -1,51 +1,20 @@
-import React from "react";
-import type { Props } from "@models/Props";
+import { useRef, useImperativeHandle, InputHTMLAttributes, Ref, forwardRef } from "react";
 
-function Input(
-  {
-    type = "text",
-    id,
-    name,
-    className,
-    placeholder,
-    disabled,
-    value,
-    inlineStyle,
-    autoFocus,
-    autoComplete,
-    tabIndex,
-    onChange,
-    onKeyUp,
-    onKeyDown,
-    onFocus,
-    onBlur,
-    onClick,
-  }: Props,
-  ref: React.LegacyRef<HTMLInputElement> | undefined
-) {
+interface T_input_props extends InputHTMLAttributes<HTMLInputElement> {}
+
+function Input(props: T_input_props, ref: Ref<HTMLInputElement>) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useImperativeHandle(ref, () => inputRef.current as HTMLInputElement, [inputRef]);
+
   return (
     <input
-      type={type}
-      id={id}
-      name={name}
-      className={className}
-      style={inlineStyle}
-      placeholder={placeholder}
-      disabled={disabled}
-      autoFocus={autoFocus}
-      autoComplete={autoComplete}
-      tabIndex={tabIndex}
-      value={value}
-      onChange={onChange}
-      onKeyUp={onKeyUp}
-      onKeyDown={onKeyDown}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      onClick={onClick}
-      ref={ref}
+      {...props}
+      data-id={props.id}
+      ref={inputRef}
     />
   );
 }
 
-const CompRefInput = React.forwardRef(Input);
+const CompRefInput = forwardRef<HTMLInputElement, T_input_props>(Input);
 export default CompRefInput;
