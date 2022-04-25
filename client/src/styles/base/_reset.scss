@@ -2,11 +2,14 @@
   box-sizing: border-box;
 }
 
+// ELEMENT
 body {
   margin: 0;
 }
 
-input, textarea, button {
+input,
+textarea,
+button {
   outline: none;
 }
 
@@ -19,6 +22,37 @@ li {
   list-style-type: none;
 }
 
+// SEMANTIC
+// header {
+//   grid-area: header;
+// }
+
+// main {
+//   grid-area: main;
+// }
+
+// section {
+//   grid-area: section;
+// }
+
+// aside {
+//   grid-area: aside;
+// }
+
+// footer {
+//   grid-area: footer;
+// }
+
+// CLASS
+.rel {
+  position: relative;
+}
+
+.abs {
+  position: absolute;
+}
+
+// EXTEND
 %reset-fieldset {
   margin: 0;
   padding: 0;
@@ -36,4 +70,16 @@ li {
   outline: none;
   border: none;
   background-color: transparent;
+}
+
+%rs-input {
+  position: relative;
+  @include square-size(100%);
+  outline: none;
+  border: none;
+  padding: 0 6px;
+  background-color: transparent;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
 }
