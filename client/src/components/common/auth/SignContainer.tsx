@@ -1,28 +1,33 @@
-import styles from "@styles-components/common/Auth.module.scss";
+import styles from "@styles-components/Auth.module.scss";
 
-import React, { useState } from "react";
-import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import { useState } from "react";
+import { useAppDispatch } from "@/store/hooks";
 
-import Container from "@components/reusable/unit1/Container";
-import Fieldset from "@components/reusable/elements/Fieldset";
-import UList from "@components/reusable/elements/UList";
+import Container from "@/components/reusable/area/Container";
+import UList from "@components/reusable/bar/UList";
+import Field from "@/components/reusable/bar/Field";
+import Btn from "@components/reusable/box/Button";
 import Input from "@components/reusable/elements/Input";
-import ButtonBox from "@components/reusable/unit1/ButtonBox";
 
-import { fn_get__str_map__obj } from "@/logic/common";
+import { fn_get__str_map__obj } from "@/logic/reusable";
+import type { I_obj } from "@/models/reusables";
+import type { T_Handler } from "@/models/function";
+import { set_s__status__close_modal } from "@/store/reusable/modal";
 
-import type { ISignContainerProps as Props } from "@models/Props";
+interface I_props {
+  prop__mode?: string;
+  prop__items?: I_obj[];
+  prop__api?: (obj?: any) => Promise<any>;
+  prop__setter__close_modal: () => void;
+}
 
-export default function SignContainer({ prop__mode, prop__items = [], prop__api, prop__setter__close_modal }: Props) {
+export default function AuthContainer({ prop__mode, prop__items = [], prop__api, prop__setter__close_modal }: I_props) {
   // State
-  // -- G
-  const dispatch =  useAppDispatch();
-
-  // -- L
+  const dispatch = useAppDispatch();
   const [s__form_infos__obj, set_s__form_infos__obj] = useState(fn_get__str_map__obj(prop__items));
 
   // Event
-  const fn_handle__submit__form = (e: React.FormEvent): void => {
+  const fn_handle__submit__form: T_Handler<React.FormEvent> = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -33,11 +38,12 @@ export default function SignContainer({ prop__mode, prop__items = [], prop__api,
         
       })
       .then(() => {
+        // dispatch(set_s__status__close_modal());
         prop__setter__close_modal();
       });
   };
 
-  const fn_handle__change__input = (e: React.ChangeEvent) => {
+  const fn_handle__change__input: T_Handler<React.ChangeEvent> = (e) => {
     e.stopPropagation();
 
     const e_tg__curr = e.currentTarget as HTMLInputElement;
@@ -54,7 +60,7 @@ export default function SignContainer({ prop__mode, prop__items = [], prop__api,
 
   return (
     <Container className={styles.wrapper__sign_container} onSubmit={(e) => fn_handle__submit__form(e)}>
-      <Fieldset className={styles.box__group} prop__legend={prop__mode ?? undefined}>
+      <Field className={styles.box__group} prop__legend={prop__mode ?? undefined}>
         <UList className={styles.box__list}>
           {
             prop__items.map((item__obj) => {
@@ -65,7 +71,7 @@ export default function SignContainer({ prop__mode, prop__items = [], prop__api,
                   <Input
                     id={id}
                     name={id}
-                    placeholder={"Inputs..."}
+                    placeholder={""}
                     onChange={(e) => fn_handle__change__input(e)}
                   />
                 </li>
@@ -73,12 +79,12 @@ export default function SignContainer({ prop__mode, prop__items = [], prop__api,
             })
           }
         </UList>
-        <ButtonBox
+        <Btn
           className={styles.box__button}
-          type="submit"
-          value="제출"
+          buttonType="submit"
+          prop__element={<span>{"제출"}</span>}
         />
-      </Fieldset>
+      </Field>
     </Container>
   );
 }
