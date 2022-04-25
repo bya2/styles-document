@@ -1,6 +1,6 @@
 import { baseURL } from "@/config/api";
-import { fn_wrap__fetch, fn_get__url_query } from "@/logic/api/common";
-import type { ISignInKeys, ISignUpKeys, ISignInParams, ISignUpBody } from "@/models/Common";
+import { fn_wrap__fetch, fn_get__url_query } from "@/logic/api";
+import type { I_sign_in_keys, I_sign_up_keys, I_sign_in_params, I_sign_up_body } from "@/models/common";
 
 const options__based: RequestInit = {
   headers: {
@@ -11,10 +11,10 @@ const options__based: RequestInit = {
   cache: "reload", // no-cache (default: "default")
 };
 
-export const fn_GET__auth__sign_in = ({ sign_in_item__id, sign_in_item__password }: ISignInKeys): Promise<any> => {
+export const fn_GET__auth__sign_in = ({ sign_in_item__id, sign_in_item__password }: I_sign_in_keys): Promise<any> => {
   const url_path__auth__sign_in: string = "/auth/sign_in";
 
-  const url_params: ISignInParams = {
+  const url_params: I_sign_in_params = {
     id: sign_in_item__id,
     password: sign_in_item__password,
   };
@@ -41,7 +41,7 @@ export const fn_GET__auth__sign_in = ({ sign_in_item__id, sign_in_item__password
     });
 };
 
-export const fn_POST__auth__sign_up = ({ sign_up_item__id, sign_up_item__password, sign_up_item__email }: ISignUpKeys): Promise<any> => {
+export const fn_POST__auth__sign_up = ({ sign_up_item__id, sign_up_item__password, sign_up_item__email }: I_sign_up_keys): Promise<any> => {
   const url_path__auth__sign_up: string = `${baseURL}/auth/sign_up`;
 
   const _url: string = url_path__auth__sign_up;

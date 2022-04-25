@@ -1,6 +1,8 @@
 import { baseURL } from "@/config/api";
-import { fn_wrap__fetch, fn_get__url_query } from "@/logic/api/common";
-import type { ISignInKeys, ISignUpKeys, ISignInParams, ISignUpBody } from "@/models/Common";
+import { fn_wrap__fetch, fn_get__url_query } from "@/logic/api";
+import type { I_sign_in_keys, I_sign_up_keys, I_sign_in_params, I_sign_up_body } from "@/models/common";
+import { APIParamMapOfExpNewNode, expNode, nodeTypes } from "@/models/explorer";
+import { T_AsyncFunc } from "@/models/function";
 
 const options__based: RequestInit = {
   headers: {
@@ -43,7 +45,8 @@ export const fn_GET__exp__nodes = (_root_name: string): Promise<any> => {
 
 // POST
 // 201
-export const fn_POST__exp__new_node = ({ _user, _type, _content, _pnode_id }: any): Promise<any> => {
+
+export const fn_POST__exp__new_node: T_AsyncFunc<APIParamMapOfExpNewNode, any/*expNode*/> = ({ type, name, r_node_id, p_node_id }) => {
   const url_path__exp__new_node: string = "/exp/new_node";
   const _url = `${baseURL}${url_path__exp__new_node}`;
 
@@ -51,20 +54,20 @@ export const fn_POST__exp__new_node = ({ _user, _type, _content, _pnode_id }: an
     ...options__based,
     method: "POST",
     body: JSON.stringify({
-      user: _user,
-      type: _type,
-      content: _content,
-      pnode_id: _pnode_id,
+      type,
+      name, // content
+      r_node_id, // user
+      p_node_id, // pnode_id
     }),
-  }
+  };
 
   return fn_wrap__fetch(_url, options)
-    .then(json => {
+    .then((json) => {
       const data = JSON.stringify(json);
-      return data;
+      // return data;
     })
-    .catch(err => {
+    .catch((err) => {
       console.log("fn_POST__exp__new_document");
       console.error(err);
-    })
-}
+    });
+};
