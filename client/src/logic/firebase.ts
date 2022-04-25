@@ -15,8 +15,8 @@ import {
   query,
   where,
   collectionGroup,
-  orderBy,
-  limit,
+  // orderBy,
+  // limit,
 } from "firebase/firestore";
 import type {
   Firestore,
@@ -27,10 +27,14 @@ import type {
   WhereFilterOp,
   Query,
   QueryConstraint,
-  OrderByDirection,
+  // OrderByDirection,
 } from "firebase/firestore";
-import type { AsyncFunc } from "@/models/Function";
-import type { obj } from "@/models/reusables";
+import type { T_AsyncFunc } from "@/models/function";
+import type { I_map } from "@/models/reusables";
+
+const fn_handle__success__ctx = (msg?: string) => {
+  console.log(msg);
+};
 
 const fn_handle__error__ctx = (err: Error, msg?: string) => {
   const ERR_MSG = msg;
@@ -38,27 +42,27 @@ const fn_handle__error__ctx = (err: Error, msg?: string) => {
 };
 
 // WRAPPER
-export const fn_wrap__run_transaction = async (_db: Firestore, _cb: AsyncFunc) => {
+export const fn_wrap__run_transaction = async (_db: Firestore, _cb: T_AsyncFunc) => {
   await runTransaction(_db, _cb).catch((err) => fn_handle__error__ctx(err, "FB - TRANSACTION"));
 };
 
-export const fn_wrap__write_batch = async (_db: Firestore, _cb: AsyncFunc) => {
+export const fn_wrap__write_batch = async (_db: Firestore, _cb: T_AsyncFunc) => {
   const batch = writeBatch(_db);
   await _cb(batch).catch((err) => fn_handle__error__ctx(err, "FB - WRITE BATCH"));
   await batch.commit();
 };
 
 // GETTER
-export const fn_get__fb__collection_ref = (_db: Firestore, _path: string) => {
-  return collection(_db, _path);
+export const fn_get__fb__collection_ref = <T = DocumentData>(_db: Firestore, _path: string) => {
+  return collection(_db, _path) as CollectionReference<T>;
 };
 
-export const fn_get__fb__collection_group_ref = (_db: Firestore, _collection_id: string) => {
-  return collectionGroup(_db, _collection_id);
+export const fn_get__fb__collection_group_ref = <T = DocumentData>(_db: Firestore, _collection_id: string) => {
+  return collectionGroup(_db, _collection_id) as Query<T>;
 };
 
-export const fn_get__fb__document_ref = (_db: Firestore, _path: string) => {
-  return doc(_db, _path);
+export const fn_get__fb__document_ref = <T = DocumentData>(_db: Firestore, _path: string) => {
+  return doc(_db, _path) as DocumentReference<T>;
 };
 
 // GET
@@ -84,30 +88,12 @@ export const fn_GET__fb__cache_doc = async <T = DocumentData>(_doc_ref: Document
 
 export const fn_GET__fb__collection_docs = async <T = DocumentData>(
   _collection_ref: CollectionReference<T>,
-  _conditions?: [string | FieldPath, WhereFilterOp, any][],
-  _orders?: [string | FieldPath, OrderByDirection | undefined],
-  _limit?: number
+  _query_constraints?: QueryConstraint[]
 ): Promise<any[]> => {
   let q;
   let results__arr: any[] = [];
-  if (_conditions || _orders || _limit) {
-    let constraints__arr: QueryConstraint[] = [];
-
-    if (_conditions) {
-      for (const condition of _conditions) {
-        constraints__arr = [...constraints__arr, where(...condition)];
-      }
-    }
-
-    if (_orders) {
-      constraints__arr = [...constraints__arr, orderBy(..._orders)];
-    }
-
-    if (_limit) {
-      constraints__arr = [...constraints__arr, limit(_limit)];
-    }
-
-    q = query(_collection_ref, ...constraints__arr);
+  if (_query_constraints) {
+    q = query(_collection_ref, ..._query_constraints);
   } else {
     q = query(_collection_ref);
   }
@@ -144,23 +130,35 @@ export const fn_GET__fb__collection_group_docs = async <T = DocumentData>(
 
 // POST
 // -- 단일 문서 생성1 (문서 ID 자동 생성)
-export const fn_POST__fb__add_doc = async (_collection_ref: CollectionReference, _doc_data: obj) => {
-  // _collection_ref: DB, 컬렉션ID
-  await addDoc(_collection_ref, _doc_data).catch((err) => fn_handle__error__ctx(err, "FB - ADD DOCUMENT"));
+// _collection_ref: DB, 컬렉션ID
+export const fn_POST__fb__add_doc = async (_collection_ref: CollectionReference, _doc_data: I_map) => {
+  const MSG = "FB - ADD DOCUMENT";
+
+  await addDoc(_collection_ref, _doc_data)
+    .then(() => fn_handle__success__ctx(MSG))
+    .catch((err) => fn_handle__error__ctx(err, MSG));
 };
 
 // -- 단일 문서 생성2 (문서 ID 자동 생성)
-export const fn_POST__fb__mix_set_doc = async (_collection_ref: CollectionReference, _doc_data: obj, _options?: obj) => {
+export const fn_POST__fb__mix_set_doc = async (_collection_ref: CollectionReference, _doc_data: I_map, _options?: I_map) => {
+  const MSG = "FB - MIX SET DOCUMENT";
+
   const _doc_ref = doc(_collection_ref);
-  await setDoc(_doc_ref, _doc_data).catch((err) => fn_handle__error__ctx(err, "FB - MIX SET DOCUMENT"));
+  await setDoc(_doc_ref, _doc_data)
+    .then(() => fn_handle__success__ctx(MSG))
+    .catch((err) => fn_handle__error__ctx(err, MSG));
 };
 
 // POST & PUT
 // -- 단일 문서 생성3 (문서에 유의미한 ID 지정)
 // -- _doc_ref: DB, 컬렉션ID/문서ID
 // -- _options: { merge: true } --> 덮어쓰기
-export const fn_POST__fb__set_doc = async (_doc_ref: DocumentReference, _doc_data: obj, _options?: SetOptions) => {
-  await setDoc(_doc_ref, _doc_data).catch((err) => fn_handle__error__ctx(err, "FB - SET DOCUMENT"));
+export const fn_POST__fb__set_doc = async (_doc_ref: DocumentReference, _doc_data: I_map, _options?: SetOptions) => {
+  const MSG = "FB - SET DOCUMENT";
+  
+  await setDoc(_doc_ref, _doc_data)
+    .then(() => fn_handle__success__ctx(MSG))
+    .catch((err) => fn_handle__error__ctx(err, MSG));
 };
 
 // PATCH
@@ -171,7 +169,7 @@ export const fn_POST__fb__set_doc = async (_doc_ref: DocumentReference, _doc_dat
 // 제공된 각 요소의 모든 인스턴스를 삭제: arrayRemove(value)
 // 숫자 증분: increment(number)
 // 필드 삭제: deleteField()
-export const fn_PATCH__fb__update_doc = async (_doc_ref: DocumentReference, _doc_data: obj) => {
+export const fn_PATCH__fb__update_doc = async (_doc_ref: DocumentReference, _doc_data: I_map) => {
   await updateDoc(_doc_ref, _doc_data).catch((err) => fn_handle__error__ctx(err, "FB - UPDATE DOCUMENT"));
 };
 
@@ -182,7 +180,7 @@ export const fn_DELETE__fb__doc = async <T = DocumentData>(_doc_ref: DocumentRef
 };
 
 // -- 문서의 필드 삭제
-export const fn_DELETE__fb__field = async (_doc_ref: DocumentReference, _doc_props: string | string[] | obj) => {
+export const fn_DELETE__fb__field = async (_doc_ref: DocumentReference, _doc_props: string | string[] | I_map) => {
   let doc_data;
 
   if (typeof _doc_props === "string") {
@@ -190,12 +188,12 @@ export const fn_DELETE__fb__field = async (_doc_ref: DocumentReference, _doc_pro
       [_doc_props]: deleteField(),
     };
   } else if (_doc_props instanceof Array) {
-    doc_data = _doc_props.reduce((obj: obj, prop) => {
+    doc_data = _doc_props.reduce((obj: I_map, prop) => {
       obj[prop] = deleteField();
       return obj;
     }, {});
   } else {
-    doc_data = Object.keys(_doc_props).reduce((obj: obj, prop) => {
+    doc_data = Object.keys(_doc_props).reduce((obj: I_map, prop) => {
       obj[prop] = deleteField();
       return obj;
     }, {});
