@@ -1,6 +1,7 @@
-// import styles from "@styles-components/"
-export default function Header() {
+export default function Header(): JSX.Element {
   return (
-    <header className=""></header>
+    <header>
+      <span>HEADER</span>
+    </header>
   )
 }

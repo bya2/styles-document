@@ -1,7 +1,7 @@
 import { useAppSelector } from "@store/hooks";
-import type { IWrapperProps as Props } from "@/models/Props"
+import type { I_div_bs_props } from "@/models/props"
 
-export default function Main({ children }: Props): JSX.Element {
+export default function Main({ children }: I_div_bs_props): JSX.Element {
   const s__aside_posX__num = useAppSelector(s => s.resizer.aside_posX__num);
 
   return (
