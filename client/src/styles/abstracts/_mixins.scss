@@ -268,23 +268,32 @@
     @content;
   }
 }
+
 @mixin mq-tablet {
   @media screen and (min-width: $bp-tb-min) and (max-width: $bp-tb-max) {
     @content;
   }
 }
+
 @mixin mq-laptop {
   @media screen and (min-width: $bp-lt-min) and (max-width: $bp-lt-max) {
     @content;
   }
 }
+
 @mixin mq-desktop {
-  @media screen and (min-width: $bp-dt-min) and (max-width: $bp-dt-max) {
+  @media screen and (min-width: $bp-dt-min) {
     @content;
   }
 }
-@mixin mq-screen {
-  @media screen and (min-width: $bp-sc-min) {
-    @content;
-  }
-}
+
+// @mixin mq-desktop {
+//   @media screen and (min-width: $bp-dt-min) and (max-width: $bp-dt-max) {
+//     @content;
+//   }
+// }
+// @mixin mq-screen {
+//   @media screen and (min-width: $bp-sc-min) {
+//     @content;
+//   }
+// }
