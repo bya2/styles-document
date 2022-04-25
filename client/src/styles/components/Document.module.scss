@@ -1,0 +1,131 @@
+$map-bg-c: hsl(0, 0%, 20%);
+$map-c: white;
+$map-g-tmpl-rows: 36px 12px 1fr;
+
+$region-top-bg-c: hsla(0, 0%, 100%, 0.1);
+
+$item-tab-max-w: 160px;
+$item-tab-bg-c: hsla(0, 0%, 100%, 0.2);
+
+$item-tab-img-square-size: 16px;
+
+$item-tab-btn-square-size: 16px;
+$item-tab-btn-hover-c: hsla(0, 0%, 100%, 0.7);
+
+%common-font {
+  font-family: $roboto;
+}
+
+.wrapper.map {
+  position: relative;
+  height: 100%;
+
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-left: none;
+  border-right: none;
+
+  background-color: $map-bg-c;
+  color: $map-c;
+
+  @include dis-g(rows, $map-g-tmpl-rows);
+}
+
+// A1
+.area.region.top {
+  position: relative;
+
+  background-color: $region-top-bg-c;
+}
+
+.bar.ulist.tabs {
+  position: absolute;
+  inset: 0;
+
+  // @include dis-f(row, s, c);
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  gap: 1px;
+
+  .group.item.tab {
+    position: relative;
+    max-width: $item-tab-max-w;
+
+    padding-right: 24px;
+    background-color: $item-tab-bg-c;
+
+    @include dis-f(row, s, c);
+
+    cursor: pointer;
+
+    &.s__active {
+      background-color: $map-bg-c;
+    }
+
+    .box.image {
+      @include square-size($item-tab-img-square-size);
+    }
+
+    .box.content {
+      line-height: 2rem;
+
+      font-family: $roboto;
+      font-size: 0.75rem;
+      font-weight: 300;
+
+      white-space: nowrap;
+      user-select: none;
+      pointer-events: none;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .box.button {
+      position: absolute;
+      right: 4px;
+      @include square-size($item-tab-btn-square-size);
+
+      outline: none;
+      border: none;
+      border-radius: 10%;
+
+      background: none;
+      color: $item-tab-btn-hover-c;
+      font-size: 0.5rem;
+
+      @include dis-f(row, c, c);
+
+      &,
+      * {
+        cursor: pointer;
+      }
+
+      &:hover {
+        background-color: hsla(0, 0%, 100%, 0.2);
+      }
+
+      button {
+        outline: none;
+        border: none;
+        padding: 0;
+        background-color: transparent;
+        color: inherit;
+      }
+    }
+  }
+}
+
+// A2
+.area.region.middle {
+  $bg-c: hsla(0, 0%, 50%, 0.1);
+
+  position: relative;
+  background-color: $bg-c;
+}
+
+// A3
+.area.region.bottom {
+  position: relative;
+}

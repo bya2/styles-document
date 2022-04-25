@@ -1,0 +1,71 @@
+
+
+.wrapper__sign_container {
+  @include wrapper(0.1);
+  padding: 6px 12px;
+
+  .box__group {
+    @extend %reset-fieldset;
+    legend {
+      font-family: $roboto;
+      font-size: 32px;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+
+    display: grid;
+    gap: 20px;
+  }
+
+  .box__list {
+    $g-t-rows: 1fr 1fr;
+    @include dis-g(rows, $g-t-rows, 16px);
+  }
+
+  .box__item {
+    display: grid;
+    gap: 4px;
+
+    label {
+      @extend %reset-label;
+      color: hsl(0, 0%, 20%);
+      font-size: 1rem;
+      // font-weight: 400;
+    }
+    input {
+      border: none;
+      @include wrapper(0.1);
+      width: 100%;
+      font-family: $roboto;
+      font-size: 1rem;
+      line-height: 24px;
+
+      &:focus {
+        box-shadow: 0 0 0 1px blue;
+      }
+    }
+  }
+
+  .box__button {
+    position: relative;
+    width: 100%;
+    height: 32px;
+    @include dis-f(row, e, c);
+
+    button {
+      @extend %reset-button;
+      position: relative;
+      height: 100%;
+      box-shadow: 0 0 2px 1px hsla(0, 0%, 0%, 0.2);
+      border-radius: 6px;
+      background-color: hsl(214, 40%, 50%);
+      color: white;
+      @include dis-f(row, c, c);
+      cursor: pointer;
+
+      &:hover {
+        background-color: hsl(214, 51%, 47%);
+      }
+    }
+  }
+}

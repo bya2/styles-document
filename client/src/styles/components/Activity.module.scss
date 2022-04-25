@@ -1,0 +1,203 @@
+$map-bgc: #f6f7fa;
+$map-c: #5c5c5c;
+$map-g-tmpl-rows: 1fr 1fr 1fr;
+
+%area {
+  position: relative;
+}
+
+%bar {
+  width: 100%;
+  display: grid;
+  gap: 8px;
+}
+
+%group {
+  //POS
+  position: relative;
+
+  //IN
+  color: hsl(0, 0%, 75%);
+  cursor: pointer;
+  @include dis-f(row, c, c);
+
+  //EVT
+  &:hover {
+    color: hsl(0, 0%, 100%);
+  }
+  &.s__active {
+    border-left: 2px solid white;
+    border-right: 2px solid transparent;
+    color: hsl(0, 0%, 100%);
+  }
+}
+
+%box__icon {
+  //VAR
+  $size: 24px;
+
+  //BOX
+  width: $size;
+  height: $size;
+
+  //IN
+  color: inherit;
+  padding: 6px;
+}
+
+%box__content {
+  //POS
+  position: absolute;
+  top: 50%;
+  left: 110%;
+  transform: translateY(-50%);
+
+  //BOX
+  border: 1px solid black;
+
+  //IN
+  background-color: hsl(0, 0%, 100%);
+  color: black;
+  font-family: $roboto;
+  font-size: 0.75em;
+  line-height: 24px;
+  white-space: nowrap;
+  padding: 0 6px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.wrapper.map.act {
+  position: relative;
+  border-top: 1px solid black;
+  padding: 12px 0;
+  background-color: $map-bgc;
+  color: $map-c;
+
+  .area.region.top {
+    position: relative;
+  }
+
+  .bar.ulist.tool {
+    padding-left: 16px;
+  }
+
+  .group.item.tool {
+    position: relative;
+    @include dis-f(row, s, c);
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      position: relative;
+      border-left: 3px solid red;
+      height: 12px;
+    }
+
+    &:hover::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      left: -100px;
+      background-color: hsla(0, 0%, 36%, 0.1);
+      pointer-events: none;
+    }
+
+    .box.image {
+      @include square-size(16 px);
+    }
+
+    .box.content {
+      text-indent: 8px;
+      line-height: 1.75rem;
+
+      font-family: $roboto;
+      font-size: .875rem;
+      font-weight: 400;
+
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    &:hover .box.content {
+      color: #000;
+    }
+
+    &.s__active .box.content {
+      text-decoration: underline;
+
+      color: #5151b7;
+      font-weight: 600;
+    }
+
+  }
+
+  .area.reigon.mid {
+
+  }
+
+  .area.region.bot {
+
+  }
+}
+
+// .area__tool_bar,
+// .area__root_bar,
+// .area__status_bar {
+//   @extend %area;
+
+//   .bar.ulist {
+//     @extend %bar;
+
+//     .group.item {
+//       @extend %group;
+//       $group: &;
+
+//       .box.image {
+//         @extend %box__icon;
+//       }
+
+//       .box.content {
+//         @extend %box__content;
+//       }
+//     }
+//   }
+// }
+
+// %tooltip {
+//   .group.item {
+//     $g: &;
+//     .box.content {
+//       @include tooltip($g, 0);
+//       @include pseudo-before-horn("left", 5px, white);
+//     }
+//   }
+// }
+
+// .area__tool_bar {
+//   //IN
+//   @include dis-f(row, c, s);
+//   @extend %tooltip;
+// }
+
+// .area__root_bar {
+//   @include dis-f(row, c, c);
+//   @extend %tooltip;
+//   .box.content {
+//     text-transform: uppercase;
+//   }
+// }
+
+// .area__status_bar {
+//   //IN
+//   @include dis-f(row, c, e);
+//   @extend %tooltip;
+
+//   .group.item {
+//     &.s__active {
+//       z-index: 3;
+//       pointer-events: none;
+//     }
+//   }
+// }

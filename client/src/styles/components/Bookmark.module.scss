@@ -1,0 +1,40 @@
+%no-space {
+  margin: 0;
+  padding: 0;
+}
+
+%font-common {
+  font-family: $roboto;
+}
+
+%text-common {
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+.map.bookmark {
+  position: relative;
+  border-top: 1px solid black;
+  background-color: #f6f7fa;
+
+  .region.top {
+    position: relative;
+    height: 32px;
+    @include dis-f(row, s, c);
+    padding: 0 6px;
+
+    .box.title {
+      h3 {
+        @extend %no-space;
+
+        @extend %font-common;
+        font-size: 1rem;
+        font-weight: 400;
+
+        @extend %text-common;
+        line-height: 24px;
+      }
+    }
+  }
+}

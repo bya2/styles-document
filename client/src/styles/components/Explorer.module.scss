@@ -1,0 +1,565 @@
+%area {
+  //POS
+  position: relative;
+}
+
+%group {
+  //POS
+  position: relative;
+
+  //IN
+  color: #000000;
+  cursor: pointer;
+  @include dis-f(row, c, c);
+
+  //EVT
+  &:hover {
+    color: hsl(0, 0%, 100%);
+  }
+  &.s__active {
+    border-left: 2px solid white;
+    border-right: 2px solid transparent;
+    color: hsl(0, 0%, 100%);
+  }
+}
+
+%box__icon {
+  //VAR
+  $size: 30px;
+
+  //BOX
+  width: $size;
+  height: $size;
+
+  //IN
+  color: inherit;
+}
+
+%font {
+  color: #000000;
+  font-size: 1em;
+  font-family: $roboto;
+  white-space: nowrap;
+  user-select: none;
+}
+
+%tooltip {
+  .group.item {
+    $g: &;
+    .box.content.s__tooltip {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 150%;
+
+      border: 1px solid black;
+
+      background-color: white;
+      color: black;
+      font-size: 0.75em;
+      line-height: 24px;
+      user-select: none;
+      pointer-events: none;
+
+      @include tooltip($g, 0);
+      @include pseudo-before-horn("top", 5px, white);
+    }
+  }
+}
+
+%img-common {
+  color: inherit;
+  pointer-events: none;
+  user-select: none;
+}
+
+%font-common {
+  font-family: $roboto;
+}
+
+%text-common {
+  color: inherit;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+.wrapper.map.exp {
+  position: relative;
+
+  box-sizing: border-box;
+  border-top: 1px solid black;
+
+  background-color: #f6f7fa;
+
+  $sh-r-ga1: 32px;
+  $sh-r-ga2: 1fr;
+  @include dis-g(rows, $sh-r-ga1 $sh-r-ga2);
+}
+
+.area.region.top {
+  @include dis-f(row, sp-b, c);
+  padding: 0 6px;
+
+  .box.title {
+    h3 {
+      margin: 0;
+      padding: 0;
+
+      @extend %font-common;
+      font-size: 1rem;
+      font-weight: 400;
+
+      @extend %text-common;
+      color: #000;
+    }
+  }
+
+  .bar.ulist {
+    position: relative;
+
+    @include dis-g(cols, 1fr 1fr, 8px);
+    @extend %tooltip;
+  }
+
+  .group.item {
+    position: relative;
+
+    .box.image {
+      position: relative;
+      @include square-size(20px);
+
+      color: #000;
+      padding: 1px;
+      cursor: pointer;
+      @include dis-f(row, c, c);
+
+      &:hover {
+        box-shadow: 0 0 0 1px hsl(0, 0%, 80%);
+        background-color: hsla(0, 0%, 80%, 1);
+      }
+    }
+
+    .box.content {
+
+    }
+  }
+}
+
+%SVG_image {
+  color: #000;
+  user-select: none;
+  pointer-events: none;
+  @include dis-f(row, c, c);
+}
+
+%content {
+  color: #000;
+  font-size: 1rem;
+  font-weight: 300;
+  font-family: $roboto;
+  line-height: 1.5rem;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+}
+
+%tooltip-content {
+  background-color: #000;
+  color: black;
+  font-size: 0.75em;
+  font-weight: 300;
+  font-family: $roboto;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+}
+
+.area.region.bottom {
+  position: relative;
+  @include dis-f(row, c, s);
+  height: 100%;
+}
+
+.bar.messages.no_item {
+  // POS
+  position: absolute;
+  inset: 0;
+
+  // INNER
+  @include dis-f(col, c, c);
+  color: black;
+  font-size: 1em;
+  font-weight: 300;
+  font-family: $roboto;
+  white-space: nowrap;
+
+  // OPER
+  user-select: none;
+  // pointer-events: none;
+
+  cursor: pointer;
+
+  // EVT
+  &:hover {
+    background-color: hsl(0, 0%, 50%);
+  }
+
+  & > span {
+    display: block;
+    text-align: center;
+  }
+}
+
+// COMP - TREEBAR
+.bar.ulist.trees {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  .group.item.tree {
+  }
+}
+
+// COMP - TOOLBAR
+.bar.ulist.tool {
+  position: relative;
+  width: 95%;
+  height: 100%;
+
+  $col_size: 20px;
+  $cols_gap: 4px;
+  padding-right: 8px;
+  @include dis-g(cols, $col_size $col_size $col_size $col_size, $cols_gap);
+  justify-content: end;
+  align-items: center;
+
+  .group.item.tool {
+    position: relative;
+    cursor: pointer;
+
+    .box.image {
+      @include square-size(20px);
+
+      color: #000;
+    }
+
+    .box.tooltip {
+      position: absolute;
+
+      border: 1px solid black;
+
+      padding: 0 6px;
+      background-color: black;
+      color: black;
+    }
+  }
+}
+
+// COMP - LOADER - SPINNER
+.box.loader.spinner {
+  position: relative;
+  @include square-size(32px);
+
+  & > span {
+    position: absolute;
+    inset: 0;
+
+    border: 2px solid #000;
+    border-top-color: transparent;
+    border-radius: 50%;
+
+    animation: ani-spin 0.3s linear infinite;
+  }
+}
+
+@keyframes ani-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(90deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// COMP - SUBTREEBAR
+.bar.ulist.sub_trees {
+  // & > .group.item.sub_tree {
+  //   & > a {
+  //     text-decoration: none;
+  //   }
+  // }
+}
+
+.area.site.node {
+  & > .box.image.node_type_image {
+  }
+
+  & > .box.content.node_name {
+  }
+}
+
+// COMP - NODE CHILDREN
+.area.site.node_children {
+  // POS
+  position: relative;
+
+  // BOX SIZE
+  max-height: 0;
+
+  // INNER
+  padding-left: 16px;
+  background-color: hsla(0, 0%, 50%, 0.05);
+
+  // OPER
+  transition-property: max-height;
+  transition-duration: 0.3s;
+
+  &.s__fold {
+    max-height: 1000px;
+  }
+
+  &.s__unfold {
+    // BOX SIZE
+    // max-height: 0;
+
+    // OPER
+    user-select: none;
+    pointer-events: none;
+
+    & > * {
+      opacity: 0;
+    }
+  }
+}
+// COMP - NODE
+.area.site.node {
+  $size_w__col1: 20px;
+  $size_w__col2: 24px;
+  $size_w__col3: 1fr;
+
+  // POS
+  position: relative;
+
+  // BOX
+  box-shadow: 0 0 0 1px transparent;
+
+  // INNER
+  // @include dis-f(row, s, c);
+  @include dis-g(cols, $size_w__col1 $size_w__col2 $size_w__col3);
+  justify-items: stretch;
+  align-items: center;
+  color: hsl(0, 0%, 15%);
+  cursor: pointer;
+
+  // EVT
+  transition-property: color;
+  transition-duration: 0.3s;
+
+  &::after {
+    content: " ";
+    position: absolute;
+    inset: 0 -100px 0 -100px;
+    line-height: 2em;
+    user-select: none;
+    pointer-events: none;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+  }
+
+  &:hover {
+    color: #000;
+    &::after {
+      background-color: hsla(0, 0, 0%, 0.05);
+    }
+  }
+
+  &.s__active {
+    color: #000;
+    &::after {
+      background-color: rgba(191, 175, 255, 0.1);
+    }
+  }
+
+  &:focus {
+    &::after {
+      box-shadow: inset 0 0 0 1px hsla(240, 100%, 72%, 0.7);
+    }
+  }
+
+  & > .box.image {
+    @extend %SVG_image;
+    @include dis-f(row, c, c);
+    padding-right: 8px;
+    color: inherit;
+  }
+
+  & > .box.image.f_node_arrow {
+    @include square-size(20px);
+  }
+
+  & > .box.image.node_type_image {
+    @include square-size(24px);
+  }
+
+  & > .box.input {
+    position: relative;
+    @include dis-f(row, s, c);
+    padding-left: 8px;
+
+    input {
+      // POS
+      position: relative;
+
+      // BOX
+      width: 100%;
+      outline: none;
+      border: none;
+      box-shadow: inset 0 0 0 1px hsl(240, 100%, 80%);
+
+      // INNER
+      padding: 0;
+      background-color: transparent;
+      color: #000;
+      font-size: 0.875rem;
+      font-weight: 300;
+      font-family: $roboto;
+      line-height: 1.5rem;
+    }
+  }
+
+  & > .box.content.node_name {
+    width: auto;
+    @extend %content;
+    color: inherit;
+    font-size: 0.875rem;
+    text-indent: 8px;
+
+    & > span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &.root {
+    $size_w__col1: 20px;
+    $size_w__col2: 1fr;
+    $size_w__col3: 100px;
+    @include dis-g(cols, $size_w__col1 $size_w__col2 $size_w__col3);
+    // padding-right: 50px;
+  }
+
+  &.root > .box.content.node_name {
+    @extend %content;
+    color: #000;
+    font-size: 0.875rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-indent: 0;
+    line-height: 2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.area.site.input.node {
+  &.s__not_focus {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+}
+
+%font__in_modal {
+  font-family: $roboto;
+}
+
+.area.roots {
+  // POS
+  position: relative;
+
+  // BOX
+  width: 200px;
+  height: 300px;
+  @include wrapper(0.1);
+
+  .box.title {
+    padding: 8px 4px;
+    h3 {
+      // POS
+      position: relative;
+
+      // OUTER
+      margin: 0;
+
+      // INNER
+      padding: 0;
+      font-family: $roboto;
+      font-size: 1rem;
+      font-weight: 300;
+      user-select: none;
+    }
+  }
+
+  .bar.ulist {
+    position: absolute;
+    inset: 0;
+
+    // INNER
+    padding: 44px 4px 16px 4px;
+    @include dis-f(col, s, c);
+
+    .group.item {
+      // POS
+      position: relative;
+
+      // OUTER
+      margin-bottom: 6px;
+
+      // BOX
+      width: 100%;
+      border-bottom: 1px solid hsl(0, 0%, 70%);
+
+      // INNER
+      cursor: pointer;
+      @include dis-f(row, sp-b, c);
+      color: hsl(0, 0%, 50%);
+
+      // EVT
+      &:hover {
+        color: black;
+      }
+
+      .box.image {
+        $size: 16px;
+
+        // BOX
+        @include square-size($size);
+
+        // INNER
+        padding-right: 2px;
+        color: inherit;
+        @include dis-f(row, c, c);
+      }
+
+      .box.content {
+        position: relative;
+
+        // INNER
+        @extend %font;
+        font-family: $roboto;
+        font-size: 0.75em;
+        line-height: 24px;
+        color: inherit;
+        text-transform: uppercase;
+        opacity: 1;
+      }
+    }
+  }
+}
