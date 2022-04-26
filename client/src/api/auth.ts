@@ -1,47 +1,58 @@
 import { db } from "@/firebase";
 import { where } from "firebase/firestore";
 import { fn_get__fb__collection_ref, fn_POST__fb__add_doc, fn_GET__fb__collection_docs } from "@/logic/firebase";
+import type {
+  I_fb_ref__sds_auth_accounts,
+  I_auth__sign_in_account,
+  I_auth__sign_up_account,
+  I_auth__validation,
+  I_auth__sign_in_ref,
+} from "@/models/auth";
 
-export const fb_path__sds_auth_account = "sds/auth/accounts";
+export const fb_path__sds_auth_accounts = "sds/auth/accounts";
 
-export interface I_fb_ref__sds_auth_account {
-  id: string;
-  password: string;
-  check_password: string;
-  email: string;
-}
+const col__sds_auth_accounts = fn_get__fb__collection_ref<I_fb_ref__sds_auth_accounts>(db, fb_path__sds_auth_accounts);
 
-export interface I_auth__sign_up_account {
-  id: string;
-  password: string;
-  check_password: string;
-  email: string;
-}
+// POST
+export const fn_POST__auth__sign_up = async (_obj: I_auth__sign_up_account): Promise<boolean> => {
+  if (_obj.password !== _obj.check_password) {
+    return false;
+  }
 
-export interface I_auth__sign_in_account {
-  id: string;
-  password: string;
-}
+  // (추가 예정)
+  // 암호화REF = _obj.password를 다른 정보와 조합해서 특정 방식으로 암호화
 
-export interface I_auth__validation {
-  id: string;
-  hashed: string;
-}
+  const req_body__obj = {
+    id: _obj.id,
+    hashed: _obj.password, // => 암호화REF
+    email: _obj.email,
+  };
 
-const col__sds_auth_account = fn_get__fb__collection_ref<I_fb_ref__sds_auth_account>(db, "sds/auth/accounts");
-
-export const fn_POST__auth__sign_up = async (_d: I_auth__sign_up_account) => {
-  await fn_POST__fb__add_doc(col__sds_auth_account, _d);
+  await fn_POST__fb__add_doc(col__sds_auth_accounts, req_body__obj);
+  return true;
 };
 
-export const fn_GET__auth__sign_in = async (_d: I_auth__sign_in_account) => {
-  const q_constraints__arr = [where("id", "==", _d.id), where("password", "==", _d.password)];
-  const results = await fn_GET__fb__collection_docs(col__sds_auth_account, q_constraints__arr);
-  console.log(results);
+// GET
+export const fn_GET__auth__sign_in = async (_obj: I_auth__sign_in_account) => {
+  // (추가 예정)
+  // 암호화REF = _obj.password를 다른 정보와 조합해서 특정 방식으로 암호화
+  const q_constraints__arr = [where("id", "==", _obj.id), where("hashed", "==", _obj.password)]; // _obj.password => 암호화REF
+  const results = await fn_GET__fb__collection_docs(col__sds_auth_accounts, q_constraints__arr);
+
+  if (!results[0]) {
+    throw new Error("void");
+  }
+
+  return results[0] as I_auth__sign_in_ref;
 };
 
 export const fn_GET__auth__validation = async (_d: I_auth__validation) => {
-  const q_constraints__arr = [where("id", "==", _d.id), where("password", "==", _d.hashed)];
-  const results = await fn_GET__fb__collection_docs(col__sds_auth_account, q_constraints__arr);
-  console.log(results);
+  const q_constraints__arr = [where("id", "==", _d.id), where("hashed", "==", _d.hashed)];
+  const results = await fn_GET__fb__collection_docs(col__sds_auth_accounts, q_constraints__arr);
+
+  if (!results[0]) {
+    throw new Error("void");
+  }
+
+  return true;
 };

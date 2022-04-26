@@ -1,23 +1,30 @@
-export interface I_sign_in_account {
+export interface I_auth__sign_in_ref {
   id: string;
-  password: string;
+  hashed: string;
 }
 
-export interface I_sign_up_account {
+export interface I_fb_ref__sds_auth_accounts {
   id: string;
   password: string;
   check_password: string;
   email: string;
 }
 
-export interface I_account {
+export interface I_auth__sign_up_account {
+  [key: string]: string;
   id: string;
   password: string;
-  hashed: string;
+  check_password: string;
   email: string;
 }
 
-export interface I_user {
+export interface I_auth__sign_in_account {
+  [key: string]: string;
+  id: string;
+  password: string;
+}
+
+export interface I_auth__validation {
   id: string;
   hashed: string;
 }
