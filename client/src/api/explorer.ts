@@ -1,101 +1,86 @@
-// import { db } from "@/firebase";
-// import { fn_GET__fb__collection_docs, fn_get__fb__collection_ref, fn_POST__fb__add_doc } from "@/logic/firebase";
-// import { expNode, expRoot } from "@/models/Explorer";
-// import { QueryConstraint, where } from "firebase/firestore";
+import { v4 as uuidv4 } from "uuid";
+import { db } from "@/firebase";
+import { arrayRemove, orderBy, where } from "firebase/firestore";
+import {
+  fn_get__fb__document_ref,
+  fn_get__fb__collection_ref,
+  fn_GET__fb__collection_docs,
+  fn_POST__fb__add_doc,
+  fn_DELETE__fb__doc,
+  fn_PATCH__fb__update_doc,
+} from "@/logic/firebase";
+import { I_exp_input_node, I_exp_node, I_exp_r_node } from "@/models/explorer";
 
-import { baseURL } from "@/config/api";
-import { fn_wrap__fetch, fn_get__url_query } from "@/logic/api";
-import type { I_sign_in_keys, I_sign_up_keys, I_sign_in_params, I_sign_up_body } from "@/models/common";
-import { APIParamMapOfExpNewNode, expNode, nodeTypes } from "@/models/explorer";
-import { T_AsyncFunc } from "@/models/function";
+interface I_fb_ref__sds_exp_nodes extends I_exp_node {}
 
+const fb_path__sds_exp_nodes = "sds/exp/nodes";
+const col__sds_exp_nodes = fn_get__fb__collection_ref<I_fb_ref__sds_exp_nodes>(db, fb_path__sds_exp_nodes);
 
-
-
-// const fb_path__sds_exp_nodes = "sds/explorer/nodes";
-
-// const col__sds_exp_nodes = fn_get__fb__collection_ref<expNode>(db, fb_path__sds_exp_nodes);
-
-// export const fn_POST__exp__new_node = async (_node: expNode) => {
-//   fn_POST__fb__add_doc(col__sds_exp_nodes, _node);
-// };
-
-// export const fn_GET__exp__nodes = async (_root: expRoot) => {
-//   const q_constraints__arr = [where("id", "==", _root.id)];
-//   const results = await fn_GET__fb__collection_docs(col__sds_exp_nodes, q_constraints__arr);
-//   console.log(results);
-// };
-
-// export const fn_GET__exp__node = async (_node: expNode) => {
-//   const q_constraints__arr = [where("id", "==", _node.id)];
-//   const results = await fn_GET__fb__collection_docs(col__sds_exp_nodes, q_constraints__arr);
-//   console.log(results);
-// };
-
-const options__based: RequestInit = {
-  headers: {
-    "content-type": "application/json",
-  },
-  mode: "cors", // (default: "same-origin")
-  credentials: "include", // or "include" (default: "same-origin")
-  cache: "reload", // no-cache (default: "default")
+// POST
+export const fn_POST__exp__create_node = async (_obj: I_exp_input_node): Promise<boolean> => {
+  const node__obj: I_exp_node = {
+    uid: uuidv4() as string,
+    ..._obj,
+  };
+  await fn_POST__fb__add_doc(col__sds_exp_nodes, node__obj);
+  return true;
 };
 
 // GET
-// 200
-export const fn_GET__exp__nodes = (_root_name: string): Promise<any> => {
-  const url_path__exp__user_storage: string = "/exp/user_storage";
+export const fn_GET__exp__node = async (_obj: I_exp_node): Promise<any> => {
+  const q_constraints__arr = [where("uid", "==", _obj.uid)];
+  const results = await fn_GET__fb__collection_docs(col__sds_exp_nodes, q_constraints__arr);
 
-  const url_params = {
-    id: _root_name,
-  };
+  if (!results[0]) {
+    throw new Error("void");
+  }
 
-  const url_query: string = fn_get__url_query(url_params);
-
-  const _url: string = `${baseURL}${url_path__exp__user_storage}?${url_query}`;
-
-  const options = {
-    ...options__based,
-  };
-
-  return fn_wrap__fetch(_url, options)
-    .then((json) => {
-      const data = JSON.stringify(json);
-      return data;
-    })
-    .catch((err) => {
-      if (err.response.data) {
-        console.log("fn_GET__exp__user_storage");
-        console.error(err);
-      }
-    });
+  return results[0] as any;
 };
 
-// POST
-// 201
+export const fn_GET__exp__nodes_of_root = async (_obj: I_exp_r_node): Promise<I_exp_node[]> => {
+  const q_constraints__arr = [where("r_node_id", "==", _obj.uid), orderBy("name", "asc")];
+  const results = await fn_GET__fb__collection_docs(col__sds_exp_nodes, q_constraints__arr);
 
-export const fn_POST__exp__new_node: T_AsyncFunc<APIParamMapOfExpNewNode, any/*expNode*/ > = ({ type, name, r_node_id, p_node_id }) => {
-  const url_path__exp__new_node: string = "/exp/new_node";
-  const _url = `${baseURL}${url_path__exp__new_node}`;
+  if (!results[0]) {
+    throw new Error("void");
+  }
 
-  const options = {
-    ...options__based,
-    method: "POST",
-    body: JSON.stringify({
-      type,
-      name, // content
-      r_node_id, // user
-      p_node_id, // pnode_id
-    }),
-  };
+  return results as I_exp_node[];
+};
 
-  return fn_wrap__fetch(_url, options)
-    .then((json) => {
-      const data = JSON.stringify(json);
-      // return data;
-    })
-    .catch((err) => {
-      console.log("fn_POST__exp__new_document");
-      console.error(err);
-    });
+export const fn_GET__exp__nodes_of_roots = async (_roots: string[]): Promise<I_exp_node[]> => {
+  const q_constraints__arr = [where("r_node_id", "in", _roots), orderBy("name", "asc")];
+  const results = await fn_GET__fb__collection_docs(col__sds_exp_nodes, q_constraints__arr);
+
+    if (!results[0]) {
+    throw new Error("void");
+  }
+
+  return results as I_exp_node[];
+}
+
+// PATCH
+export const fn_PATCH__exp__node_name = async (_obj: I_exp_node): Promise<boolean> => {
+  const doc__node = fn_get__fb__document_ref(db, `${fb_path__sds_exp_nodes}/${_obj.uid}`);
+  await fn_PATCH__fb__update_doc(doc__node, {
+    name: _obj.name,
+  });
+  return true;
+};
+
+export const fn_PATCH__exp__node_children = async (_obj: I_exp_node): Promise<boolean> => {
+  const doc__p_node = fn_get__fb__document_ref(db, `${fb_path__sds_exp_nodes}/${_obj.p_node_uid}`);
+  await fn_PATCH__fb__update_doc(doc__p_node, {
+    c_node_uids: arrayRemove(_obj.uid),
+  });
+  return true;
+};
+
+// DELETE
+export const fn_DELETE__exp__node = async (_obj: I_exp_node): Promise<boolean> => {
+  const doc__node = fn_get__fb__document_ref(db, `${fb_path__sds_exp_nodes}/${_obj.uid}`);
+  await fn_DELETE__fb__doc(doc__node);
+  await fn_PATCH__exp__node_children(_obj);
+  return true;
 };
