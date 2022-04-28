@@ -12,20 +12,34 @@ export type T_ref = {
 };
 
 export interface I_exp_node_ref {
-  [key: string]: any;
-  id: string;
-  name: string;
+  uid: string;
 }
 
-export interface I_exp_root extends I_exp_node_ref {
-  type?: T_root;
+export interface I_exp_r_node extends I_exp_node_ref {
+  type: T_root;
   children?: I_exp_node[];
 }
 
+export interface I_exp_tree {
+  uid: string;
+  children: I_exp_node[];
+}
+
 export interface I_exp_node extends I_exp_node_ref {
+  name: string;
   type: T_node;
-  parent: string;
-  children: string[] | I_exp_node[];
+  r_node_uid: string;
+  p_node_uid: string;
+  c_node_uids?: string[];
+  children?: I_exp_node[];
+}
+
+export interface I_exp_input_node {
+  name: string;
+  type: T_node;
+  r_node_uid: string;
+  p_node_uid: string;
+
 }
 
 type FType = "nt__f";
@@ -38,11 +52,6 @@ export interface expRef {
 }
 
 export interface expRoot extends I_map<any>, expRef {}
-
-export interface expNodeRef {
-  id: string;
-  name: string;
-}
 
 export interface expNode {
   id: string;
