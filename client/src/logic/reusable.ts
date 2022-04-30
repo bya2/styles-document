@@ -1,4 +1,4 @@
-import type { I_map, I_obj } from "@/models/reusables";
+import type { I_cond_map, I_map, I_obj } from "@/models/reusables";
 
 // OBJ ITEM
 export const fn_get__cond__obj = (_items__arr: I_obj[]): I_map<boolean> => {
@@ -27,7 +27,8 @@ export const fn_handle__error__ctx = (err: Error, msg?: string) => {
   console.error(`${ERR_MSG}\n${err}`);
 };
 
-export const fn_get__init_s__cond_map = (_items__arr: I_obj[]): I_map<boolean> => {
+// OBJ ITEM
+export const fn_get__init_cond_map = (_items__arr: I_obj[]): I_map<boolean> => {
   try {
     if (!_items__arr) {
       throw new Error("LOC:@/logic/auth/fn_get__init_s__sign_in");
@@ -42,12 +43,25 @@ export const fn_get__init_s__cond_map = (_items__arr: I_obj[]): I_map<boolean> =
   }, {});
 };
 
-export const fn_get__init_s__str_map = (_items__arr: I_obj[]): I_map<string> => {
+export const fn_get__cond_map_of_objs = (_objs__arr: any[], _id: string): I_cond_map => {
+  return _objs__arr.reduce((obj: I_cond_map, _obj) => {
+    obj[_obj[_id]] = false;
+    return obj;
+  }, {});
+};
+
+export const fn_get__cond_map_of_uids = (_uids__arr: string[]): I_cond_map => {
+  return _uids__arr.reduce((obj: I_cond_map, uid) => {
+    obj[uid] = false;
+    return obj;
+  }, {});
+};
+
+export const fn_get__init_str_map = (_items__arr: I_obj[]): I_map<string> => {
   try {
     if (!_items__arr) {
       throw new Error("LOC:@/logic/auth/fn_get__init_s__sign_in");
     }
-
   } catch (err) {
     fn_handle__error__ctx(err);
   }
