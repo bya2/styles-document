@@ -1,7 +1,7 @@
 import styles from "@styles-components/Explorer.module.scss";
 import { useEffect, useCallback, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { set_s__exp_tools__is_click_item } from "@/store/common/explorer";
+import { set_s__exp_tool__is_click } from "@/store/common/explorer";
 import UList from "@/components/reusable/bar/UList";
 import Item from "@/components/reusable/group/Item";
 import Img from "@/components/reusable/box/Image";
@@ -14,7 +14,7 @@ const init_s__is_mouse_enter_item__map = fn_get__init_s__bool_map(tool_items__ar
 
 export default function ToolBar(): JSX.Element {
   // State
-  const s__is_click_item__map = useAppSelector((s) => s.explorer.tools.is_click_item__map);
+  const s__is_click_item__map = useAppSelector((s) => s.explorer.tools.is_click__cond_map);
   const dispatch = useAppDispatch();
 
   const [s__is_mouse_enter_item__map, set_s__is_mouse_enter_item__map] = useState<I_cond_map>(init_s__is_mouse_enter_item__map);
@@ -23,12 +23,12 @@ export default function ToolBar(): JSX.Element {
   // Handler
   const cb_handle__click__item = useCallback(
     (e: React.MouseEvent) => {
-      const e_tg__curr = e.currentTarget;
-      const e_tg__id = e_tg__curr.getAttribute("data-id");
+      const curr_tg = e.currentTarget;
+      const curr_tg_id = curr_tg.getAttribute("data-id");
 
-      if (!e_tg__id) throw Error("No data-id.");
+      if (!curr_tg_id) throw Error("No data-id.");
 
-      switch (e_tg__id) {
+      switch (curr_tg_id) {
         case tool_items__arr[0].id:
           break;
         case tool_items__arr[1].id:
@@ -39,7 +39,7 @@ export default function ToolBar(): JSX.Element {
           break;
       }
 
-      dispatch(set_s__exp_tools__is_click_item(e_tg__id));
+      dispatch(set_s__exp_tool__is_click({ uid: curr_tg_id, cond: true }));
     },
     [dispatch]
   );

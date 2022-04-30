@@ -5,11 +5,11 @@ import Content from "@/components/reusable/box/Content";
 import Img from "@/components/reusable/box/Image";
 import Item from "@/components/reusable/group/Item";
 import { layout_menu_items__arr } from "./items";
-import { set_s__exp_menus__is_click_item__map } from "@/store/common/explorer";
+import { set_s__exp_menus__is_click__cond_map } from "@/store/common/explorer";
 
 export default function MenuBar() {
   // State
-  const s__exp_menus__is_click_item__map = useAppSelector((s) => s.explorer.menus.is_click_item__map);
+  const s__exp_menus__is_click_item__map = useAppSelector((s) => s.explorer.menus.is_click__cond_map);
   const dispatch = useAppDispatch();
 
   // Handler
@@ -18,7 +18,7 @@ export default function MenuBar() {
     if (!e_tg__key) return;
 
     dispatch(
-      set_s__exp_menus__is_click_item__map({
+      set_s__exp_menus__is_click__cond_map({
         ...s__exp_menus__is_click_item__map,
         [e_tg__key]: true,
       })

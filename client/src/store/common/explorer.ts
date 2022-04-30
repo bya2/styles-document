@@ -25,6 +25,7 @@ interface I_s__tools {
 interface I_s__nodes {
   n_arr: expNode[][];
   arr: I_exp_node[];
+  is_loaded: boolean;
   init_s__cond_map: I_cond_map;
   is_active__cond_map: I_cond_map;
   is_fold__cond_map: I_cond_map;
@@ -63,6 +64,7 @@ const initialState: I_exp_state_map = {
   nodes: {
     n_arr: [],
     arr: [],
+    is_loaded: false,
     init_s__cond_map: {},
     is_active__cond_map: {},
     is_fold__cond_map: {},
@@ -108,7 +110,7 @@ export const Slice = createSlice({
     },
 
     // -- ACTIVE
-    set_s__exp_r_nodes__is_active__cond_map: (state, action: PayloadAction<I_cond_map>): void => {
+    set_s__exp_r_nodes__is_active__cond_map: (state, action: PayloadAction<I_cond_map>) => {
       state.r_nodes.is_active__cond_map = action.payload;
     },
     set_s__exp_r_node__is_active: (state, action: PayloadAction<{ uid: string; cond: boolean }>) => {
@@ -120,16 +122,45 @@ export const Slice = createSlice({
 
     // NODES
     // -- INIT
-    set_s__exp_nodes__init_cond_map: (state, action: PayloadAction<I_cond_map>): void => {
+    set_s__exp_nodes__init_cond_map: (state, action: PayloadAction<I_cond_map>) => {
       state.nodes.init_s__cond_map = action.payload;
     },
 
-    // -- ACTIVE
-    set_s__exp_nodes__is_active__cond_map: (state, action: PayloadAction<I_cond_map>): void => {
-      state.nodes.is_active__cond_map = action.payload;
+    // -- LIST
+    set_s__exp_nodes__arr: (state, action: PayloadAction<I_exp_node[]>) => {
+      state.nodes.arr = action.payload;
+    },
+    add_s__exp_node__obj: (state, action: PayloadAction<I_exp_node>) => {
+      const { uid, p_node_uid } = action.payload;
+
+      state.nodes.arr = [...state.nodes.arr, action.payload];
+
+      const a = state.nodes.arr.find((node) => node.uid === p_node_uid);
+      if (a) {
+        if (!a.c_node_uids) {
+          a.c_node_uids = [];
+        }
+        a.c_node_uids = [...a.c_node_uids, uid];
+      }
+    },
+    del_s__exp_node__obj: (state, action: PayloadAction<I_exp_node | { uid: string }>) => {
+      state.nodes.arr = state.nodes.arr.filter((node) => node.uid !== action.payload.uid);
     },
 
-    set_s__exp_node__is_active: (state, action: PayloadAction<{ uid: string; cond: boolean }>): void => {
+    // -- LOAD
+    set_s__exp_nodes__is_loaded: (state, action: PayloadAction<boolean>) => {
+      state.nodes.is_loaded = action.payload;
+    },
+
+    // -- ACTIVE
+    set_s__exp_nodes__is_active__cond_map: (state, action: PayloadAction<I_cond_map>) => {
+      state.nodes.is_active__cond_map = {
+        ...action.payload,
+        ...state.nodes.is_active__cond_map,
+      };
+    },
+
+    set_s__exp_node__is_active: (state, action: PayloadAction<{ uid: string; cond: boolean }>) => {
       state.nodes.is_active__cond_map = {
         ...state.nodes.init_s__cond_map,
         [action.payload.uid]: action.payload.cond,
@@ -137,16 +168,19 @@ export const Slice = createSlice({
     },
 
     // -- FOLD
-    set_s__exp_f_nodes__is_fold__cond_map: (state, action: PayloadAction<I_cond_map>): void => {
-      state.nodes.is_fold__cond_map = action.payload;
+    set_s__exp_f_nodes__is_fold__cond_map: (state, action: PayloadAction<I_cond_map>) => {
+      state.nodes.is_fold__cond_map = {
+        ...action.payload,
+        ...state.nodes.is_fold__cond_map
+      };
     },
-    set_s__exp_f_node__is_fold: (state, action: PayloadAction<{ uid: string; cond: boolean }>): void => {
+    set_s__exp_f_node__is_fold: (state, action: PayloadAction<{ uid: string; cond: boolean }>) => {
       state.nodes.is_fold__cond_map = {
         ...state.nodes.is_fold__cond_map,
         [action.payload.uid]: action.payload.cond,
       };
     },
-    set_s__exp_f_node__is_toggle: (state, action: PayloadAction<{ uid: string }>): void => {
+    set_s__exp_f_node__is_toggle: (state, action: PayloadAction<{ uid: string }>) => {
       state.nodes.is_fold__cond_map = {
         ...state.nodes.is_fold__cond_map,
         [action.payload.uid]: !state.nodes.is_fold__cond_map[action.payload.uid],
@@ -258,6 +292,10 @@ export const Slice = createSlice({
     del_s__exp_tree__obj: (state, action: PayloadAction<I_exp_r_node>) => {
       state.trees.arr = state.trees.arr.filter((tree) => tree.uid !== action.payload.uid);
     },
+
+    // add_s__exp_tree_node__obj: (state, action: PayloadAction<I_exp_node>) => {
+    //   state.trees.arr.find(el => el.uid === action.payload.r_node_uid)?.children?.find()
+    // },
   },
 });
 
@@ -272,6 +310,12 @@ export const {
   set_s__exp_r_node__is_active,
 
   // NODES
+  // -- LIST
+  set_s__exp_nodes__arr,
+  add_s__exp_node__obj,
+  del_s__exp_node__obj,
+  // -- IS LOAD
+  set_s__exp_nodes__is_loaded,
   // -- INIT MAP
   set_s__exp_nodes__init_cond_map,
   // -- ACTIVE MAP

@@ -4,21 +4,21 @@ import UList from "@/components/reusable/bar/UList";
 import Item from "@/components/reusable/group/Item";
 import TreeNode from "@/components/common/explorer/TreeNode";
 import TreeNodeChildren from "@/components/common/explorer/TreeNodeChildren";
-import { expTree } from "@/models/explorer";
-import { NODE__ROOT } from "@/config/common";
+import { I_exp_r_node } from "@/models/explorer";
+import { ROOT_TYPE } from "@/config/explorer";
 
-export default function TreeBar(): JSX.Element {
+export default function TreeBar() {
   const s__exp_trees__arr = useAppSelector((s) => s.explorer.trees.arr);
 
   return (
     <UList cssModule={styles} className={`${styles.trees}`} tabIndex={0}>
-      {s__exp_trees__arr.map((tree__obj: expTree) => {
-        const { id, children } = tree__obj;
+      {s__exp_trees__arr.map((tree__obj: I_exp_r_node) => {
+        const { uid, children } = tree__obj;
 
         return (
-          <Item key={id} prop__id={id} cssModule={styles} className={styles.tree}>
-            <TreeNode prop__node_id={id} prop__node_name={id} prop__node_type={NODE__ROOT} />
-            <TreeNodeChildren prop__p_node_id={id} prop__node_children={children} />
+          <Item key={uid} prop__id={uid} cssModule={styles} className={styles.tree}>
+            <TreeNode prop__node_uid={uid} prop__node_name={uid} prop__node_type={ROOT_TYPE} />
+            <TreeNodeChildren prop__r_node_uid={uid} prop__p_node_uid={uid} prop__node_children={children || []} />
           </Item>
         );
       })}

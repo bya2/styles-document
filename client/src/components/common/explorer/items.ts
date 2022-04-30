@@ -1,5 +1,5 @@
 import type { I_obj } from "@/models/reusables";
-import type { expNode } from "@/models/explorer";
+import type { expNode, I_exp_node } from "@/models/explorer";
 
 import NewDocumentIcon from "@/assets/icon/explorer/add-circle-outline.svg";
 import NewFolderIcon from "@/assets/icon/explorer/bag-add-outline.svg";
@@ -58,55 +58,55 @@ export const messages__no_item__arr: string[] = [MSG__NO_ITEM__1, MSG__NO_ITEM__
 // DUMMY
 export const dummy_items__exp_nodes__n_arr: expNode[][] = [
   [
-    {
-      id: "dfdf",
-      name: "F1",
-      type: NODE_TYPE__FOLDER,
-      parent: ROOT_NODE_ID,
-      children: ["sssssssss"],
-    },
-    {
-      id: "sssssssss",
-      name: "F2",
-      type: NODE_TYPE__FOLDER,
-      parent: "dfdf",
-      children: ["sssssssssb"],
-    },
-    {
-      id: "sssssssssb",
-      name: "D1",
-      type: NODE_TYPE__DOCUMENT,
-      parent: "sssssssss",
-      children: [],
-    },
-    {
-      id: "cc",
-      name: "D2",
-      type: NODE_TYPE__DOCUMENT,
-      parent: ROOT_NODE_ID,
-      children: [],
-    },
-    {
-      id: "cd",
-      name: "D3",
-      type: NODE_TYPE__DOCUMENT,
-      parent: ROOT_NODE_ID,
-      children: [],
-    },
-    {
-      id: "fa",
-      name: "F3",
-      type: NODE_TYPE__FOLDER,
-      parent: ROOT_NODE_ID,
-      children: ["da"],
-    },
-    {
-      id: "da",
-      name: "D4",
-      type: NODE_TYPE__DOCUMENT,
-      parent: "fa",
-      children: [],
-    },
+    // {
+    //   id: "dfdf",
+    //   name: "F1",
+    //   type: NODE_TYPE__FOLDER,
+    //   parent: ROOT_NODE_ID,
+    //   children: ["sssssssss"],
+    // },
+    // {
+    //   id: "sssssssss",
+    //   name: "F2",
+    //   type: NODE_TYPE__FOLDER,
+    //   parent: "dfdf",
+    //   children: ["sssssssssb"],
+    // },
+    // {
+    //   id: "sssssssssb",
+    //   name: "D1",
+    //   type: NODE_TYPE__DOCUMENT,
+    //   parent: "sssssssss",
+    //   children: [],
+    // },
+    // {
+    //   id: "cc",
+    //   name: "D2",
+    //   type: NODE_TYPE__DOCUMENT,
+    //   parent: ROOT_NODE_ID,
+    //   children: [],
+    // },
+    // {
+    //   id: "cd",
+    //   name: "D3",
+    //   type: NODE_TYPE__DOCUMENT,
+    //   parent: ROOT_NODE_ID,
+    //   children: [],
+    // },
+    // {
+    //   id: "fa",
+    //   name: "F3",
+    //   type: NODE_TYPE__FOLDER,
+    //   parent: ROOT_NODE_ID,
+    //   children: ["da"],
+    // },
+    // {
+    //   id: "da",
+    //   name: "D4",
+    //   type: NODE_TYPE__DOCUMENT,
+    //   parent: "fa",
+    //   children: [],
+    // },
   ],
   // [
   //   {
@@ -125,3 +125,66 @@ export const dummy_items__exp_nodes__n_arr: expNode[][] = [
   //   },
   // ],
 ];
+
+export const dummies__exp_nodes__arr: I_exp_node[] = [
+  
+  {
+    uid: "dfdf",
+    name: "F1",
+    type: NODE_TYPE__FOLDER,
+    r_node_uid: ROOT_NODE_ID,
+    p_node_uid: ROOT_NODE_ID,
+    c_node_uids: ["sssssssss"],
+    // children: ["sssssssss"],
+  },
+  {
+    uid: "sssssssss",
+    name: "F2",
+    type: NODE_TYPE__FOLDER,
+    r_node_uid: ROOT_NODE_ID,
+    p_node_uid: "dfdf",
+    c_node_uids: ["sssssssssb"],
+    // children: ["sssssssssb"],
+  },
+  {
+    uid: "sssssssssb",
+    name: "D1",
+    type: NODE_TYPE__DOCUMENT,
+    r_node_uid: ROOT_NODE_ID,
+    p_node_uid: "sssssssss",
+    // c_node_uids
+    // children: [],
+  },
+  {
+    uid: "cc",
+    name: "D2",
+    type: NODE_TYPE__DOCUMENT,
+    r_node_uid: ROOT_NODE_ID,
+    p_node_uid: ROOT_NODE_ID,
+    // children: [],
+  },
+  {
+    uid: "cd",
+    name: "D3",
+    type: NODE_TYPE__DOCUMENT,
+    r_node_uid: ROOT_NODE_ID,
+    p_node_uid: ROOT_NODE_ID,
+    // children: [],
+  },
+  {
+    uid: "fa",
+    name: "F3",
+    type: NODE_TYPE__FOLDER,
+    r_node_uid: ROOT_NODE_ID,
+    p_node_uid: ROOT_NODE_ID,
+    c_node_uids: ["da"],
+    // children: ["da"],
+  },
+  {
+    uid: "da",
+    name: "D4",
+    type: NODE_TYPE__DOCUMENT,
+    r_node_uid: ROOT_NODE_ID,
+    p_node_uid: "fa",
+  },
+]
