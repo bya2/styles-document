@@ -1,10 +1,21 @@
 # JH 탐색기
 
+브라우저 내 문서 탐색기 및 에디터 기능을 가진 애플리케이션입니다.
+
 ## 작성자
 
-이진형(bya2)
+이진형(bya2, byaa1972@gmail.com)
 
 팀 구성 - 개인
+
+## 작성한 다른 프로젝트
+
+[영화 정보 대시보드](https://github.com/bya2/ps-movie-graphs-app)
+
+[뭐해먹지](https://github.com/KNUT-Mohaemookji/mohaemookji-legacy)
+
+[철도 환경 모니터링 시뮬레이터](https://github.com/ord-lab205)
+
 
 ## 설명
 
@@ -24,10 +35,6 @@ bcrypt를 통한 암호화, 암호화된 정보를 서버에 요청, 응답 받�
 
 문서 요소:
 편집기에 작성된 내용을 서버에 전송하면 문서 내 요소가 추가될 수 있도록 했고, Selection 객체로 해당 요소를 클릭하면 에디터에 작성한 내용에 대한 복사 기능을 구현했습니다.
-
-
-## 작성한 다른 프로젝트
-
 
 ## 기술
 
@@ -53,6 +60,13 @@ bcrypt를 통한 암호화, 암호화된 정보를 서버에 요청, 응답 받�
 
 ## 에러 핸들링
 
+### React
+```
+```
+
+### Typescript
+```
+```
 
 ### Firestore API
 
