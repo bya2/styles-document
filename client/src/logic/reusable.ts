@@ -71,3 +71,15 @@ export const fn_get__init_str_map = (_items__arr: I_obj[]): I_map<string> => {
     return obj;
   }, {});
 };
+
+// STORAGE OBJ
+export const fn_get__ls_arr_item__arr = <T = any>(_key: string): T[] => {
+  const item__str = window.localStorage.getItem(_key);
+
+  if (item__str) {
+    const item__arr = JSON.parse(item__str) as T[];
+    return item__arr;
+  } else {
+    return [];
+  }
+};
