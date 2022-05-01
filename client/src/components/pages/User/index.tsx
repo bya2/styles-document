@@ -67,6 +67,15 @@ export default function UserIdPage() {
       dispatch(set_s__act_r_nodes__is_mouse_down__cond_map(fn_get__init_s__bool_map(sorted_r_nodes__arr)));
     } catch (err) {
       fn_handle__error(err, { loc: "UserIdPage.side.mount" });
+      window.localStorage.setItem(
+        local_storage_keys__map.visited_pages,
+        JSON.stringify([
+          {
+            id: param__user_id,
+            occured_at: fn_get__curr_date__str(),
+          },
+        ])
+      );
     }
   }, [dispatch, param__user_id]);
 
