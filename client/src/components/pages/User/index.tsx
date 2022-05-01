@@ -8,7 +8,7 @@ import ActMap from "@/components/common/activity/ActMap";
 import ExpMap from "@/components/common/explorer/ExpMap";
 import Resizer from "@/components/reusable/complete/Resizer";
 import { local_storage_keys__map } from "@/config/storage";
-import { fn_get__init_s__bool_map, fn_get__ls_arr_item__arr, fn_handle__error__ctx } from "@/logic/reusable";
+import { fn_get__init_s__bool_map, fn_get__ls_arr_item__arr, fn_handle__error } from "@/logic/reusable";
 import type { T_Handler } from "@/models/function";
 import SearchMap from "@/components/common/search/SearchMap";
 import Bookmark from "@/components/common/bookmark";
@@ -66,8 +66,7 @@ export default function UserIdPage() {
       dispatch(set_s__act_r_nodes__arr(sorted_r_nodes__arr));
       dispatch(set_s__act_r_nodes__is_mouse_down__cond_map(fn_get__init_s__bool_map(sorted_r_nodes__arr)));
     } catch (err) {
-      const MSG = "Loc:UserIdPage.side.mount\n";
-      console.error(MSG, err.message);
+      fn_handle__error(err, { loc: "UserIdPage.side.mount" });
     }
   }, [dispatch, param__user_id]);
 

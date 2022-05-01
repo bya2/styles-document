@@ -27,6 +27,22 @@ export const fn_handle__error__ctx = (err: Error, msg?: string) => {
   console.error(`${ERR_MSG}\n${err}`);
 };
 
+interface I_err_handler_props {
+  loc?: string;
+}
+
+export const fn_handle__error = (_err: Error, _options?: I_err_handler_props) => {
+  if (_options) {
+    const msg =
+      Object.entries(_options)
+        .map(([_key, _value]) => `${_key.toUpperCase()}:${_value}`)
+        .join("\n") + "\n";
+    console.error(msg, _err.message);
+  } else {
+    console.error(_err.message);
+  }
+};
+
 // OBJ ITEM
 export const fn_get__init_cond_map = (_items__arr: I_obj[]): I_map<boolean> => {
   try {
