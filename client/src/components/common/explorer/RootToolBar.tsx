@@ -1,6 +1,6 @@
 import styles from "@styles-components/Explorer.module.scss";
-import { useEffect, useCallback, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useCallback, useState } from "react";
+import { useAppDispatch } from "@/store/hooks";
 import { set_s__exp_tool__is_click } from "@/store/common/explorer";
 import UList from "@/components/reusable/bar/UList";
 import Item from "@/components/reusable/group/Item";
@@ -13,14 +13,13 @@ import type { I_obj, I_cond_map } from "@/models/reusables";
 const init_s__is_mouse_enter_item__map = fn_get__init_s__bool_map(tool_items__arr);
 
 export default function ToolBar(): JSX.Element {
-  // State
-  const s__is_click_item__map = useAppSelector((s) => s.explorer.tools.is_click__cond_map);
+  // STATE
   const dispatch = useAppDispatch();
 
   const [s__is_mouse_enter_item__map, set_s__is_mouse_enter_item__map] = useState<I_cond_map>(init_s__is_mouse_enter_item__map);
   const [s__mouse_pointer_pos, set_s__mouse_pointer_pos] = useState<[number, number]>([0, 0]);
 
-  // Handler
+  // HANDLER
   const cb_handle__click__item = useCallback(
     (e: React.MouseEvent) => {
       const curr_tg = e.currentTarget;
@@ -82,11 +81,6 @@ export default function ToolBar(): JSX.Element {
     },
     [s__is_mouse_enter_item__map]
   );
-
-  // Mount & Update
-  useEffect(() => {
-    console.log(s__is_click_item__map);
-  }, [s__is_click_item__map]);
 
   return (
     <UList cssModule={styles} className={styles.tool}>

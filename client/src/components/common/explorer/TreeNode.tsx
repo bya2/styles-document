@@ -12,7 +12,6 @@ import SVGFolder from "@/assets/icon/explorer/folder-outline.svg";
 import SVGOpenFolder from "@/assets/icon/explorer/folder-open-outline.svg";
 import SVGForwardArrow from "@/assets/icon/explorer/chevron-forward-outline.svg";
 import SVGDownArrow from "@/assets/icon/explorer/chevron-down-outline.svg";
-import { NODE_TYPE__DOCUMENT, NODE_TYPE__FOLDER, NODE__ROOT } from "@/config/common";
 import { DOC_TYPE, FOLDER_TYPE, ROOT_TYPE } from "@/config/explorer";
 
 interface Props {
@@ -44,7 +43,14 @@ export default function TreeNode({ prop__node_uid, prop__node_name, prop__node_t
   // STATE
   const s__is_fold_f_node = useAppSelector((s) => s.explorer.nodes.is_fold__cond_map[prop__node_uid]);
   const s__is_active_node = useAppSelector((s) => s.explorer.nodes.is_active__cond_map[prop__node_uid]);
+  const s__auth__ref_id = useAppSelector((s) => s.auth.ref.id);
   const dispatch = useAppDispatch();
+
+  const is_VALID = s__auth__ref_id === prop__node_uid;
+
+  if (prop__node_uid === "bya2") {
+    console.log(s__auth__ref_id, prop__node_uid);
+  }
 
   // CACHE
   const SVGNodeType = useMemo(
@@ -89,7 +95,7 @@ export default function TreeNode({ prop__node_uid, prop__node_name, prop__node_t
       />
       {is_ROOT ? undefined : <Img cssModule={styles} className={styles.node_type_image} prop__element={<SVGNodeType />} />}
       <Content cssModule={styles} className={styles.node_name} prop__content={prop__node_name} />
-      {is_ROOT ? <RootToolBar /> : undefined}
+      {is_ROOT && is_VALID ? <RootToolBar /> : undefined}
     </Site>
   );
 }

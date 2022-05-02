@@ -1,7 +1,7 @@
 import styles from "@styles-components/Explorer.module.scss";
 import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { add_s__exp_r_node__obj, set_s__exp_menu_item__close_modal } from "@/store/common/explorer";
+import { add_s__exp_r_node__obj, set_s__exp_menu_item__close_modal, set_s__exp_nodes__is_loaded } from "@/store/common/explorer";
 import Area from "@/components/reusable/area/Area";
 import Title from "@/components/reusable/box/Title";
 import UList from "@/components/reusable/bar/UList";
@@ -29,6 +29,7 @@ export default function RootBar() {
 
       dispatch(add_s__exp_r_node__obj({ uid: e_tg_uid, type: ROOT_TYPE }));
       dispatch(set_s__exp_menu_item__close_modal());
+      dispatch(set_s__exp_nodes__is_loaded(false)); 
     },
     [dispatch, s__exp_r_nodes__arr]
   );
@@ -42,6 +43,7 @@ export default function RootBar() {
 
           if (s__exp_r_nodes__arr.find((el) => el?.uid === act_root__obj.id)) {
             return <li key={id}></li>;
+            // throw new Error("no match.");
           }
 
           return (
