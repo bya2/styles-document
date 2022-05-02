@@ -1,5 +1,49 @@
 import type { I_cond_map, I_map, I_obj } from "@/models/reusables";
 
+// FUNCTION WRAP
+export const fn_wrap__cb = <I = any, O = any>(_cb: (_arg?: I) => O, _arg?: I): O | void => {
+  try {
+    const value = _cb(_arg);
+    if (value) {
+      return value;
+    }
+  } catch (err) {
+    fn_handle__error(err);
+  }
+};
+
+export const fn_wrap__async_cb = async <I = any, O = any>(_cb: (_arg?: I) => Promise<O>, _arg?: I): Promise<O | void> => {
+  const value = await _cb(_arg).catch((err) => fn_handle__error(err));
+  if (value) {
+    return value;
+  }
+};
+
+interface I_mount_option_props extends I_err_handler_props{
+  is_mounted: boolean;
+}
+
+// Life
+export const fn_wrap__mount = (_cb: () => void, { is_mounted, ...errOptions }: I_mount_option_props): void => {
+  try {
+    if (!is_mounted) {
+      _cb();
+    }
+  } catch (err) {
+    fn_handle__error(err, errOptions);
+  }
+};
+
+export const fn_wrap__update = (_cb: () => void, { is_mounted, ...errOptions }: I_mount_option_props): void => {
+  try {
+    if (is_mounted) {
+      _cb();
+    }
+  } catch (err) {
+    fn_handle__error(err, errOptions);
+  }
+};
+
 // OBJ ITEM
 export const fn_get__cond__obj = (_items__arr: I_obj[]): I_map<boolean> => {
   return _items__arr.reduce((obj: I_map<boolean>, item__obj: I_obj) => {
