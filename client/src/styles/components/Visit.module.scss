@@ -57,13 +57,6 @@
 
   .region.bot {
     .ulist.recent {
-      a {
-        position: relative;
-        @extend %rs-link-text;
-        @include square-size(100%);
-        @include dis-f(row, sp-b, c);
-      }
-
       .item.recent {
         position: relative;
 
@@ -88,6 +81,19 @@
           inset: 0;
           background-color: hsla(0, 0%, 50%, 0.1);
         }
+      }
+
+      a {
+        position: relative;
+        @extend %rs-link-text;
+        @include square-size(100%);
+        @include dis-g(cols, 1fr 1fr);
+      }
+
+      span {
+        @extend %text-common;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }
