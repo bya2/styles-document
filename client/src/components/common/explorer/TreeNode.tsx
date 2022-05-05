@@ -68,7 +68,8 @@ export default function TreeNode({ prop__node_uid, prop__node_name, prop__node_t
           dispatch(set_s__exp_f_node__is_toggle({ uid: _node_uid }));
           if (_node_type === DOC_TYPE) {
             dispatch(add_s__exp_o_node__obj({ uid: _node_uid }));
-            navigate(`?doc=${_node_uid}`);
+            navigate(`${_node_uid}`);
+            // navigate(`?doc=${_node_uid}`);
           }
         },
         { once: true }

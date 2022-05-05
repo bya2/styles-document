@@ -28,8 +28,8 @@ export default function RootBar() {
       if (is_duplicated) return;
 
       dispatch(add_s__exp_r_node__obj({ uid: e_tg_uid, type: ROOT_TYPE }));
-      dispatch(set_s__exp_menu_item__close_modal());
       dispatch(set_s__exp_nodes__is_loaded(false)); 
+      dispatch(set_s__exp_menu_item__close_modal());
     },
     [dispatch, s__exp_r_nodes__arr]
   );
