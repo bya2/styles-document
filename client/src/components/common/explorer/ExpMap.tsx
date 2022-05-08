@@ -21,7 +21,7 @@ import MenuBar from "@/components/common/explorer/MenuBar";
 import TreeBar from "@/components/common/explorer/TreeBar";
 import ExpRootBar from "@/components/common/explorer/RootBar";
 import Loader from "@/components/reusable/complete/Loader";
-import { layout_menu_items__arr, messages__no_item__arr } from "./items";
+import { menu_items__arr, messages__no_item__arr } from "./items";
 import { fn_get__cond_map_of_uids, fn_handle__error } from "@/logic/reusable";
 import {
   fn_get__nodes_of_r_node_uids__arr,
@@ -167,7 +167,7 @@ export default function Explorer(): JSX.Element {
       </Region>
 
       <Modal
-        prop__getter__is_actived={s__exp_menus__is_click__cond_map[layout_menu_items__arr[0].id]}
+        prop__getter__is_actived={s__exp_menus__is_click__cond_map[menu_items__arr[0].id]}
         prop__setter__close_modal={() => dispatch(set_s__exp_menu_item__close_modal())}
       >
         <ExpRootBar />

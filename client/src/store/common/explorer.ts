@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "@/store";
 import { fn_get__init_s__bool_map } from "@/logic/reusable";
-import { layout_menu_items__arr, tool_items__arr } from "@/components/common/explorer/items";
+import { menu_items__arr, tool_items__arr } from "@/components/common/explorer/items";
 import type { I_cond_map } from "@models/reusables";
 import type { expNode, I_exp_node_ref, I_exp_r_node, I_exp_node } from "@/models/explorer";
 import { FOLDER_TYPE } from "@/config/explorer";
@@ -76,7 +76,7 @@ const initialState: I_exp_state_map = {
   },
 
   menus: {
-    is_click__cond_map: fn_get__init_s__bool_map(layout_menu_items__arr),
+    is_click__cond_map: fn_get__init_s__bool_map(menu_items__arr),
   },
 
   tools: {
@@ -93,8 +93,8 @@ export const Slice = createSlice({
   initialState,
   reducers: {
     // INIT
-    set_s__exp__init_mount: (state): void => {
-      state.is_mounted = true;
+    set_s__exp__is_mounted: (state, action: PayloadAction<boolean>): void => {
+      state.is_mounted = action.payload;
     },
 
     // ROOTS
@@ -171,7 +171,7 @@ export const Slice = createSlice({
     set_s__exp_f_nodes__is_fold__cond_map: (state, action: PayloadAction<I_cond_map>) => {
       state.nodes.is_fold__cond_map = {
         ...action.payload,
-        ...state.nodes.is_fold__cond_map
+        ...state.nodes.is_fold__cond_map,
       };
     },
     set_s__exp_f_node__is_fold: (state, action: PayloadAction<{ uid: string; cond: boolean }>) => {
@@ -243,26 +243,29 @@ export const Slice = createSlice({
 
     // MENUS
     // -- CLICK
-    set_s__exp_menus__is_click__cond_map: (state, action: PayloadAction<I_cond_map>): void => {
-      state.menus.is_click__cond_map = action.payload;
-    },
     set_s__exp_menu__is_click: (state, action: PayloadAction<{ uid: string; cond: boolean }>) => {
       state.menus.is_click__cond_map = {
         ...state.menus.is_click__cond_map,
         [action.payload.uid]: action.payload.cond,
       };
     },
+    toggle_s__exp_menu__is_click: (state, action: PayloadAction<{ uid: string }>) => {
+      state.menus.is_click__cond_map = {
+        ...state.menus.is_click__cond_map,
+        [action.payload.uid]: !state.menus.is_click__cond_map[action.payload.uid],
+      };
+    },
     set_s__exp_menu_item__open_modal: (state): void => {
       state.menus.is_click__cond_map = {
         ...state.menus.is_click__cond_map,
-        [layout_menu_items__arr[0].id]: true,
+        [menu_items__arr[0].id]: true,
       };
     },
 
     set_s__exp_menu_item__close_modal: (state): void => {
       state.menus.is_click__cond_map = {
         ...state.menus.is_click__cond_map,
-        [layout_menu_items__arr[0].id]: false,
+        [menu_items__arr[0].id]: false,
       };
     },
 
@@ -300,7 +303,7 @@ export const Slice = createSlice({
 });
 
 export const {
-  set_s__exp__init_mount,
+  set_s__exp__is_mounted,
 
   // ROOTS
   set_s__exp_r_nodes__arr,
@@ -337,8 +340,8 @@ export const {
   set_s__exp_o_node__is_open,
 
   // MENUS
-  set_s__exp_menus__is_click__cond_map,
   set_s__exp_menu__is_click,
+  toggle_s__exp_menu__is_click,
   set_s__exp_menu_item__open_modal,
   set_s__exp_menu_item__close_modal,
 

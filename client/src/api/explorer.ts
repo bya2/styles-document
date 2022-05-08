@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { db } from "@/firebase";
-import { arrayRemove, arrayUnion, orderBy, where, WriteBatch } from "firebase/firestore";
+import { arrayRemove, arrayUnion, limit, orderBy, startAt, Transaction, where, WriteBatch } from "firebase/firestore";
 import {
   fn_get__fb__document_ref,
   fn_get__fb__collection_ref,
@@ -13,6 +13,8 @@ import {
 } from "@/logic/firebase";
 import { I_exp_input_node, I_exp_node, I_exp_r_node } from "@/models/explorer";
 import { I_api_result } from "@/models/api";
+import { DOC_TYPE, FOLDER_TYPE } from "@/config/explorer";
+import { I_search_nodes } from "@/models/search";
 
 interface I_fb_ref__sds_exp_nodes extends I_exp_node {}
 
@@ -41,14 +43,6 @@ export const fn_POST__exp__create_node = async (_obj: I_exp_input_node): Promise
     }
   });
 
-  // await fn_POST__fb__add_doc(col__sds_exp_nodes, node__obj);
-
-  // const doc__p_node = fn_get__fb__document_ref(db, `${fb_path__sds_exp_nodes}/${_obj.p_node_uid}`);
-
-  // await fn_PATCH__fb__update_doc(doc__p_node, {
-  //   c_node_uids: arrayUnion(uid),
-  // });
-
   return uid;
 };
 
@@ -63,19 +57,54 @@ export const fn_GET__exp__node = async (_uid: string): Promise<I_exp_node> => {
   return result;
 };
 
-export const fn_GET__exp__nodes_of_root = async (_obj: I_exp_r_node): Promise<I_exp_node[]> => {
-  const q_constraints__arr = [where("r_node_id", "==", _obj.uid), orderBy("name", "asc")];
-  const results = await fn_GET__fb__collection_docs(col__sds_exp_nodes, q_constraints__arr);
-
-  if (!results[0]) throw new Error("void");
-
-  return results as I_exp_node[];
+export const fn_GET__exp__nodes_of_root = async (_r_node_uid: string): Promise<I_exp_node[]> => {
+  const q_constraints__arr = [where("r_node_id", "==", _r_node_uid), orderBy("name", "asc")];
+  const results = (await fn_GET__fb__collection_docs(col__sds_exp_nodes, q_constraints__arr)) as I_exp_node[];
+  return results;
 };
 
 export const fn_GET__exp__nodes_of_roots = async (_r_node_uids__arr: string[]): Promise<I_exp_node[]> => {
   const q_constraints__arr = [where("r_node_uid", "in", _r_node_uids__arr)];
   const results = (await fn_GET__fb__collection_docs(col__sds_exp_nodes, q_constraints__arr)) as I_exp_node[];
   return results;
+};
+
+// -- FireStore는 전체 텍스트 검색 기능을 제공하지 않음.
+
+export const fn_GET__search__nodes = async (_q: string): Promise<I_search_nodes[]> => {
+  const q_constraints__arr1 = [where("name", "==", _q), where("type", "==", DOC_TYPE), limit(3)];
+  const nodes__arr = (await fn_GET__fb__collection_docs(col__sds_exp_nodes, q_constraints__arr1)) as I_exp_node[];
+
+  let p_node_names: string[];
+
+  await fn_wrap__run_transaction(db, async (_ts: Transaction): Promise<void> => {
+    const tmp_names: string[] = await Promise.all(
+      nodes__arr.map(async (node__obj) => {
+        if (node__obj.p_node_uid === node__obj.r_node_uid) return node__obj.r_node_uid;
+        const doc_ref__p_node = fn_get__fb__document_ref<I_exp_node>(db, `${fb_path__sds_exp_nodes}/${node__obj.p_node_uid}`);
+        const doc__p_node = await _ts.get(doc_ref__p_node);
+        if (!doc__p_node.exists()) throw new Error("fn_GET__search__nodes - no exist - doc__p_node");
+        return doc__p_node.data().name;
+      })
+    ).catch((err) => {
+      console.error(err);
+      return [];
+    });
+
+    p_node_names = tmp_names;
+  });
+
+  return nodes__arr.reduce((arr: I_search_nodes[], node__obj, idx) => {
+    return [
+      ...arr,
+      {
+        uid: node__obj.uid,
+        name: node__obj.name,
+        r_node_uid: node__obj.r_node_uid,
+        p_node_name: p_node_names[idx],
+      },
+    ];
+  }, []);
 };
 
 // PATCH
