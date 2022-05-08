@@ -1,13 +1,11 @@
 import type { I_obj } from "@/models/reusables";
 import type { expNode, I_exp_node } from "@/models/explorer";
-
 import NewDocumentIcon from "@/assets/icon/explorer/add-circle-outline.svg";
 import NewFolderIcon from "@/assets/icon/explorer/bag-add-outline.svg";
 import RefreshIcon from "@/assets/icon/explorer/refresh-outline.svg";
 import RemoveIcon from "@/assets/icon/explorer/close-circle-outline.svg";
-
 import SplitIcon from "@/assets/icon/explorer/grid-outline.svg";
-import ExtendIcon from "@/assets/icon/explorer/play-outline.svg";
+import BookmarkIcon from "@/assets/icon/explorer/star-outline.svg";
 import { NODE_TYPE__DOCUMENT, NODE_TYPE__FOLDER, ROOT_NODE_ID } from "@/config/common";
 
 // COMMON
@@ -36,16 +34,16 @@ export const tool_items__arr: I_obj[] = [
   },
 ];
 
-export const layout_menu_items__arr: I_obj[] = [
+export const menu_items__arr: I_obj[] = [
   {
-    id: "id__item__split",
-    content: "분할",
+    id: "extension",
+    content: "확장",
     SVG: SplitIcon,
   },
   {
-    id: "id__item__expansion",
-    content: "확장",
-    SVG: ExtendIcon,
+    id: "bookmark",
+    content: "북마크",
+    SVG: BookmarkIcon,
   },
 ];
 

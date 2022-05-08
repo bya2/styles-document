@@ -115,14 +115,14 @@
     }
   }
 
-  .bar.ulist {
+  .bar.ulist.menu {
     position: relative;
 
     @include dis-g(cols, 1fr 1fr, 8px);
     @extend %tooltip;
   }
 
-  .group.item {
+  .group.item.menu {
     position: relative;
 
     .box.image {
@@ -140,8 +140,13 @@
       }
     }
 
-    .box.content {
-
+    &.s__active {
+      svg {
+        color: yellow;
+        path {
+          fill: yellow;
+        }
+      }
     }
   }
 }
@@ -215,9 +220,36 @@
 .bar.ulist.trees {
   position: relative;
   width: 100%;
+  height: 100%;
   overflow: hidden;
-  .group.item.tree {
-  }
+  @include dis-f(col, s, stretch);
+
+  // & > .item.tree {
+  //   & > .area.site.node_children {
+  //     overflow: hidden;
+  //     overflow-y: scroll;
+
+
+  //     &.s__fold {
+
+  //     }
+  //   }
+  // }
+
+  // .item.tree {
+  //   & > .node_children > .bar.ulist.sub_trees {
+  //     position: relative;
+  //     overflow: hidden;
+  //     overflow-y: scroll;
+  //     &::-webkit-scrollbar {
+  //       width: 6px;
+  //     }
+  //     &::-webkit-scrollbar-thumb {
+  //       background-color: hsla(0, 0%, 0%, 0.2);
+  //       border-radius: 6px;
+  //     }
+  //   }
+  // }
 }
 
 // COMP - TOOLBAR
@@ -293,6 +325,7 @@
   //     text-decoration: none;
   //   }
   // }
+  
 }
 
 .area.site.node {

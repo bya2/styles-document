@@ -37,4 +37,45 @@
       }
     }
   }
+
+  .region.bot {
+    .item {
+      position: relative;
+      color: #000;
+      line-height: 1.5rem;
+      text-indent: 1rem;
+      user-select: none;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: transparent;
+      }
+
+      &:hover::before {
+        background-color: hsla(0, 0%, 50%, 0.1);
+      }
+
+      a {
+        position: relative;
+        color: inherit;
+        line-height: 1.5rem;
+        text-decoration: none;
+        @extend %font-common;
+        @include dis-g(cols, 1fr 1fr 1fr);
+      }
+
+      &:hover {
+        a {
+          text-decoration: underline;
+        }
+      }
+  
+      .box.content {
+        @extend %font-common;
+        font-weight: 300;
+      }
+    }
+  }
 }
