@@ -43,7 +43,7 @@ const fn_handle__error__ctx = (err: Error, msg?: string) => {
 
 // WRAPPER
 export const fn_wrap__run_transaction = async (_db: Firestore, _cb: T_AsyncFunc) => {
-  await runTransaction(_db, _cb).catch((err) => fn_handle__error__ctx(err, "FB - TRANSACTION"));
+  return await runTransaction(_db, _cb).catch((err) => fn_handle__error__ctx(err, "FB - TRANSACTION"));
 };
 
 export const fn_wrap__write_batch = async (_db: Firestore, _cb: T_AsyncFunc) => {

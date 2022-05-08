@@ -17,7 +17,7 @@ interface I_exp__layerd_nodes_arg {
 //   const node__obj = await fn_wrap__fb_GET<any, I_exp_node>(, _obj);
 // }
 
-export const fn_get__nodes_of_roots__arr = async (_r_node_uids__arr: string[]): Promise<I_exp_node[]> => {
+export const fn_get__nodes_of_r_node_uids__arr = async (_r_node_uids__arr: string[]): Promise<I_exp_node[]> => {
   const nodes__arr = await fn_wrap__fb_GET<string[], I_exp_node[]>(fn_GET__exp__nodes_of_roots, _r_node_uids__arr);
   if (!nodes__arr) return dummies__exp_nodes__arr;
   return nodes__arr;
@@ -120,7 +120,7 @@ export const fn_get__nodes__cond_map = (exp_nodes__arr: I_exp_node[], _type?: st
   }, {});
 };
 
-export const fn_get__r_node_of_non_children = (_uids__arr: string[]): I_exp_r_node[] => {
+export const fn_get__r_nodes_of_non_children = (_uids__arr: string[]): I_exp_r_node[] => {
   return _uids__arr.reduce((arr: I_exp_r_node[], _uid) => {
     return [
       ...arr,
