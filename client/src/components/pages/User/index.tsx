@@ -15,6 +15,8 @@ import Bookmark from "@/components/common/bookmark";
 import VisitMap from "@/components/common/visit";
 import { fn_get__curr_date__str } from "@/logic/date";
 import Status from "@/components/common/status";
+import { fn_GET__auth__bookmarks } from "@/api/auth";
+import { set_s__bm__items__arr } from "@/store/common/bookmark";
 
 const cursor_cX__for_fd = 80;
 const cursor_cX__for_unfd = 160;
@@ -23,6 +25,7 @@ export default function UserIdPage() {
   const { userId: param__user_id } = useParams();
 
   const s__act_tools__is_active__cond_map = useAppSelector((s) => s.activity.tools.is_active__cond_map);
+  const s__auth__ref_id = useAppSelector((s) => s.auth.ref.id);
   const dispatch = useAppDispatch();
 
   const cb_handle__mouse_move__box: T_Handler<MouseEvent> = useCallback(
@@ -82,6 +85,18 @@ export default function UserIdPage() {
   useEffect(() => {
     cb_handle__side__mount_and_update();
   }, [cb_handle__side__mount_and_update]);
+
+  useEffect(() => {
+    try {
+      if (!s__auth__ref_id) throw new Error("");
+
+      fn_GET__auth__bookmarks({ id: s__auth__ref_id }).then((bookmarks__arr) => {
+        dispatch(set_s__bm__items__arr(bookmarks__arr));
+      });
+    } catch (err) {
+      fn_handle__error(err, { loc: "Bookmark-mount+update" });
+    }
+  }, [s__auth__ref_id, dispatch]);
 
   return (
     <Main>
