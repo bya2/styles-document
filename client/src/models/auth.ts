@@ -5,9 +5,10 @@ export interface I_auth__sign_in_ref {
 
 export interface I_fb_ref__sds_auth_accounts {
   id: string;
-  password: string;
-  check_password: string;
+  hashed: string;
+  // check_password: string;
   email: string;
+  bookmarks: string[];
 }
 
 export interface I_auth__sign_up_account {

@@ -1,35 +1,10 @@
-%rs-input {
-  position: relative;
-  @include square-size(100%);
-  outline: none;
-  border: none;
-  padding: 0 6px;
-  background-color: transparent;
-  color: inherit;
-  font-size: inherit;
-  line-height: inherit;
-}
-
-%no-space {
-  margin: 0;
-  padding: 0;
-}
-
-%font-common {
-  font-family: $roboto;
-}
-
-%text-common {
-  white-space: nowrap;
-  pointer-events: none;
-  user-select: none;
-}
-
 .map.search {
-  position: relative;
-  border-top: 1px solid black;
-  padding: 0 6px;
-  background-color: #f6f7fa;
+  & {
+    position: relative;
+    border-top: 1px solid black;
+    padding: 0 6px;
+    background-color: #f6f7fa;
+  }
 
   .region.top {
     position: relative;
@@ -50,33 +25,108 @@
     }
   }
 
-  .region.mid {
-    .box.input {
+  .region.container.mid {
+    & {
       position: relative;
+    }
 
-      border: 1px solid black;
+    form {
+      .box.input {
+        position: relative;
+        border: 1px solid black;
 
-      background-color: white;
-      @extend %font-common;
-      font-size: 1rem;
-      line-height: 24px;
+        line-height: 24px;
 
-      @include dis-f(row, stretch, c);
-      padding-right: 8px;
+        @extend %font-common;
+        color: inherit;
+        font-size: 1rem;
 
-      input {
-        @extend %rs-input;
+        @include dis-f(row, stretch, c);
+
+        input {
+          @extend %rs-input;
+          &:focus {
+          }
+        }
       }
-
-      input:focus {
-      }
-
+      
       .box.image.inp_key {
         div {
           color: rgb(42, 42, 42);
           pointer-events: none;
           user-select: none;
         }
+      }
+    }
+  }
+
+  .area.bot {
+    position: relative;
+    @extend %font-common;
+    font-size: 1rem;
+    font-weight: 300;
+
+    .site {
+      margin-bottom: 16px;
+      &.page {
+      }
+
+      &.doc {
+      }
+    }
+
+    .title {
+      h3 {
+        margin: 0;
+
+        @extend %font-common;
+        font-size: 1rem;
+        font-weight: 400;
+
+        @extend %text-common;
+        line-height: 2rem;
+      }
+    }
+
+    .ulist {
+    }
+
+    .item {
+      position: relative;
+
+      &:hover::before {
+        content: " ";
+        position: absolute;
+        inset: 0;
+        background-color: hsla(0, 0%, 50%, 0.1);
+      }
+
+      a {
+        position: relative;
+        color: inherit;
+        line-height: 1.5rem;
+        text-decoration: none;
+        @extend %font-common;
+        @include dis-g(cols, 1fr 1fr 1fr);
+      }
+
+      div {
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:nth-of-type(1) {
+          @include dis-f(row, s, c);
+        }
+        &:nth-of-type(2) {
+          @include dis-f(row, c, c);
+        }
+        &:nth-of-type(3) {
+          @include dis-f(row, e, c);
+        }
+      }
+
+      &:hover a > div :nth-of-type(1) {
+        text-decoration: underline;
       }
     }
   }

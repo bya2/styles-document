@@ -39,8 +39,14 @@ export interface I_exp_input_node {
   type: T_node;
   r_node_uid: string;
   p_node_uid: string;
-
 }
+
+// export interface I_exp_search_result {
+//   uid: string;
+//   name: string;
+//   r_node_uid: string;
+//   p_node_name: string;
+// }
 
 type FType = "nt__f";
 type DType = "nt__d";
