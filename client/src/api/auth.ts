@@ -1,6 +1,13 @@
 import { db } from "@/firebase";
-import { where } from "firebase/firestore";
-import { fn_get__fb__collection_ref, fn_POST__fb__add_doc, fn_GET__fb__collection_docs } from "@/logic/firebase";
+import { arrayRemove, arrayUnion, where } from "firebase/firestore";
+import {
+  fn_get__fb__collection_ref,
+  fn_get__fb__document_ref,
+  fn_GET__fb__collection_docs,
+  fn_PATCH__fb__update_doc,
+  fn_POST__fb__set_doc,
+  fn_GET__fb__doc,
+} from "@/logic/firebase";
 import type {
   I_fb_ref__sds_auth_accounts,
   I_auth__sign_in_account,
@@ -8,6 +15,7 @@ import type {
   I_auth__validation,
   I_auth__sign_in_ref,
 } from "@/models/auth";
+import { I_search_users } from "@/models/search";
 
 export const fb_path__sds_auth_accounts = "sds/auth/accounts";
 
@@ -26,9 +34,11 @@ export const fn_POST__auth__sign_up = async (_obj: I_auth__sign_up_account): Pro
     id: _obj.id,
     hashed: _obj.password, // => 암호화REF
     email: _obj.email,
+    bookmarks: [],
   };
 
-  await fn_POST__fb__add_doc(col__sds_auth_accounts, req_body__obj);
+  const doc__id = fn_get__fb__document_ref(db, `${fb_path__sds_auth_accounts}/${_obj.id}`);
+  await fn_POST__fb__set_doc(doc__id, req_body__obj);
   return true;
 };
 
@@ -54,5 +64,42 @@ export const fn_GET__auth__validation = async (_d: I_auth__validation) => {
     throw new Error("void");
   }
 
+  return true;
+};
+
+export const fn_GET__search__users = async (_arg: string) => {
+  const q_constraints__arr = [where("id", "==", _arg)];
+  const results = (await fn_GET__fb__collection_docs(col__sds_auth_accounts, q_constraints__arr)) as I_auth__sign_in_ref[];
+
+  if (!results[0]) {
+    return [];
+  }
+
+  return results.map((result) => ({ id: result.id })) as I_search_users[];
+};
+
+export const fn_GET__auth__bookmarks = async (_obj: { id: string }) => {
+  const doc__id = fn_get__fb__document_ref(db, `${fb_path__sds_auth_accounts}/${_obj.id}`);
+  const obj = await fn_GET__fb__doc(doc__id);
+  if (!obj) throw new Error("void");
+  return obj.bookmarks;
+};
+
+// PATCH
+export const fn_PATCH__auth__add_bookmark = async (_obj: { id: string; bookmark: string }) => {
+  const doc__id = fn_get__fb__document_ref(db, `${fb_path__sds_auth_accounts}/${_obj.id}`);
+
+  console.log(`${fb_path__sds_auth_accounts}/${_obj.id}`);
+  await fn_PATCH__fb__update_doc(doc__id, {
+    bookmarks: arrayUnion(_obj.bookmark),
+  });
+  return true;
+};
+
+export const fn_PATCH__auth__remove_bookmark = async (_obj: { id: string; bookmark: string }) => {
+  const doc__id = fn_get__fb__document_ref(db, `${fb_path__sds_auth_accounts}/${_obj.id}`);
+  await fn_PATCH__fb__update_doc(doc__id, {
+    bookmarks: arrayRemove(_obj.bookmark),
+  });
   return true;
 };
