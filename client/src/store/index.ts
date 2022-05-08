@@ -2,8 +2,8 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import explorerReducer from "./common/explorer";
 import activityReducer from "./common/activity";
+import bookmarkReducer from "./common/bookmark";
 import authReducer from "./common/auth";
-// import layerListReducer from "./common/layerList";
 import resizerReducer from "./reusable/resizer";
 import modalReducer from "./reusable/modal";
 
@@ -12,8 +12,8 @@ export const store = configureStore({
   reducer: {
     explorer: explorerReducer,
     activity: activityReducer,
+    bookmark: bookmarkReducer,
     auth: authReducer,
-    // layerList: layerListReducer,
     resizer: resizerReducer,
     modal: modalReducer,
   }
