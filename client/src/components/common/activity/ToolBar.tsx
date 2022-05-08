@@ -1,7 +1,7 @@
 import styles from "@styles-components/Activity.module.scss";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { set_s__act_tool__is_active_item } from "@/store/common/activity";
+import { set_s__act_tool__is_active } from "@/store/common/activity";
 import UList from "@/components/reusable/bar/UList";
 import Item from "@/components/reusable/group/Item";
 import Img from "@/components/reusable/box/Image";
@@ -12,20 +12,22 @@ import type { T_Handler } from "@/models/function";
 
 export default function ToolBar(): JSX.Element {
   // STATE
-  const s__is_active_item__map = useAppSelector((s) => s.activity.tools.is_active_item__map);
+  const s__auth__ref = useAppSelector((s) => s.auth.ref);
+  const s__is_active_item__map = useAppSelector((s) => s.activity.tools.is_active__cond_map);
   const dispatch = useAppDispatch();
+
+  const m__is_login = useMemo<boolean>(() => s__auth__ref.id !== null && s__auth__ref.hashed !== null, [s__auth__ref]);
 
   // HANDLER
   const cb_handle__click__tool_item: T_Handler<React.MouseEvent> = useCallback(
     (e) => {
       e.stopPropagation();
 
-      const e_tg__curr = e.currentTarget;
-      const e_tg__key = e_tg__curr.getAttribute("data-id");
+      const curr_tg = e.currentTarget;
+      const curr_tg_id = curr_tg.getAttribute("data-id");
+      if (!curr_tg_id) return;
 
-      if (!e_tg__key) return;
-
-      dispatch(set_s__act_tool__is_active_item(e_tg__key));
+      dispatch(set_s__act_tool__is_active({ id: curr_tg_id, cond: true }));
     },
     [dispatch]
   );
@@ -36,6 +38,11 @@ export default function ToolBar(): JSX.Element {
       {tool_items__arr.map((tool_item__obj: I_obj) => {
         const { id, content, SVG } = tool_item__obj;
         const element = SVG ? <SVG /> : undefined;
+
+        if (id === "bookmark" && !m__is_login) {
+          return <></>;
+        }
+
         return (
           <Item
             key={id}
@@ -44,8 +51,8 @@ export default function ToolBar(): JSX.Element {
             className={`${styles.tool} ${s__is_active_item__map[id] ? styles.s__active : ""}`}
             onClick={(e) => cb_handle__click__tool_item(e)}
           >
-            <Img cssModule={styles} prop__element={element} />
             <Content cssModule={styles} prop__content={content} prop__is_tooltip={true} />
+            <Img cssModule={styles} prop__element={element} />
           </Item>
         );
       })}

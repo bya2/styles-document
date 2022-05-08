@@ -1,8 +1,6 @@
 import styles from "@styles-components/Activity.module.scss";
 
 import ToolBar from "./ToolBar";
-import RootBar from "./RootBar";
-import StatusBar from "./StatusBar";
 import Map from "@/components/reusable/wrapper/Map";
 import Region from "@/components/reusable/area/Region";
 
