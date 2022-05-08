@@ -8,7 +8,7 @@ import UList from "@components/reusable/bar/UList";
 import Field from "@/components/reusable/bar/Field";
 import Btn from "@components/reusable/box/Button";
 import Input from "@components/reusable/elements/Input";
-import { fn_get__init_s__str_map } from "@/logic/reusable";
+import { fn_get__init_str_map } from "@/logic/reusable";
 import { fn_GET__auth__sign_in, fn_POST__auth__sign_up } from "@/api/auth";
 import type { I_obj } from "@/models/reusables";
 import type { T_Handler } from "@/models/function";
@@ -28,7 +28,7 @@ interface I_props {
 export default function AuthContainer({ prop__mode, prop__items, prop__setter__close_modal }: I_props) {
   // State
   const dispatch = useAppDispatch();
-  const [s__form_infos__obj, set_s__form_infos__obj] = useState(fn_get__init_s__str_map(prop__items));
+  const [s__form_infos__obj, set_s__form_infos__obj] = useState(fn_get__init_str_map(prop__items));
 
   // Event
   const fn_handle__submit__form: T_Handler<React.FormEvent> = (e) => {
