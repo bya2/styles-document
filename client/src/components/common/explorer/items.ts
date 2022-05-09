@@ -1,9 +1,9 @@
 import type { I_obj } from "@/models/reusables";
-import type { expNode, I_exp_node } from "@/models/explorer";
-import NewDocumentIcon from "@/assets/icon/explorer/add-circle-outline.svg";
-import NewFolderIcon from "@/assets/icon/explorer/bag-add-outline.svg";
-import RefreshIcon from "@/assets/icon/explorer/refresh-outline.svg";
-import RemoveIcon from "@/assets/icon/explorer/close-circle-outline.svg";
+import type { I_exp_node } from "@/models/explorer";
+import NewDocumentIcon from "@/assets/icon/explorer/add-outline.svg";
+import NewFolderIcon from "@/assets/icon/explorer/albums-outline.svg";
+import RefreshIcon from "@/assets/icon/explorer/reload-outline.svg";
+import RemoveIcon from "@/assets/icon/explorer/close-outline.svg";
 import SplitIcon from "@/assets/icon/explorer/grid-outline.svg";
 import BookmarkIcon from "@/assets/icon/explorer/star-outline.svg";
 import { NODE_TYPE__DOCUMENT, NODE_TYPE__FOLDER, ROOT_NODE_ID } from "@/config/common";
@@ -53,79 +53,7 @@ const MSG__NO_ITEM__3 = "Click this explorer.";
 const MSG__NO_ITEM__4 = "(Up to 3)";
 export const messages__no_item__arr: string[] = [MSG__NO_ITEM__1, MSG__NO_ITEM__2, MSG__NO_ITEM__3, "-", MSG__NO_ITEM__4];
 
-// DUMMY
-export const dummy_items__exp_nodes__n_arr: expNode[][] = [
-  [
-    // {
-    //   id: "dfdf",
-    //   name: "F1",
-    //   type: NODE_TYPE__FOLDER,
-    //   parent: ROOT_NODE_ID,
-    //   children: ["sssssssss"],
-    // },
-    // {
-    //   id: "sssssssss",
-    //   name: "F2",
-    //   type: NODE_TYPE__FOLDER,
-    //   parent: "dfdf",
-    //   children: ["sssssssssb"],
-    // },
-    // {
-    //   id: "sssssssssb",
-    //   name: "D1",
-    //   type: NODE_TYPE__DOCUMENT,
-    //   parent: "sssssssss",
-    //   children: [],
-    // },
-    // {
-    //   id: "cc",
-    //   name: "D2",
-    //   type: NODE_TYPE__DOCUMENT,
-    //   parent: ROOT_NODE_ID,
-    //   children: [],
-    // },
-    // {
-    //   id: "cd",
-    //   name: "D3",
-    //   type: NODE_TYPE__DOCUMENT,
-    //   parent: ROOT_NODE_ID,
-    //   children: [],
-    // },
-    // {
-    //   id: "fa",
-    //   name: "F3",
-    //   type: NODE_TYPE__FOLDER,
-    //   parent: ROOT_NODE_ID,
-    //   children: ["da"],
-    // },
-    // {
-    //   id: "da",
-    //   name: "D4",
-    //   type: NODE_TYPE__DOCUMENT,
-    //   parent: "fa",
-    //   children: [],
-    // },
-  ],
-  // [
-  //   {
-  //     id: "dfdfe",
-  //     name: "OK22",
-  //     type: NODE_TYPE__FOLDER,
-  //     parent: ROOT_NODE_ID,
-  //     children: ["sssssssssa"],
-  //   },
-  //   {
-  //     id: "sssssssssa",
-  //     name: "OK",
-  //     type: NODE_TYPE__DOCUMENT,
-  //     parent: "dfdfe",
-  //     children: [],
-  //   },
-  // ],
-];
-
 export const dummies__exp_nodes__arr: I_exp_node[] = [
-  
   {
     uid: "dfdf",
     name: "F1",
@@ -185,4 +113,4 @@ export const dummies__exp_nodes__arr: I_exp_node[] = [
     r_node_uid: ROOT_NODE_ID,
     p_node_uid: "fa",
   },
-]
+];
