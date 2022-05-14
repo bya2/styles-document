@@ -28,6 +28,13 @@
 }
 
 // 배치
+@mixin pos-abs-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 @mixin pos-abs($posX, $posY) {
   position: absolute;
 
@@ -56,7 +63,7 @@
     //POS
     position: absolute;
     z-index: 9;
-    
+
     //BOX
     border-width: $size;
     border-style: solid;
@@ -107,7 +114,6 @@
   }
 }
 
-
 // -- INSET
 @mixin posX-C($type: absolute) {
   position: $type;
@@ -150,7 +156,7 @@
   justify-content: _get-dis-f-map-val($main-axis);
   align-items: _get-dis-f-map-val($cross-axis);
   flex-wrap: _get-dis-f-map-val($wrap);
-  align-content: _get-dis-f-map-val($line)
+  align-content: _get-dis-f-map-val($line);
 }
 
 @mixin dis-g($tempalte-direction, $template, $gap: 0) {
@@ -251,7 +257,7 @@
 }
 
 @mixin c-wrapper($alpha, $color: black, $bold: 1px) {
-  box-shadow: 0 0 0 $bold $color
+  box-shadow: 0 0 0 $bold $color;
 }
 
 @mixin wrap-in-box($a: 0.1, $b: 1px) {
