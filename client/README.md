@@ -8,16 +8,23 @@
 
 팀 구성 - 개인
 
-### 그 외, 작성한 다른 프로젝트
+## 기술
 
-[영화 정보 대시보드](https://github.com/bya2/ps-movie-graphs-app)
+> - 언어: `HTML5`, `SCSS`, `Typescript`
+> - 라이브러리: `React`, `Redux`, `React-Router-DOM`, `Firebase`
+> - 빌드: `Webpack`, `Babel`
+> - 데이터베이스: `Firestore`
 
-[뭐해먹지](https://github.com/KNUT-Mohaemookji/mohaemookji-legacy)
+## 장치
 
-[철도 환경 모니터링 시뮬레이터](https://github.com/ord-lab205)
+> - 모바일 (320px~)
+> - 태블릿
+> - 노트북 (~1440px)
+
+## 전체 화면
 
 
-## 설명
+## 화면 및 기능
 
 브라우저 내 문서 탐색기 및 에디터 기능을 가진 애플리케이션입니다.
 
@@ -35,20 +42,8 @@
 
 문서 요소: 편집기에 작성된 내용을 서버에 전송하면 문서 내 요소가 추가될 수 있도록 했고, Selection 객체로 해당 요소를 클릭하면 에디터에 작성한 내용에 대한 복사 기능을 구현했습니다.
 
-## 기술
-
-> - 언어: `HTML5`, `SCSS`, `Typescript`
-> - 라이브러리: `React`, `Redux`, `React-Router-DOM`, `Firebase`
-> - 빌드: `Webpack`, `Babel`
-> - 데이터베이스: `Firestore`
-
-## 장치
-
-> - 모바일 (320px~)
-> - 태블릿
-> - 노트북 (~1440px)
-
 ## 데모
+
 
 
 ## 실행
@@ -59,20 +54,28 @@
 
 ## 에러 핸들링
 
-### React
-
-```
-```
-
 ### Typescript
 
-> - 타입에 `undefined`나 `null`이 포함되도록 인터페이스를 작성하고, 이들이 포함되지 않도록 작성된 인터페이스에 해당하는 함수를 호출할 때 타입을 명확하게 명시하도록 강제되는 일이 자주 있었습니다. 이를 조건문에 따라 `throw`를 통해 에러를 발생시켜서 `as` 등을 사용하지 않고 코드의 가독성을 유지할 수 있었고, 의도하지 않은 기능을 발견할 수 있었습니다.
+- 문제: `undefined`, `null`이 포함된 인터페이스와 포함되지 않은 인터페이스 간의 데이터 전달이 이루어질 때, 타입을 명시하도록 강제.
+- 해결: 조건문으로 `throw`로 에러를 발생.
+  - 의도하지 않은 동작 발견
+  - `as`등의 선언자를 사용하지 않고 코드의 간결성 유지
 
 ### Firestore API
 
 > - `FB`를 통해 불러온 객체는 `read-only` 상태이기 때문에, 스프레드 문법을 통해 해당 객체를 다른 변수에 할당하고, 수정하여 사용했습니다.
 > - 데이터를 '추가', '수정', '삭제'하는 작업에 대한 요청은 일정 시간의 간격을 두고 실행되어야하므로, 읽기 작업이 있으면 `Transaction`, 없으면 `Batch`를 이용했습니다.
 
-### 그 외
+## 그 외
+
+### 변경점
 
 - Express로 백엔드를 작성하고, 클라이언트에서 `fetch`를 이용해서 API를 작성했으나, `Firestore`로 변경. (22/4/29)
+
+### 다른 프로젝트
+
+- [영화 정보 대시보드](https://github.com/bya2/ps-movie-graphs-app)
+
+- [뭐해먹지](https://github.com/KNUT-Mohaemookji/mohaemookji-legacy)
+
+- [철도 환경 모니터링 시뮬레이터](https://github.com/ord-lab205)
