@@ -49,127 +49,145 @@
 ## 화면 및 기능
 
 #### 기능 컴포넌트
-> Activity
->  - 로그인 상태 레이아웃
->  - 각 기능에 대한 라우팅(탐색기, 즐겨찾기, 방문 기록, 문서 검색)
 
-- Status
-  - 로그인
-  - 회원가입
-  - 로그아웃
+Activity
 
-- Explorer
-  - API
-  - 메뉴
-    - 방문 기록에 따른 다른 사용자의 탐색기 추가
-    - 해당 페이지 즐겨찾기 활성화
-  - 트리 구조
-    - 탐색기 모음
-    - 탐색기 도구
-    - 탐색기 내 서브 트리
-      - Node
-      - InputNode
-      - Children
+- 로그인 상태 레이아웃
+- 각 기능에 대한 라우팅(탐색기, 즐겨찾기, 방문 기록, 문서 검색)
 
-- Bookmark
-  - 활성화된 리스트
-  - Local Storage 추가/제거
+Status
 
-- Visit
-  - 리스트
-  - 페이지 방문 기록 업데이트
+- 로그인
+- 회원가입
+- 로그아웃
 
-- Search
-  - API (Firestore가 부분 문자열 검색 기능을 지원하지 않으므로, 전체 문자열을 매치하여 검색)
-  - 검색된 페이지
-  - 검색된 문서
+Explorer
 
-- Document
-  - 리스트
-  - 활성화된 문서에 대한 탭
-  - 문서 내 요소 추가 기능
+- API
+- 메뉴
+  - 방문 기록에 따른 다른 사용자의 탐색기 추가
+  - 해당 페이지 즐겨찾기 활성화
+- 트리 구조
+  - 탐색기 모음
+  - 탐색기 도구
+  - 탐색기 내 서브 트리
+    - Node
+    - InputNode
+    - Children
+
+Bookmark
+
+- 활성화된 리스트
+- Local Storage 추가/제거
+
+Visit
+
+- 리스트
+- 페이지 방문 기록 업데이트
+
+Search
+
+- API (Firestore가 부분 문자열 검색 기능을 지원하지 않으므로, 전체 문자열을 매치하여 검색)
+- 검색된 페이지
+- 검색된 문서
+
+Document
+
+- 리스트
+- 활성화된 문서에 대한 탭
+- 문서 내 요소 추가 기능
 
 #### 재사용 컴포넌트
-- Complete
-  - 모달(Modal)
-  - 로더(Loader)
-  - 리사이저(Resizer)
-  - 툴팁(Tooltip)
 
-- Wrapper
-  - Outer    
-  - Inner
-  - Map       (최상위 컴포넌트)
-  - Layout    (경로)
+Complete
 
-- Area
-  - Container (API)
-  - Region    (위치)
-  - Site      (기능)
+- 모달(Modal)
+- 로더(Loader)
+- 리사이저(Resizer)
+- 툴팁(Tooltip)
 
-- Bar
-  - Field     (fieldset)
-  - Messages  (Content List)
-  - List      (ul)
+Wrapper
 
-- Group
-  - Group     (div)
-  - Item      (li)
-  - ThumbItem (Thumb)
+- Outer
+- Inner
+- Map (최상위 컴포넌트)
+- Layout (경로)
 
-- Box
-  - 정보(Info)
-  - 제목(Title)
-  - 내용(Content)
-  - 이미지(Image)
-  - 버튼(Button)
-  - 썸네일(Thumbnail)
+Area
+
+- Container (API)
+- Region (위치)
+- Site (기능)
+
+Bar
+
+- Field (fieldset)
+- Messages (Content List)
+- List (ul)
+
+Group
+
+- Group (div)
+- Item (li)
+- ThumbItem (Thumb)
+
+Box
+
+- 정보(Info)
+- 제목(Title)
+- 내용(Content)
+- 이미지(Image)
+- 버튼(Button)
+- 썸네일(Thumbnail)
 
 #### 로직
-  - 재사용
-    - 동기/비동기 콜백 함수 Wrapper (에러 객체 제어)
-    - 에러 Handler
-    - 지정된 프로퍼티를 키 값으로 가지는 문자열 객체 Getter
-    - 지정된 프로퍼티를 키 값으로 가지는 조건 객체 Getter
-    - 스토리지 객체의 배열 요소 Getter
 
-  - API
-    - Fetch Wrapper
-    - URL QUERT Getter
-    - Firestore GET/POST/PATCH/DELETE Wrapper
+- 재사용
 
-  - Firestore
-    - 문서 Ref Getter
-    - 컬렉션 Ref Getter
-    - Transaction Wrapper (읽기/쓰기 다중 처리)
-    - Batch Wrapper (쓰기 다중 처리)
-    - 문서 Getter
-    - 캐시된 문서 Getter
-    - 컬렉션 내 문서 Getter
-    - 컬렉션 그룹 내 문서 Getter
-    - 문서 생성 Handler (add, set, mix)
-    - 문서 수정 Handler
-    - 문서 삭제 Handler
-    - 문서 내 필드 삭제 Handler
-  
-  - 파일
-    - 확장명 없는 파일 이름 Getter
+  - 동기/비동기 콜백 함수 Wrapper (에러 객체 제어)
+  - 에러 Handler
+  - 지정된 프로퍼티를 키 값으로 가지는 문자열 객체 Getter
+  - 지정된 프로퍼티를 키 값으로 가지는 조건 객체 Getter
+  - 스토리지 객체의 배열 요소 Getter
 
-  - 탐색기
-    - 루트 노드에 따라 노드(문서/폴더)를 분리한 Map Getter
-    - 부모 노드에 따라 노드(문서/폴더)를 분리한 Map Getter
-    - 이름에 따라 순서가 정렬된 노드 목록 Getter
-    - 자식 노드를 가지고 있는 지에 대한 여부 Getter
-    - 오류 방지를 위해 ID를 문자열로 변환
-    - 계층 구조의 노드 배열 Getter
-    - 모든 노드 ID에 대한 조건 객체 Getter
-    - 자식 노드를 가지고 있지 않은 루트 노드 Getter
-  
-  - 방문 기록
-    - 현재 날짜 및 시간 Getter
+- API
 
-    
+  - Fetch Wrapper
+  - URL QUERT Getter
+  - Firestore GET/POST/PATCH/DELETE Wrapper
 
+- Firestore
+
+  - 문서 Ref Getter
+  - 컬렉션 Ref Getter
+  - Transaction Wrapper (읽기/쓰기 다중 처리)
+  - Batch Wrapper (쓰기 다중 처리)
+  - 문서 Getter
+  - 캐시된 문서 Getter
+  - 컬렉션 내 문서 Getter
+  - 컬렉션 그룹 내 문서 Getter
+  - 문서 생성 Handler (add, set, mix)
+  - 문서 수정 Handler
+  - 문서 삭제 Handler
+  - 문서 내 필드 삭제 Handler
+
+- 파일
+
+  - 확장명 없는 파일 이름 Getter
+
+- 탐색기
+
+  - 루트 노드에 따라 노드(문서/폴더)를 분리한 Map Getter
+  - 부모 노드에 따라 노드(문서/폴더)를 분리한 Map Getter
+  - 이름에 따라 순서가 정렬된 노드 목록 Getter
+  - 자식 노드를 가지고 있는 지에 대한 여부 Getter
+  - 오류 방지를 위해 ID를 문자열로 변환
+  - 계층 구조의 노드 배열 Getter
+  - 모든 노드 ID에 대한 조건 객체 Getter
+  - 자식 노드를 가지고 있지 않은 루트 노드 Getter
+
+- 방문 기록
+  - 현재 날짜 및 시간 Getter
 
 ## Demo
 
