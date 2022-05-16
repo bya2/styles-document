@@ -52,7 +52,7 @@ export default function SearchMap() {
         <Title cssModule={styles} prop__title={"Search"} />
       </Region>
 
-      <Container cssModule={styles} className={`${styles.region} ${styles.mid}`}>
+      <Container style_obj={styles} _classes={`${styles.region} ${styles.mid}`}>
         <Box cssModule={styles} className={styles.input}>
           <input type="text" value={s__input_value__str} ref={ref__input} onChange={(e) => cb_handle__change__input(e)} />
           <Img cssModule={styles} className={styles.inp_key} prop__element={<div>/</div>} />

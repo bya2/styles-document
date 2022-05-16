@@ -6,7 +6,6 @@ import { useAppDispatch } from "@/store/hooks";
 import Container from "@/components/reusable/area/Container";
 import UList from "@components/reusable/bar/UList";
 import Field from "@/components/reusable/bar/Field";
-import Btn from "@components/reusable/box/Button";
 import Input from "@components/reusable/elements/Input";
 import { fn_get__init_str_map } from "@/logic/reusable";
 import { fn_GET__auth__sign_in, fn_POST__auth__sign_up } from "@/api/auth";
@@ -18,6 +17,7 @@ import { fn_handle__error__ctx } from "@/logic/reusable";
 import { set_s__auth_ref } from "@/store/common/auth";
 import { fn_wrap__fb_GET, fn_wrap__fb_POST } from "@/logic/api";
 import { local_storage_keys__map, session_storage_keys__map } from "@/config/storage";
+import BtnBox from "@components/reusable/box/Button";
 
 interface I_props {
   prop__mode: string;
@@ -103,7 +103,7 @@ export default function AuthContainer({ prop__mode, prop__items, prop__setter__c
   };
 
   return (
-    <Container className={styles.wrapper__sign_container} onSubmit={(e) => fn_handle__submit__form(e)}>
+    <Container style_obj={styles} className={"wrapper__sign_container"} onSubmit={(e) => fn_handle__submit__form(e)}>
       <Field className={styles.box__group} prop__legend={prop__mode ?? undefined}>
         <UList className={styles.box__list}>
           {prop__items.map((item__obj) => {
@@ -116,7 +116,7 @@ export default function AuthContainer({ prop__mode, prop__items, prop__setter__c
             );
           })}
         </UList>
-        <Btn className={styles.box__button} buttonType="submit" prop__element={<span>{"제출"}</span>} />
+        <BtnBox style_obj={styles} className={"box__button"} type="submit" _content={"제출"} />
       </Field>
     </Container>
   );
