@@ -23,7 +23,8 @@
 
 > - 언어: `HTML5`, `SCSS`, `Typescript`
 > - 라이브러리: `React`, `Redux`, `React-Router-DOM`, `Firebase`
-> - 빌드: `Webpack`, `Babel`
+> - 프레임워크: `Electron`
+> - 빌드: `Webpack`, `Gulp`, `Babel`
 > - 데이터베이스: `Firestore`
 
 ## 장치
@@ -34,7 +35,7 @@
 
 ## 화면 및 기능
 
-#### `기능 컴포넌트`
+#### 기능 컴포넌트
 - Activity
   - 로그인 상태 레이아웃
   - 각 기능에 대한 라우팅(탐색기, 즐겨찾기, 방문 기록, 문서 검색)
@@ -75,7 +76,7 @@
   - 활성화된 문서에 대한 탭
   - 문서 내 요소 추가 기능
 
-#### `재사용 컴포넌트`
+#### 재사용 컴포넌트
 - Complete
   - 모달(Modal)
   - 로더(Loader)
@@ -111,7 +112,7 @@
   - 버튼(Button)
   - 썸네일(Thumbnail)
 
-#### `로직`
+#### 로직
   - 재사용
     - 동기/비동기 콜백 함수 Wrapper (에러 객체 제어)
     - 에러 Handler
@@ -153,6 +154,8 @@
   
   - 방문 기록
     - 현재 날짜 및 시간 Getter
+
+    
 
 
 ## Demo
