@@ -36,7 +36,7 @@ const route_items__arr = [
         children: [
           {
             index: true,
-            element: <>12</>
+            element: <span>{"Click Documents"}</span>
           },
           {
             path: ":docId",
