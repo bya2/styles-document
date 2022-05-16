@@ -1,4 +1,4 @@
-const User = require("../models/users");
+const User = require("../../models/users");
 
 const fn_service__auth__sign_up = (obj_sign_up_data) => {
   const usr = new User(obj_sign_up_data);
