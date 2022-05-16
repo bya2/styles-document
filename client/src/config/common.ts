@@ -1,3 +1,4 @@
+import { T_doc, T_folder } from "@/models/explorer";
 import type { I_map } from "@/models/reusables";
 
 export const NODE__ROOT: string = "ROOT";
@@ -15,8 +16,8 @@ export const sessionStorage__keys__map: I_map<string> = {
 };
 
 export const ROOT_NODE_ID: "id__root_node_of_tree" = "id__root_node_of_tree";
-export const NODE_TYPE__FOLDER: "nt__f" = "nt__f";
-export const NODE_TYPE__DOCUMENT: "nt__d" = "nt__d";
+export const NODE_TYPE__FOLDER: T_folder = "t_folder";
+export const NODE_TYPE__DOCUMENT: T_doc = "t_document";
 
 
 export const normal_width__activity__num: number = 46;
