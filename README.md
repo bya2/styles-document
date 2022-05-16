@@ -5,6 +5,25 @@
 - VSCode와 같은 에디터 형태의 스타일 문서를 작성할 수 있는 애플리케이션
 - 마크다운, 서체, 색상 박스
 
+## 작성자
+
+이진형(bya2, byaa1972@gmail.com)
+
+팀 구성 - 개인
+
+## 기술
+
+> - 언어: `HTML5`, `SCSS`, `Typescript`
+> - 라이브러리: `React`, `Redux`, `React-Router-DOM`, `Firebase`
+> - 빌드: `Webpack`, `Babel`
+> - 데이터베이스: `Firestore`
+
+## 장치
+
+> - 모바일 (320px~)
+> - 태블릿
+> - 노트북 (~1440px)
+
 ## Progress
 
 #### 0213 (기능 완성)
