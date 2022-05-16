@@ -7,7 +7,9 @@
 
 ## 작성자
 
-이진형(bya2, byaa1972@gmail.com)
+이진형(bya2)
+이메일: [byaa1972@gmail.com](byaa1972@gmail.com)
+깃허브: [https://github.com/bya2](https://github.com/bya2)
 
 팀 구성 - 개인
 
@@ -21,11 +23,19 @@
 
 ## 기술
 
+#### 프론트엔드
+
 > - 언어: `HTML5`, `SCSS`, `Typescript`
 > - 라이브러리: `React`, `Redux`, `React-Router-DOM`, `Firebase`
 > - 프레임워크: `Electron`
 > - 빌드: `Webpack`, `Gulp`, `Babel`
 > - 데이터베이스: `Firestore`
+
+#### 백엔드
+
+> - 언어: `Javascript`
+> - 프레임워크: `Express`
+> - 데이터베이스: `MongoDB(Mongoose)`
 
 ## 장치
 
