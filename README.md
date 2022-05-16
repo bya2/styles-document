@@ -115,6 +115,50 @@ Box
   - 썸네일(Thumbnail)
 ```
 
+- `로직`
+  - 재사용
+    - 동기/비동기 콜백 함수 Wrapper (에러 객체 제어)
+    - 에러 Handler
+    - 지정된 프로퍼티를 키 값으로 가지는 문자열 객체 Getter
+    - 지정된 프로퍼티를 키 값으로 가지는 조건 객체 Getter
+    - 스토리지 객체의 배열 요소 Getter
+
+  - API
+    - Fetch Wrapper
+    - URL QUERT Getter
+    - Firestore GET/POST/PATCH/DELETE Wrapper
+
+  - Firestore
+    - 문서 Ref Getter
+    - 컬렉션 Ref Getter
+    - Transaction Wrapper (읽기/쓰기 다중 처리)
+    - Batch Wrapper (쓰기 다중 처리)
+    - 문서 Getter
+    - 캐시된 문서 Getter
+    - 컬렉션 내 문서 Getter
+    - 컬렉션 그룹 내 문서 Getter
+    - 문서 생성 Handler (add, set, mix)
+    - 문서 수정 Handler
+    - 문서 삭제 Handler
+    - 문서 내 필드 삭제 Handler
+  
+  - 파일
+    - 확장명 없는 파일 이름 Getter
+
+  - 탐색기
+    - 루트 노드에 따라 노드(문서/폴더)를 분리한 Map Getter
+    - 부모 노드에 따라 노드(문서/폴더)를 분리한 Map Getter
+    - 이름에 따라 순서가 정렬된 노드 목록 Getter
+    - 자식 노드를 가지고 있는 지에 대한 여부 Getter
+    - 오류 방지를 위해 ID를 문자열로 변환
+    - 계층 구조의 노드 배열 Getter
+    - 모든 노드 ID에 대한 조건 객체 Getter
+    - 자식 노드를 가지고 있지 않은 루트 노드 Getter
+  
+  - 방문 기록
+    - 현재 날짜 및 시간 Getter
+
+
 ## Demo
 
 #### 0213 (기능 완성)
