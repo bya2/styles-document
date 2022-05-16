@@ -103,9 +103,9 @@ export const fn_get__init_cond_map = (_items__arr: I_obj[]): I_map<boolean> => {
   }, {});
 };
 
-export const fn_get__cond_map_of_objs = (_objs__arr: any[], _id: string): I_cond_map => {
+export const fn_get__cond_map_of_objs = (_objs__arr: any[], _prop: string): I_cond_map => {
   return _objs__arr.reduce((obj: I_cond_map, _obj) => {
-    obj[_obj[_id]] = false;
+    obj[_obj[_prop]] = false;
     return obj;
   }, {});
 };
