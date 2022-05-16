@@ -11,17 +11,13 @@
 
 팀 구성 - 개인
 
-### 다른 프로젝트
+##### 다른 프로젝트
 
-- [개인: 소설 리뷰 & 플랫폼 정보 스크랩퍼](https://github.com/bya2/simple-crawling)
-
-- [개인: 영화 정보 대시보드](https://github.com/bya2/ps-movie-graphs-app)
-
-- [개인: 철도 환경 모니터링 시뮬레이터](https://github.com/ord-lab205)
-
-- [팀: 뭐해먹지](https://github.com/KNUT-Mohaemookji/mohaemookji-legacy)
-
-- [팀: fc-](https://github.com/bya2/fc-)
+> - [개인: 소설 리뷰 & 플랫폼 정보 스크랩퍼](https://github.com/bya2/simple-crawling)
+> - [개인: 영화 정보 대시보드](https://github.com/bya2/ps-movie-graphs-app)
+> - [개인: 철도 환경 모니터링 시뮬레이터](https://github.com/ord-lab205)
+> - [팀: 뭐해먹지](https://github.com/KNUT-Mohaemookji/mohaemookji-legacy)
+> - [팀: fc-](https://github.com/bya2/fc-)
 
 ## 기술
 
@@ -38,21 +34,86 @@
 
 ## 화면 및 기능
 
-브라우저 내 문서 탐색기 및 에디터 기능을 가진 애플리케이션입니다.
+- `기능 컴포넌트`
+```
+Activity
+  - 로그인 상태 레이아웃
+  - 각 기능에 대한 라우팅(탐색기, 즐겨찾기, 방문 기록, 문서 검색)
 
-재사용 컴포넌트: 이벤트 발생마다 컴포넌트 상태의 변경에 따른 컴포넌트의 리렌더링에 의해 성능 감소를 완화하고,`CSS 모듈`의 사용에 최적화하고, 중복된 코드 작성 방지, 어떤 기능에 대한 목적을 나타내는 재활용 컴포넌트를 구현했습니다.
+Status
+  - 로그인
+  - 회원가입
+  - 로그아웃
 
-로그인: 계정을 등록할 수 있고, 이를 통해 로그인 및 로그아웃할 수 있습니다. 등록된 계정은 `Firestore`에 저장됩니다.
+Explorer
+  - API
+  - 메뉴
+    - 방문 기록에 따른 다른 사용자의 탐색기 추가
+    - 해당 페이지 즐겨찾기 활성화
+  - 트리 구조
+    - 탐색기 모음
+    - 탐색기 도구
+    - 탐색기 내 서브 트리
+      - Node
+      - InputNode
+      - Children
 
-페이지: 방문한 페이지는 `스토리지 객체`에 저장됩니다. 이를 통해 사용자는 방문한 페이지 목록을 볼 수 있고, 해당 페이지의 탐색기를 탐색기 목록에 추가할 수 있습니다.
+Bookmark
+  - 활성화된 리스트
+  - Local Storage 추가/제거
 
-탐색기: VSCode, 네이버 클라우드와 같은 탐색기의 트리 구조를 참고해서 컴포넌트 재귀를 통해 계층 구조로 구현했습니다. 분리된 컴포넌트들의 상태를 관리하기 위해 `Redux`를 사용했습니다. 탐색기 내의 요소는 '문서'와 '폴더'로 구분합니다. 페이지에 해당하는 계정은 문서와 폴더를 작성할 수 있습니다. 작성된 문서와 폴더는 `Firestore`에 저장됩니다. 문서로의 이동은 라우트 기능을 사용하여 URL을 통해 리소스를 표현합니다.
+Visit
+  - 리스트
+  - 페이지 방문 기록 업데이트
 
-문서 검색: `Firestore`는 '전체 텍스트 검색 기능'을 제공하지 않기 때문에, 값에 대한 일부 문자열을 검색할 수 없었습니다. 그래서 사용자가 작성하는 쿼리와 일치하는 문서를 검색하고, 그 경로를 화면 상에 출력할 수 있도록 작성했습니다.
+Search
+  - API (Firestore가 부분 문자열 검색 기능을 지원하지 않으므로, 전체 문자열을 매치하여 검색)
+  - 검색된 페이지
+  - 검색된 문서
 
-편집기: 사용자 입력할 때마다 이벤트 객체를 통해 자동 줄 바꿈 기능을 구현했습니다. 또한 줄이 변경될 때마다 줄에 번호가 부여되도록 구현했습니다.
+Document
+  - 리스트
+  - 활성화된 문서에 대한 탭
+  - 문서 내 요소 추가 기능
+```
 
-문서 요소: 편집기에 작성된 내용을 서버에 전송하면 문서 내 요소가 추가될 수 있도록 했고, Selection 객체로 해당 요소를 클릭하면 에디터에 작성한 내용에 대한 복사 기능을 구현했습니다.
+- `재사용 컴포넌트`
+```
+Complete
+  - 모달(Modal)
+  - 로더(Loader)
+  - 리사이저(Resizer)
+  - 툴팁(Tooltip)
+
+Wrapper
+  - Outer    
+  - Inner
+  - Map       (최상위 컴포넌트)
+  - Layout    (경로)
+
+Area
+  - Container (API)
+  - Region    (위치)
+  - Site      (기능)
+
+Bar
+  - Field     (fieldset)
+  - Messages  (Content List)
+  - List      (ul)
+
+Group
+  - Group     (div)
+  - Item      (li)
+  - ThumbItem (Thumb)
+
+Box
+  - 정보(Info)
+  - 제목(Title)
+  - 내용(Content)
+  - 이미지(Image)
+  - 버튼(Button)
+  - 썸네일(Thumbnail)
+```
 
 ## Demo
 
@@ -122,27 +183,7 @@
 
 ![image](https://user-images.githubusercontent.com/61080445/158029258-2765b3f1-44e3-43b5-8e43-477c35cc2306.png)
 
-## REST API
-
-GET
-
-```
-/api/auth/sign_in (로그인)
-/api/auth/validation (로그인 검증)
-/api/exp/node_list (폴더 및 문서 목록)
-/api/doc/elem_list (문서 내 요소 목록)
-```
-
-POST
-
-```
-/api/auth/sign_up (회원 가입)
-/api/exp/add_group (폴더 생성)
-/api/exp/add_doc (문서 생성)
-/api/doc/add_elem (문서 내 요소 생성)
-```
-
-## Function
+## 구현 기능
 
 `현재 구현된 기능`
 
