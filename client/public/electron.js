@@ -1,6 +1,7 @@
 const process = require("process");
 const path = require("path");
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, Menu, shell, ipcMain } = require("electron");
+const { IPC_PING__NEW_NODE, IPC_PING__OPEN_DOC } = require("../src/config/ipc");
 
 const createWindow = () => {
   let mainWin = new BrowserWindow({
@@ -18,6 +19,31 @@ const createWindow = () => {
     mainWin = null;
   });
 };
+
+ipcMain.on(IPC_PING__NEW_NODE, (event, arg) => {
+  console.log("new node");
+});
+
+ipcMain.on(IPC_PING__OPEN_DOC, (event, arg) => {
+  console.log("open doc");
+});
+
+const template = [
+  {
+    label: "File",
+    submenu: [
+      {
+        label: "Open",
+        click: () => {
+          shell.openExternal("http://github.com/bya2");
+        },
+      },
+    ],
+  },
+];
+
+const menu = Menu.buildFromTemplate(template);
+Menu.setApplicationMenu(menu);
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
