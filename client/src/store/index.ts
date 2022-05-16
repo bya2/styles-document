@@ -3,6 +3,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import explorerReducer from "./common/explorer";
 import activityReducer from "./common/activity";
 import bookmarkReducer from "./common/bookmark";
+import documentReducer from "./common/document";
 import authReducer from "./common/auth";
 import resizerReducer from "./reusable/resizer";
 import modalReducer from "./reusable/modal";
@@ -13,6 +14,7 @@ export const store = configureStore({
     explorer: explorerReducer,
     activity: activityReducer,
     bookmark: bookmarkReducer,
+    document: documentReducer,
     auth: authReducer,
     resizer: resizerReducer,
     modal: modalReducer,
