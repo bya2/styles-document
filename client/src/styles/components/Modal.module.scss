@@ -31,7 +31,7 @@
   }
 }
 
-.box.button.close {
+.button.box.close {
   $size: 20px;
   $size__hover: 30px;
 
@@ -53,16 +53,23 @@
   cursor: pointer;
 
   button {
+    @extend %rs-button;
+    position: relative;
+    @include square-size(100%);
     outline: none;
     border: none;
     background-color: transparent;
-    pointer-events: none;
+    cursor: pointer;
   }
 
   // EVT
   &:hover {
-    // transform: translate(-30%, 30%) scale(1.2);
     box-shadow: 0 0 0 1px hsla(0, 0%, 0%, 0.3);
     transition: 1s;
+  }
+
+  svg {
+    position: absolute;
+    inset: 0;
   }
 }

@@ -1,34 +1,152 @@
-$map-bg-c: hsl(0, 0%, 20%);
-$map-c: white;
+$map-bg-c: hsl(0, 0%, 90%);
+$map-c: black;
 $map-g-tmpl-rows: 36px 12px 1fr;
 
-$region-top-bg-c: hsla(0, 0%, 100%, 0.1);
+$region-top-bg-c: hsla(0, 0%, 0%, 0.1);
 
 $item-tab-max-w: 160px;
-$item-tab-bg-c: hsla(0, 0%, 100%, 0.2);
+$item-tab-bg-c: hsla(0, 0%, 76%, 0.7);
+$item-tab-active-bg-c: rgba(191, 175, 255, 0.1);
+$item-tab-active-bd-c: hsla(240, 100%, 72%, 0.7);
 
 $item-tab-img-square-size: 16px;
 
 $item-tab-btn-square-size: 16px;
-$item-tab-btn-hover-c: hsla(0, 0%, 100%, 0.7);
+$item-tab-btn-hover-c: hsla(0, 0%, 0%, 0.7);
 
-%common-font {
-  font-family: $roboto;
-}
+$thumb-item-square-size: 100px;
+$thumb-box-square-size: 48px;
 
 .wrapper.map {
+  & {
+    position: relative;
+    height: 100%;
+
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-left: none;
+    border-right: none;
+
+    background-color: $map-bg-c;
+    color: $map-c;
+
+    @include dis-g(rows, $map-g-tmpl-rows);
+  }
+
+  & .thumb.bar {
+    position: relative;
+
+    @include dis-f(row, s, s);
+    flex-wrap: wrap;
+
+    .thumb.item {
+      position: relative;
+      @include square-size($thumb-item-square-size);
+      border: 1px solid black;
+      cursor: pointer;
+
+      .image {
+        @include pos-abs-center;
+        @include square-size($thumb-box-square-size);
+        color: hsl(0, 0%, 30%);
+      }
+
+      .title {
+        @extend %font-common;
+      }
+
+      .volume {
+        @extend %font-common;
+      }
+
+      &:hover {
+        .image {
+          color: hsl(0, 0%, 20%);
+        }
+
+        .title {
+        }
+
+        .volume {
+        }
+      }
+    }
+  }
+
+  & .add-elem.thumb.item {
+    // background-color: black;
+  }
+
+  & .add-elem-in-modal.container {
+    .group {
+      label {
+        display: none;
+      }
+
+      input {
+        @extend %rs-input;
+        @extend %font-common;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  & .elem.thumb.item {
+  }
+}
+
+.add-elem-in-modal.container {
   position: relative;
-  height: 100%;
+  width: 500px;
+  height: 600px;
+  @include dis-f(col, s, c);
 
-  box-sizing: border-box;
-  border: 1px solid black;
-  border-left: none;
-  border-right: none;
 
-  background-color: $map-bg-c;
-  color: $map-c;
 
-  @include dis-g(rows, $map-g-tmpl-rows);
+  .group {
+    label {
+      display: none;
+    }
+
+    input {
+      width: 400px;
+      border-bottom: 1px solid black;
+
+      @extend %rs-input;
+      @extend %font-common;
+      font-size: 1rem;
+
+      .title {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  .button.box {
+    position: relative;
+    @include dis-f(row, e, c);
+
+    button {
+      @extend %rs-button;
+      position: relative;
+      width: 48px;
+      height: 24px;
+      // box-shadow: 0 0 0 1px #000;
+      border-radius: 4px;
+      background-color: rgb(108, 110, 253);
+      @include dis-f(row, c, c);
+
+      span {
+        @extend %font-common;
+        color: #fff;
+        font-size: 1rem;
+        padding: 1px 6px;
+        @extend %text-common;
+        line-height: 1.5rem;
+        text-transform: capitalize;
+      }
+    }
+  }
 }
 
 // A1
@@ -60,7 +178,8 @@ $item-tab-btn-hover-c: hsla(0, 0%, 100%, 0.7);
     cursor: pointer;
 
     &.s__active {
-      background-color: $map-bg-c;
+      box-shadow: inset 0 0 0 1px $item-tab-active-bd-c;
+      background-color: $item-tab-active-bg-c;
     }
 
     .box.image {
@@ -103,7 +222,7 @@ $item-tab-btn-hover-c: hsla(0, 0%, 100%, 0.7);
       }
 
       &:hover {
-        background-color: hsla(0, 0%, 100%, 0.2);
+        background-color: hsla(0, 0%, 20%, 0.2);
       }
 
       button {
