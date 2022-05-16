@@ -8,7 +8,9 @@
 ## 작성자
 
 이진형(bya2)
+
 이메일: [byaa1972@gmail.com](byaa1972@gmail.com)
+
 깃허브: [https://github.com/bya2](https://github.com/bya2)
 
 팀 구성 - 개인
@@ -31,9 +33,10 @@
 > - 빌드: `Webpack`, `Gulp`, `Babel`
 > - 데이터베이스: `Firestore`
 
-#### 백엔드
+#### 백엔드 (현재 `Firestore`로 변경)
 
 > - 언어: `Javascript`
+> - 라이브러리: `bcyrpt`
 > - 프레임워크: `Express`
 > - 데이터베이스: `MongoDB(Mongoose)`
 
