@@ -1,16 +1,15 @@
-import type { I_div_bs_props } from "@/models/props";
+import { I_btn_props, I_re_props } from "@/models/props";
 
-interface I_props extends I_div_bs_props {
-  buttonType?: "button" | "submit" | "reset";
+export interface I_btn_box_props extends I_re_props, I_btn_props {
+  // _image: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
 }
 
-export default function Button(props: I_props): JSX.Element {
-  const { buttonType, cssModule, className, prop__element, ...div_props } = props;
-
+export default function BtnBox({ style_obj, className, _class, type, _image: Img, _content, ...props }: I_btn_box_props) {
   return (
-    <div {...div_props} className={`${cssModule?.box} ${cssModule?.button} ${className}`}>
-      <button type={buttonType}>
-        {prop__element}
+    <div className={`${style_obj.box} ${style_obj.button} ${style_obj[className || ""]} ${_class}`}>
+      <button {...props} type={type}>
+        {Img ? <Img /> : undefined}
+        {_content ? <span>{_content}</span> : undefined}
       </button>
     </div>
   );

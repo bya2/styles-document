@@ -6,6 +6,8 @@ import Inner from "../wrapper/Inner";
 import Button from "../box/Button";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { set_s__status__close_modal } from "@/store/reusable/modal";
+import BtnBox from "../box/Button";
+import CloseIcon from "@/assets/icon/explorer/close-outline.svg";
 
 interface I_props {
   children: React.ReactNode;
@@ -44,11 +46,12 @@ export default function Modal({
     createPortal(
       <Outer cssModule={styles} onMouseDown={(e) => fn_handle__mouse_down__outer(e)} onMouseUp={(e) => {}}>
         <Inner cssModule={styles} onMouseDown={(e) => e.stopPropagation()}>
-          <Button
-            cssModule={styles}
-            className={`${styles.close} ${s__is_mouse_down__c_btn__bool ? styles.s__mouse_down : ""}`}
-            prop__element={<span>{"X"}</span>}
+          <BtnBox
+            style_obj={styles}
+            className={"close"}
+            _class={s__is_mouse_down__c_btn__bool ? styles.s__mouse_down : ""}
             onMouseDown={(e) => fn_handle__mouse_down__c_btn(e)}
+            _image={CloseIcon}
           />
           <div>{children}</div>
         </Inner>
