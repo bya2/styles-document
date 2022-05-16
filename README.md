@@ -13,11 +13,15 @@
 
 ### 다른 프로젝트
 
-- [영화 정보 대시보드](https://github.com/bya2/ps-movie-graphs-app)
+- [개인: 소설 리뷰 & 플랫폼 정보 스크랩퍼](https://github.com/bya2/simple-crawling)
 
-- [뭐해먹지](https://github.com/KNUT-Mohaemookji/mohaemookji-legacy)
+- [개인: 영화 정보 대시보드](https://github.com/bya2/ps-movie-graphs-app)
 
-- [철도 환경 모니터링 시뮬레이터](https://github.com/ord-lab205)
+- [개인: 철도 환경 모니터링 시뮬레이터](https://github.com/ord-lab205)
+
+- [팀: 뭐해먹지](https://github.com/KNUT-Mohaemookji/mohaemookji-legacy)
+
+- [팀: fc-](https://github.com/bya2/fc-)
 
 ## 기술
 
