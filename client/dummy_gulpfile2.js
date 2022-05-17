@@ -1,14 +1,14 @@
 const path = require("path");
 const fs = require("fs");
 const gulp = require("gulp");
-const clean = require("gulp-clean");
+const gulpClean = require("gulp-clean");
 const htmlmin = require("gulp-htmlmin");
 const imagemin = require("gulp-imagemin");
 const newer = require("gulp-newer");
 const sourcemaps = require("gulp-sourcemaps");
 const aliases = require("gulp-style-aliases");
 const header = require("gulp-header");
-const sassShopify = require("gulp-shopify-sass"); // IMPORT를 4가지 형태의 파일 이름으로 로드
+const gss = require("gulp-shopify-sass"); // IMPORT를 4가지 형태의 파일 이름으로 로드
 const sassGlob = require("gulp-sass-glob"); // 전역 IMPORT 선언
 const sassImportOnce = require("gulp-sass-import-once"); // 중복 IMPORT 제거
 const sass = require("gulp-sass")(require("sass"));
@@ -29,12 +29,12 @@ const _paths = {
     dest: "dist",
   },
   scss: {
-    src: "src/styles/main.scss",
+    src: "src/styles/**/*.scss",
     maps: "maps",
     dest: "tmp",
   },
   css: {
-    src: "tmp/**/*.css",
+    src: "tmp/*.css",
     dest: "dist",
   },
   ts: {
@@ -86,12 +86,6 @@ const _options = {
   imagemin: {
     verbose: true,
   },
-  aliases: {
-    "@styles-layouts": path.resolve(__dirname, "src/styles/layouts"),
-    "@styles-components": path.resolve(__dirname, "src/styles/components"),
-    "@styles": path.resolve(__dirname, "src/styles"),
-    "@": path.resolve(__dirname, "src"),
-  },
   sass: {
     outputStyle: "expanded", // nested, compressed
     indentType: "tab", // space, tab
@@ -108,16 +102,16 @@ const _options = {
   // },
 };
 
-function cleanDir(cb) {
+function clean(cb) {
   gulp
     .src(_paths.clean.src, {
       read: false,
       allowEmpty: true,
     })
-    .pipe(clean());
+    .pipe(gulpClean());
   cb();
 }
-exports.clean = gulp.series(cleanDir);
+exports.clean = gulp.series(clean);
 
 function copyHTML(cb) {
   gulp
@@ -127,7 +121,7 @@ function copyHTML(cb) {
   cb();
 }
 
-exports.copyHTML = gulp.series(cleanDir, copyHTML);
+exports.copyHTML = gulp.series(clean, copyHTML);
 
 function minImg(cb) {
   gulp
@@ -138,23 +132,33 @@ function minImg(cb) {
   cb();
 }
 
-exports.minImg = gulp.series(cleanDir, minImg);
+exports.minImg = gulp.series(clean, minImg);
 
 function compileSCSS(cb) {
   gulp
     .src(_paths.scss.src, { since: gulp.lastRun(compileSCSS) })
-    .pipe(aliases(_options.aliases))
-    .pipe(sassGlob())
+    .pipe(
+      aliases({
+        "@": "src" || path.resolve(__dirname, "src"),
+        "@styles": "src/styles" || path.resolve(__dirname, "src/styles"),
+        "@styles-layouts": path.resolve(__dirname, "src/styles/layouts"),
+        "@styles-components": path.resolve(__dirname, "src/styles/components"),
+      })
+    )
+    // .pipe(header(`@import "${path.resolve(__dirname, "src/styles")}/__index";`))
+    .pipe(gss())
     .pipe(sourcemaps.init())
-    .pipe(sass(_options.sass).on("error", sass.logError))
-    .pipe(autoPrefixer(_options.autoPrefixer))
-    .pipe(cleanCSS(_options.cleanCSS))
+    .pipe(
+      sass({
+        ..._options.sass,
+      }).on("error", sass.logError)
+    )
     .pipe(sourcemaps.write(_paths.scss.maps))
     .pipe(gulp.dest(_paths.scss.dest));
   cb();
 }
 
-exports.compSCSS = gulp.series(cleanDir, compileSCSS);
+exports.compileSCSS = gulp.series(clean, compileSCSS);
 
 function minCSS(cb) {
   gulp
@@ -165,7 +169,7 @@ function minCSS(cb) {
   cb();
 }
 
-exports.minCSS = gulp.series(cleanDir, compileSCSS, minCSS);
+exports.minCSS = gulp.series(clean, compileSCSS, minCSS);
 
 function transpileTS(cb) {
   cb();
