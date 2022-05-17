@@ -6,14 +6,18 @@ const htmlmin = require("gulp-htmlmin");
 const imagemin = require("gulp-imagemin");
 const newer = require("gulp-newer");
 const sourcemaps = require("gulp-sourcemaps");
-const aliases = require("gulp-style-aliases");
-const header = require("gulp-header");
+const aliases = require("gulp-style-aliases"); // 별칭 적용
+const header = require("gulp-header"); // 상단 스크립트 선언
 const sassShopify = require("gulp-shopify-sass"); // IMPORT를 4가지 형태의 파일 이름으로 로드
 const sassGlob = require("gulp-sass-glob"); // 전역 IMPORT 선언
 const sassImportOnce = require("gulp-sass-import-once"); // 중복 IMPORT 제거
 const sass = require("gulp-sass")(require("sass"));
 const autoPrefixer = require("gulp-autoprefixer");
 const cleanCSS = require("gulp-clean-css");
+const ts = require("gulp-typescript");
+const browserify = require("browserify");
+const uglify = require("gulp-uglify");
+const concat = require("gulp-concat");
 
 const _paths = {
   clean: {
@@ -28,21 +32,25 @@ const _paths = {
     newer: "dist",
     dest: "dist",
   },
-  scss: {
+  css: {
     src: "src/styles/main.scss",
     maps: "maps",
     dest: "tmp",
   },
-  css: {
-    src: "tmp/**/*.css",
-    dest: "dist",
-  },
   ts: {
+    config: "./tsconfig.json",
+    maps: "maps",
     dest: "tmp",
   },
   js: {
-    src: "src/index.tsx",
+    src: "src/index.js",
     dest: "dist",
+  },
+};
+
+const _names = {
+  js: {
+    concat: "concat.min.js",
   },
 };
 
@@ -127,7 +135,7 @@ function copyHTML(cb) {
   cb();
 }
 
-exports.copyHTML = gulp.series(cleanDir, copyHTML);
+exports.onlyHTML = gulp.series(cleanDir, copyHTML);
 
 function minImg(cb) {
   gulp
@@ -138,42 +146,44 @@ function minImg(cb) {
   cb();
 }
 
-exports.minImg = gulp.series(cleanDir, minImg);
+exports.onlyImg = gulp.series(cleanDir, minImg);
 
 function compileSCSS(cb) {
   gulp
-    .src(_paths.scss.src, { since: gulp.lastRun(compileSCSS) })
-    .pipe(aliases(_options.aliases))
-    .pipe(sassGlob())
+    .src(_paths.css.src, { since: gulp.lastRun(compileSCSS) }) // LATEST CHANGE
+    .pipe(aliases(_options.aliases)) // ALIAS
+    .pipe(sassGlob()) // GLOB IMPORT
     .pipe(sourcemaps.init())
-    .pipe(sass(_options.sass).on("error", sass.logError))
+    .pipe(sass(_options.sass).on("error", sass.logError)) // COMPILE
     .pipe(autoPrefixer(_options.autoPrefixer))
-    .pipe(cleanCSS(_options.cleanCSS))
-    .pipe(sourcemaps.write(_paths.scss.maps))
-    .pipe(gulp.dest(_paths.scss.dest));
-  cb();
-}
-
-exports.compSCSS = gulp.series(cleanDir, compileSCSS);
-
-function minCSS(cb) {
-  gulp
-    .src(_paths.css.src)
-    .pipe(autoPrefixer(_options.autoPrefixer))
-    .pipe(cleanCSS(_options.cleanCSS))
+    .pipe(cleanCSS(_options.cleanCSS)) // MIN
+    .pipe(sourcemaps.write(_paths.css.maps))
     .pipe(gulp.dest(_paths.css.dest));
   cb();
 }
 
-exports.minCSS = gulp.series(cleanDir, compileSCSS, minCSS);
+exports.onlyCSS = gulp.series(cleanDir, compileSCSS);
 
 function transpileTS(cb) {
+  const tsProject = ts.createProject(_paths.ts.config);
+  tsProject
+    .src()
+    .pipe(sourcemaps.init())
+    .pipe(tsProject())
+    .js //
+    .pipe(sourcemaps.write(_paths.ts.maps))
+    .pipe(gulp.dest(_paths.ts.dest));
   cb();
 }
 
+exports.onlyTS = gulp.series(cleanDir, transpileTS);
+
 function minJS(cb) {
+  gulp.src(_paths.js.src).pipe(browserify()).pipe(uglify()).pipe(concat(_names.js.concat)).pipe(gulp.dest(_paths.js.dest));
   cb();
 }
+
+exports.onlyJS = gulp.series(minJS);
 
 function watch(cb) {
   cb();
