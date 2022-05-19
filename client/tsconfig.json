@@ -11,7 +11,7 @@
       "@store/*": ["./store/*"],
       "@styles/*": ["./styles/*"],
       "@styles-layouts/*": ["./styles/layouts/*"],
-      "@styles-components/*": ["./styles/components/*"],
+      "@styles-components/*": ["./styles/components/*"]
     },
     "typeRoots": ["./node_modules/@types", "./src/@types"],
     "target": "ESNext",
@@ -28,7 +28,7 @@
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
+    "esModuleInterop": true
   },
   "include": ["src/**/*", "ext.d.ts"],
   "exclude": ["node_modules/**/*"]
