@@ -180,5 +180,6 @@ function minJS(cb) {
 }
 
 function watch(cb) {
+  gulp.watch(_r)
   cb();
 }

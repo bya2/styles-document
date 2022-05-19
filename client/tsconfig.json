@@ -1,8 +1,5 @@
 {
-  //OPTIONS
   "compilerOptions": {
-    // PATHS
-    // -- [IMPORT]
     "baseUrl": "src",
     "paths": {
       "@/*": ["./*"],
@@ -16,33 +13,23 @@
       "@styles-layouts/*": ["./styles/layouts/*"],
       "@styles-components/*": ["./styles/components/*"],
     },
-    // -- [DECLARATION]
     "typeRoots": ["./node_modules/@types", "./src/@types"],
-
-    // COMPILE
     "target": "ESNext",
     "module": "CommonJS",
     "moduleResolution": "node",
     "jsx": "react-jsx",
-
-    // COMPILER
     "watch": true,
     "allowJs": true,
     "checkJs": true,
     "resolveJsonModule": true,
-
-    // RULE
-    // -- [STRICT]
-    "noImplicitAny": true, // any type of 'expression' and 'declaration'
-    "noImplicitThis": false,  // any type of 'this'
-    "alwaysStrict": true, // use strict
+    "noImplicitAny": true,
+    "noImplicitThis": false,
+    "alwaysStrict": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
   },
-
-  //RANGES
   "include": ["src/**/*", "ext.d.ts"],
   "exclude": ["node_modules/**/*"]
 }
