@@ -140,38 +140,6 @@ function bundle(cb) {
 
 exports.jsjs = gulp.series(cleaner, bundle);
 
-// function jsBuilder(cb) {
-//   // const bundleStream = browserify(path.resolve(__dirname, _routes.js.src)) // Node.js의 Readable Stream.
-//   //   .plugin(tsify)
-//   //   .transform(babelify, {
-//   //     presets: ["@babel/preset-react"],
-//   //     extensions: [".json", ".ts", ".tsx", ".js", ".jsx"],
-//   //   })
-//   //   .transform(uglifyify, { global: true })
-//   //   .bundle()
-//   //   .on("error", gUtil.log);
-
-//   // bundleStream
-//   //   .pipe(source("main.js")) // Readable Stream을 Vinly Object로 변환.
-//   //   .pipe(buffer()) // sourcemaps
-//   //   .pipe(sourcemaps.init())
-//   //   .pipe(terser())
-//   //   .pipe(sourcemaps.write("maps"))
-//   //   .pipe(gulp.dest(_routes.js.dest));
-
-//   watchBro
-//     .bundle()
-//     .on("error", gUtil.log)
-//     .pipe(source("main.js")) // Readable Stream을 Vinly Object로 변환.
-//     .pipe(buffer()) // sourcemaps
-//     .pipe(sourcemaps.init())
-//     .pipe(terser())
-//     .pipe(sourcemaps.write("maps"))
-//     .pipe(gulp.dest(_routes.js.dest));
-// }
-
-// exports.onlyJS = gulp.series(cleaner, jsBuilder);
-
 function server(cb) {
   browserSync.init({
     server: {
@@ -185,16 +153,16 @@ function reloader(cb) {
   cb();
 }
 
-// function watcher(cb) {
-//   gulp.watch(_routes.html.watch, gulp.series(htmlBuilder));
-//   gulp.watch(_routes.img.watch, gulp.series(imgBuilder));
-//   gulp.watch(_routes.css.watch, gulp.series(cssBuilder));
-//   gulp.watch(_routes.js.watch, gulp.series(jsBuilder, reloader));
-//   cb();
-// }
+function watcher(cb) {
+  gulp.watch(_routes.html.watch, gulp.series(htmlBuilder));
+  gulp.watch(_routes.img.watch, gulp.series(imgBuilder));
+  gulp.watch(_routes.css.watch, gulp.series(cssBuilder));
+  gulp.watch(_routes.js.watch, gulp.series(bundle, reloader));
+  cb();
+}
 
-// function builder(cb) {
-//   gulp.series(cleaner, gulp.parallel(htmlBuilder, imgBuilder, cssBuilder, jsBuilder), server, watcher);
-// }
+function builder(cb) {
+  gulp.series(cleaner, gulp.parallel(htmlBuilder, imgBuilder, cssBuilder, bundle), server, watcher);
+}
 
-// exports.build = builder;
+exports.build = builder;
