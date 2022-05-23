@@ -1,0 +1,30 @@
+$size-w--scrb: 8px;
+$size-h--scrb: 10px;
+$bg-c--scrb-thumb: #d1d1d1;
+$bg-c--scrb-track: #fafafa;
+
+.scroller.wrapper {
+  position: relative;
+
+  flex: 1 1 auto;
+  height: 100%;
+
+  display: block;
+
+  overflow: hidden;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: $size-w--scrb;
+    height: $size-h--scrb;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $bg-c--scrb-thumb;
+    border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $bg-c--scrb-track;
+  }
+}

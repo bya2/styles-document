@@ -50,18 +50,18 @@
 
 #### 기능 컴포넌트
 
-Activity
+`Activity`
 
 - 로그인 상태 레이아웃
 - 각 기능에 대한 라우팅(탐색기, 즐겨찾기, 방문 기록, 문서 검색)
 
-Status
+`Status`
 
 - 로그인
 - 회원가입
 - 로그아웃
 
-Explorer
+`Explorer`
 
 - API
 - 메뉴
@@ -75,23 +75,23 @@ Explorer
     - InputNode
     - Children
 
-Bookmark
+`Bookmark`
 
 - 활성화된 리스트
 - Local Storage 추가/제거
 
-Visit
+`Visit`
 
 - 리스트
 - 페이지 방문 기록 업데이트
 
-Search
+`Search`
 
 - API (Firestore가 부분 문자열 검색 기능을 지원하지 않으므로, 전체 문자열을 매치하여 검색)
 - 검색된 페이지
 - 검색된 문서
 
-Document
+`Document`
 
 - 리스트
 - 활성화된 문서에 대한 탭
@@ -99,39 +99,39 @@ Document
 
 #### 재사용 컴포넌트
 
-Complete
+`Complete`
 
 - 모달(Modal)
 - 로더(Loader)
 - 리사이저(Resizer)
 - 툴팁(Tooltip)
 
-Wrapper
+`Wrapper`
 
 - Outer
 - Inner
 - Map (최상위 컴포넌트)
 - Layout (경로)
 
-Area
+`Area`
 
 - Container (API)
 - Region (위치)
 - Site (기능)
 
-Bar
+`Bar`
 
 - Field (fieldset)
 - Messages (Content List)
 - List (ul)
 
-Group
+`Group`
 
 - Group (div)
 - Item (li)
 - ThumbItem (Thumb)
 
-Box
+`Box`
 
 - 정보(Info)
 - 제목(Title)
