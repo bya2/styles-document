@@ -1,22 +1,26 @@
 import styles from "@styles-components/App.module.scss";
 import { lazy, Suspense } from "react";
 import { useRoutes } from "react-router-dom";
+import Header from "@/components/layouts/Header";
+import Footer from "@/components/layouts/Footer";
 import Loader from "@/components/reusable/complete/AppLoader";
+
+const PAGE_DELAY__MS = 100;
 
 // CODE SPLITING
 const HomePage = lazy(() => {
-  return Promise.all([import("@components/pages/Home"), new Promise((resolve) => setTimeout(resolve, 500))]).then(
+  return Promise.all([import("@components/pages/Home"), new Promise((resolve) => setTimeout(resolve, PAGE_DELAY__MS))]).then(
     ([moduleExports]) => moduleExports
   );
 });
 const UserPage = lazy(() => {
-  return Promise.all([import("@components/pages/User"), new Promise((resolve) => setTimeout(resolve, 500))]).then(
+  return Promise.all([import("@components/pages/User"), new Promise((resolve) => setTimeout(resolve, PAGE_DELAY__MS))]).then(
     ([moduleExports]) => moduleExports
   );
 });
 
 const UserDocPage = lazy(() => {
-  return Promise.all([import("@components/pages/User/Doc"), new Promise((resolve) => setTimeout(resolve, 100))]).then(
+  return Promise.all([import("@components/pages/User/Doc"), new Promise((resolve) => setTimeout(resolve, PAGE_DELAY__MS))]).then(
     ([moduleExports]) => moduleExports
   );
 });
@@ -28,7 +32,7 @@ const route_items__arr = [
     children: [
       {
         index: true,
-        element: <HomePage />
+        element: <HomePage />,
       },
       {
         path: ":userId",
@@ -36,32 +40,29 @@ const route_items__arr = [
         children: [
           {
             index: true,
-            element: <span>{"Click Documents"}</span>
+            element: <span>{"Click Documents"}</span>,
           },
           {
             path: ":docId",
-            element: <UserDocPage />
-          }
-        ]
-      }
-    ]
+            element: <UserDocPage />,
+          },
+        ],
+      },
+    ],
   },
 ];
 
+// COMPONENT
 export default function App(): JSX.Element {
   const routes = useRoutes(route_items__arr);
 
   return (
     <div className={styles.App}>
-      <header>
-        <span></span>
-      </header>
+      <Header />
       <Suspense fallback={<Loader />}>
         <>{routes}</>
       </Suspense>
-      <footer>
-        <span></span>
-      </footer>
+      <Footer />
     </div>
   );
 }
