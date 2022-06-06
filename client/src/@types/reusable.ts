@@ -1,0 +1,1 @@
+export type TOrU<T> = T | undefined;
