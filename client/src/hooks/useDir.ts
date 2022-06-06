@@ -1,24 +1,32 @@
-import { useEffect, useState } from "react";
+import { useState, useCallback } from "react";
+import type { IDir } from "@/@types/reusable";
 
-export interface IBoolDir {
-  [key: string]: boolean;
-}
+export const getDirOfObjList = <V>(_arr: any[], _tgProp: string, _initValue: V): IDir<V> => {
+  return _arr.reduce((_dir: IDir<V>, _obj: any) => {
+    _dir[_obj[_tgProp]] = _initValue;
+    return _dir;
+  }, {});
+};
 
-export default function useDir<T>(_arr: T[], _prop: string) {
-  const [dir, setDir] = useState({});
+export default function useDir<V>(_arr: any[], _tgProp: string, _initValue: V) {
+  const [dir, setDir] = useState<IDir<V>>(() => getDirOfObjList<V>(_arr, _tgProp, _initValue));
 
-  useEffect(() => {
-    const tmpDir = _arr.reduce((_dir: IBoolDir, _obj: any) => {
-      _dir[_obj[_prop]] = false;
-      return _dir;
-    }, {});
-
-    setDir(tmpDir);
+  const upsertDir = useCallback((_tgProp: string, _initValue: V) => {
+    setDir((prev) => {
+      return {
+        ...prev,
+        [_tgProp]: _initValue,
+      };
+    });
   }, []);
 
-  const add = () => {};
+  const removeDir = useCallback((_tgProp: string) => {
+    setDir((prev) => {
+      const curr = { ...prev };
+      delete curr[_tgProp];
+      return curr;
+    });
+  }, []);
 
-  const remove = () => {};
-
-  return [dir, add, remove];
+  return [dir, { upsertDir, removeDir }];
 }

@@ -1,5 +1,15 @@
 import { useState, useCallback } from "react";
 
+export const getMapOfObjList = <K, V>(_arr: any[], _tgPropName: K, _initValue: V) => {
+  const map = new Map();
+
+  for (const obj of _arr) {
+    map.set(obj[_tgPropName], _initValue);
+  }
+
+  return map;
+};
+
 export default function useMap<K, V>(_map?: Map<K, V>) {
   const [map, setMap] = useState<Map<K, V>>(_map ?? new Map());
 
