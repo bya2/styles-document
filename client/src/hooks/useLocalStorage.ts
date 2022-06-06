@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { TOrU } from "@/@types/reusable";
 
-const getLocalValue = <T>(_key: string, _initValue: T): TOrU<T> => {
+const getLocalValue = <T>(_key: string, _initValue?: T): TOrU<T> => {
   const unparsedStr = globalThis.localStorage.getItem(_key);
   if (!unparsedStr) return _initValue;
 
@@ -9,7 +9,7 @@ const getLocalValue = <T>(_key: string, _initValue: T): TOrU<T> => {
   return parsed;
 };
 
-export default function useLocalStorage<T>(_key: string, _initValue: any) {
+export default function useLocalStorage<T>(_key: string, _initValue?: T) {
   const [value, setValue] = useState<TOrU<T>>(() => getLocalValue<T>(_key, _initValue));
 
   useEffect(() => {
