@@ -1,21 +1,21 @@
 import { useCallback, useState } from "react";
-import { TInputChangeE } from "@/@types/event";
+import type { TInputChangeE } from "@/@types/event";
 
 export default function useInput(_initValue?: string) {
-  const [value, setValue] = useState<string>(_initValue ?? "");
+  const [input, setInput] = useState<string>(_initValue ?? "");
 
-  const onChangeListener = useCallback((e: TInputChangeE) => {
+  const inputChangeListener = useCallback((e: TInputChangeE) => {
     e.stopPropagation();
-    setValue(e.currentTarget.value);
+    setInput(e.currentTarget.value);
   }, []);
 
-  const handleReset = useCallback(() => {
-    setValue(_initValue ?? "");
+  const resetInput = useCallback(() => {
+    setInput(_initValue ?? "");
   }, []);
 
-  const handleEmpty = useCallback(() => {
-    setValue("");
+  const emptyInput = useCallback(() => {
+    setInput("");
   }, []);
 
-  return [value, onChangeListener, handleReset, handleEmpty];
+  return [input, inputChangeListener, resetInput, emptyInput];
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TOrU } from "@/@types/reusable";
+import type { TOrU } from "@/@types/reusable";
 
 const getLocalValue = <T>(_key: string, _initValue: T): TOrU<T> => {
   const unparsedStr = globalThis.localStorage.getItem(_key);
