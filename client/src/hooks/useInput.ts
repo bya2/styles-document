@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import type { TInputChangeE } from "@/@types/event";
+import type { TInputChangeE, TInputKeyE } from "@/@types/event";
 
 export default function useInput(_initValue?: string) {
   const [input, setInput] = useState<string>(_initValue ?? "");
@@ -9,13 +9,9 @@ export default function useInput(_initValue?: string) {
     setInput(e.currentTarget.value);
   }, []);
 
-  const resetInput = useCallback(() => {
-    setInput(_initValue ?? "");
-  }, []);
-
-  const emptyInput = useCallback(() => {
-    setInput("");
-  }, []);
-
-  return [input, inputChangeListener, resetInput, emptyInput];
+  return [input, setInput, inputChangeListener] as [
+    string,
+    React.Dispatch<React.SetStateAction<string>>,
+    (e: TInputChangeE) => void
+  ];
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { TOrU } from "@/@types/reusable";
+import type { TOrU, TReturnState } from "@/@types/reusable";
 
 export const getSessionStorageValue = <T>(_key: string, _initValue?: T): TOrU<T> => {
   const unparsedStr = globalThis.sessionStorage.getItem(_key);
@@ -9,7 +9,7 @@ export const getSessionStorageValue = <T>(_key: string, _initValue?: T): TOrU<T>
   return parsed;
 };
 
-export default function useSessionStorage<T>(_key: string, _initValue?: T) {
+export default function useSessionStorage<T>(_key: string, _initValue?: T): TReturnState<TOrU<T>> {
   const [value, setValue] = useState<TOrU<T>>(() => getSessionStorageValue(_key, _initValue));
 
   useEffect(() => {
