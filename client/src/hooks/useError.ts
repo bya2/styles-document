@@ -1,19 +1,36 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-export interface IuseErrorOptions {
+export interface IHookErrorOptions {
   isDebugger?: boolean;
 }
 
-export default function useError(options?: IuseErrorOptions) {
-  return useCallback((_err: Error) => {
+const useError = (errOpts?: IHookErrorOptions): ((err: Error) => void) => {
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    if (error) {
+      handleError(error);
+      throw error;
+    }
+  }, [error]);
+
+  const handleError = useCallback((err: Error) => {
     let message = "";
-    for (const [errKey, errValue] of Object.entries(_err)) {
-      message += `${errKey}: ${errValue}\n`;
+    for (const [optKey, optVal] of Object.entries(err)) {
+      message += `${optKey}: ${optVal}\n`;
     }
     console.error(message);
 
-    if (options?.isDebugger) {
+    if (errOpts?.isDebugger) {
       debugger;
     }
   }, []);
-}
+
+  const dispatchError = useCallback((err: Error) => {
+    setError(err);
+  }, []);
+
+  return dispatchError;
+};
+
+export default useError;
