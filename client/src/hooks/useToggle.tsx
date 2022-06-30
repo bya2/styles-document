@@ -1,9 +1,11 @@
+import { useReducer } from "react";
 import useLocalStorage from "./useLocalStorage";
+import type { Reducer } from "react";
 
-export default function useToggle(key: string, initValue?: boolean) {
-  const [value, setValue] = useLocalStorage<boolean>(key, initValue);
+const useToggleReducer = (currState: boolean, nextState?: boolean): boolean => nextState ?? !currState;
 
-  const toggle = () => setValue((prev) => !prev);
+const useToggle = (key: string, initialState: boolean): [boolean, React.Dispatch<boolean>] => {
+  return useReducer<Reducer<boolean, any>>(useToggleReducer, initialState);
+};
 
-  return [value, toggle];
-}
+export default useToggle;
